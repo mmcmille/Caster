@@ -1,4 +1,4 @@
-from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
+from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, Text, Pause, ShortIntegerRef
 
 from castervoice.lib.actions import Key, Mouse
 from castervoice.lib import navigation, utilities
@@ -6,7 +6,7 @@ from castervoice.rules.core.navigation_rules import navigation_support
 
 try:  # Try first loading from caster user directory
     from alphabet_rules import alphabet_support
-except ImportError: 
+except ImportError:
     from castervoice.rules.core.alphabet_rules import alphabet_support
 
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -17,7 +17,6 @@ from castervoice.lib.merge.state.short import S, L, R
 class NavigationNon(MappingRule):
 
     pronunciation = "navigation companion"
-
     mapping = {
         "<direction> <time_in_seconds>":
             AsynchronousAction(
@@ -26,8 +25,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "find":
-            R(Key("c-f")),
+        #"search [for] [<text>]": R(Key("c-f") + Text("%(text)s")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
         "find prior [<n>]":
@@ -36,6 +34,8 @@ class NavigationNon(MappingRule):
             R(Key("cs-f")),
         "replace":
             R(Key("c-h")),
+        "F<function_key>":
+            R(Key("f%(function_key)s")),
         "[show] context menu":
             R(Key("s-f10")),
         "lean":
@@ -46,7 +46,7 @@ class NavigationNon(MappingRule):
             R(Function(navigation.middle_click)),
         "shift right click":
             R(Key("shift:down") + Mouse("right") + Key("shift:up")),
-        "curse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
+        "mouse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
         "scree <direction> [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
@@ -60,11 +60,11 @@ class NavigationNon(MappingRule):
         "garb [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.stoosh_keep_clipboard)),
-        "drop [<nnavi500>]":
-            R(Mouse("left") + Mouse("left") + Function(
-                navigation.drop_keep_clipboard,
-                capitalization=0,
-                spacing=0)),
+        #"drop [<nnavi500>]":
+            #R(Mouse("left") + Mouse("left") + Function(
+            #    navigation.drop_keep_clipboard,
+            #    capitalization=0,
+            #    spacing=0)),
         "sure stoosh":
             R(Key("c-c")),
         "sure cut":
@@ -73,31 +73,24 @@ class NavigationNon(MappingRule):
             R(Key("c-v")),
         "refresh":
             R(Key("c-r")),
-        "maxiwin":
-            R(Key("w-up")),
-        "move window":
-            R(Key("a-space, r, a-space, m")),
-        "window (left | lease) [<n>]":
-            R(Key("w-left"))*Repeat(extra="n"),
-        "window (right | ross) [<n>]":
-            R(Key("w-right"))*Repeat(extra="n"),
-        "monitor (left | lease) [<n>]":
-            R(Key("sw-left"))*Repeat(extra="n"),
-        "monitor (right | ross) [<n>]":
-            R(Key("sw-right"))*Repeat(extra="n"),
-        "(next | prior) window":
-            R(Key("ca-tab, enter")),
-        "switch (window | windows)":
-            R(Key("ca-tab"))*Repeat(extra="n"),
-        "next tab [<n>]":
-            R(Key("c-pgdown"))*Repeat(extra="n"),
-        "prior tab [<n>]":
-            R(Key("c-pgup"))*Repeat(extra="n"),
-        "close tab [<n>]":
-            R(Key("c-w/20"))*Repeat(extra="n"),
+
+        "(next | right ) tab [<n>]":
+            R(Key("c-pgdown/20"))*Repeat(extra="n"),
+        "(prior | last | left ) tab [<n>]":
+            R(Key("c-pgup/20"))*Repeat(extra="n"),
+        "close (tab|it) [<n>]":
+            R(Key("c-w/40:%(n)s")),#*Repeat(extra="n"),
+    	"new tab [<n>]":
+            R(Key("c-t/20"))*Repeat(extra="n"),
         "elite translation <text>":
             R(Function(alphabet_support.elite_text)),
+    	"ignore body":
+            R(Key("c-x")),
+
+
     }
+
+
 
     extras = [
         Dictation("text"),
@@ -123,6 +116,7 @@ class NavigationNon(MappingRule):
             "ex": 1,
             "tie": 2
         }),
+
     ]
     defaults = {
         "n": 1,
@@ -131,7 +125,8 @@ class NavigationNon(MappingRule):
         "direction2": "",
         "dokick": 0,
         "text": "",
-        "wm": 2
+        "wm": 2,
+        "position": "sit",
     }
 
 

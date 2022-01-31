@@ -1,4 +1,4 @@
-from dragonfly import Function, Choice, Repetition, Dictation, Key, Repeat, ShortIntegerRef
+from dragonfly import Function, Choice, Repetition, Dictation, ShortIntegerRef
 
 try:  # Try first loading from caster user directory
     from text_manipulation_rules import text_manipulation_support
@@ -14,17 +14,13 @@ try:  # Try first loading from caster user directory
     from punctuation_rules.punctuation_support import double_text_punc_dict, text_punc_dict
 except ImportError:
     from castervoice.rules.core.punctuation_rules.punctuation_support import double_text_punc_dict, text_punc_dict
-from castervoice.lib.actions import Text
+
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib.merge.state.short import R
-from castervoice.lib.util import recognition_history
-
-_history = recognition_history.get_and_register_history(10)
 
 base_number_dict = {"zero": "0", "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9" }
-
 number_dict = {"numb "+k:base_number_dict[k] for k in base_number_dict}
 
 """ requires a recent version of dragonfly because of recent modification of the Function action
@@ -55,28 +51,11 @@ number_dict = {"numb "+k:base_number_dict[k] for k in base_number_dict}
 class TextManipulation(MergeRule):
     pronunciation = "text manipulation"
 
-    def _print_history():
-        #if len(_history) !=0:
-        print(_history[len(_history)-1])
-
-
     mapping = {
-        #prefix with space if the last command was text
-        "<text>": R(Text("%(text)s")+Text(" ")),#+Function(_print_history)),
-        #"type": #
 
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
-        #select text
-        "(select all|get everything)":
-		R(Key("c-a/10")),
-        "bold text":
-		R(Key("c-b/10")),
-        "snag [<n>]": #char
-            R(Key("s-left:%(n)s")),
-        "snag right [<n>]":
-            R(Key("s-right:%(n)s")),
 
-    # replace text or character
+        # replace text or character
         "replace <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation> with <dictation2>":
             R(Function(text_manipulation_support.copypaste_replace_phrase_with_phrase,
                        dict(dictation="replaced_phrase", dictation2="replacement_phrase"), dictation_versus_character="dictation"),
@@ -86,15 +65,7 @@ class TextManipulation(MergeRule):
                        dict(character="replaced_phrase", character2="replacement_phrase"), dictation_versus_character="character"),
               rdescript="Text Manipulation: replace character to the left of the cursor"),
 
-
-
         # remove text or character
-        "clear [line]": R(Key("end/10, s-home/10, backspace/10")),
-        "strike line": R(Key("end/10, s-home/10, backspace:2/10")),
-        "clear <line_dir>": R(Key("s-%(line_dir)s/20, backspace")),
-        "strike [<direction>] [<n>]": #defaults to left, say right to strike right
-            R(Key("cs-%(direction)s")*Repeat(extra="n") + Key("backspace")),
-
         "remove <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.copypaste_remove_phrase_from_text,
                        dict(dictation="phrase"), dictation_versus_character="dictation"),
@@ -116,38 +87,16 @@ class TextManipulation(MergeRule):
               rdescript="Text Manipulation: delete until chosen character"),
 
         # move cursor
-        "back [<n>]":
-            R(Key("c-left:%(n)s/10", use_hardware=True)),
-        "jump [<n>]":
-            #R(Key("control:down") + Key("right") + Key("control:up")),
-	    R(Key("c-right:%(n)s/10")),
-
-        #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
-        #    R(Function(text_manipulation_support.move_until_phrase,
-        #               dict(dictation="phrase"), dictation_versus_character="dictation"),
-        #       rdescript="Text Manipulation: move to chosen phrase to the left or right of the cursor"),
-        #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <character_sequence> [over]":
-        #    Function(lambda direction, before_after, number_of_lines_to_search, occurrence_number, character_sequence:
-        #     text_manipulation_support.move_until_phrase(direction, before_after,
-        #     "".join(character_sequence), number_of_lines_to_search, occurrence_number, "character")),
+        "(go | move) <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
+            R(Function(text_manipulation_support.move_until_phrase,
+                       dict(dictation="phrase"), dictation_versus_character="dictation"),
+               rdescript="Text Manipulation: move to chosen phrase to the left or right of the cursor"),
+        "(go | move) <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <character_sequence> [over]":
+            Function(lambda direction, before_after, number_of_lines_to_search, occurrence_number, character_sequence:
+             text_manipulation_support.move_until_phrase(direction, before_after,
+             "".join(character_sequence), number_of_lines_to_search, occurrence_number, "character")),
 
         # select text or character
-        #line commands
-        "back line":
-    		R(Key("home")),
-    	"jump line":
-    		R(Key("end")),
-        "new line": R(Key("end,enter")),
-
-        "get line":R(Key("end/20, s-home/20")),
-        #to do get line n
-        "transfer line":R(Key("end/20, s-home/20, c-c/20, a-tab")),
-        "copy line":R(Key("end/20, s-home/20, c-c")),
-        "cut line":R(Key("end/20, s-home/20, c-x")),
-        #get n line|lines direction
-
-        #get n words back/
-        "get word": R(Key("c-left, cs-right, c-c")),
         "grab <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.select_phrase,
                        dict(dictation="phrase"), dictation_versus_character="dictation"),
@@ -188,8 +137,8 @@ class TextManipulation(MergeRule):
         Repetition(character_choice_object, min=1, max=3, name="character_sequence"),
         Dictation("dict"),
         Dictation("dictation"),
-        Dictation("text"),
         Dictation("dictation2"),
+        Dictation("text"),
         ShortIntegerRef("n", 1, 100),
         ShortIntegerRef("m", 1, 100),
         ShortIntegerRef("wait_time", 1, 1000),
@@ -201,18 +150,14 @@ class TextManipulation(MergeRule):
         Choice("single_character", character_dict),
 
         Choice("direction", {
-            "left": "left",
-            "right": "right",
-            "up": "up",
-            "down": "down",
+            "lease": "left",
+            "ross": "right",
+            "sauce": "up",
+            "dunce": "down",
             # note: "sauce" (i.e. "up") will be treated the same as "lease" (i.e. "left") except that
             # the default number_of_lines_to_search will be set to 3
             # in the same way, "dunce" (i.e. "down") will be treated the same as
             # "ross" (i.e. "right")
-        }),
-        Choice("line_dir", {
-                "left": "home",
-                "right": "end",
         }),
         Choice("before_after", {
             "before": "before",
@@ -240,12 +185,11 @@ class TextManipulation(MergeRule):
 
     ]
     defaults = {
-        "direction": "left",
+
         "before_after": None,
         "letter_size": "upper",
         "number_of_lines_to_search": 0, # before changing this default, please read the function deal_with_up_down_directions
         "occurrence_number": 1,} # if direction is up or down, the default number_of_lines_to_search
-
         # will be 3 instead of zero.
         # This can be changed in the function deal_with_up_down_directions
         # 'number_of_lines_to_search = zero' means you are searching only on the current line
@@ -253,3 +197,5 @@ class TextManipulation(MergeRule):
 
 def get_rule():
     return TextManipulation, RuleDetails(ccrtype=CCRType.GLOBAL)
+
+

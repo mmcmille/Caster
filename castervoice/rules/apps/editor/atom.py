@@ -4,7 +4,7 @@ Command-module for Atom
 Official Site "https://atom.io/"
 """
 
-# How long to wait for the Atom palette to load before hitting the enter key
+
 from dragonfly import Pause, Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
 
 from castervoice.lib.actions import Text, Key
@@ -13,6 +13,7 @@ from castervoice.lib import settings, navigation
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
+# How long to wait for the Atom palette to load before hitting the enter key
 atom_palette_wait = 30
 if settings.settings(["miscellaneous", "atom_palette_wait"]):
     atom_palette_wait = int(settings.SETTINGS["miscellaneous"]["atom_palette_wait"])
@@ -38,6 +39,8 @@ class AtomRule(MappingRule):
     """
 
     mapping = {
+        "search project [for] [<text>]": R(Key("cs-f")+ Pause("50")+ Text("%(text)s")+ Key("enter")),
+        
         # Menu UI------------------------------------------------------------------------
         #File Menu
         "[open] new window":
@@ -74,6 +77,7 @@ class AtomRule(MappingRule):
             R(Key("c-k, ca-w")),
         "close window":
             R(Key("cs-w")),
+            "close (file|it)": R(Key("c-w")),
         #Extra
         #Edit Menu
         "copy path":
@@ -145,9 +149,9 @@ class AtomRule(MappingRule):
             R(Key("f11")),
         "toggle menu bar":
             ACP("Toggle Menu Bar"),
-        "increase font [size] [<n>]":
+        "(zoom in|increase font) [size] [<n>]":
             R(Key("cs-equals")*Repeat(extra="n")),
-        "decrease font [size] [<n>]":
+        "(zoom out|decrease font) [size] [<n>]":
             R(Key("cs-minus")*Repeat(extra="n")),
         "reset font [size]":
             R(Key("c-0")),
@@ -203,6 +207,7 @@ class AtomRule(MappingRule):
         "[select] inside brackets":
             R(Key("ac-comma")),
         #Find Menu
+        "find [<text>]": R(Key("c-f")+ Pause("50")+ Text("%(text)s")),
         "find (selection | selected)":
             R(Key("c-e")),
         "find [and] select all":
@@ -530,10 +535,10 @@ class AtomRule(MappingRule):
             R(Text('#" [<n>]": ACP("") * Repeat(extra="n"),') + Key("enter"))*
             Repeat(extra="n"),
         #Basic Dragonfly Snippets
-        "dev key [<n>]":
-            R(Text('"": Key(""),'))*Repeat(extra="n"),
-        "dev text [<n>]":
-            R(Text('"": Text(""),'))*Repeat(extra="n"),
+        "key rule [<n>]": R(Text('"": R(Key("")),') + Key("home,right")),
+            #R(Text('"": Key(""),'))*Repeat(extra="n"),
+        "text rule [<n>]":
+            R(Text('"": R(Text("")),'))*Repeat(extra="n"),
         "send command [<n>]":
             R(Text('"": R(Function(SendJsonCommands, a_command=""), rdescript=""),'))*
             Repeat(extra="n"),
