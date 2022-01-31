@@ -5,7 +5,7 @@ from castervoice.lib.actions import Key, Text
 
 def caster_alphabet():
     return {
-        "alpha"    : "a", #hi
+        "alpha"    : "a",
         "bravo"    : "b",
         "charlie"    : "c",
         "delta"   : "d",
