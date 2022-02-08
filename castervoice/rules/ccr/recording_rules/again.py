@@ -8,11 +8,14 @@ from castervoice.lib.util import recognition_history
 
 _history = recognition_history.get_and_register_history(10)
 
+#TODO: Investigate why Caster's abstraction of dragonflys `ShortIntegerRef` Via `IntegerRefST` causes recognition errors in this grammar.
+
 class Again(MappingRule):
 
     mapping = {
-        "again (<n> [(times|time)] | do)":
-            R(Function(lambda n: Again._create_asynchronous(n)), show=False),  # pylint: disable=E0602
+        #"again (<n> [(times|time)] | do)":
+        "more [<n>]":
+            R(Function(lambda n: Again._create_asynchronous(n)), show=True),  # pylint: disable=E0602
     }
     extras = [ShortIntegerRef("n", 1, 50)]
     defaults = {"n": 1}
@@ -20,27 +23,28 @@ class Again(MappingRule):
     @staticmethod
     def _repeat(utterance):
         Playback([(utterance, 0.0)]).execute()
-        return False 
+        return False
 
     @staticmethod
     def _create_asynchronous(n):
         last_utterance_index = 2
+        print(_history[len(_history)-2])
         if len(_history) == 0:
             return
 
-        # ContextStack adds the word to history before executing it for WSR 
-        if get_current_engine().name in ["sapi5shared", "sapi5", "sapi5inproc"]:  
+        # ContextStack adds the word to history before executing it for WSR
+        if get_current_engine().name in ["sapi5shared", "sapi5", "sapi5inproc"]:
             if len(_history) == 1: return
 
         # Calculatees last utterance from recognition history and creates list of str for Dragonfly Playback
         utterance = list(map(str, _history[len(_history) - last_utterance_index]))
 
-        if utterance[0] == "again": return
+        if utterance[0] == "more": return
         forward = [L(S(["cancel"], lambda: Again._repeat(utterance)))]
         AsynchronousAction(
             forward,
             rdescript="Repeat Last Action",
-            time_in_seconds=0.2,
+            time_in_seconds=0.1,
             repetitions=int(n),
             blocking=False).execute()
 

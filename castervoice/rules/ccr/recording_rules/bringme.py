@@ -1,4 +1,5 @@
 import os
+import sys
 import shlex
 import threading
 import time
@@ -11,12 +12,13 @@ if six.PY2:
 else:
     from pathlib import Path  # pylint: disable=import-error
 
-from dragonfly import Function, Choice, Dictation, ContextAction
+from dragonfly import Function, Choice, Dictation, ContextAction, RunCommand, BringApp
 from castervoice.lib.context import AppContext
-from castervoice.lib.ctrl.mgr.loading.load.content_root import ContentRoot
+
 from castervoice.lib import settings, utilities, context, contexts
 from castervoice.lib import printer
 from castervoice.lib.actions import Text, Key
+from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.selfmod.selfmodrule import BaseSelfModifyingRule
 from castervoice.lib.merge.state.short import R
@@ -34,14 +36,14 @@ class BringRule(BaseSelfModifyingRule):
     pronunciation = "bring me"
 
     # Contexts
-    _browser_context = AppContext(["chrome", "firefox"])
+    _browser_context = AppContext(["chrome", "firefox", "edge"])
     _explorer_context = AppContext("explorer.exe") | contexts.DIALOGUE_CONTEXT
     _terminal_context = contexts.TERMINAL_CONTEXT
     # Paths
     _terminal_path = settings.settings(["paths", "TERMINAL_PATH"])
     _explorer_path = str(Path("C:\\Windows\\explorer.exe"))
-    _source_dir = Path(settings.settings(["paths", "BASE_PATH"])).parents[0]
-    _user_dir = settings.settings(["paths", "USER_DIR"])
+    _source_dir =  Path(settings.SETTINGS["paths"]["BASE_PATH"]).parents[0]
+    _user_dir = settings.SETTINGS["paths"]["USER_DIR"]
     _home_dir = Path.home()
 
     def __init__(self, **kwargs):
@@ -61,23 +63,24 @@ class BringRule(BaseSelfModifyingRule):
         self._initialize()
 
         self._smr_mapping = {
-            "bring me <program>": R(Function(self._bring_program)),
-            "bring me <website>": R(Function(self._bring_website)),
-            "bring me <folder> [in <app>]": R(Function(self._bring_folder)),
-            "bring me <file>": R(Function(self._bring_file)),
-            "refresh bring me": R(Function(self._load_and_refresh)),
-            "<launch_type> to bring me as <key>": R(Function(self._bring_add)),
-            "to bring me as <key>": R(Function(self._bring_add_auto)),
-            "remove <key> from bring me": R(Function(self._bring_remove)),
-            "restore bring me defaults": R(Function(self._bring_reset_defaults)),
+            "(open|show) <program>": R(Function(self._bring_program)),
+            "(open|show) <website>": R(Function(self._bring_website)),
+            "(open|show) <folder> [in <app>]": R(Function(self._bring_folder)),
+            "<folder> [folder]": R(Function(self._bring_folder_path)),
+            "(open|show) <file>": R(Function(self._bring_file)),
+            "(refresh|reload) opener": R(Function(self._load_and_refresh)),
+            "(open|show) <launch_type> as <key>": R(Function(self._bring_add)),
+            #"(open|show) this as <key>": R(Function(self._bring_add_auto)),
+            "remove <key> from opener": R(Function(self._bring_remove)),
+            "restore opener defaults": R(Function(self._bring_reset_defaults)),
         }
         self._smr_extras = [
             Choice(
                 "launch_type", {
                     "[current] program": "program",
-                    "website": "website",
+                    "(website|page)": "website",
                     "folder": "folder",
-                    "file": "file",
+                    "( this |file )": "file",
                 }),
             Choice("app", {
                 "terminal": "terminal",
@@ -180,13 +183,19 @@ class BringRule(BaseSelfModifyingRule):
     def _bring_website(self, website):
         browser = utilities.default_browser_command()
         Popen(shlex.split(browser.replace('%1', website)))
-
+    def _bring_folder_path(self, folder):
+        Text(folder).execute()
     def _bring_folder(self, folder, app):
         if not app:
+            #uses double commander instead of file Explorer
+            Popen(['C:\GD_sync\Apps\doublecmd\doublecmd.exe ',str( '\''+folder+'\'')])#, hide_window= False)).execute()
+            #R(RunCommand("C:\GD_sync\Apps\doublecmd\doublecmd.exe " + "\"" + str(folder) + "\"", hide_window= False)).execute()
+            """
             ContextAction(Function(lambda: Popen([BringRule._explorer_path, folder])), [
                 (BringRule._terminal_context, Text("cd \"%s\"\n" % folder)),
                 (BringRule._explorer_context, Key("c-l/5") + Text("%s\n" % folder))
             ]).execute()
+            """
         elif app == "terminal":
             Popen([BringRule._terminal_path, "--cd=" + folder.replace("\\", "/")])
         elif app == "explorer":
@@ -194,7 +203,7 @@ class BringRule(BaseSelfModifyingRule):
 
     def _bring_program(self, program):
         Popen(program)
-
+        #R(BringApp(program)) TODO improve app launching
     def _bring_file(self, file):
         threading.Thread(target=os.startfile, args=(file, )).start()  # pylint: disable=no-member
 
@@ -222,9 +231,9 @@ class BringRule(BaseSelfModifyingRule):
             # Caster User Dir Navigation
             "caster source": str(Path(_source_dir)),
             "caster user": str(Path(_user_dir)),
-            "caster hooks": str(Path(_user_dir).joinpath(ContentRoot.USER_DIR).joinpath("hooks")),
-            "caster transformers": str(Path(_user_dir).joinpath(ContentRoot.USER_DIR).joinpath("transformers")),
-            "caster rules": str(Path(_user_dir).joinpath(ContentRoot.USER_DIR).joinpath("rules")),
+            "caster hooks": str(Path(_user_dir).joinpath("hooks")),
+            "caster transformers": str(Path(_user_dir).joinpath("transformers")),
+            "caster rules": str(Path(_user_dir).joinpath("rules")),
             "caster data": str(Path(_user_dir).joinpath("data")),
             "caster settings": str(Path(_user_dir).joinpath("settings")),
             "sick you lee": str(Path(_user_dir).joinpath("sikuli")),
@@ -252,7 +261,6 @@ class BringRule(BaseSelfModifyingRule):
             "caster transformer file": str(Path(_user_dir).joinpath("transformers/words.txt")),
         }
     }
-
 
 def get_rule():
     details = RuleDetails(name="bring me",
