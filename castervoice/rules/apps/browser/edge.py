@@ -185,7 +185,7 @@ class EdgeRule(MappingRule):
                 "click": ":c",
                 "tab": ":t",
                 "hover": ":h",
-                "get": ":s",
+                "(get|copy)": ":s",
             }),
         Choice("read_speed", {
 		"slow":"20",

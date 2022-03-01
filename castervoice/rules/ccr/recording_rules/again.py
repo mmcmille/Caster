@@ -8,7 +8,7 @@ from castervoice.lib.util import recognition_history
 
 _history = recognition_history.get_and_register_history(10)
 
-#TODO: Investigate why Caster's abstraction of dragonflys `ShortIntegerRef` Via `IntegerRefST` causes recognition errors in this grammar.
+#TODO: Investigate why Caster's abstraction of dragonflys `ShortIntegerRef` Via `ShortIntegerRef` causes recognition errors in this grammar.
 
 class Again(MappingRule):
 

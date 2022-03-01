@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 from dragonfly import MappingRule, Choice
 from castervoice.lib.actions import Key
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
