@@ -2,11 +2,9 @@
 Michael McMillen
 '''
 
-from dragonfly import MappingRule, Function, Repeat, Pause, Choice, BringApp
-
+from dragonfly import MappingRule, Function, Repeat, Pause, Choice, BringApp, ShortIntegerRef
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
-from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.actions import Key, Text, Mouse
 from castervoice.rules.core.navigation_rules import navigation_support
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails

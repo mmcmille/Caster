@@ -2,7 +2,7 @@
 Michael McMillen
 '''
 
-from dragonfly import Function, Choice, Repetition, Dictation, Key, Repeat
+from dragonfly import Function, Choice, Repetition, Dictation, Key, Repeat, ShortIntegerRef
 
 try:  # Try first loading from caster user directory
     from text_manipulation_rules import text_manipulation_support
@@ -21,7 +21,6 @@ except ImportError:
 from castervoice.lib.actions import Text
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
-from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib.merge.state.short import R
 from castervoice.lib.util import recognition_history

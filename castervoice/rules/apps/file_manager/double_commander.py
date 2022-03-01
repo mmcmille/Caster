@@ -7,7 +7,7 @@ from dragonfly import Repeat, MappingRule, Choice, Pause, ShortIntegerRef
 from castervoice.lib.actions import Key, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
-#from castervoice.lib.merge.additions import ShortIntegerRef
+
 #double commander
 class DoubleCommanderRule(MappingRule):
     mapping = {
@@ -66,4 +66,4 @@ class DoubleCommanderRule(MappingRule):
 
 
 def get_rule():
-    return DoubleCommanderRule, RuleDetails(name="double", executable="doublecmd")
+    return DoubleCommanderRule, RuleDetails(name="double commander", executable="doublecmd")
