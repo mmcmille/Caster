@@ -1,12 +1,14 @@
 
 '''
-
+Michael McMillen
 independent Windows for tabs
 dictation folder
 '''
-from dragonfly import Repeat, Pause, Function, Choice, MappingRule, Dictation, ShortIntegerRef
+from dragonfly import Repeat, Pause, Function, Choice, MappingRule, Dictation
 
 from castervoice.lib.actions import Key, Mouse, Text
+
+from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
@@ -16,12 +18,13 @@ from castervoice.lib.temporary import Store, Retrieve
 class EdgeRule(MappingRule):
     mapping = {
         #moved to folder
-        "move [to] <dict>":R(Mouse("(436, 158), left")+ Pause(" 100")+ Text(" %(dict)s")),
-        "flag it": R(Mouse("(323, 158), left")),
-        "trash it": R(Mouse("(511, 158), left")),#510, 158
+        "move [to] <dict>":R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
+        "flag it": R(Mouse("(246, 146), left")),
+        "trash it": R(Mouse("(443, 148), left")),#510, 158
         "send (it|email)": R(Key("tab:3/20,enter")),
         "discard it": R(Key("tab:4/40")),
-        "[get] link": R(Key("a-c")),
+        "link":
+            R(Key("a-c")),
         "link map": R(Key("")),
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
@@ -82,7 +85,7 @@ class EdgeRule(MappingRule):
         "scroll right [<read_dir>] [<read_speed>]": #left side
         R(Key("escape") + Mouse("".join(["(0.98, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll [<read_dir>] [<read_speed>]": #left side
-            R(Key("escape") + Mouse("".join(["(10, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+            R(Key("escape") + Mouse("".join(["(8, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
     	"stop":
@@ -110,6 +113,7 @@ class EdgeRule(MappingRule):
             R(Key("f11")),
         "(show|view) page source":
             R(Key("c-u")),
+
 
         "step over":
             R(Key("f10")),

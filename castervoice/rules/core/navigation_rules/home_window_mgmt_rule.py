@@ -1,4 +1,4 @@
-from dragonfly import MappingRule, Function, Repeat, Pause, Choice, ShortIntegerRef
+from dragonfly import MappingRule, Function, Repeat, Pause, Choice
 
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
@@ -9,11 +9,10 @@ from castervoice.lib.merge.state.short import R
 
 
 class HomeWindowManagementRule(MappingRule):
-    window_scale = 120 #system wide scale
     mapping = {
 
         #app switching via control clicks area on vertical taskbar
-        "(open|switch|window|show) <app_n>":
+        "(show|open|switch|window) <app_n>":
             R(Key("control:down") +
               Mouse("".join(["[30,","%(app_n)s", "], left"])) +
               Key("control:up/20") +
@@ -26,9 +25,9 @@ class HomeWindowManagementRule(MappingRule):
         Choice("app_n", {
          	"(1|web)": 60,
             "(2|files)": 110,
-            "(3|commands)": 160,
+            "(3|maps)": 160,
             "(4|commands)": 210,
-            "5": 280,#255,
+            "(5|)": 280,#255,
             "6": 350,#300,
             "7":  400,#350, #files implemented directly, along with freeplane (maps)
             "8": 440,#400,

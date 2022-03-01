@@ -1,7 +1,11 @@
-from dragonfly import MappingRule, Function, Repeat, Pause, Choice, ShortIntegerRef
+'''
+Michael McMillen
+'''
+from dragonfly import MappingRule, Function, Repeat, Pause, Choice
 
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
+from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.actions import Key, Text, Mouse
 from castervoice.rules.core.navigation_rules import navigation_support
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -11,11 +15,10 @@ from castervoice.lib.merge.state.short import R
 class WindowManagementRule(MappingRule):
     mapping = {
         #Window Manipulation
-        
 
         #screen zooming by Windows magnifier, note zoom in is w-equals, not w-plus!
-        "(zoom screen| screen in)": R(Key("w-equals")),
-        "(back screen| screen out) ": R(Key("w-minus")),
+        "(zoom screen| screen in)": R(Key("w-equals/20")),
+        "(back screen| screen out) ": R(Key("w-minus/20")),
         "full-screen": R(Key("w-minus:4/40")),
 
         "search Windows":R(Key("w-s")),
