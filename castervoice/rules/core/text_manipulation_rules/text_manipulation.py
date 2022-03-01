@@ -1,4 +1,8 @@
-from dragonfly import Function, Choice, Repetition, Dictation, Key, Repeat, ShortIntegerRef
+'''
+Michael McMillen
+'''
+
+from dragonfly import Function, Choice, Repetition, Dictation, Key, Repeat
 
 try:  # Try first loading from caster user directory
     from text_manipulation_rules import text_manipulation_support
@@ -17,6 +21,7 @@ except ImportError:
 from castervoice.lib.actions import Text
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
+from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib.merge.state.short import R
 from castervoice.lib.util import recognition_history
@@ -62,9 +67,7 @@ class TextManipulation(MergeRule):
 
     mapping = {
         #prefix with space if the last command was text
-        "<text>": R(Text("%(text)s")+Text(" ")),#+Function(_print_history)),
-        #"type": #
-
+        #"<text>": R(Text("")),#%(text)s")+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
         #select text
         "(select all|get everything)":
@@ -93,7 +96,7 @@ class TextManipulation(MergeRule):
         "strike line": R(Key("end/10, s-home/10, backspace:2/10")),
         "clear <line_dir>": R(Key("s-%(line_dir)s/20, backspace")),
         "strike [<direction>] [<n>]": #defaults to left, say right to strike right
-            R(Key("cs-%(direction)s")*Repeat(extra="n") + Key("backspace")),
+            R(Key("cs-%(direction)s/10")*Repeat(extra="n") + Key("backspace")),
 
         "remove <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.copypaste_remove_phrase_from_text,
@@ -141,7 +144,7 @@ class TextManipulation(MergeRule):
 
         "get line":R(Key("end/20, s-home/20")),
         #to do get line n
-        "transfer line":R(Key("end/20, s-home/20, c-c/20, a-tab")),
+        "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
         "copy line":R(Key("end/20, s-home/20, c-c")),
         "cut line":R(Key("end/20, s-home/20, c-x")),
         #get n line|lines direction
