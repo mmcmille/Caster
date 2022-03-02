@@ -1,7 +1,8 @@
-from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
+from dragonfly import Function, Repeat, Dictation, Choice, MappingRule
 
 from castervoice.lib.actions import Key, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
+from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.merge.state.short import R
 
 
@@ -35,7 +36,7 @@ class OutlookRule(MappingRule):
         "subject <text>": R(Key("a-u") + Function(capitalize) + Key("tab")),
         "attach file": R(Key("n, a, f")),
         "add to dictionary": R(Key("s-f10/2, a")),
-        "click send message": R(Key("a-s")),  # be careful
+        "send email": R(Key("a-s")),  # be careful
         "find and replace": R(Key("c-h")),
         "check names": R(Key("c-k")),
         "spell check": R(Key("f7")),
@@ -44,7 +45,10 @@ class OutlookRule(MappingRule):
         # folders pane
         "expand [that]": R(Key("asterisk")),
         "collapse [that]": R(Key("minus")),
-
+        #notifications
+        "dismiss all": R(Key("a-a")),
+        
+        
         # folders navigation
         # some of these may be user dependent, depends on the order of your folders
         # which you can inspect by pressing control y
@@ -56,12 +60,14 @@ class OutlookRule(MappingRule):
         "go to starred": R(Key("c-y/10, s:3, enter")),
         "go to important": R(Key("c-y/10, i:2, enter")),
         "go to outbox": R(Key("cs-o")),
+        "inbox": R(Key("cs-i")),
 
         # center pane
         "sort by [<sort_by>]": R(Key("a-v/5, a, b/5, %(sort_by)s")),
         "reverse sort": R(Key("a-v, r, s")),
         "block sender": R(Key("a-h/3, j/3, b")),
-        "search [bar] [<dict>]": R(Key("c-e") + Text("%(dict)s")),
+        "search": R(Key("c-e")),
+        "search [for] [<dict>]": R(Key("c-e") + Text("%(dict)s")),
         "(message list | messages)": R(Key("tab:3")),
         "(empty | clear) search [bar]": R(Key("c-e, c-a, del/3, escape")),
         # from the search bar to get the focus into the messages is three tabs
@@ -75,13 +81,18 @@ class OutlookRule(MappingRule):
         "(prior | previous) message [<n>]": R(Key("s-f6/20, up"))*Repeat(extra='n'),
         "[select] next link": R(Key("tab")),
         "[select] (previous | prior) link": R(Key("s-tab")),
-
+        "move email": R(Key("popup/20, m")),
+        "tag email": R(Key("popup/20, t/10, a")),
+        "archive": R(Key("backspace")),
+        "done tagging": R(Key("space/10, enter")),
+        
         # calendar
         "workweek [view]": R(Key("ca-2")),
         "full week [view]": R(Key("ca-3")),
         "month view": R(Key("ca-4")),
 
-        # message shortcuts
+        #message shortcuts
+        "flag email": R(Key("insert")),
         "reply [<dict>]": R(Key("c-r") + Text("%(dict)s")),
         "reply all [<dict>]": R(Key("cs-r") + Text("%(dict)s")),
         "forward": R(Key("c-f")),
@@ -90,7 +101,8 @@ class OutlookRule(MappingRule):
         "(folder | go to folder)": R(Key("c-y")),
 
         # navigation
-        "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
+	"open folder": R(Key("c-y")),
+	"next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
         "mail view": R(Key("c-1")),
         "calendar": R(Key("c-2")),
