@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 import itertools
 
 from castervoice.rules.ccr.standard import SymbolSpecs
@@ -17,13 +21,15 @@ right_spec = "(right | ross)"
 left_spec = "(left | lease)"
 shift_spec = "(shift | shin)"
 control_spec = "(control | fly)"
+get_spec = "get"
 alt_spec = "alt"
 windows_spec = "windows"
 
-# Modifier key names 
+# Modifier key names
 modifier_map = {
         control_spec: "c",
         shift_spec: "s",
+        get_spec: "cs",
         alt_spec: "a",
         windows_spec: "w",
     }
@@ -32,6 +38,7 @@ modifier_map = {
 modifier_key_name = {
     control_spec: "ctrl ",
     shift_spec: "shift ",
+    get_spec: "get ",
     alt_spec: "alt ",
     windows_spec: "win ",
 }
@@ -39,7 +46,7 @@ modifier_key_name = {
 
 def build_perm_dict(a_dict):
     """
-    Builds a dict all possible combinations of spec/key based on dict 
+    Builds a dict all possible combinations of spec/key based on dict
     Returns dict
     """
     choices = {
