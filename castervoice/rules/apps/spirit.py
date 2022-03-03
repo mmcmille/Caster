@@ -108,4 +108,4 @@ class SpiritRule(MappingRule):
 
 def get_rule():
 
-	return SpiritRule, RuleDetails(name="spirit rule", executable="wfica32")#"SPIRITShell")
+	return SpiritRule, RuleDetails(name="spirit", executable="wfica32")#"SPIRITShell")

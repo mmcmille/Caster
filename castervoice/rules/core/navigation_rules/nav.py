@@ -2,7 +2,7 @@
 Michael McMillen
 '''
 
-from dragonfly import Function, Repeat, Dictation, Choice, ContextAction, ShortIntegerRef, Pause, Text
+from dragonfly import Function, Repeat, Dictation, Choice, Pause, Text, ContextAction, ShortIntegerRef
 from castervoice.lib.context import AppContext
 
 from castervoice.lib import navigation, context, textformat, text_utils
@@ -55,13 +55,13 @@ class Navigation(MergeRule):
     mapping = {
         # "periodic" repeats whatever comes next at 1-second intervals until "terminate"
         # or "escape" (or your SymbolSpecs.CANCEL) is spoken or 100 tries occur
-        "repeat":
+        "(repeat | periodic)":
             ContextSeeker(forward=[
                 L(
                     S(["cancel"], lambda: None),
                     S(["*"],
                       lambda fnparams: UntilCancelled(
-                          Mimic(*filter(lambda s: s != "repeat", fnparams)), 1).execute(
+                          Mimic(*filter(lambda s: s != "periodic", fnparams)), 1).execute(
                           ),
                       use_spoken=True))
             ]),
@@ -88,13 +88,10 @@ class Navigation(MergeRule):
                                time_in_seconds=0.1,
                                repetitions=50),
 
-
         # keyboard shortcuts
-
-	#"find":R( Key("c-f")),
-    # uses Windows X menu
+        "ignore body":
+            R(Key("c-x")),
         "computer <pc_op>":R( Key("w-x/40,up,up,%(pc_op)s")),
-
         'save ( file | it )':
             R(Key("c-s"), rspec="save"),
         'save as':
@@ -105,21 +102,24 @@ class Navigation(MergeRule):
 	    R(Key("c-o")),
         'print file':
             R(Key("c-p")),
+
+        #page
         "search page [for] [<textnv>]":
             R(Key("c-f") + Pause("200") + Text("%(textnv)s")),
+        "last page": R(Key("a-left")),
+	    "header":
+            R(Key("c-home/50")),
+        "footer":
+            R(Key("c-end/50")),
+        #orig
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
-        "(copy | stoosh) [<nnavi500>]": Key("c-c"),
-        "copy over": R(Key("c-c") + Pause("100") + Key("a-tab")),
-            #R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
+        "stoosh [<nnavi500>]":
+            R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard), rspec="cut"),
-        "pasted": R(Key("c-v,enter")),
-        "(pasta | drop it | spark) [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
+        "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
             R(Function(navigation.drop_keep_clipboard), rspec="spark"),
-        "plain pasta": R(Key("cs-u")), #uses auto hotkey
-	"toss":
-		R(Key("a-tab")+Pause("20")+Key ("c-v")+Pause("20")+ Key ("a-tab/10")),
         "splat [<splatdir>] [<nnavi10>]":
             R(Key("c-%(splatdir)s"), rspec="splat")*Repeat(extra="nnavi10"),
         SymbolSpecs.CANCEL:
@@ -159,6 +159,9 @@ class Navigation(MergeRule):
             R(Function(textformat.partial_format_text)),
         "hug <enclosure>":
             R(Function(text_utils.enclose_selected)),
+        "dredge [<nnavi10>]":
+            R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
+              rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
         "kick [<nnavi3>]":
@@ -167,43 +170,45 @@ class Navigation(MergeRule):
             R(Function(navigation.right_click)),
         "(kick double|double kick)":
             R(Function(navigation.left_click)*Repeat(2)),
-        "kick hold":
+        "squat":
             R(Function(navigation.left_down)),
-        "kick release":
+        "bench":
             R(Function(navigation.left_up)),
+
         # special keystroke commands
-        "(lend | line front) [<nnavi10>]":
+        "(lease wally | latch) [<nnavi10>]":
             R(Key("home:%(nnavi10)s")),
-        "(line end | continue) [<nnavi10>]":
+        "(ross wally | ratch) [<nnavi10>]":
             R(Key("end:%(nnavi10)s")),
-        # page
-        "last page": R(Key("a-left")),
-	    "header":
-            R(Key("c-home/50")),
-        "footer":
-            R(Key("c-end/50")),
-	#"scroll down [<nnavi10>]":
-          #  R(Key("c-down:%(nnavi10)s")),
-        #"scroll up [<nnavi10>]":
-          #  R(Key("c-up:%(nnavi10)s")),
-        # line
-    	#"grab [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
-        #"grab right [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
-	# key
+        "sauce wally [<nnavi10>]":
+            R(Key("c-home:%(nnavi10)s")),
+        "dunce wally [<nnavi10>]":
+            R(Key("c-end:%(nnavi10)s")),
+        "bird [<nnavi500>]":
+            R(Key("c-left:%(nnavi500)s")),
+        "firch [<nnavi500>]":
+            R(Key("c-right:%(nnavi500)s")),
+        "brick [<nnavi500>]":
+            R(Key("s-left:%(nnavi500)s")),
+        "frick [<nnavi500>]":
+            R(Key("s-right:%(nnavi500)s")),
+        "blitch [<nnavi500>]":
+            R(Key("cs-left:%(nnavi500)s")),
+        "flitch [<nnavi500>]":
+            R(Key("cs-right:%(nnavi500)s")),
         "<button_dictionary_500_no_prefix_no_modifier> [<nnavi500>]":
             R(Key("%(button_dictionary_500_no_prefix_no_modifier)s")*Repeat(extra='nnavi500'),
               rdescript="press buttons from button_dictionary_500_no_prefix_no_modifier"),
         "<modifier> <button_dictionary_500_modifier> [<nnavi500>]":
-            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s/10")*Repeat(extra='nnavi500'),
+            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s")*Repeat(extra='nnavi500'),
               rdescript="press modifiers plus buttons from button_dictionary_500_modifier"),
         "<modifier> <button_dictionary_1_modifier>":
-            R(Key("%(modifier)s-%(button_dictionary_1_modifier)s/10"),
+            R(Key("%(modifier)s-%(button_dictionary_1_modifier)s"),
               rdescript="press modifiers plus buttons from button_dictionary_1_modifier"),
     }
 
     tell_commands_dict = {"dock": ";", "doc": ";", "sink": "", "com": ",", "deck": ":"}
     tell_commands_dict.update(_tpd)
-    #Edited direction buttons no_prefix_no_modifier
     button_dictionary_500_no_prefix_no_modifier = {
         "tabby": "tab",
         "shave": "backspace",
@@ -273,39 +278,16 @@ class Navigation(MergeRule):
             "lease": "backspace",
             "ross": "delete",
         }),
-        keyboard_support.modifier_choice_object,
-        Choice("button_dictionary_500_no_prefix_no_modifier", button_dictionary_500_no_prefix_no_modifier),
-        Choice("button_dictionary_500_modifier", button_dictionary_500_modifier),
-        Choice("button_dictionary_1_modifier", button_dictionary_1_modifier),
-        Choice("app_name", {
-         	#"files": 60,
-            #"web": 110,
-            #"(notes)": 160,
-            #"(rules|atom|commands)": 210,
-            #"(sheets)": 255,
-            #"(writer)": 300,
-            #"(atom|commands)":  350,
-            #"(spirit)": 400,
-            #"maps": 440
-            "10": 490,
-            "11": 540,
-            #"12": 590,
-            #"13": 640,
-            #"14": 690,
-            #"15": 740,
-            #"16": 780,
-            #"17": 820,
-            #"18": 860,
-            #"19": 920,
-            #"20": 960
-        }),
         Choice("pc_op", {
          	"sleep": "right,down,enter",
             "restart": "right,up",
             "shutdown": "right,up,up",
-
         }),
 
+        keyboard_support.modifier_choice_object,
+        Choice("button_dictionary_500_no_prefix_no_modifier", button_dictionary_500_no_prefix_no_modifier),
+        Choice("button_dictionary_500_modifier", button_dictionary_500_modifier),
+        Choice("button_dictionary_1_modifier", button_dictionary_1_modifier)
     ]
 
     defaults = {

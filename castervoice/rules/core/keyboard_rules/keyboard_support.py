@@ -21,7 +21,6 @@ right_spec = "(right | ross)"
 left_spec = "(left | lease)"
 shift_spec = "(shift | shin)"
 control_spec = "(control | fly)"
-get_spec = "get"
 alt_spec = "alt"
 windows_spec = "windows"
 
@@ -29,7 +28,6 @@ windows_spec = "windows"
 modifier_map = {
         control_spec: "c",
         shift_spec: "s",
-        get_spec: "cs",
         alt_spec: "a",
         windows_spec: "w",
     }
@@ -38,7 +36,6 @@ modifier_map = {
 modifier_key_name = {
     control_spec: "ctrl ",
     shift_spec: "shift ",
-    get_spec: "get ",
     alt_spec: "alt ",
     windows_spec: "win ",
 }
