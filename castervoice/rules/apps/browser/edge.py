@@ -22,7 +22,7 @@ class EdgeRule(MappingRule):
         "send (it|email)": R(Key("tab:3/20,enter")),
         "discard it": R(Key("tab:4/40")),
         "link":
-            R(Key("a-c")),
+            R(Key("a-c/50, a-tab")),
         "link map": R(Key("")),
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),

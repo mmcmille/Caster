@@ -198,9 +198,9 @@ class Navigation(MergeRule):
             R(Key("cs-right:%(nnavi500)s")),
         "<button_dictionary_500_no_prefix_no_modifier> [<nnavi500>]":
             R(Key("%(button_dictionary_500_no_prefix_no_modifier)s")*Repeat(extra='nnavi500'),
-              rdescript="press buttons from button_dictionary_500_no_prefix_no_modifier"),
-        "<modifier> <button_dictionary_500_modifier> [<nnavi500>]":
-            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s")*Repeat(extra='nnavi500'),
+              rdescript="press buttons: %(button_dictionary_500_no_prefix_no_modifier)s %(nnavi500)s"),
+        "<modifier> <button_dictionary_500_modifier> [<nnavi500>]": #added delay
+            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s/0.01")*Repeat(extra='nnavi500'),
               rdescript="press modifiers plus buttons from button_dictionary_500_modifier"),
         "<modifier> <button_dictionary_1_modifier>":
             R(Key("%(modifier)s-%(button_dictionary_1_modifier)s"),

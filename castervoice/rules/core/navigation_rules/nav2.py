@@ -69,11 +69,11 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
-        "sure stoosh":
+        "(copy | sure stoosh)":
             R(Key("c-c")),
         "sure cut":
             R(Key("c-x")),
-        "sure spark":
+        "(drop it | sure spark)":
             R(Key("c-v")),
         "refresh":
             R(Key("c-r")),

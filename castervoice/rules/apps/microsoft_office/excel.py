@@ -1,4 +1,5 @@
 """
+Michael McMillen
 Command-module for Microsoft Excel
 You also can find some good vocola commands for Excel on Mark Lillibridge's Github:
 https://github.com/mdbridge/bit-bucket/tree/master/voice/my_commands/commands
@@ -7,12 +8,11 @@ Alex Boche 2019
 
 # this function takes a dictionary and returns a dictionary whose keys are sequences of keys of the original dictionary
 # and whose values our the corresponding sequences of values of the original dictionary
-from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition
+from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition, ShortIntegerRef
 
 from castervoice.rules.core.alphabet_rules import alphabet_support  # Manually change in port in if in user directory
 from castervoice.lib.actions import Text, Key
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
-from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.merge.state.short import R
 
 class ExcelRule(MappingRule):

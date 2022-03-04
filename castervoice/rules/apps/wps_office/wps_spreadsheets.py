@@ -1,8 +1,8 @@
 """
-Command-module for Microsoft Excel
-You also can find some good vocola commands for Excel on Mark Lillibridge's Github:
-https://github.com/mdbridge/bit-bucket/tree/master/voice/my_commands/commands
-Alex Boche 2019
+Michael McMillen
+TODO:
+add grab direction, holds cs, copies with done
+
 """
 
 # this function takes a dictionary and returns a dictionary whose keys are sequences of keys of the original dictionary

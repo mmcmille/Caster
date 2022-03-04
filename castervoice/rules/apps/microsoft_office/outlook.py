@@ -1,8 +1,11 @@
-from dragonfly import Function, Repeat, Dictation, Choice, MappingRule
+'''
+Michael McMillen
+'''
+
+from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
 
 from castervoice.lib.actions import Key, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
-from castervoice.lib.merge.additions import ShortIntegerRef
 from castervoice.lib.merge.state.short import R
 
 
@@ -47,8 +50,8 @@ class OutlookRule(MappingRule):
         "collapse [that]": R(Key("minus")),
         #notifications
         "dismiss all": R(Key("a-a")),
-        
-        
+
+
         # folders navigation
         # some of these may be user dependent, depends on the order of your folders
         # which you can inspect by pressing control y
@@ -85,7 +88,7 @@ class OutlookRule(MappingRule):
         "tag email": R(Key("popup/20, t/10, a")),
         "archive": R(Key("backspace")),
         "done tagging": R(Key("space/10, enter")),
-        
+
         # calendar
         "workweek [view]": R(Key("ca-2")),
         "full week [view]": R(Key("ca-3")),

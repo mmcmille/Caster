@@ -118,11 +118,8 @@ class TextManipulation(MergeRule):
               rdescript="Text Manipulation: delete until chosen character"),
 
         # move cursor
-        "back [<n>]":
-            R(Key("c-left:%(n)s/10", use_hardware=True)),
-        "jump [<n>]":
-            #R(Key("control:down") + Key("right") + Key("control:up")),
-	    R(Key("c-right:%(n)s/10")),
+        "back [<n>]": R(Key("c-left:%(n)s/10", use_hardware=True)),
+        "jump [<n>]": R(Key("c-right:%(n)s/10")),
 
         #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
         #    R(Function(text_manipulation_support.move_until_phrase,
@@ -135,14 +132,13 @@ class TextManipulation(MergeRule):
 
         # select text or character
         #line commands
-        "back line":
+        "start line":
     		R(Key("home")),
-    	"jump line":
+    	"end line":
     		R(Key("end")),
         "new line": R(Key("end,enter")),
-
-        "get line":R(Key("end/20, s-home/20")),
         #to do get line n
+        "copy over": R(Key("c-c/20,a-tab")),
         "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
         "copy line":R(Key("end/20, s-home/20, c-c")),
         "cut line":R(Key("end/20, s-home/20, c-x")),

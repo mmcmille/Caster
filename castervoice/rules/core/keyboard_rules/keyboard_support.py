@@ -110,7 +110,7 @@ class ButtonDict():
             "insert": "insert",
             "pause": "pause",
             windows_spec: "win",
-            "(apps | popup)": "apps",
+            "(apps | menu)": "apps",
             "print screen": "printscreen",
             "scroll lock": "scrolllock",
             "num lock": "numlock",
