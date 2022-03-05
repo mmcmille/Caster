@@ -59,6 +59,7 @@ class NavigationNon(MappingRule):
                 [L(S(["cancel"], Function(navigation.wheel_scroll, nnavi500=1)))],
                 repetitions=1000,
                 blocking=False)),
+
         "colic":
             R(Key("control:down") + Mouse("left") + Key("control:up")),
         "garb [<nnavi500>]":
@@ -69,10 +70,11 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
+        #added release modifiers to work with "select"
         "(copy | sure stoosh)":
-            R(Key("c-c")),
-        "sure cut":
-            R(Key("c-x")),
+            R(Key("c-c, shift:up, ctrl:up")),
+        "[sure] cut":
+            R(Key("c-x, shift:up, ctrl:up")),
         "(drop it | sure spark)":
             R(Key("c-v")),
         "refresh":

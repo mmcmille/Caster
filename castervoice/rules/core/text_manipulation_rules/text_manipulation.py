@@ -120,6 +120,19 @@ class TextManipulation(MergeRule):
         # move cursor
         "back [<n>]": R(Key("c-left:%(n)s/10", use_hardware=True)),
         "jump [<n>]": R(Key("c-right:%(n)s/10")),
+        #line commands
+        "back line":
+    		R(Key("home")),
+    	"jump line":
+    		R(Key("end")),
+        "new line": R(Key("end,enter")),
+        #to do get line n
+        "copy over": R(Key("c-c/20,a-tab")),
+        "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
+        "copy line":R(Key("end/20, s-home/20, c-c")),
+        "cut line":R(Key("end/20, s-home/20, c-x")),
+        "get word": R(Key("c-left, cs-right, c-c")),
+        #"select": R(Key("ctrl:down, shift:down")),
 
         #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
         #    R(Function(text_manipulation_support.move_until_phrase,
@@ -131,21 +144,10 @@ class TextManipulation(MergeRule):
         #     "".join(character_sequence), number_of_lines_to_search, occurrence_number, "character")),
 
         # select text or character
-        #line commands
-        "start line":
-    		R(Key("home")),
-    	"end line":
-    		R(Key("end")),
-        "new line": R(Key("end,enter")),
-        #to do get line n
-        "copy over": R(Key("c-c/20,a-tab")),
-        "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
-        "copy line":R(Key("end/20, s-home/20, c-c")),
-        "cut line":R(Key("end/20, s-home/20, c-x")),
         #get n line|lines direction
 
         #get n words back/
-        "get word": R(Key("c-left, cs-right, c-c")),
+
         "grab <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.select_phrase,
                        dict(dictation="phrase"), dictation_versus_character="dictation"),

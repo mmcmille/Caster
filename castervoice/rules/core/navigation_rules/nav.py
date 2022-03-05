@@ -123,7 +123,7 @@ class Navigation(MergeRule):
         "splat [<splatdir>] [<nnavi10>]":
             R(Key("c-%(splatdir)s"), rspec="splat")*Repeat(extra="nnavi10"),
         SymbolSpecs.CANCEL:
-            R(Key("escape"), rspec="cancel"),
+            R(Key("escape, shift:up, ctrl:up"), rspec="cancel"),
         "shackle":
             R(Key("home/5, s-end"), rspec="shackle"),
         "(tell | tau) <semi>":
@@ -211,8 +211,8 @@ class Navigation(MergeRule):
     tell_commands_dict.update(_tpd)
     button_dictionary_500_no_prefix_no_modifier = {
         "tabby": "tab",
-        "shave": "backspace",
-        "(delete | deli)": "del",
+        "shave": "backspace, shift:up, ctrl:up", #select mod
+        "(delete | deli)": "del,  shift:up, ctrl:up",#select mod
         "done": "enter",
         "left": "left",
         "right": "right",
