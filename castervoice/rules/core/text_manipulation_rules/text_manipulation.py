@@ -71,6 +71,11 @@ class TextManipulation(MergeRule):
         #select text
         "(select all|get everything)":
 		R(Key("c-a/10")),
+        "select [<direction>] [<n>]": #defaults to left
+            R(Key("cs-%(direction)s/10")*Repeat(extra="n")),
+        "select <direction> <direction2> [<n>]": #defaults to left
+            R(Key("cs-%(direction)s/10") + Key("s-%(direction2)s/10")*Repeat(extra="n")),
+
         "bold text":
 		R(Key("c-b/10")),
         "snag [<n>]": #char
@@ -132,7 +137,7 @@ class TextManipulation(MergeRule):
         "copy line":R(Key("end/20, s-home/20, c-c")),
         "cut line":R(Key("end/20, s-home/20, c-x")),
         "get word": R(Key("c-left, cs-right, c-c")),
-        #"select": R(Key("ctrl:down, shift:down")),
+
 
         #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
         #    R(Function(text_manipulation_support.move_until_phrase,
@@ -143,10 +148,6 @@ class TextManipulation(MergeRule):
         #     text_manipulation_support.move_until_phrase(direction, before_after,
         #     "".join(character_sequence), number_of_lines_to_search, occurrence_number, "character")),
 
-        # select text or character
-        #get n line|lines direction
-
-        #get n words back/
 
         "grab <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.select_phrase,
@@ -209,6 +210,12 @@ class TextManipulation(MergeRule):
             # the default number_of_lines_to_search will be set to 3
             # in the same way, "dunce" (i.e. "down") will be treated the same as
             # "ross" (i.e. "right")
+        }),
+        Choice("direction2", {
+            "left": "left",
+            "right": "right",
+            "up": "up",
+            "down": "down",
         }),
         Choice("line_dir", {
                 "left": "home",

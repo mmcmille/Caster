@@ -65,7 +65,7 @@ class NavigationNon(MappingRule):
         "garb [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.stoosh_keep_clipboard)),
-        "drop [<nnavi500>]":
+        "drop mouse [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.drop_keep_clipboard,
                 capitalization=0,
@@ -77,6 +77,8 @@ class NavigationNon(MappingRule):
             R(Key("c-x, shift:up, ctrl:up")),
         "(drop it | sure spark)":
             R(Key("c-v")),
+        "drop text":
+            R(Key("cs-u")),
         "refresh":
             R(Key("c-r")),
         "maxiwin":

@@ -2,7 +2,7 @@
 Michael McMillen
 '''
 
-from dragonfly import MappingRule, Function, Repeat, Pause, Choice, BringApp, ShortIntegerRef
+from dragonfly import MappingRule, Function, Repeat, Pause, Choice, BringApp, ShortIntegerRef, RunCommand
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
 from castervoice.lib.actions import Key, Text, Mouse
@@ -21,7 +21,8 @@ class WorkWindowManagementRule(MappingRule):
         #"edit everything": R(Key("c-a, c-x") + BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
         #"edit region": R(Key("c-x") + R(BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
 
-
+        "show letters":
+            R(RunCommand(r"C:\Users\u581917\Apps Local\Interfacing\HuntAndPeck-1.6\hap.exe /hint")),
         "Open Cisco":
             R(BringApp(r"C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnui.exe")),
         "open process [explorer]":
