@@ -22,7 +22,7 @@ class WorkWindowManagementRule(MappingRule):
         #"edit region": R(Key("c-x") + R(BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
 
         "show letters":
-            R(RunCommand(r"C:\Users\u581917\Apps Local\Interfacing\HuntAndPeck-1.6\hap.exe /hint")),
+            R(Key("c-m")),#uses Fluent Search
         "Open Cisco":
             R(BringApp(r"C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnui.exe")),
         "open process [explorer]":
