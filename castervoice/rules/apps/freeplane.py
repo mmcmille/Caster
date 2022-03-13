@@ -49,6 +49,7 @@ class FreeplaneRule(MappingRule):
 		}),
 		Choice("key_rule", {
 			"save all": "a-s",
+			"copy single": "cs-c",
 			# navigation
 			"last": "a-left",
 			"find": "cs-j",

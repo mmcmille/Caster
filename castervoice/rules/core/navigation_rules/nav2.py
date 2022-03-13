@@ -102,7 +102,7 @@ class NavigationNon(MappingRule):
         "(prior | last | left ) tab [<n>]":
             R(Key("c-pgup/20"))*Repeat(extra="n"),
         "close (tab|it) [<n>]":
-            R(Key("c-w/40:%(n)s"))*Repeat(extra="n"),
+            R(Key("c-w/40"))*Repeat(extra="n"),
         "new tab [<n>]":
             R(Key("c-t/20"))*Repeat(extra="n"),
         "elite translation <text>":
