@@ -12,6 +12,10 @@ from castervoice.lib.merge.state.short import R
 
 class WindowManagementRule(MappingRule):
     mapping = {
+
+        "show letters":
+            R(Key("c-m")),#uses Fluent Search
+
         #Window Manipulation
 
         #screen zooming by Windows magnifier, note zoom in is w-equals, not w-plus!
