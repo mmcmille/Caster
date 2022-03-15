@@ -34,6 +34,7 @@ class SpiritRule(MappingRule):
 
 		#other commands
 		"edit": R(Key("f2")),
+		"refresh": R(Key("f5")),
 		#menu control
 		"<menu_title> [menu]":
 			R(Key("alt/20, %(menu_title)s/20")),

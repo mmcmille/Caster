@@ -14,7 +14,7 @@ class WindowManagementRule(MappingRule):
     mapping = {
 
         "show letters":
-            R(Key("c-m")),#uses Fluent Search
+            R(Key("ca-m")),#uses Fluent Search
 
         #Window Manipulation
 
