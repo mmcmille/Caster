@@ -26,7 +26,7 @@ class HomeWindowManagementRule(MappingRule):
          	"(1|web)": 64,
             "(2|files)": 111,#+47@100%
             "(3|commands)": 158,
-            "(4|commands)": 205,
+            "(4|notes)": 205,
             "(5|)": 252,
             "6": 299,
             "7": 346,
