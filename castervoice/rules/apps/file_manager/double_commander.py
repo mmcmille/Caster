@@ -17,6 +17,7 @@ class DoubleCommanderRule(MappingRule):
         "rename <new_name>": R(Key('f2/20, %(new_name)s, enter')),
         "out [<n>]": R(Key('a-up/20') * Repeat(extra='n')),
         "search text": R(Key("a-f7") + Pause("100") + Key("tab/10") * Repeat(extra=5)  + Key("space")),
+        "open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
     }
     extras = [
         ShortIntegerRef("n", 1, 100),

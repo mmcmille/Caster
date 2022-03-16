@@ -14,7 +14,7 @@ class WindowManagementRule(MappingRule):
     mapping = {
 
         "show letters":
-            R(Key("c-m")),#uses Fluent Search
+            R(Key("ca-m")),#uses Fluent Search
 
         #Window Manipulation
 
@@ -23,7 +23,7 @@ class WindowManagementRule(MappingRule):
         "(back screen| screen out) ": R(Key("w-minus/20")),
         "full-screen": R(Key("w-minus:4/40")),
 
-        "search Windows":R(Key("w-s")),
+        "search Windows":R(Key("alt:down,ctrl:down,ctrl:up,alt:up")),
         "search apps":R(Key("w-s/20")+ Text("apps: ")),
         "search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-b,space")),
