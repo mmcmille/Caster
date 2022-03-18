@@ -65,6 +65,8 @@ class TextManipulation(MergeRule):
 
 
     mapping = {
+        #prefix with space if the last command was text
+        #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
         #select text
         "(select all|get everything)":

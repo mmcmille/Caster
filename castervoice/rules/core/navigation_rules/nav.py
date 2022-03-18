@@ -170,9 +170,9 @@ class Navigation(MergeRule):
             R(Function(navigation.right_click)),
         "(kick double|double kick)":
             R(Function(navigation.left_click)*Repeat(2)),
-        "squat":
+        "(squat| kick hold)":
             R(Function(navigation.left_down)),
-        "bench":
+        "(bench| kick release)":
             R(Function(navigation.left_up)),
 
         # special keystroke commands

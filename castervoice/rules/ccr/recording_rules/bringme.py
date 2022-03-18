@@ -41,7 +41,8 @@ class BringRule(BaseSelfModifyingRule):
     _terminal_context = contexts.TERMINAL_CONTEXT
     # Paths
     _terminal_path = settings.settings(["paths", "TERMINAL_PATH"])
-    _explorer_path = str(Path("C:\\Windows\\explorer.exe"))
+    #original  _explorer_path = str(Path("C:\\Windows\\explorer.exe"))
+    _explorer_path = str(Path("C:\\Users\\u581917\\OneDrive - Syngenta\\Apps\\doublecmd\\doublecmd.exe"))
     _source_dir =  Path(settings.SETTINGS["paths"]["BASE_PATH"]).parents[0]
     _user_dir = settings.SETTINGS["paths"]["USER_DIR"]
     _home_dir = Path.home()
@@ -187,15 +188,10 @@ class BringRule(BaseSelfModifyingRule):
         Text(folder).execute()
     def _bring_folder(self, folder, app):
         if not app:
-            #uses double commander instead of file Explorer
-            Popen(['C:\GD_sync\Apps\doublecmd\doublecmd.exe ',str( '\''+folder+'\'')])#, hide_window= False)).execute()
-            #R(RunCommand("C:\GD_sync\Apps\doublecmd\doublecmd.exe " + "\"" + str(folder) + "\"", hide_window= False)).execute()
-            """
             ContextAction(Function(lambda: Popen([BringRule._explorer_path, folder])), [
                 (BringRule._terminal_context, Text("cd \"%s\"\n" % folder)),
                 (BringRule._explorer_context, Key("c-l/5") + Text("%s\n" % folder))
             ]).execute()
-            """
         elif app == "terminal":
             Popen([BringRule._terminal_path, "--cd=" + folder.replace("\\", "/")])
         elif app == "explorer":

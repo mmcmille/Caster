@@ -24,8 +24,8 @@ class WorkWindowManagementRule(MappingRule):
             R(BringApp(r"C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnui.exe")),
         "open process [explorer]":
             R(BringApp(r"C:\Users\u581917\Apps Local\Utility\ProcessExplorer\procexp.exe")),
-	    "open citrix":
-            R(BringApp(r"C:\Program Files (x86)\Citrix\ICA Client\SelfServicePlugin\SelfService.exe")),
+	   # "open citrix":
+        #    R(BringApp(r"C:\Program Files (x86)\Citrix\ICA Client\SelfServicePlugin\SelfService.exe")),
         #"open spirit": R(BringApp(r"C:\Program Files (
         "[my] username": R(Text("u581917")+ Key("tab")),
 
@@ -52,7 +52,7 @@ class WorkWindowManagementRule(MappingRule):
             "(3|edge|web)": 160,
             "(4|notes)": 210,
             "(5|commands|rules)": 255,
-            "6": 300,
+            "(6| files)": 300,
             "7": 350, #files implemented directly, along with freeplane (maps)
             "8": 400,
             "9": 440,
