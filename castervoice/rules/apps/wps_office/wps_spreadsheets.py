@@ -121,7 +121,7 @@ class SpreadsheetsRule(MappingRule):
         "insert stuff":
             R(Key("cs-plus")),
         "insert row":
-            R(Key("cs-plus")),
+            R(Key("cs-plus/40,down")),
         "insert column":
             R(Key("cs-plus/40, a-c/40, enter")),
         "insert cell [to the] left":

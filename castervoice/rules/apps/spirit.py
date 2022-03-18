@@ -24,7 +24,7 @@ class SpiritRule(MappingRule):
 		"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
 		#row and column right-click menu commands
 		#uses menu, assumes mouse is resting on row
-		"<rc_item>": R(Mouse("right") + Pause("50")+Key("%(rc_item)s,enter")),
+		"<rc_item>": R(Mouse("left/50,right/20") +Key("%(rc_item)s,enter")),
 		"remove": R(Mouse("left, right") + Pause("20")+Key("r")),
 		"paste down":R(Mouse("right/50") + Key("p/10:2,enter")),
 		"properties":R(Mouse("right/50") + Key("up,enter")),
@@ -94,8 +94,8 @@ class SpiritRule(MappingRule):
 				"(add|make) subplots": "a/20:2",
 
 				"plant trial":"p/20:3",
-				"sort down":"up:8,right,down",
-				"sort up":"up:8,right,down:2",
+				"sort down":"up:8/10,right/10,down/10",
+				"sort up":"up:8/10,right/10,down:2/10",
 		}),
 
 
