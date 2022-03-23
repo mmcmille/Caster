@@ -31,34 +31,18 @@ class SpreadsheetsRule(MappingRule):
 
 
     mapping = {
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s")),
+
     # whole number input, move to next cell automatically
     #number input right/down/off
     #def _load_and_refresh(self, _input_mode):
         "<row_1>": R(Text("%(row_1)s")+Function(_number_output_direction)),
-        "next": R(Key("enter")),
+
         # collect number direction, number= number of cells
         "collect <output_number_options>": R(Function(change_number_output_direction)),
 
-        "fit column [width]": R(Key("a-w")),
-            "( search | find)": R(Key("c-f")),
-            "add filter":
-    		R(Key("cs-l")),
-        # filtering
-    	"filter":
-    		R(Key("a-down/20")),
-    	"sort down":
-    		R(Key("a-down/20, up,up,left,enter")),
-    	"sort up":
-    		R(Key("a-down/20, up,up,enter")),
-    	"clear filter":
-    		R(Key("a-down/20, up/20, right/20, tab/20, tab/20, enter")),
-
-
-
-    	"fill down":
-    		R(Key("c-d/20")),
-
-    	"next sheet [<n>]":
+        "next sheet [<n>]":
                 R(Key("c-pgdown"))*Repeat(extra='n'),
             "(prior | previous) sheet [<n>]":
                 R(Key("c-pgup"))*Repeat(extra='n'),
@@ -121,7 +105,7 @@ class SpreadsheetsRule(MappingRule):
         "insert stuff":
             R(Key("cs-plus")),
         "insert row":
-            R(Key("cs-plus/40,down")),
+            R(Key("cs-plus/80,down")),
         "insert column":
             R(Key("cs-plus/40, a-c/40, enter")),
         "insert cell [to the] left":
@@ -183,7 +167,21 @@ class SpreadsheetsRule(MappingRule):
             "down": "down",
             "right": "tab",
             "off": ""
-        })
+        }),
+        Choice("key_rule", {
+            "fit column [width]": "a-w",
+            "( search | find)": "c-f",
+            # filtering
+            "add filter": "cs-l",
+        	"filter": "a-down/20",
+        	"clear filter": "a-down/40, up/20, right/20, tab/20, tab/20, enter",
+            #sorting
+            "sort down": "a-down/40, up/20,up/20,left/20,enter",
+        	"sort up": "a-down/40, up/20,up/20,enter",
+
+            "fill down": "c-d",
+
+        }),
     ]
     defaults = {"n": 1, "dict": ""}
 
