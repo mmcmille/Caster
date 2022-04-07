@@ -50,13 +50,13 @@ def window_exists(windowname=None, executable=None):
         return False
 
 
-def get_window_by_title(title=None): 
+def get_window_by_title(title=None):
     # returns 0 if nothing found
     Matches = Window.get_matching_windows(title=title)
     if Matches:
         return Matches[0].handle
     else:
-        return 0 
+        return 0
 
 
 def get_active_window_title():
@@ -311,7 +311,8 @@ def get_selected_files(folders=False):
     if WIN32 or LINUX:
         cb = Clipboard(from_system=True)
         cb.clear_clipboard()
-        Key("c-c").execute()
+        #orig for file explorer Key("c-c").execute()
+        Key("cs-n").execute()#double commander
         time.sleep(0.1)
         files = get_clipboard_files(folders)
         cb.copy_to_system()
@@ -322,7 +323,7 @@ def get_selected_files(folders=False):
 
 def enum_files_from_clipboard(target):
     '''
-    Generates absolute paths from clipboard 
+    Generates absolute paths from clipboard
     Returns unverified absolute file/dir paths based on defined mime type
     '''
     paths = []

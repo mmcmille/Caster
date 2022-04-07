@@ -52,7 +52,7 @@ class NavigationNon(MappingRule):
             R(Key("shift:down") + Mouse("right") + Key("shift:up")),
         "curse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
-        "(wheel | scree) <direction> [<nnavi500>]":
+        "wheel <direction> [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
         "scree <direction> <time_in_seconds>":
             R(AsynchronousAction(
@@ -71,7 +71,7 @@ class NavigationNon(MappingRule):
                 capitalization=0,
                 spacing=0)),
         #added release modifiers to work with "select"
-        "(copy | sure stoosh)":
+        "(copy it | sure stoosh)":
             R(Key("c-c, shift:up, ctrl:up")),
         "[sure] cut":
             R(Key("c-x, shift:up, ctrl:up")),

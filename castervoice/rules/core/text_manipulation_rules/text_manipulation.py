@@ -65,19 +65,18 @@ class TextManipulation(MergeRule):
 
 
     mapping = {
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s/40")),
+
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
         #select text
-        "(select all|get everything)":
-		R(Key("c-a/10")),
         "select [<direction>] [<n>]": #defaults to left
             R(Key("cs-%(direction)s/10")*Repeat(extra="n")),
         "select <direction> <direction2> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/10") + Key("s-%(direction2)s/10")*Repeat(extra="n")),
 
-        "bold text":
-		R(Key("c-b/10")),
         "snag [<n>]": #char
             R(Key("s-left:%(n)s")),
         "snag right [<n>]":
@@ -96,8 +95,6 @@ class TextManipulation(MergeRule):
 
 
         # remove text or character
-        "clear [line]": R(Key("end/10, s-home/10, backspace/10")),
-        "strike line": R(Key("end/10, s-home/10, backspace:2/10")),
         "clear <line_dir>": R(Key("s-%(line_dir)s/20, backspace")),
         "strike [<direction>] [<n>]": #defaults to left, say right to strike right
             R(Key("cs-%(direction)s/10")*Repeat(extra="n") + Key("backspace")),
@@ -125,15 +122,11 @@ class TextManipulation(MergeRule):
         # move cursor
         "back [<n>]": R(Key("c-left:%(n)s/10", use_hardware=True)),
         "jump [<n>]": R(Key("c-right:%(n)s/10")),
-        #line commands
-        "back line":
-    		R(Key("home")),
-    	"jump line":
-    		R(Key("end")),
-        "new line": R(Key("end,enter")),
+
         #to do get line n
         "copy over": R(Key("c-c/20,a-tab")),
         "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
+        "transfer page":R(Key("c-a, c-c/20, a-tab")),
         "copy line":R(Key("end/20, s-home/20, c-c")),
         "cut line":R(Key("end/20, s-home/20, c-x")),
         "get word": R(Key("c-left, cs-right, c-c")),
@@ -243,8 +236,18 @@ class TextManipulation(MergeRule):
             "ninth": 9,
             "tenth": 10,
         }),
-
-
+        Choice("key_rule", {
+            "(select all|get everything)": "c-a",
+            "bold text": "c-b",
+            #line commands
+            "back line":"home",
+        	"jump line": "end",
+            "new line": "end,enter",
+            #clears text
+            "clear [line]": "end, s-home, backspace",
+            "strike line": "end, s-home, backspace:2",
+            "clear page": "c-a, backspace",
+        }),
     ]
     defaults = {
         "direction": "left",

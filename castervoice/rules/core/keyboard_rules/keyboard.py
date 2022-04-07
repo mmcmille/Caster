@@ -33,7 +33,7 @@ def hold_keys(modifier_choice_key_name):
 class Keyboard(MappingRule):
     mapping = {
         "<modifier> <button_dictionary_1>": #added delay 0.01
-            R(Key("%(modifier)s-%(button_dictionary_1)s/1"), rdescript="Keyboard: %(modifier)s-%(button_dictionary_1)s"),
+            R(Key("%(modifier)s-%(button_dictionary_1)s/10"), rdescript="Keyboard: %(modifier)s-%(button_dictionary_1)s"),
         "hold <modifier_key_name>":
             R(Function(lambda modifier_key_name: hold_keys(modifier_key_name),rdescript="Keyboard: Hold %(modifier_key_name)s")),
         "release modifier keys": R(Key("shift:up, ctrl:up, alt:up, win:up"))

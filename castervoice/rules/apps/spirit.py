@@ -28,10 +28,14 @@ class SpiritRule(MappingRule):
 		"remove": R(Mouse("left, right") + Pause("20")+Key("r")),
 		"paste down":R(Mouse("right/50") + Key("p/10:2,enter")),
 		"properties":R(Mouse("right/50") + Key("up,enter")),
-		"okay":R(Mouse("(2141, 1324),left")), #Key("a-o")),
+
+
+		#mouse commands
 		"(pull over| bring over| apply profile)": R(Mouse("left:down/60, <-200, 0>, left:up")),
-
-
+		"pull up": R(Mouse("left:down/60, <0, -30>, left:up")),
+		"pull down": R(Mouse("left:down/60, <0, 30>, left:up")),
+		"okay":R(Mouse("(2141, 1324),left")), #Key("a-o")),
+		"profile":R(Mouse("(1386, 227),left")), #lettuce team
 		#other commands
 		"edit": R(Key("f2")),
 		"refresh": R(Key("f5")),

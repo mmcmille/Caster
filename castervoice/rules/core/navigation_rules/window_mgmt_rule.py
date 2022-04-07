@@ -13,8 +13,7 @@ from castervoice.lib.merge.state.short import R
 class WindowManagementRule(MappingRule):
     mapping = {
 
-        "show letters":
-            R(Key("csa-m")),#uses Fluent Search
+        "show letters": R(Key("csa-m")),#uses Fluent Search
 
         #Window Manipulation
 

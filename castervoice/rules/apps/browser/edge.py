@@ -72,7 +72,7 @@ class EdgeRule(MappingRule):
        "show (buttons | numbers)":
             R(Key("cs-space/80") + Text(":+") + Key("enter")),
        "hide (buttons | numbers)":
-            R(Key("cs-space/80") + Text(":-") + Key("enter")),
+            R(Key("cs-space/100") + Text(":-") + Key("enter")),
         "<k>": R(Key("cs-space/80") + Text("".join(["%(k)s"])) + Key("enter")),
         "<voice_action> <k>":
             R(Key("cs-space/80") + Text("".join(["%(k)s", "%(voice_action)s"])) + Key("enter")),
@@ -81,13 +81,13 @@ class EdgeRule(MappingRule):
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #left side
-        R(Key("escape") + Mouse("".join(["(0.98, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        R(Mouse("".join(["(0.98, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll [<read_dir>] [<read_speed>]": #left side
-            R(Key("escape") + Mouse("".join(["(8, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+            R(Mouse("".join(["(8, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
     	"stop":
-    		R(Key("escape")),
+    		R(Key("space")),
 
 
         # requires an extension in some browsers such as chrome
