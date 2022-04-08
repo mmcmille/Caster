@@ -70,12 +70,12 @@ class EdgeRule(MappingRule):
             R(Key("as-m")),
        #click by voice
        "show (buttons | numbers)":
-            R(Key("cs-space/80") + Text(":+") + Key("enter")),
+            R(Key("cs-n/80") + Text(":+") + Key("enter")),
        "hide (buttons | numbers)":
-            R(Key("cs-space/100") + Text(":-") + Key("enter")),
-        "<k>": R(Key("cs-space/80") + Text("".join(["%(k)s"])) + Key("enter")),
+            R(Key("cs-n/100") + Text(":-") + Key("enter")),
+        "<k>": R(Key("cs-n/80") + Text("".join(["%(k)s"])) + Key("enter")),
         "<voice_action> <k>":
-            R(Key("cs-space/80") + Text("".join(["%(k)s", "%(voice_action)s"])) + Key("enter")),
+            R(Key("cs-n/80") + Text("".join(["%(k)s", "%(voice_action)s"])) + Key("enter")),
 
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":

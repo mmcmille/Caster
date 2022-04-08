@@ -15,6 +15,7 @@ class WorkWindowManagementRule(MappingRule):
     x_pos = 60
     offset = 50
     mapping = {
+
         # Application Launching
         #"edit text": R(RunApp("notepad")),
         #"edit text": R(BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe")),
@@ -22,6 +23,7 @@ class WorkWindowManagementRule(MappingRule):
         #"edit region": R(Key("c-x") + R(BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
 
         #"<text>": R(Text("%(text)s ")),
+        "<text>": R(Text("")),
         "scratch":R(Key("w-7")),
         "Open Cisco":
             R(BringApp(r"C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnui.exe")),
