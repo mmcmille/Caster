@@ -1,7 +1,7 @@
 '''
 Michael McMillen
 '''
-from dragonfly import MappingRule, Function, Repeat, Pause, Choice, ShortIntegerRef
+from dragonfly import MappingRule, Function, Repeat, Pause, Choice, ShortIntegerRef, Dictation
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
 from castervoice.lib.actions import Key, Text, Mouse
@@ -23,6 +23,8 @@ class WindowManagementRule(MappingRule):
         "full-screen": R(Key("w-minus:4/40")),
 
         "search Windows":R(Key("alt:down,ctrl:down,ctrl:up,alt:up")),
+        "search Windows [<dict>]":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(dict)s")),
+
         "search apps":R(Key("w-s/20")+ Text("apps: ")),
         "search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-b,space")),
@@ -116,6 +118,7 @@ class WindowManagementRule(MappingRule):
 
     extras = [
         navigation_support.get_direction_choice("direction"),
+        Dictation("dict"),
         Choice("position", {
             "sit": 3,
             "stand": 1
