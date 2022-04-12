@@ -21,10 +21,9 @@ class WindowManagementRule(MappingRule):
         "(zoom screen| screen in)": R(Key("w-equals/20")),
         "(back screen| screen out) ": R(Key("w-minus/20")),
         "full-screen": R(Key("w-minus:4/40")),
-
-        "search Windows":R(Key("alt:down,ctrl:down,ctrl:up,alt:up")),
-        "search Windows [<dict>]":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(dict)s")),
-
+        #uses fluent search
+        #"search Windows":R(Key("alt:down,ctrl:down,ctrl:up,alt:up")),
+        "search <search_tag> [for] [<dict>]":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s") + Key("tab")+ Text("%(dict)s")),
         "search apps":R(Key("w-s/20")+ Text("apps: ")),
         "search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-b,space")),
@@ -119,6 +118,11 @@ class WindowManagementRule(MappingRule):
     extras = [
         navigation_support.get_direction_choice("direction"),
         Dictation("dict"),
+        Choice("search_tag", {
+            "Windows": "",
+            "apps": "apps",
+            "Bible": "bible",
+        }),
         Choice("position", {
             "sit": 3,
             "stand": 1
@@ -147,7 +151,7 @@ class WindowManagementRule(MappingRule):
             "20": 960
         }),
     ]
-
+    defaults = {"search_tag": "Windows", "dict": ""}
 
 def get_rule():
     details = RuleDetails(name="window management rule")

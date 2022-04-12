@@ -71,7 +71,7 @@ class NavigationNon(MappingRule):
                 capitalization=0,
                 spacing=0)),
         #added release modifiers to work with "select"
-        "(copy it | sure stoosh)":
+        "(copy [it] | sure stoosh)":
             R(Key("c-c, shift:up, ctrl:up")),
         "[sure] cut":
             R(Key("c-x, shift:up, ctrl:up")),

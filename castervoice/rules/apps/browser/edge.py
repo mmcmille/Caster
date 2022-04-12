@@ -87,7 +87,7 @@ class EdgeRule(MappingRule):
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
     	"stop":
-    		R(Key("space")),
+    		R(Key("escape")),
 
 
         # requires an extension in some browsers such as chrome
