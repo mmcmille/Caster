@@ -15,8 +15,14 @@ from castervoice.lib.temporary import Store, Retrieve
 
 class EdgeRule(MappingRule):
     mapping = {
+        #temporary rule for virtual mint fulfillment ,
+        # uses an excel file with source container ids in one column, and envelope container ids in the column to the right
+        "transfer": R(Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
+        "next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
+
+        #outlook online rules
         #moved to folder
-        "move [to] <dict>":R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
+        "move [(it|to)] [<dict>]":R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
         "flag it": R(Mouse("(246, 146), left")),
         "trash it": R(Mouse("(443, 148), left")),#510, 158
         "send (it|email)": R(Key("tab:3/20,enter")),

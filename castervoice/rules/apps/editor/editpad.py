@@ -10,11 +10,12 @@ from castervoice.lib.merge.state.short import R
 class EditPadRule(MappingRule):
 
     mapping = {
-    "<text>": R(Text("%(text)s ")),
+    "<text> {weight=1000}": R(Text("%(text)s ")),
 
         "go [to] line <n>":
             R(Key("c-g/10") + Text("%(n)s") + Key("enter")),
     }
+    #weight = 2
     extras = [
         Dictation("text"),
         ShortIntegerRef("n", 1, 1000),

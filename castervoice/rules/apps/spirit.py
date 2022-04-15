@@ -40,9 +40,8 @@ class SpiritRule(MappingRule):
 		"edit": R(Key("f2")),
 		"refresh": R(Key("f5")),
 		#menu control
-		"<menu_title> [menu]":
-			R(Key("alt/20, %(menu_title)s/20")),
-
+		"<menu_title> [menu]": R(Key("alt/20, %(menu_title)s/20")),
+		"frame [<m>]": R(Key("alt/20, w/20, %(m)s/20")),
 	}
 	extras = [
 		Choice("menu_title", {
@@ -108,7 +107,7 @@ class SpiritRule(MappingRule):
 		ShortIntegerRef("m", 1, 10)
 
 	]
-    #defaults = {"n": 1, "k": 1, "m":"", "nth": ""}
+	defaults = {"n": 1, "k": 1, "m":1, "nth": ""}
 
 
 def get_rule():

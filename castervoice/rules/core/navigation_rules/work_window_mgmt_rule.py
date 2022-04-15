@@ -46,13 +46,18 @@ class WorkWindowManagementRule(MappingRule):
               Pause("200")+
               Mouse("(0.5, 0.5)")
               ),
+
+        #"open <app_name> ":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("edge") + Key("tab") + Text("%(app_name)s") + Key("enter")),
     }
 
     extras = [
         Dictation("text"),
+        Choice("app_name", {
+            "email": "email",
+        }),
         Choice("app_n", {
             #100% Scale,
-            "(1|mail|email)": 64,
+            "(1|email)": 64,#"(1|mail|email)": 64,
             "(2|planner)": 110,
             "(3|edge|web)": 160,
             "(4|notes)": 210,

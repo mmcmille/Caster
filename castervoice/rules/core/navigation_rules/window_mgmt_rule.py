@@ -36,16 +36,8 @@ class WindowManagementRule(MappingRule):
 
         #switch  between windows
 
-        #app switching via control clicks area on vertical taskbar
+        "open <dict>": R(Key("")),
         "close window": R(Key("a-f4")),
-        #window switching in computer specific rules
-        #"(show|open|switch|window) <app_n>":
-        #    R(Key("control:down") +
-        #      Mouse("".join(["[30,","%(app_n)s", "], left"])) +
-        #      Key("control:up/20") +
-        #      Pause("200")+
-        #      Mouse("(0.5, 0.5)")
-        #      ),
 
         "window <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),

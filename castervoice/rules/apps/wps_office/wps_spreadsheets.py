@@ -33,6 +33,8 @@ class SpreadsheetsRule(MappingRule):
     mapping = {
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
+        #temporary rule for transferring
+        "transfer": R(Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter")),
 
     # whole number input, move to next cell automatically
     #number input right/down/off
@@ -83,8 +85,8 @@ class SpreadsheetsRule(MappingRule):
 
 
     	#navigate to top of column labeled letter
-    	"column <letter>": R(Mouse("(35, 175), left") + Pause("20") + Text("%(letter)s1") + Key("enter")), # + Key("c-g")), #35, 175
-        "column <letter> <letter_2>": R(Mouse("(35, 175), left")
+    	"column <letter>": R(Mouse("(35, 170), left") + Pause("20") + Text("%(letter)s1") + Key("enter")), # + Key("c-g")), #35, 175
+        "column <letter> <letter_2>": R(Mouse("(35, 170), left")
             + Pause("20") + Text("%(letter)s%(letter_2)s1") + Key("enter")),
         "cell <letter> <row_1>": R(Mouse("(35, 175), left")
             + Pause("20") + Text("%(letter)s%(row_1)s") + Key("enter")),
