@@ -94,8 +94,7 @@ class Navigation(MergeRule):
         "computer <pc_op>":R( Key("w-x/40,up,up,%(pc_op)s")),
         'save ( file | it )':
             R(Key("c-s"), rspec="save"),
-        'save as':
-            R(Key("cs-s")),
+        # implemented in each program 'save as': R(Key("cs-s")),
         'new file':
             R(Key("c-n")),
         'open file':

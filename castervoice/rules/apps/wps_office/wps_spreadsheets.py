@@ -76,7 +76,7 @@ class SpreadsheetsRule(MappingRule):
         "close file":
     		R(Key("c-w/20")),
     	"save [file] as":
-    		R(Key("a-f/20, a/20, m/20")),
+    		R(Key("alt/20, f/20, a/20, m/20")),
 
         # menu items
         "manage rules": R(Key("alt, h,4,r")),

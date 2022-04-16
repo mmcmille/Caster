@@ -72,9 +72,9 @@ class TextManipulation(MergeRule):
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
         #select text
-        "select [<direction>] [<n>]": #defaults to left
+        "(select|get) [<direction>] [<n>]": #defaults to left
             R(Key("cs-%(direction)s/10")*Repeat(extra="n")),
-        "select <direction> <direction2> [<n>]": #defaults to left
+        "(select|get) <direction> <direction2> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/10") + Key("s-%(direction2)s/10")*Repeat(extra="n")),
 
         "snag [<n>]": #char

@@ -17,8 +17,10 @@ class EdgeRule(MappingRule):
     mapping = {
         #temporary rule for virtual mint fulfillment ,
         # uses an excel file with source container ids in one column, and envelope container ids in the column to the right
-        "transfer": R(Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
-        "next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
+        #"transfer": R(Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
+        #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
+
+        "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
 
         #outlook online rules
         #moved to folder
@@ -201,7 +203,13 @@ class EdgeRule(MappingRule):
     		}),
 	    ShortIntegerRef("k", 0, 10000),
         ShortIntegerRef("n", 1, 100),
-        ShortIntegerRef("m", 1, 10)
+        ShortIntegerRef("m", 1, 10),
+        Choice("click_item", {
+    		"true":"288, 881",
+    		"false":"257, 927",
+            "submit":"835, 1002",
+            "continue":"747, 944",
+    		}),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
 
