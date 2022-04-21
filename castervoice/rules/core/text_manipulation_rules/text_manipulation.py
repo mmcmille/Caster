@@ -66,7 +66,7 @@ class TextManipulation(MergeRule):
 
     mapping = {
         #generic key rule
-        "<key_rule>": R(Key("%(key_rule)s/40")),
+        "<key_rule>": R(Key("%(key_rule)s/40, shift:up, ctrl:up")),
 
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
@@ -124,13 +124,6 @@ class TextManipulation(MergeRule):
         "jump [<n>]": R(Key("c-right:%(n)s/10")),
 
         #to do get line n
-        "copy over": R(Key("c-c/20,a-tab")),
-        "(copy line over | transfer line)":R(Key("end/20, s-home/20, c-c/20, a-tab")),
-        "transfer page":R(Key("c-a, c-c/20, a-tab")),
-        "copy line":R(Key("end/20, s-home/20, c-c")),
-        "cut line":R(Key("end/20, s-home/20, c-x")),
-        "get word": R(Key("c-left, cs-right, c-c")),
-
 
         #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
         #    R(Function(text_manipulation_support.move_until_phrase,
@@ -247,6 +240,15 @@ class TextManipulation(MergeRule):
             "clear [line]": "end, s-home, backspace",
             "strike line": "end, s-home, backspace:2",
             "clear page": "c-a, backspace",
+            #copying
+            "copy over": "c-c/20, a-tab",
+            "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
+            "transfer page": "c-a, c-c/20, a-tab",
+            "copy line": "end/20, s-home/20, c-c",
+            "cut line": "end/20, s-home/20, c-x",
+            "get word": "c-left, cs-right, c-c",
+
+
         }),
     ]
     defaults = {

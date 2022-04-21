@@ -89,7 +89,7 @@ class EdgeRule(MappingRule):
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #left side
-        R(Mouse("".join(["(0.98, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll [<read_dir>] [<read_speed>]": #left side
             R(Mouse("".join(["(8, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":

@@ -39,12 +39,13 @@ class WorkWindowManagementRule(MappingRule):
         "my Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
 
         #app switching via control clicks area on vertical taskbar
-        "(show|open|switch|window) <app_n>":
+        " [<close_choice>] (show|open|switch|window) <app_n>":
             R(Key("control:down") +
               Mouse("".join(["[30,","%(app_n)s", "], left"])) +
               Key("control:up/20") +
-              Pause("200")+
-              Mouse("(0.5, 0.5)")
+              Pause("100")+
+              Mouse("(0.5, 0.5)") +
+              Key("%(close_choice)s")
               ),
 
         #"open <app_name> ":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("edge") + Key("tab") + Text("%(app_name)s") + Key("enter")),
@@ -54,6 +55,10 @@ class WorkWindowManagementRule(MappingRule):
         Dictation("text"),
         Choice("app_name", {
             "email": "email",
+        }),
+        Choice("close_choice",{
+            "close":"a-f4",
+            "":"",
         }),
         Choice("app_n", {
             #100% Scale,

@@ -35,7 +35,7 @@ class SpreadsheetsRule(MappingRule):
         "<key_rule>": R(Key("%(key_rule)s")),
         #temporary rule for transferring
         "transfer": R(Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter")),
-
+        "grab column": R(Key("c-space/20, shift:down")),
     # whole number input, move to next cell automatically
     #number input right/down/off
     #def _load_and_refresh(self, _input_mode):
