@@ -31,7 +31,7 @@ class WorkWindowManagementRule(MappingRule):
 	   # "open citrix":
         #    R(BringApp(r"C:\Program Files (x86)\Citrix\ICA Client\SelfServicePlugin\SelfService.exe")),
         #"open spirit": R(BringApp(r"C:\Program Files (
-        "[my] username": R(Text("u581917")+ Key("tab")),
+        "drop username": R(Text("u581917")+ Key("tab")),
 
 
         #hotstrings
