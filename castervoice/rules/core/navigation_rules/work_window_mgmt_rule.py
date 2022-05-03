@@ -35,7 +35,7 @@ class WorkWindowManagementRule(MappingRule):
 
 
         #hotstrings
-        "password":R(Text("Q1w1e1rk")+ Pause("20") + Key("enter")),
+        "password":R(Text("Q1w1e1rl")+ Pause("20") + Key("enter")),
         "my Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
 
         #app switching via control clicks area on vertical taskbar
