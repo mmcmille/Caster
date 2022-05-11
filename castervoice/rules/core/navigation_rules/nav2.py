@@ -50,7 +50,7 @@ class NavigationNon(MappingRule):
             R(Function(navigation.middle_click)),
         "shift right click":
             R(Key("shift:down") + Mouse("right") + Key("shift:up")),
-        "curse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
+        "mouse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
         "wheel <direction> [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
@@ -77,8 +77,7 @@ class NavigationNon(MappingRule):
             R(Key("c-x, shift:up, ctrl:up")),
         "(drop it | sure spark)":
             R(Key("c-v")),
-        "drop text":
-            R(Key("cs-u")),
+        #implemented in each app "drop text":R(Key("cs-u")),
         "refresh":
             R(Key("c-r")),
         "maxiwin":

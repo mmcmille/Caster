@@ -26,7 +26,7 @@ class DoubleCommanderRule(MappingRule):
 			"Q": "q.csv",
 		}),
 		Choice("key_rule", {
-            "switch": "tab",
+            "[switch] frame": "tab",
             "transfer": "escape/20, c-x/20,tab/20,c-v",
             "duplicate": "c-c,tab,c-v",
             "open": "c-p",

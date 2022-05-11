@@ -22,7 +22,7 @@ class WorkWindowManagementRule(MappingRule):
         #"edit everything": R(Key("c-a, c-x") + BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
         #"edit region": R(Key("c-x") + R(BringApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\npp.8.3.1.portable.x64\notepad++.exe") + Key("c-v")),
 
-        #"<text>": R(Text("%(text)s ")),
+
         "scratch":R(Key("w-7")),
         "Open Cisco":
             R(BringApp(r"C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnui.exe")),
@@ -32,35 +32,53 @@ class WorkWindowManagementRule(MappingRule):
         #    R(BringApp(r"C:\Program Files (x86)\Citrix\ICA Client\SelfServicePlugin\SelfService.exe")),
         #"open spirit": R(BringApp(r"C:\Program Files (
         "drop username": R(Text("u581917")+ Key("tab")),
-
+        "drop citrix username": R(Text("NAFTA\u581917")+ Key("tab")),
 
         #hotstrings
         "password":R(Text("Q1w1e1rl")+ Pause("20") + Key("enter")),
+<<<<<<< Updated upstream
         "my Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
+=======
+        "drop Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
+>>>>>>> Stashed changes
 
         #app switching via control clicks area on vertical taskbar
-        " [<close_choice>] (show|open|switch|window) <app_n>":
-            R(Key("control:down") +
-              Mouse("".join(["[30,","%(app_n)s", "], left"])) +
-              Key("control:up/20") +
-              Pause("100")+
-              Mouse("(0.5, 0.5)") +
+        " [<close_choice>] (show|open|window) <app_n_key>": #<app_n>":
+            R(
+                Key("w-%(app_n_key)s") +
+                #Key("control:down") +
+              #Mouse("".join(["[30,","%(app_n)s", "], left"])) +
+              #Key("control:up/20") +
+              #Pause("100")+
+              #Mouse("(0.5, 0.5)") +
               Key("%(close_choice)s")
               ),
+        #app switching via fluent search
+        "switch [<text>]": R(Key("csa-p") + Pause( "100") + Text("%(text)s ")),
+        #"taskbar <n>": R(Key("w-%(n)s")),
 
-        #"open <app_name> ":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("edge") + Key("tab") + Text("%(app_name)s") + Key("enter")),
     }
 
     extras = [
+        ShortIntegerRef("n", 1, 10),
         Dictation("text"),
-        Choice("app_name", {
-            "email": "email",
-        }),
         Choice("close_choice",{
             "close":"a-f4",
             "":"",
         }),
-        Choice("app_n", {
+        Choice("app_n_key", {
+            "(1|email)": 1,
+            "(2|planner)": 2,
+            "(3|edge|web)": 3,
+            "(4|notes)": 4,
+            "(5|commands|rules)": 5,
+            "(6|files)": 6,
+            "(7|writer)": 7,
+            "(8|sheets)": 8,
+            "9": 9,
+            "10": 0,
+        }),
+        Choice("app_n_coord", {
             #100% Scale,
             "(1|email)": 64,#"(1|mail|email)": 64,
             "(2|planner)": 110,

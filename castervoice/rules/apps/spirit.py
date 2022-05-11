@@ -33,7 +33,7 @@ class SpiritRule(MappingRule):
 		#mouse commands
 		"(pull over| bring over| apply profile)": R(Mouse("left:down/60, <-200, 0>, left:up")),
 		"pull up": R(Mouse("left:down/60, <0, -30>, left:up")),
-		"pull down": R(Mouse("left:down/60, <0, 30>, left:up")),
+		"pull down": R(Mouse("left:down/60, <0, 60>, left:up")),
 		"okay":R(Mouse("(2141, 1324),left")), #Key("a-o")),
 		"profile":R(Mouse("(1386, 227),left")), #lettuce team
 		#other commands

@@ -36,7 +36,7 @@ class OneNoteRule(MappingRule):
 	    "(find | search) [<dict>]": R(Key("c-e") + Pause("50") + Text("%(dict)s")),
 		"(find | search) [on] page [<dict>]": R(Key("c-f") + Pause("50") + Text("%(dict)s")),
 		    #text formatting
-		"heading <heading_n>":
+		"heading <heading_n> {weight=1000}":
 	            R(Key("ca-%(heading_n)s")),
 	    "normal [text]": R(Key("cs-n")),
 	    "toggle edit cell":

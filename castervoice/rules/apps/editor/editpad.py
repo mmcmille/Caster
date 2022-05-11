@@ -1,4 +1,4 @@
-from dragonfly import Repeat, Dictation, MappingRule, ShortIntegerRef
+from dragonfly import Repeat, Dictation, MappingRule, ShortIntegerRef, Choice
 
 from castervoice.lib.actions import Key, Text, Mouse
 
@@ -10,7 +10,10 @@ from castervoice.lib.merge.state.short import R
 class EditPadRule(MappingRule):
 
     mapping = {
-    "<text> {weight=1000}": R(Text("%(text)s ")),
+    #dictation mode
+    "<text> {weight=10}": R(Text("%(text)s ")),
+
+    "hi <name>": R(Text("Hi %(name)s,") + Key("enter")),
 
         "go [to] line <n>":
             R(Key("c-g/10") + Text("%(n)s") + Key("enter")),
@@ -20,6 +23,14 @@ class EditPadRule(MappingRule):
         Dictation("text"),
         ShortIntegerRef("n", 1, 1000),
         ShortIntegerRef("n2", 1, 10),
+        Choice("name", {
+            "darin": "Darryn",
+            "mel": "Mel",
+            "veronica": "Veronica",
+            "drew": "Drew",
+            "yvette": "Yvette",
+            "leo": "Leo",
+        }),
     ]
     defaults = {"n": 1}
 

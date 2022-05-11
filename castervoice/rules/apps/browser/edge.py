@@ -22,6 +22,9 @@ class EdgeRule(MappingRule):
 
         "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
 
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s")),
+
         #outlook online rules
         #moved to folder
         "move [(it|to)] [<dict>]":R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
@@ -153,12 +156,8 @@ class EdgeRule(MappingRule):
             R(Key("c-9")),
         "second last tab":
             R(Key("c-9, cs-tab")),
-        "switch focus [<n>]":
-            R(Key("f6/20")) * Repeat(extra="n"),
         "[toggle] bookmark bar":
             R(Key("cs-b")),
-        "switch user":
-            R(Key("cs-m")),
         "focus notification":
             R(Key("a-n")),
         "allow notification":
@@ -210,6 +209,9 @@ class EdgeRule(MappingRule):
             "submit":"835, 1002",
             "continue":"747, 944",
     		}),
+        Choice("key_rule", {
+    	   "drop text": "cs-v",
+		}),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
 

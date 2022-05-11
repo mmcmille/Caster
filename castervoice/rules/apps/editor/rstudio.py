@@ -52,6 +52,10 @@ class RStudioRule(MappingRule):
         R(Key("c-enter")),
     "run document":
         R(Key("ac-r")),
+    "knit document":
+        R(Key("cs-k")),
+
+
     "comment (line | selected)":
         R(Key("cs-c")),
 
