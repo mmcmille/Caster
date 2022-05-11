@@ -34,9 +34,6 @@ class WindowManagementRule(MappingRule):
         "window isolate":
             R(Key("w-d/150, a-tab")),
 
-        #switch  between windows
-
-        "open <dict>": R(Key("")),
         "close window": R(Key("a-f4")),
 
         "window <direction> [<n>]":

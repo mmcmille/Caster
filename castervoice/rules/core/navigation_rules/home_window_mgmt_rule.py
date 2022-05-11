@@ -19,6 +19,12 @@ class HomeWindowManagementRule(MappingRule):
               Pause("200")+
               Mouse("(0.5, 0.5)")
               ),
+
+
+        "track mouse": R(Key("f9", use_hardware=True)),
+
+
+
     }
 
     extras = [

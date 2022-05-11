@@ -40,8 +40,8 @@ class EdgeRule(MappingRule):
             R(Key("c-n")),
         "(new incognito window | incognito)":
             R(Key("cs-n")),
-        "new tab [<n>]|tab new [<n>]":
-            R(Key("c-t") * Repeat(extra="n")),
+        "new tab [<n>]|tab new [<n>]": R(Key("c-t") * Repeat(extra="n")),
+        "search (it|this)": R(Key("c-c/20, c-t, c-v, enter")),
         "restore tab [<n>]|tab reopen [<n>]":
             R(Key("cs-t")) * Repeat(extra="n"),
         #"close tab [<n>]|tab close [<n>]":

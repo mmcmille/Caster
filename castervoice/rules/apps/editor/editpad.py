@@ -15,7 +15,7 @@ class EditPadRule(MappingRule):
         "go [to] line <n>":
             R(Key("c-g/10") + Text("%(n)s") + Key("enter")),
     }
-    #weight = 2
+    
     extras = [
         Dictation("text"),
         ShortIntegerRef("n", 1, 1000),
