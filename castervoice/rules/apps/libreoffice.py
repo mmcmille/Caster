@@ -18,7 +18,7 @@ from castervoice.lib.merge.state.short import R
 
 
 
-class LOCalcRule(MappingRule):
+class LORule(MappingRule):
     number_output_mode = ""#default, options: down,right,off,
 
     def _number_output_direction():
@@ -201,4 +201,4 @@ class LOCalcRule(MappingRule):
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return LOCalcRule, RuleDetails(name="spreadsheets", executable="soffice")
+    return LORule, RuleDetails(name="libre office", executable="soffice")
