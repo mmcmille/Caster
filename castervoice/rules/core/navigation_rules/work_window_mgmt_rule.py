@@ -36,11 +36,7 @@ class WorkWindowManagementRule(MappingRule):
 
         #hotstrings
         "password":R(Text("Q1w1e1rl")+ Pause("20") + Key("enter")),
-<<<<<<< Updated upstream
-        "my Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
-=======
         "drop Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
->>>>>>> Stashed changes
 
         #app switching via control clicks area on vertical taskbar
         " [<close_choice>] (show|open|window) <app_n_key>": #<app_n>":
