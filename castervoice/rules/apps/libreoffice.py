@@ -22,12 +22,12 @@ class LORule(MappingRule):
     number_output_mode = ""#default, options: down,right,off,
 
     def _number_output_direction():
-        #print(SpreadsheetsRule.number_output_mode)
-        return Key(SpreadsheetsRule.number_output_mode).execute() #+Key("%(_input_mode)s"),
+        #print(LORule.number_output_mode)
+        return Key(LORule.number_output_mode).execute() #+Key("%(_input_mode)s"),
     # change the direction of number output, based on the Choice
     def change_number_output_direction(output_number_options):
-        SpreadsheetsRule.number_output_mode = output_number_options #"down"
-        print(SpreadsheetsRule.number_output_mode)
+        LORule.number_output_mode = output_number_options #"down"
+        print(LORule.number_output_mode)
 
 
     mapping = {
@@ -52,15 +52,10 @@ class LORule(MappingRule):
 
         "next sheet [<n>]":
                 R(Key("c-pgdown"))*Repeat(extra='n'),
-            "(prior | previous) sheet [<n>]":
+        "(prior | previous) sheet [<n>]":
                 R(Key("c-pgup"))*Repeat(extra='n'),
-            "[select] cell <column_1> <row_1>":
-                R(Key("c-g") + Text("%(column_1)s%(row_1)s") + Key("enter")),
-            "select <column_1> <row_1> through <column_2> <row_2>":
-                R(Key("c-g") + Text("%(column_1)s%(row_1)s:%(column_2)s%(row_2)s") +
-                  Key("enter")),
-            "edit":
-    		R(Key("f2")),
+        "select <column_1> <row_1> through <column_2> <row_2>":
+                R(Key("c-g") + Text("%(column_1)s%(row_1)s:%(column_2)s%(row_2)s") + Key("enter")),
 
     	#navigation
     	"left file":
@@ -81,20 +76,14 @@ class LORule(MappingRule):
 
 
     	#navigate to top of column labeled letter
-    	"jump <letter>": R(Mouse("(93, 147), left") + Pause("20") + Text("%(letter)s1") + Key("enter")), # + Key("c-g")), #35, 175
-        "column <letter> <letter_2>": R(Mouse("(93, 147), left")
-            + Pause("20") + Text("%(letter)s%(letter_2)s1") + Key("enter")),
-        "cell <letter> <row_1>": R(Mouse("(93, 147), left")
-            + Pause("20") + Text("%(letter)s%(row_1)s") + Key("enter")),
+    	"cell <dict>": R(Key("f5/40, del:2, %(dict)s, enter, f5")),#dict should be characters
+        #"column <letter> <letter_2>": R(Mouse("(93, 147), left") + Pause("20") + Text("%(letter)s%(letter_2)s1") + Key("enter")),
+        "cell <dict> <row_1>": R(Key("f5/40, del:2, %(dict)s, tab:2/10, del") + Text("%(row_1)s") + Key("enter, f5")),#dict should be characters
 
         #"row <row_1>":  navigate to row number, implemented by copying from name box?
 
 
-    	"select current column":
-                R(Key("c-space")),
-        "get row":
-            R(Key("cs-space/20")),
-        "top of column":
+    	"top of column":
             R(Key("c-up")),
         "beginning of row":
             R(Key("c-left")),
@@ -123,7 +112,7 @@ class LORule(MappingRule):
 
         #Writer
         #dictation mode
-        "<dict> {weight=1000}": R(Text("%(dict)s ")),
+        #"<dict> {weight=100}": R(Text("%(dict)s ")),
         "hi <name>": R(Text("Hi %(name)s,") + Key("enter")),
     }
     extras = [
@@ -156,6 +145,7 @@ class LORule(MappingRule):
 		}),
 
         Choice("key_rule", {
+            "edit": "f2",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "a-w",
@@ -164,7 +154,7 @@ class LORule(MappingRule):
             "freeze (first|top) row": "a-v/40, c, r",
             "add filter": "cs-l",
         	"filter": "a-down/20",
-        	"clear filter": "a-down/40, s-tab/20, c/20, enter",
+            "(clear filter| filter off)": "a-down/40, s-tab/20, c/20, enter",
             #sorting
             "sort down": "a-down/40, s-tab, space, enter",
         	"sort up": "a-down/40, s-tab, space, down, enter",
@@ -177,13 +167,15 @@ class LORule(MappingRule):
             "drop special": "cs-v",
             "okay":"a-o, enter",
             #selecting
-            "get row": "s-space",
-            "get column": "c-space",
+            "(select|get) row": "s-space",
+            "(select|get) column": "c-space",
             "delete column": "c-minus/40, c, a-o",
         	"delete row": "c-minus/40, r, a-o",
             "delete this": "c-minus",
             "insert column": "apps/40, i/20, c, a-o",
+            "insert comment": "ca-c",
             "fly under": "up, c-down, down",
+
             #Writer
             "check spelling": "f7",
 

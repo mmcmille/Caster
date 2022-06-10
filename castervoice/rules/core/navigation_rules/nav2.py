@@ -70,13 +70,6 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
-        #added release modifiers to work with "select"
-        "(copy [it] | sure stoosh)":
-            R(Key("c-c, shift:up, ctrl:up")),
-        "[sure] cut":
-            R(Key("c-x, shift:up, ctrl:up")),
-        "(drop it | sure spark)":
-            R(Key("c-v")),
         #implemented in each app "drop text":R(Key("cs-u")),
         "refresh":
             R(Key("c-r")),

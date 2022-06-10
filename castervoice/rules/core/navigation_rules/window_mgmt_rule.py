@@ -22,12 +22,12 @@ class WindowManagementRule(MappingRule):
         "(back screen| screen out) ": R(Key("w-minus/20")),
         "full-screen": R(Key("w-minus:4/40")),
         #uses fluent search
-        #"search Windows":R(Key("alt:down,ctrl:down,ctrl:up,alt:up")),
-        "search <search_tag> [for] [<dict>]":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s") + Key("tab")+ Text("%(dict)s")),
-        "search apps":R(Key("w-s/20")+ Text("apps: ")),
-        "search web":R(Key("w-s/20")+ Text("web: ")),
+        "search <search_tag>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s")),
+        "search <search_tag> [for] <dict>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s") + Key("tab")+ Text("%(dict)s")),
+        #uses windows start menu
+        #"search apps":R(Key("w-s/20")+ Text("apps: ")),
+        #"search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-b,space")),
-        "maxiwin": R(Key("w-up")),
 
         "move window":
             R(Key("a-space, r, a-space, m")),
@@ -81,7 +81,8 @@ class WindowManagementRule(MappingRule):
             R(Function(utilities.minimize_window)),
 	           "window swap":
             R(Key("ws-right")),
-
+        "window resize":
+            R(Mouse("(0.99, 0.99), left")),
         # Workspace management
         "show work [spaces]":
             R(Key("w-tab")),
@@ -109,6 +110,7 @@ class WindowManagementRule(MappingRule):
         Dictation("dict"),
         Choice("search_tag", {
             "Windows": "",
+            "web": "",
             "apps": "apps",
             "Bible": "bible",
         }),

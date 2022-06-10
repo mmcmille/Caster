@@ -73,9 +73,9 @@ class TextManipulation(MergeRule):
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
         #select text
         "(select|get) [<direction>] [<n>]": #defaults to left
-            R(Key("cs-%(direction)s/10")*Repeat(extra="n")),
+            R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
         "(select|get) <direction> <direction2> [<n>]": #defaults to left
-            R(Key("cs-%(direction)s/10") + Key("s-%(direction2)s/10")*Repeat(extra="n")),
+            R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
 
         "snag [<n>]": #char
             R(Key("s-left:%(n)s")),
@@ -237,16 +237,25 @@ class TextManipulation(MergeRule):
         	"jump line": "end",
             "new line": "end,enter",
             #clears text
-            "clear [line]": "end, s-home, backspace",
-            "strike line": "end, s-home, backspace:2",
+            "clear line": "end, s-home, backspace",
+            "strike line": "end, s-up, s-end, backspace",
             "clear page": "c-a, backspace",
             #copying
+            #added release modifiers to work with "select"
+            "copy [it|this]": "c-c, shift:up, ctrl:up",
+            "cut [it|this]": "c-x, shift:up, ctrl:up",
+            "drop [it]": "c-v",
+
+
+
             "copy over": "c-c/20, a-tab",
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
             "transfer page": "c-a, c-c/20, a-tab",
             "copy line": "end/20, s-home/20, c-c",
             "cut line": "end/20, s-home/20, c-x",
             "get word": "c-left, cs-right, c-c",
+
+
 
 
         }),

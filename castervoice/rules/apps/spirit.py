@@ -51,7 +51,9 @@ class SpiritRule(MappingRule):
 			"reports": "r",
 			"window": "w",
 			"help": "h",
+
 			"import": "f,down:2,right,enter",
+			"export": "f,down:3/40,right/40,enter",
 			"export containers": "f,down:3/40,right/40,down/40,enter",
 			#"close frame": "f, enter"
 		}),
@@ -96,7 +98,7 @@ class SpiritRule(MappingRule):
 				"view [associated] (trial|trials)": "v/20, t",
 				"(add|make) subplots": "a/20:2",
 
-				"plant trial":"p/20:3",
+				"plant (trial|trials)":"p/20:3",
 				"sort down":"up:8/10,right/10,down/10",
 				"sort up":"up:8/10,right/10,down:2/10",
 		}),

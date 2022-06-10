@@ -196,13 +196,13 @@ class Navigation(MergeRule):
         "flitch [<nnavi500>]":
             R(Key("cs-right:%(nnavi500)s")),
         "<button_dictionary_500_no_prefix_no_modifier> [<nnavi500>]":
-            R(Key("%(button_dictionary_500_no_prefix_no_modifier)s/10")*Repeat(extra='nnavi500'),
+            R(Key("%(button_dictionary_500_no_prefix_no_modifier)s")*Repeat(extra='nnavi500'),
               rdescript="press buttons: %(button_dictionary_500_no_prefix_no_modifier)s %(nnavi500)s"),
         "<modifier> <button_dictionary_500_modifier> [<nnavi500>]": #added delay
-            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s/10")*Repeat(extra='nnavi500'),
+            R(Key("%(modifier)s-%(button_dictionary_500_modifier)s/1")*Repeat(extra='nnavi500'),
               rdescript="nav: press modifiers plus buttons from button_dictionary_500_modifier"),
         "<modifier> <button_dictionary_1_modifier>":
-            R(Key("%(modifier)s-%(button_dictionary_1_modifier)s/10"),
+            R(Key("%(modifier)s-%(button_dictionary_1_modifier)s/1"),
               rdescript="press modifiers plus buttons from button_dictionary_1_modifier"),
     }
 
