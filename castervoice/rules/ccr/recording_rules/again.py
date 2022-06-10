@@ -11,7 +11,6 @@ _history = recognition_history.get_and_register_history(10)
 #TODO: Investigate why Caster's abstraction of dragonflys `ShortIntegerRef` Via `ShortIntegerRef` causes recognition errors in this grammar.
 
 class Again(MappingRule):
-
     mapping = {
         #"again (<n> [(times|time)] | do)":
         "more [<n>]":

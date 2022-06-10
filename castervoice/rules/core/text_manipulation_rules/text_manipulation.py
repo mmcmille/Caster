@@ -243,21 +243,17 @@ class TextManipulation(MergeRule):
             #copying
             #added release modifiers to work with "select"
             "copy [it|this]": "c-c, shift:up, ctrl:up",
+            "get word": "c-left, cs-right, c-c",
+            "copy over": "c-c/20, a-tab",
             "cut [it|this]": "c-x, shift:up, ctrl:up",
             "drop [it]": "c-v",
 
 
 
-            "copy over": "c-c/20, a-tab",
-            "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
-            "transfer page": "c-a, c-c/20, a-tab",
             "copy line": "end/20, s-home/20, c-c",
+            "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
             "cut line": "end/20, s-home/20, c-x",
-            "get word": "c-left, cs-right, c-c",
-
-
-
-
+            "transfer page": "c-a, c-c/20, a-tab",
         }),
     ]
     defaults = {
