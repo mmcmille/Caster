@@ -1,5 +1,6 @@
 '''
 Michael McMillen
+free plane
 to do
 filter dictation, press escape
 '''
@@ -52,7 +53,7 @@ class FreeplaneRule(MappingRule):
 			"copy single": "cs-c",
 			# navigation
 			"last": "a-left",
-			"find": "cs-j",
+			"search": "cs-j",
 			"filter": "c-f",
 			"(isolate)": "ca-f",
 			"(clear filter)": "ca-x",

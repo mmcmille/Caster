@@ -211,7 +211,8 @@ class EdgeRule(MappingRule):
     		}),
         Choice("key_rule", {
     	   "drop text": "cs-v",
-		}),
+           "out": "a-left",
+        }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
 
