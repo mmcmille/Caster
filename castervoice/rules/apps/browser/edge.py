@@ -94,7 +94,7 @@ class EdgeRule(MappingRule):
         "scroll right [<read_dir>] [<read_speed>]": #left side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll [<read_dir>] [<read_speed>]": #left side
-            R(Mouse("".join(["(8, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+            R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
     	"stop":
@@ -102,7 +102,7 @@ class EdgeRule(MappingRule):
 
 
         # requires an extension in some browsers such as chrome
-        "[toggle] caret browsing":
+        "(show|hide) cursor":
             R(Key("f7")),
         "[go] home [page]":
             R(Key("a-home")),
@@ -211,7 +211,8 @@ class EdgeRule(MappingRule):
     		}),
         Choice("key_rule", {
     	   "drop text": "cs-v",
-		}),
+           "out": "a-left",
+        }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
 
