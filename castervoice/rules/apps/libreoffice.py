@@ -148,7 +148,7 @@ class LORule(MappingRule):
             "edit": "f2",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
-            "fit column [width]": "a-w",
+            "fit column [width]": "sa-right",
             "( search | find)": "c-f",
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
@@ -160,7 +160,7 @@ class LORule(MappingRule):
         	"sort up": "a-down/40, s-tab, space, down, enter",
             "fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
-        	"save [file] as": "alt/20, f/20, a/20",
+        	"save [file] as": "a-f/40, a/20",
 
             #pasting
             "drop text": "csa-v",
