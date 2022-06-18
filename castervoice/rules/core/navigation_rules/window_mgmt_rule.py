@@ -30,7 +30,7 @@ class WindowManagementRule(MappingRule):
         "system tray": R(Key("w-b,space")),
 
         "move window":
-            R(Key("a-space, r, a-space, m")),
+            R(Key("")),
         "window isolate":
             R(Key("w-d/150, a-tab")),
 
