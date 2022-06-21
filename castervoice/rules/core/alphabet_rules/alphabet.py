@@ -1,6 +1,5 @@
 from dragonfly import Function, Choice
 
-
 try:  # Try first loading from caster user directory
     import alphabet_support
 except ImportError:

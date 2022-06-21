@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 import dragonfly
 from dragonfly import Choice
 
@@ -33,7 +37,7 @@ B) the user of a programming language will know what they're supposed to get fil
 TARGET_CHOICE = Choice(
     "target", {
         comma: ",",
-        "(period | dot)": ".",
+        "period": ".",
         "(pair | parentheses)": "(~)",
         "[square] (bracket | brackets)": "[~]",
         "curly [brace]": "{~}",

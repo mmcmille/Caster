@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 from dragonfly import Choice
 
 from castervoice.lib.actions import Key, Text
@@ -31,6 +35,17 @@ def caster_alphabet():
         "x-ray"   : "x",
         "yankee"  : "y",
         "Zulu"    : "z",
+        #temp numbers
+        "zero": "0",
+        "one": "1",
+        "two": "2",
+        "three": "3",
+        "four": "4",
+        "five": "5",
+        "six": "6",
+        "seven": "7",
+        "eight": "8",
+        "nine": "9",
     }
 
 

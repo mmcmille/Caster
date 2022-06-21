@@ -1,25 +1,31 @@
+'''
+Michael McMillen
+'''
 from dragonfly import Choice, Function, ShortIntegerRef
 
 try:  # Try first loading from caster user directory
     from numeric_support import word_number, numbers2
-except ImportError: 
+except ImportError:
     from castervoice.rules.core.numbers_rules.numeric_support import word_number, numbers2
-    
+
 from castervoice.lib.actions import Text
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib.merge.state.short import R
 
-
 class Numbers(MergeRule):
     pronunciation = "numbers"
     mapping = {
+
         "word number <wn>":
             R(Function(word_number, extra="wn")),
-        "[<long>] numb <wnKK>":
-            R(Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"),
-              rspec="Number"),
+        #"[<long>] numb <wnKK>": R(Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
+        #simplified numbers
+        "numb <wnKK>": R(Function(numbers2, extra="wnKK")),
+
+        #"zero <wnKK>": R(Text("0") + Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
+        #"oh": R(Text("0")),
     }
 
     extras = [
