@@ -9,13 +9,15 @@ from castervoice.lib.merge.state.short import R
 
 class HomeWindowManagementRule(MappingRule):
     mapping = {
-        #app switching via control clicks area on vertical taskbar, 1-10
+
+        #app switching via Windows number , 1-10
         "[<close_choice>] (show|open|window) <app_n_key>":
             R(
                 Key("cw-%(app_n_key)s") +
                 Pause("100") +
                 Key("%(close_choice)s")
             ),
+
 
         "[<close_choice>] (show|open|window) <app_n_11>": #<app_n>":
             R(
@@ -30,7 +32,6 @@ class HomeWindowManagementRule(MappingRule):
         #app switching via fluent search
         "switch [<text>]": R(Key("csa-p") + Pause( "100") + Text("%(text)s ")),
         #"taskbar <n>": R(Key("w-%(n)s")),
-        "track mouse": R(Key("f9", use_hardware=True)),
     }
 
     extras = [

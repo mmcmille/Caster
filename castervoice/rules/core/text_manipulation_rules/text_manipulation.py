@@ -67,7 +67,7 @@ class TextManipulation(MergeRule):
     mapping = {
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40, shift:up, ctrl:up")),
-
+        "drop <drop_strings>": R(Text("%(drop_strings)s")),
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
@@ -254,6 +254,18 @@ class TextManipulation(MergeRule):
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
             "cut line": "end/20, s-home/20, c-x",
             "transfer page": "c-a, c-c/20, a-tab",
+        }),
+        Choice("drop_strings", {
+            "Outlook email":"Michael.S.McMillen@Outlook.com",
+            "[full] name" : "Michael McMillen",
+            "first name": "Michael",
+            "last name": "McMillen",
+            "birthdate": "07/30/1983",
+            "address": "1561 Albright Dr.",
+            "(telephone|phone) [number]": "8312062683",
+            "Monica's (telephone|phone) [number]": "2096027457",
+            "zipcode": "95023",
+
         }),
     ]
     defaults = {

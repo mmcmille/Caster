@@ -39,7 +39,7 @@ class WorkWindowManagementRule(MappingRule):
         "password":R(Text("Q1w1e1rl")+ Pause("20") + Key("enter")),
         "drop Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
 
-        #app switching via control clicks area on vertical taskbar, 1-10
+        #app switching via Windows number , 1-10
         "[<close_choice>] (show|open|window) <app_n_key>":
             R(
                 Key("cw-%(app_n_key)s") +
