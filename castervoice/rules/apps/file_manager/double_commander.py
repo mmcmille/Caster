@@ -60,6 +60,7 @@ class DoubleCommanderRule(MappingRule):
             "display list": 'c-f1',
             "display details": 'c-f2',
             "display file tree": 'c-f8',
+            "link": "apps,s,enter",
 		}),
 
     ]
