@@ -53,7 +53,7 @@ class NavigationNon(MappingRule):
         "mouse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
         #places mouse cursor in position of 3x3 grid, and presses f11 to start tracking if needed
-        "touch <mouse_grid> [<track_choice>]":
+        "pointer <mouse_grid> [<track_choice>]":
             R(Mouse("(%(mouse_grid)s)")+ Key("%(track_choice)s")),
         "track": R(Key("f10")),
         "wheel <direction> [<nnavi500>]":

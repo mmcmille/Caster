@@ -257,6 +257,8 @@ class TextManipulation(MergeRule):
         }),
         Choice("drop_strings", {
             "Outlook email":"Michael.S.McMillen@Outlook.com",
+            "Gmail":"mcmillen.michael.s@gmail.com",
+            "password":"Lucydog1",
             "[full] name" : "Michael McMillen",
             "first name": "Michael",
             "last name": "McMillen",

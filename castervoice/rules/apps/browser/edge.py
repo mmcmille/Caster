@@ -91,9 +91,11 @@ class EdgeRule(MappingRule):
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll right [<read_dir>] [<read_speed>]": #left side
+        "scroll [<read_dir>] [<read_speed>]": #current mouse location
+            R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        "scroll right [<read_dir>] [<read_speed>]": #right side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll [<read_dir>] [<read_speed>]": #left side
+        "scroll left [<read_dir>] [<read_speed>]": #left side
             R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),

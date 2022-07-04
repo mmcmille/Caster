@@ -50,15 +50,15 @@ class FreeplaneRule(MappingRule):
 		}),
 		Choice("key_rule", {
 			"save all": "a-s",
-			"copy single": "cs-c",
+			"copy (node|single)": "cs-c",
 			# navigation
 			"last": "a-left",
+			"next": "a-right",
 			"search": "cs-j",
 			"filter": "c-f",
 			"(isolate)": "ca-f",
 			"(clear filter)": "ca-x",
-			"open link": "c-enter",
-			"edit link": "c-k",
+
 			"fold [it]": "space",
 			"(fold|collapse) all": "a-home",
 			"outline view": "cs-o",
@@ -74,6 +74,10 @@ class FreeplaneRule(MappingRule):
 			"(sibling|bro)": "enter",
 			"(child|kid)": "tab",
 			"pasta clone": "c-d",
+			#links
+			"open link": "c-enter",
+			"edit link": "c-k",
+			"get link": "a-e/20, c, c",
 			#view
 			"center ( view | node )": "ca-c",
 			"new (window|view)": "ca-v",
