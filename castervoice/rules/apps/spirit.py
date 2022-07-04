@@ -41,7 +41,7 @@ class SpiritRule(MappingRule):
 		"refresh": R(Key("f5")),
 		#menu control
 		"<menu_title> [menu]": R(Key("alt/20, %(menu_title)s/20")),
-		"frame [<m>]": R(Key("alt/20, w/20, %(m)s/20")),
+		"frame [<m>]": R(Key("alt/40, w/40, %(m)s/20")),
 	}
 	extras = [
 		Choice("menu_title", {

@@ -31,10 +31,10 @@ def text_punc_dict():
     _id = _inv_dtpb()
     return {
         "ace":                                                " ",
-        "(clamor|exclamation point)":                        "!",
+        "clamor | bang":                                    "!",
         "chocky":                                            "\"",
         "hash tag":                                           "#",
-        "Dolly":                                              "$",
+        "dollar":                                              "$",
         "(modulo|percent)":                                   "%",
         "ampersand":                                          "&",
         "apostrophe | single quote | chicky":                 "'",
