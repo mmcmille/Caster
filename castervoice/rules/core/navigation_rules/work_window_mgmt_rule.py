@@ -36,7 +36,7 @@ class WorkWindowManagementRule(MappingRule):
         "drop citrix username": R(Text("NAFTA\u581917")+ Key("tab")),
 
         #hotstrings
-        "password":R(Text("Q1w1e1rl")+ Pause("20") + Key("enter")),
+        "password":R(Text("Q1w1e1r;")+ Pause("20") + Key("enter")),
         "drop Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
 
         #app switching via Windows number , 1-10
