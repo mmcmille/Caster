@@ -232,6 +232,8 @@ class TextManipulation(MergeRule):
         Choice("key_rule", {
             "(select all|get everything)": "c-a",
             "bold text": "c-b",
+            "underline text": "c-u",
+            "italic text": "c-i",
             #line commands
             "back line":"home",
         	"jump line": "end",

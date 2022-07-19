@@ -15,6 +15,7 @@ class HomeWindowManagementRule(MappingRule):
             R(
                 Key("cw-%(app_n_key)s") +
                 Pause("100") +
+                Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
 
