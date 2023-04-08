@@ -150,6 +150,7 @@ class LORule(MappingRule):
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "sa-right",
             "( search | find)": "c-f",
+            "freeze top row": "a-v/40,c,r",
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "add filter": "cs-l",
