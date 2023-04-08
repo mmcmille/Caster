@@ -25,13 +25,15 @@ class EdgeRule(MappingRule):
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
-        #outlook online rules
+        #gmail,   ...outlook online rules
         #moved to folder
-        "move [(it|to)] [<dict>]":R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
+
+        "move [(it|to)] [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
         "flag it": R(Mouse("(246, 146), left")),
-        "trash it": R(Mouse("(443, 148), left")),#510, 158
+        "trash it": R(Key("s-3")), #R(Mouse("(443, 148), left")),#510, 158
         "send (it|email)": R(Key("tab:3/20,enter")),
         "discard it": R(Key("tab:4/40")),
+
         "link":
             R(Key("a-c/50, a-tab")),
         "link map": R(Key("")),
@@ -80,22 +82,25 @@ class EdgeRule(MappingRule):
        "midnight":
             R(Key("as-m")),
        #click by voice
+"refresh (buttons | numbers)":
+            R(Key("cs-n/100") + Text(":-") + Key("enter")) + Pause("80") +
+            R(Key("cs-n/80") + Text(":+") + Key("enter")),
        "show (buttons | numbers)":
             R(Key("cs-n/80") + Text(":+") + Key("enter")),
        "hide (buttons | numbers)":
             R(Key("cs-n/100") + Text(":-") + Key("enter")),
-        "<k>": R(Key("cs-n/80") + Text("".join(["%(k)s"])) + Key("enter")),
+        "<k>": R(Key("cs-n/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
         "<voice_action> <k>":
-            R(Key("cs-n/80") + Text("".join(["%(k)s", "%(voice_action)s"])) + Key("enter")),
+            R(Key("cs-n/20") + Text("".join(["%(k)s", "%(voice_action)s"])) + Pause("20") + Key("enter")),
 
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll [<read_dir>] [<read_speed>]": #current mouse location
+        "scroll here [<read_dir>] [<read_speed>]": #current mouse location
             R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #right side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll left [<read_dir>] [<read_speed>]": #left side
+        "scroll [<read_dir>] [<read_speed>]": #left side
             R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),

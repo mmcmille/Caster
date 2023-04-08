@@ -258,6 +258,8 @@ class TextManipulation(MergeRule):
             "transfer page": "c-a, c-c/20, a-tab",
         }),
         Choice("drop_strings", {
+            "e-mail":"mandmmcmillen@gmail.com",
+            "school email":"mmcmillen@sbhsd.k12.ca.us",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
             "Gmail":"mcmillen.michael.s@gmail.com",
             "password":"Lucydog1",

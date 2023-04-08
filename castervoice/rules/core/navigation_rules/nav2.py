@@ -132,6 +132,7 @@ class NavigationNon(MappingRule):
         Choice("mouse_grid", {
             "(1|top left)": "0.17, 0.17",
             "(2|top)": "0.5, 0.17",
+            "top edge": "0.5, 0.02",
             "(3|top right)": "0.83, 0.17",
             "(4|left)": "0.17, 0.5",
             "(5|center|middle)": "0.5, 0.5",

@@ -1,6 +1,6 @@
 '''
 Michael McMillen
-free plane
+search
 to do
 filter dictation, press escape
 '''
@@ -50,7 +50,8 @@ class FreeplaneRule(MappingRule):
 		}),
 		Choice("key_rule", {
 			"save all": "a-s",
-			"copy (node|single)": "cs-c",
+			"copy (node|single)": "cs-s",
+			"copy [node] ID": "cs-i",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -73,7 +74,7 @@ class FreeplaneRule(MappingRule):
 			"(insert|big bro)": "s-enter",
 			"(sibling|bro)": "enter",
 			"(child|kid)": "tab",
-			"pasta clone": "c-d",
+			"(paste|drop) clone": "c-d",
 			#links
 			"open link": "c-enter",
 			"edit link": "c-k",
