@@ -1,3 +1,4 @@
+
 from dragonfly import Dictation, MappingRule, Function, Repeat, Pause, Choice, BringApp, ShortIntegerRef, RunCommand
 from castervoice.lib import utilities
 from castervoice.lib import virtual_desktops
@@ -19,7 +20,7 @@ class HomeWindowManagementRule(MappingRule):
                 Key("%(close_choice)s")
             ),
 
-
+        #app switching for windows 11+
         "[<close_choice>] (show|open|window) <app_n_11>": #<app_n>":
             R(
                 Key("w-t/20, down:9") +
@@ -33,6 +34,18 @@ class HomeWindowManagementRule(MappingRule):
         #app switching via fluent search
         "switch [<text>]": R(Key("csa-p") + Pause( "100") + Text("%(text)s ")),
         #"taskbar <n>": R(Key("w-%(n)s")),
+
+        #transfers clipboard to Windows number , 1-10
+        "transfer <app_n_key>":
+            R(
+                Key("cw-%(app_n_key)s") +
+                Pause("50") +
+                Key("c-v") +
+                Pause("50") +
+                #Mouse("(0.5, 0.5)") +
+                Key("a-tab")
+            ),
+
     }
 
     extras = [

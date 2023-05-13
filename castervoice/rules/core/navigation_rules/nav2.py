@@ -139,7 +139,8 @@ class NavigationNon(MappingRule):
             "(6|right)": "0.83, 0.5",
             "(7|bottom left)": "0.17, 0.83",
             "(8|bottom)": "0.5, 0.83",
-            "(9|bottom right)": "0.83, 0.83",
+            "9": "0.83, 0.83",
+            "bottom right ": "0.95, 0.95",
         }),
 
         Choice("track_choice",{

@@ -74,7 +74,8 @@ class WindowManagementRule(MappingRule):
         "window ( zones | panes)":R(Key("wc-z")),
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
-
+        "window snip":
+            R(Key("ws-s")),
         "window max":
             R(Function(utilities.maximize_window)),
         "window min":
