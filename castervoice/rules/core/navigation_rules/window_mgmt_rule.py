@@ -70,7 +70,7 @@ class WindowManagementRule(MappingRule):
         #change screen
         #"switch screen": R(Key("w-p/10")),
         "computer <position>": R(Key("w-p/90, down/40:%(position)s, enter/40") + Pause("800") + Key("escape")+ Pause("200")+ Key("c-m")),
-        #open window panes configuration
+        #open window panes configuration, need to set in fancy zones 
         "window ( zones | panes)":R(Key("wc-z")),
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
