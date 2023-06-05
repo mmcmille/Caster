@@ -260,6 +260,7 @@ class TextManipulation(MergeRule):
         Choice("drop_strings", {
             "e-mail":"mandmmcmillen@gmail.com",
             "school email":"mmcmillen@sbhsd.k12.ca.us",
+            "Monterey email":"mmcmillen@csumb.edu",
             "syngenta email":"michael.mcmillen@syngenta.com",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
             "Gmail":"mcmillen.michael.s@gmail.com",
