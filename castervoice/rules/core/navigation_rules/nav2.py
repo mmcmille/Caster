@@ -53,7 +53,8 @@ class NavigationNon(MappingRule):
         "mouse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
         #places mouse cursor in position of 3x3 grid, and presses f11 to start tracking if needed
-        "pointer <mouse_grid> [<track_choice>]":
+        # "pointer <mouse_grid> [<track_choice>]":
+        "<mouse_grid> [<track_choice>]":
             R(Mouse("(%(mouse_grid)s)")+ Key("%(track_choice)s")),
         "track": R(Key("f10")),
         "wheel <direction> [<nnavi500>]":
@@ -94,9 +95,11 @@ class NavigationNon(MappingRule):
         "switch (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
         "(next | right ) tab [<n>]":
-            R(Key("c-pgdown/20"))*Repeat(extra="n"),
+            R(Key("c-tab/20"))*Repeat(extra="n"),
+            #R(Key("c-pgdown/20"))*Repeat(extra="n"),
         "(prior | last | left ) tab [<n>]":
-            R(Key("c-pgup/20"))*Repeat(extra="n"),
+            R(Key("cs-tab/20"))*Repeat(extra="n"),
+            #R(Key("c-pgup/20"))*Repeat(extra="n"),
         "close (tab|it) [<n>]":
             R(Key("c-w/40"))*Repeat(extra="n"),
         "new tab [<n>]":
@@ -129,18 +132,19 @@ class NavigationNon(MappingRule):
             "ex": 1,
             "tie": 2
         }),
-        Choice("mouse_grid", {
-            "(1|top left)": "0.17, 0.17",
-            "(2|top)": "0.5, 0.17",
-            "top edge": "0.5, 0.02",
-            "(3|top right)": "0.83, 0.17",
-            "(4|left)": "0.17, 0.5",
-            "(5|center|middle)": "0.5, 0.5",
-            "(6|right)": "0.83, 0.5",
-            "(7|bottom left)": "0.17, 0.83",
-            "(8|bottom)": "0.5, 0.83",
-            "9": "0.83, 0.83",
-            "bottom right ": "0.95, 0.95",
+        Choice("mouse_grid", {#3x3 grid for mouse
+            "(top left | northwest)": "0.17, 0.17",
+            "(top | north)": "0.5, 0.17",
+            "far (top | north)": "0.5, 0.02",
+            "(top right | northeast)": "0.83, 0.17",
+            "(mid left | west)": "0.17, 0.5",
+            "(center|middle)": "0.5, 0.5",
+            "(mid right | east)": "0.83, 0.5",
+            "(bottom left | southwest)": "0.17, 0.83",
+            "(bottom | south)": "0.5, 0.83",
+            "far (bottom | south)": "0.5, 0.98",
+            "(bottom right | southeast)": "0.83, 0.83",
+            "far (bottom right | southeast)": "0.95, 0.95",
         }),
 
         Choice("track_choice",{

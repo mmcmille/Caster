@@ -312,7 +312,8 @@ def get_selected_files(folders=False):
         cb = Clipboard(from_system=True)
         cb.clear_clipboard()
         #orig for file explorer Key("c-c").execute()
-        Key("cs-n").execute()#double commander
+        #Key("cs-n").execute()#double commander
+        Key("cs-c").execute()#one commander
         time.sleep(0.1)
         files = get_clipboard_files(folders)
         cb.copy_to_system()

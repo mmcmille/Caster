@@ -104,7 +104,7 @@ class EdgeRule(MappingRule):
             R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
-    	"stop":
+    	"stop it":
     		R(Key("escape")),
 
 
