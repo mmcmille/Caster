@@ -42,8 +42,10 @@ class BringRule(BaseSelfModifyingRule):
     # Paths
     _terminal_path = settings.settings(["paths", "TERMINAL_PATH"])
     #original  _explorer_path = str(Path("C:\\Windows\\explorer.exe"))
-    _explorer_path = str(Path("C:\\GD_sync\\Apps\\doublecmd\\doublecmd.exe"))
+    #_explorer_path = str(Path("C:\\GD_sync\\Apps\\doublecmd\\doublecmd.exe"))
+    _explorer_path = str(Path("C:\Program Files\OneCommander\OneCommander.exe"))
     _source_dir =  Path(settings.SETTINGS["paths"]["BASE_PATH"]).parents[0]
+
     _user_dir = settings.SETTINGS["paths"]["USER_DIR"]
     _home_dir = Path.home()
 
@@ -188,7 +190,8 @@ class BringRule(BaseSelfModifyingRule):
         Text(folder).execute()
     def _bring_folder(self, folder, app):
         if not app:
-            Popen([BringRule._explorer_path ,str( '\''+folder+'\'')])# uses double commander instead
+            Popen([BringRule._explorer_path ,str(folder)])# uses one commander 
+            #Popen([BringRule._explorer_path ,str( '\''+folder+'\'')])# uses double commander instead
             """
             ContextAction(Function(lambda: Popen([BringRule._explorer_path, folder])), [
                 (BringRule._terminal_context, Text("cd \"%s\"\n" % folder)),
