@@ -44,7 +44,7 @@ def text_punc_dict():
         "plus":                                               "+",
         comma:                                                ",",
         "minus":                                              "-",
-        "period | dot":                                       ".",
+        "period | dot | stop":                                  ".",
         "slash":                                              "/",
         "colon":                                             ":",
         "semicolon":                                             ";",
@@ -63,7 +63,7 @@ def text_punc_dict():
         "underscore":                                         "_",
         "ticky | ((left | right) " + _id["``"] + " )":        "`",
         "open " + _id["{}"]:                                  "{",
-        "pipe (sim | symbol)":                                "|",
+        "(pike | pipe symbol)":                                "|",
         "close " + _id["{}"]:                                 "}",
         "tilde":                                              "~",
     }

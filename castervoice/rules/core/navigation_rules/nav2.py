@@ -30,7 +30,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "find":
+        "(find|search)":
             R(Key("c-f")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
@@ -75,7 +75,7 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
-        #implemented in each app "drop text":R(Key("cs-u")),
+        "drop text":R(Key("wca-v")),#uses microsoft powertoys
         "refresh":
             R(Key("c-r")),
         "maxiwin":

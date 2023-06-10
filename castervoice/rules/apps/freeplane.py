@@ -26,7 +26,7 @@ class FreeplaneRule(MappingRule):
 		#movement
 		"move <direction> [<m>]": R(Key("c-%(direction)s")) * Repeat(extra='m'),
 
-		"drop text": R(Key("cs-v/20, a-p, enter")),
+		#"drop text": R(Key("cs-v/20, a-p, enter")),
 	}
 	extras = [
 		ShortIntegerRef("m", 1, 10),

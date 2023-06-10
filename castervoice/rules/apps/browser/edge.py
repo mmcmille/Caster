@@ -217,7 +217,7 @@ class EdgeRule(MappingRule):
             "continue":"747, 944",
     		}),
         Choice("key_rule", {
-    	   "drop text": "cs-v",
+    	   #"drop text": "cs-v",
            "out": "a-left",
         }),
     ]

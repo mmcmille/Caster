@@ -61,7 +61,7 @@ class OneNote10Rule(MappingRule):
 			"full (page|screen)": "f11",
 			"new window": "c-m",
 			"new page": "c-n",
-			"drop text": "apps/20,tab/20,right/20,down:2/20,space",
+			#"drop text": "apps/20,tab/20,right/20,down:2/20,space",
 			"open link": "c-enter",
 			"edit link": "c-k",
 			"checkbox": "c-1",

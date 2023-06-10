@@ -10,11 +10,11 @@ def _set_mode(mic_mode):
 
 class CasterMicRule(MappingRule):
     mapping = {
-        "caster <mic_mode>": Function(lambda mic_mode: _set_mode(mic_mode)),
+        "(microphone | caster) <mic_mode>": Function(lambda mic_mode: _set_mode(mic_mode)),
     }
     extras = [
         Choice("mic_mode", {
-            "off": "off",
+            "off": "sleeping",#"off",
             "on": "on",
             "sleep": "sleeping",
         }),
