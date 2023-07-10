@@ -12,12 +12,12 @@ from castervoice.lib.merge.state.short import R
 class OneCommanderRule(MappingRule):
     mapping = {
         #generic key rule
-        "<key_rule>": R(Key("%(key_rule)s/40")),
+        "<key_rule>": R(Key("%(key_rule)s/10")),
 
         "rename <new_name>": R(Key('f2/20, %(new_name)s, enter')),
         "out [<n>]": R(Key('a-up/20') * Repeat(extra='n')),
         "search text": R(Key("a-f7") + Pause("100") + Key("tab/10") * Repeat(extra=5)  + Key("space")),
-        "open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
+        #"open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
     }
     extras = [
         ShortIntegerRef("n", 1, 100),
@@ -26,18 +26,18 @@ class OneCommanderRule(MappingRule):
 			"Q": "q.csv",
 		}),
 		Choice("key_rule", {
-            "left tab": "c-tab",
-            "right tab": "cs-tab",
-            "[switch] frame": "tab",
-            "transfer": "escape/20, c-x/20,tab/20,c-v",
-            "duplicate": "c-c,tab,c-v",
+            "restore tab": "cs-t",
+            "switch [frame]": "a-f",
+            "transfer": "a-m",
+            "duplicate": "a-c",
             "open": "c-p",
             "open with": "apps,h",
             "extract [all]": "escape, apps,t,enter",
             "Favorites": "c-d",
             "last": "a-left",
+            "link": "cs-c",
             "get filename": 'cs-n/20, a-tab',
-            "get path": "c-p, c-c, escape/20, a-tab",
+            "get path": "cs-c",
             "find [in] files": 'a-f7',
             "search": "a-f7",
             "properties": "apps,up,enter",
@@ -45,7 +45,7 @@ class OneCommanderRule(MappingRule):
             "view": 'f3',
             "edit": 'f4',
             "move": 'f6',
-            "new (directory | folder)": 'f7',
+            "new (directory | folder)": "cs-n",
             "wipe": 's-delete',
             "trash it": "delete",
             "FTP": 'c-f',
@@ -62,7 +62,6 @@ class OneCommanderRule(MappingRule):
             "display list": 'c-f1',
             "display details": 'c-f2',
             "display file tree": 'c-f8',
-            "link": "apps,s,enter",
 		}),
 
     ]

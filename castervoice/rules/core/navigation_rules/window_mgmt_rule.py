@@ -14,6 +14,7 @@ class WindowManagementRule(MappingRule):
     mapping = {
 
         "show letters": R(Key("csa-m")),#uses Fluent Search
+        "snippet": R(Key("ws-s")),#uses snipping tool
 
         #Window Manipulation
 
@@ -25,6 +26,7 @@ class WindowManagementRule(MappingRule):
         "search <search_tag>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s")),
         "search <search_tag> [for] <dict>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s") + Key("tab")+ Text("%(dict)s")),
         #uses windows start menu
+
         #"search apps":R(Key("w-s/20")+ Text("apps: ")),
         #"search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-b,space")),
@@ -70,7 +72,7 @@ class WindowManagementRule(MappingRule):
         #change screen
         #"switch screen": R(Key("w-p/10")),
         "computer <position>": R(Key("w-p/90, down/40:%(position)s, enter/40") + Pause("800") + Key("escape")+ Pause("200")+ Key("c-m")),
-        #open window panes configuration, need to set in fancy zones 
+        #open window panes configuration, need to set in fancy zones
         "window ( zones | panes)":R(Key("wc-z")),
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),

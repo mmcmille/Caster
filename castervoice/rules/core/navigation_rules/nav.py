@@ -66,27 +66,27 @@ class Navigation(MergeRule):
                       use_spoken=True))
             ]),
         # VoiceCoder-inspired -- these should be done at the IDE level
-        "fill <target>":
-            R(Key("escape, escape, end"), show=False) +
-            AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line)))],
-            time_in_seconds=0.2, repetitions=50 ),
-        "jump in":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
-                               time_in_seconds=0.1,
-                               repetitions=50),
-        "jump out":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
-                               time_in_seconds=0.1,
-                               repetitions=50),
-        "jump back":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-                               time_in_seconds=0.1,
-                               repetitions=50),
-        "jump back in":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-                               finisher=Key("right"),
-                               time_in_seconds=0.1,
-                               repetitions=50),
+
+#        "fill <target>":
+#            R(Key("escape, escape, end"), show=False) +
+#            AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line)))],
+#        "jump in":
+#            AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
+#                               time_in_seconds=0.1,
+#                               repetitions=50),
+#        "jump out":
+#            AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
+#                               time_in_seconds=0.1,
+#                               repetitions=50),
+#        "jump back":
+#            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+#                               time_in_seconds=0.1,
+#                               repetitions=50),
+#        "jump back in":
+#            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+#                               finisher=Key("right"),
+#                               time_in_seconds=0.1,
+#                               repetitions=50),
 
         # keyboard shortcuts
         "ignore body":
@@ -113,8 +113,8 @@ class Navigation(MergeRule):
         #orig
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
-        "stoosh [<nnavi500>]":
-            R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
+        #"stoosh [<nnavi500>]":
+        #    R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard), rspec="cut"),
         "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
@@ -151,7 +151,7 @@ class Navigation(MergeRule):
         "peek [<big>] format":
             R(Function(textformat.peek_text_format)),
         "(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)] <textnv> [brunt]":
-            R(Function(textformat.master_format_text)),
+            R(Function(textformat.master_format_text)+Text(" ")),
         "[<big>] format <textnv>":
             R(Function(textformat.prior_text_format)),
         "<word_limit> [<big>] format <textnv>":
@@ -163,15 +163,15 @@ class Navigation(MergeRule):
               rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
-        "kick [<nnavi3>]":
+     "(kick| ah ) [<nnavi3>]":
             R(Function(navigation.left_click))*Repeat(extra="nnavi3"),
         "psychic":
             R(Function(navigation.right_click)),
-        "(kick double|double kick)":
+        "(kick double|double tap)":
             R(Function(navigation.left_click)*Repeat(2)),
-        "(squat| kick hold)":
+        "(squat| grab it| hold it )":
             R(Function(navigation.left_down)),
-        "(bench| kick release)":
+        "(bench|release [it])":
             R(Function(navigation.left_up)),
 
         # special keystroke commands
@@ -196,7 +196,7 @@ class Navigation(MergeRule):
         "flitch [<nnavi500>]":
             R(Key("cs-right:%(nnavi500)s")),
         "<button_dictionary_500_no_prefix_no_modifier> [<nnavi500>]":
-            R(Key("%(button_dictionary_500_no_prefix_no_modifier)s")*Repeat(extra='nnavi500'),
+            R(Key("%(button_dictionary_500_no_prefix_no_modifier)s/1")*Repeat(extra='nnavi500'),
               rdescript="press buttons: %(button_dictionary_500_no_prefix_no_modifier)s %(nnavi500)s"),
         "<modifier> <button_dictionary_500_modifier> [<nnavi500>]": #added delay
             R(Key("%(modifier)s-%(button_dictionary_500_modifier)s/1")*Repeat(extra='nnavi500'),
@@ -210,7 +210,7 @@ class Navigation(MergeRule):
     tell_commands_dict.update(_tpd)
     button_dictionary_500_no_prefix_no_modifier = {
         "tabby": "tab",
-        "shave": "backspace, shift:up, ctrl:up", #select mod
+        "shave": "backspace",# shift:up, ctrl:up", #select mod
         "(delete | deli)": "del,  shift:up, ctrl:up",#select mod
         "done": "enter",
         "left": "left",
@@ -240,12 +240,12 @@ class Navigation(MergeRule):
 
         Choice("capitalization", {
             "yell": 1,
-            "tie": 2,
+            "title": 2,
             "gerrish": 3,
             "sing": 4,
             "laws": 5,
             "say": 6,
-            "cop": 7,
+            "cap": 7,
             "slip": 8,
         }),
         Choice(

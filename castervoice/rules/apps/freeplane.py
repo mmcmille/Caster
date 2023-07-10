@@ -14,15 +14,15 @@ from castervoice.lib.merge.state.short import R
 from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
-class FreeplaneRule(MappingRule):
+class FreeplaneRule(MappingRule):#free plane
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/40")),
 		#menu control
 		"<menu_title> menu": R(Key("a-%(menu_title)s")),
 		#zoom
-		"zoom out [<m>]": R(Key("c-minus")) * Repeat(extra='m'),
-		"zoom in [<m>]": R(Key("c-equals")) * Repeat(extra='m'),
+		"zoom out [<m>]": R(Key("a-down")) * Repeat(extra='m'),
+		"zoom in [<m>]": R(Key("a-up")) * Repeat(extra='m'),
 		#movement
 		"move <direction> [<m>]": R(Key("c-%(direction)s")) * Repeat(extra='m'),
 
@@ -50,18 +50,22 @@ class FreeplaneRule(MappingRule):
 		}),
 		Choice("key_rule", {
 			"save all": "a-s",
-			"copy (node|single)": "cs-s",
+			"copy (node|single)": "cs-c",
 			"copy [node] ID": "cs-i",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
-			"search": "cs-j",
+			"search map": "cs-j",
 			"filter": "c-f",
-			"(isolate)": "ca-f",
 			"(clear filter)": "ca-x",
+			"jump in":"s-escape",
+			"jump out":"escape",
+			"go back":"escape",
+			"next":"enter,enter",
 
 			"fold [it]": "space",
 			"(fold|collapse) all": "a-home",
+			"unfold all": "a-end",
 			"outline view": "cs-o",
 			"edit styles": "c-f11",
 			#split
@@ -70,6 +74,9 @@ class FreeplaneRule(MappingRule):
 			#edit
 			"edit": "end",
 			"edit dialogue": "a-enter",
+			"title it":"ca-c",
+			"(capitalize| cap) it":"as-up",
+
 			#nodes
 			"(insert|big bro)": "s-enter",
 			"(sibling|bro)": "enter",
@@ -82,6 +89,9 @@ class FreeplaneRule(MappingRule):
 			#view
 			"center ( view | node )": "ca-c",
 			"new (window|view)": "ca-v",
+			#new words
+			"antecedent":"",
+
 		}),
 	]
 	defaults = {

@@ -32,7 +32,7 @@ class HomeWindowManagementRule(MappingRule):
                 Key("%(close_choice)s")),
 
         #app switching via fluent search
-        "switch [<text>]": R(Key("csa-p") + Pause( "100") + Text("%(text)s ")),
+        #"switch [<text>]": R(Key("csa-p") + Pause( "100") + Text("%(text)s ")),
         #"taskbar <n>": R(Key("w-%(n)s")),
 
         #transfers clipboard to Windows number , 1-10
@@ -55,11 +55,11 @@ class HomeWindowManagementRule(MappingRule):
             "close":"a-f4",
             "":"",
         }),
-        Choice("app_n_key", {
+        Choice("app_n_key", {#can open individual programs through BringMe (opener), save first if needed (do this for freeplane )
             "(1|web)": 1,
-            "(2|files)": 2,
+            "(2)": 2,
             "(3|commands)": 3,
-            "(4|notes)": 4,
+            "(4|maps|map)": 4,
             "5": 5,
             "6": 6,
             "7": 7,

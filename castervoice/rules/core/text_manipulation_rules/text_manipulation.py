@@ -258,12 +258,12 @@ class TextManipulation(MergeRule):
             "transfer page": "c-a, c-c/20, a-tab",
         }),
         Choice("drop_strings", {
-            "e-mail":"mandmmcmillen@gmail.com",
+            "email":"mandmmcmillen@gmail.com",
             "school email":"mmcmillen@sbhsd.k12.ca.us",
             "Monterey email":"mmcmillen@csumb.edu",
             "syngenta email":"michael.mcmillen@syngenta.com",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
-            "Gmail":"mcmillen.michael.s@gmail.com",
+            "my email":"mcmillen.michael.s@gmail.com",
             "password":"Lucydog1",
             "[full] name" : "Michael McMillen",
             "first name": "Michael",
@@ -273,6 +273,7 @@ class TextManipulation(MergeRule):
             "(telephone|phone) [number]": "8312062683",
             "Monica's (telephone|phone) [number]": "2096027457",
             "zipcode": "95023",
+            "student id": "841703494",
 
         }),
     ]

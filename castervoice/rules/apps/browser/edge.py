@@ -36,7 +36,7 @@ class EdgeRule(MappingRule):
 
         "link":
             R(Key("a-c/50, a-tab")),
-        "link map": R(Key("")),
+        "link map": R(Key("a-c/50, w-4/1")),#assumes map is output window for
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":
@@ -45,7 +45,7 @@ class EdgeRule(MappingRule):
             R(Key("c-n")),
         "(new incognito window | incognito)":
             R(Key("cs-n")),
-        "new tab [<n>]|tab new [<n>]": R(Key("c-t") * Repeat(extra="n")),
+        #"new tab [<n>]|tab new [<n>]": R(Key("c-t") * Repeat(extra="n")),
         "search (it|this)": R(Key("c-c/20, c-t, c-v, enter")),
         "restore tab [<n>]|tab reopen [<n>]":
             R(Key("cs-t")) * Repeat(extra="n"),
@@ -96,15 +96,15 @@ class EdgeRule(MappingRule):
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll here [<read_dir>] [<read_speed>]": #current mouse location
+        "scroll [<read_dir>] [<read_speed>]": #current mouse location
             R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #right side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll [<read_dir>] [<read_speed>]": #left side
+        "scroll left [<read_dir>] [<read_speed>]": #left side
             R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
-    	"stop it":
+    	"stop [it]":
     		R(Key("escape")),
 
 
@@ -159,8 +159,6 @@ class EdgeRule(MappingRule):
             R(Text("/msg NickServ identify PASSWORD")),
         "tab <m>|<nth> tab":
             R(Key("c-%(m)s%(nth)s")),
-        "last tab":
-            R(Key("c-9")),
         "second last tab":
             R(Key("c-9, cs-tab")),
         "[toggle] bookmark bar":
@@ -192,10 +190,11 @@ class EdgeRule(MappingRule):
                 "sixth": "6",
                 "seventh": "7",
                 "eighth": "8",
+                "(ninth|last)":"9",
             }),
         Choice("voice_action", {
-                "click": ":c",
-                "tab": ":t",
+                "click on": ":c",
+                "tab [on]": ":t",
                 "hover": ":h",
                 "(get|copy)": ":s",
             }),
@@ -219,6 +218,7 @@ class EdgeRule(MappingRule):
         Choice("key_rule", {
     	   #"drop text": "cs-v",
            "out": "a-left",
+           "edit": "f2",# spreadsheet 
         }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}

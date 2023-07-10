@@ -30,7 +30,7 @@ def text_punc_dict():
 
     _id = _inv_dtpb()
     return {
-        "ace":                                                " ",
+        "spacebar":                                         " ",
         "clamor | bang":                                    "!",
         "chocky":                                            "\"",
         "hash tag":                                           "#",
@@ -44,7 +44,7 @@ def text_punc_dict():
         "plus":                                               "+",
         comma:                                                ",",
         "minus":                                              "-",
-        "period | dot | stop":                                  ".",
+        "period":                                             ".",
         "slash":                                              "/",
         "colon":                                             ":",
         "semicolon":                                             ";",
@@ -63,7 +63,7 @@ def text_punc_dict():
         "underscore":                                         "_",
         "ticky | ((left | right) " + _id["``"] + " )":        "`",
         "open " + _id["{}"]:                                  "{",
-        "(pike | pipe symbol)":                                "|",
+        "pipe symbol":                                         "|",
         "close " + _id["{}"]:                                 "}",
         "tilde":                                              "~",
     }

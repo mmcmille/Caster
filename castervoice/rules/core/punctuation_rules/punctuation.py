@@ -1,8 +1,14 @@
+"""
+Michael McMillen
+
+TODO: make some punctuation go back one, and some punctuation not   
+"""
+
 from dragonfly import Choice, Repeat, ShortIntegerRef
 
 from castervoice.lib.actions import Key, Text
 
-try:  # Try  first loading  from caster user directory
+try:  # Try  first loading  from caster user directory! !
     from punctuation_support import double_text_punc_dict, text_punc_dict
 except ImportError:
     from castervoice.rules.core.punctuation_rules.punctuation_support import double_text_punc_dict, text_punc_dict
@@ -17,6 +23,12 @@ class Punctuation(MergeRule):
     pronunciation = "punctuation"
 
     mapping = {
+        "ace [<npunc100>]":
+            R(Text(" "))*Repeat(extra="npunc100"),
+
+        #alternative punctuation rule, relies on a space after words
+        "<text_punc>": R(Key("left/1") + Text("%(text_punc)s") + Key("right/1")),
+
         "[<long>] <text_punc> [<npunc>]":
             R(Text("%(long)s" + "%(text_punc)s" + "%(long)s"))*Repeat(extra="npunc"),
         # For some reason, this one doesn't work through the other function
@@ -30,10 +42,9 @@ class Punctuation(MergeRule):
             R(Key("s-tab"))*Repeat(extra="npunc"),
         "boom [<npunc>]":
             R(Text(", "))*Repeat(extra="npunc"),
-        "bam [<npunc>]":
+        "dot [<npunc>]":
             R(Text(". "))*Repeat(extra="npunc"),
-        "ace [<npunc100>]":
-            R(Text(" "))*Repeat(extra="npunc100"),
+
     }
 
     extras = [
