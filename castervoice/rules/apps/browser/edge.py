@@ -82,16 +82,16 @@ class EdgeRule(MappingRule):
        "midnight":
             R(Key("as-m")),
        #click by voice
-"refresh (buttons | numbers)":
-            R(Key("cs-n/100") + Text(":-") + Key("enter")) + Pause("80") +
-            R(Key("cs-n/80") + Text(":+") + Key("enter")),
+       "refresh (buttons | numbers)":
+            R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
+            R(Key("cs-space/80") + Text(":+") + Key("enter")),
        "show (buttons | numbers)":
-            R(Key("cs-n/80") + Text(":+") + Key("enter")),
+            R(Key("cs-space/80") + Text(":+") + Key("enter")),
        "hide (buttons | numbers)":
-            R(Key("cs-n/100") + Text(":-") + Key("enter")),
-        "<k>": R(Key("cs-n/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
+            R(Key("cs-space/100") + Text(":-") + Key("enter")),
+        "<k>": R(Key("cs-space/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
         "<voice_action> <k>":
-            R(Key("cs-n/20") + Text("".join(["%(k)s", "%(voice_action)s"])) + Pause("20") + Key("enter")),
+            R(Key("cs-space/20") + Text("".join(["%(k)s", "%(voice_action)s"])) + Pause("20") + Key("enter")),
 
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
@@ -218,7 +218,7 @@ class EdgeRule(MappingRule):
         Choice("key_rule", {
     	   #"drop text": "cs-v",
            "out": "a-left",
-           "edit": "f2",# spreadsheet 
+           "edit": "f2",# spreadsheet
         }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
