@@ -89,8 +89,9 @@ class FreeplaneRule(MappingRule):#free plane
 			#view
 			"center ( view | node )": "ca-c",
 			"new (window|view)": "ca-v",
-			#new words
-			"antecedent":"",
+			#icons
+			"info icon ": "ca-i",
+			"school":"",
 
 		}),
 	]

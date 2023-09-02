@@ -36,7 +36,7 @@ class EdgeRule(MappingRule):
 
         "link":
             R(Key("a-c/50, a-tab")),
-        "link map": R(Key("a-c/50, w-4/1")),#assumes map is output window for
+        "link map": R(Key("a-c/50, w-5/1")),#assumes map is output window for
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":

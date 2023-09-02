@@ -29,7 +29,7 @@ class WindowManagementRule(MappingRule):
 
         #"search apps":R(Key("w-s/20")+ Text("apps: ")),
         #"search web":R(Key("w-s/20")+ Text("web: ")),
-        "system tray": R(Key("w-b,space")),
+        "system tray": R(Key("w-t/20,tab/5,space")),
 
         "move window":
             R(Key("")),
@@ -73,7 +73,7 @@ class WindowManagementRule(MappingRule):
         #"switch screen": R(Key("w-p/10")),
         "computer <position>": R(Key("w-p/90, down/40:%(position)s, enter/40") + Pause("800") + Key("escape")+ Pause("200")+ Key("c-m")),
         #open window panes configuration, need to set in fancy zones
-        "window ( zones | panes)":R(Key("wc-z")),
+        "window ( zones | panes)":R(Key("ws-`")),
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
         "window snip":

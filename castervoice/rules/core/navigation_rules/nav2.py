@@ -75,7 +75,7 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
-        "drop text":R(Key("wca-v/20") + Key("alt/20")),#uses microsoft powertoys
+        "drop text":R(Key("wca-v/20")),#uses microsoft powertoys
         "refresh":
             R(Key("c-r")),
         "maxiwin":

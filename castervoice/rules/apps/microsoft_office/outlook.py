@@ -26,7 +26,7 @@ class OutlookRule(MappingRule):
         "new journal entry": R(Key("cs-j")),
         "new task": R(Key("cs-k")),
         "new contact group": R(Key("cs-l")),
-        "(new message| new mail)": R(Key("cs-m")),
+        "(new message| new mail)": R(Key("c-n")),
         "new note": R(Key("cs-n")),
         "open the new search folder window": R(Key("cs-p")),
         "new meeting request": R(Key("cs-q")),
@@ -86,7 +86,7 @@ class OutlookRule(MappingRule):
         "[select] (previous | prior) link": R(Key("s-tab")),
         "move email": R(Key("popup/20, m")),
         "tag email": R(Key("popup/20, t/10, a")),
-        "archive": R(Key("backspace")),
+    #    "archive": R(Key("backspace")),
         "done tagging": R(Key("space/10, enter")),
 
         # calendar
@@ -95,17 +95,19 @@ class OutlookRule(MappingRule):
         "month view": R(Key("ca-4")),
 
         #message shortcuts
-        "flag email": R(Key("insert")),
+        "flag (it|email)": R(Key("insert")),
         "reply [<dict>]": R(Key("c-r") + Text("%(dict)s")),
         "reply all [<dict>]": R(Key("cs-r") + Text("%(dict)s")),
         "forward": R(Key("c-f")),
         "Mark as read": R(Key("c-q")),
         "Mark as unread": R(Key("c-u")),
         "(folder | go to folder)": R(Key("c-y")),
-
+        "move it": R(Key("cs-v")),
+        "send it": R(Key("c-enter")),
+        "trash it": R(Key("delete")),
         # navigation
-	"open folder": R(Key("c-y")),
-	"next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
+	    "open folder": R(Key("c-y")),
+	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
         "mail view": R(Key("c-1")),
         "calendar": R(Key("c-2")),
