@@ -13,7 +13,7 @@ from castervoice.lib.merge.state.short import R
 class WindowManagementRule(MappingRule):
     mapping = {
 
-        "show letters": R(Key("csa-m")),#uses Fluent Search
+        "letters": R(Key("csa-m")),#uses Fluent Search
         "snippet": R(Key("ws-s")),#uses snipping tool
 
         #Window Manipulation
@@ -31,12 +31,10 @@ class WindowManagementRule(MappingRule):
         #"search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-t/20,tab/5,space")),
 
-        "move window":
-            R(Key("")),
         "window isolate":
             R(Key("w-d/150, a-tab")),
 
-        "close window": R(Key("a-f4")),
+        "(window close|close window )": R(Key("a-f4")),
 
         "window <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),
@@ -80,7 +78,7 @@ class WindowManagementRule(MappingRule):
             R(Key("ws-s")),
         "window max":
             R(Function(utilities.maximize_window)),
-        "window min":
+        "window (min|hide)":
             R(Function(utilities.minimize_window)),
 	           "window swap":
             R(Key("ws-right")),

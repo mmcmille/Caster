@@ -262,6 +262,7 @@ class TextManipulation(MergeRule):
             "school email":"mmcmillen@sbhsd.k12.ca.us",
             "Monterey email":"mmcmillen@csumb.edu",
             "syngenta email":"michael.mcmillen@syngenta.com",
+            "syngenta password":"Q1w1e1rr",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
             "my email":"mcmillen.michael.s@gmail.com",
             "password":"Lucydog1",

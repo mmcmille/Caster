@@ -3,7 +3,10 @@
 from __future__ import unicode_literals
 from builtins import str
 
-import collections
+#import collections
+#python 3.10 added to fix error
+import collections.abc
+#rom collections.abc import MutableMapping
 import io
 import tomlkit
 from past.builtins import xrange
@@ -217,8 +220,8 @@ def _deep_merge_defaults(data, defaults):
     changes = 0
     for key, default_value in defaults.items():
         # If the key is in the data, use that, but call recursivly if it's a dict.
-        if key in data:
-            if isinstance(data[key], collections.Mapping):
+        if key in data: # python 3.10 changed collections to collections.abc
+            if isinstance(data[key], collections.abc.Mapping):
                 child_data, child_changes = _deep_merge_defaults(data[key], default_value)
                 data[key] = child_data
                 changes += child_changes
@@ -327,11 +330,11 @@ def _get_defaults():
 
         # Speech recognition engine settings
         "engine": {
-            "default_engine_mode": False, 
+            "default_engine_mode": False,
             "engine_mode": "normal",
-            "default_mic": False, 
+            "default_mic": False,
             "mic_mode": "on",
-            "mic_sleep_timer_on": True, 
+            "mic_sleep_timer_on": True,
             "mic_sleep_timer": 300, # Seconds before microphone goes to sleep after last successful recognition.
             # Note: No greater than 5 minutes or 300 seconds unless DPI/DPI sleep settings are adjusted
         },

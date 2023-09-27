@@ -1,7 +1,7 @@
 """
 Michael McMillen
 
-TODO: make some punctuation go back one, and some punctuation not   
+TODO: make some punctuation go back one, and some punctuation not
 """
 
 from dragonfly import Choice, Repeat, ShortIntegerRef
@@ -27,7 +27,9 @@ class Punctuation(MergeRule):
             R(Text(" "))*Repeat(extra="npunc100"),
 
         #alternative punctuation rule, relies on a space after words
-        "<text_punc>": R(Key("left/1") + Text("%(text_punc)s") + Key("right/1")),
+       "<sentence_punc>": R(Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
+
+       "<text_punc>": R(Text("%(text_punc)s")),
 
         "[<long>] <text_punc> [<npunc>]":
             R(Text("%(long)s" + "%(text_punc)s" + "%(long)s"))*Repeat(extra="npunc"),
@@ -54,6 +56,11 @@ class Punctuation(MergeRule):
             "long", {
                 "long": " ",
             }),
+        Choice(
+            "sentence_punc", {
+            "pause": ",",
+            "(period|stop)": ".",
+        }),
         Choice(
             "text_punc", text_punc_dict()),
         Choice(

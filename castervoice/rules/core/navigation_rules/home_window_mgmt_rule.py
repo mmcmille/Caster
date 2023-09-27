@@ -55,13 +55,13 @@ class HomeWindowManagementRule(MappingRule):
             "close":"a-f4",
             "":"",
         }),
-        Choice("app_n_key", {#can open individual programs through BringMe (opener), save first if needed (do this for freeplane )
+        Choice("app_n_key", {#can open individual programs through BringMe (opener), but it doesn't work for every program, save first if needed (do this for freeplane )
             "(1|web)": 1,
-            "(2)": 2,
+            "(2|email|outlook)": 2,
             "(3|commands)": 3,
-            "(4|email|outlook)": 4,
-            "(5|maps|map)": 5,
-            "6": 6,
+            "(4)": 4,
+            "(5|map)": 5,
+            "(6|notes|one note)": 6,
             "7": 7,
             "8": 8,
             "9": 9,

@@ -32,7 +32,7 @@ def text_punc_dict():
     return {
         "spacebar":                                         " ",
         "clamor | bang":                                    "!",
-        "chocky":                                            "\"",
+        "(chocky| open quote| close quote)":                 "\"",
         "hash tag":                                           "#",
         "dollar":                                              "$",
         "(modulo|percent)":                                   "%",
@@ -44,7 +44,7 @@ def text_punc_dict():
         "plus":                                               "+",
         comma:                                                ",",
         "minus":                                              "-",
-        "period":                                             ".",
+        "(dot|point)":                                         ".",
         "slash":                                              "/",
         "colon":                                             ":",
         "semicolon":                                             ";",

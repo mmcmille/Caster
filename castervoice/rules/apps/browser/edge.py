@@ -36,7 +36,8 @@ class EdgeRule(MappingRule):
 
         "link":
             R(Key("a-c/50, a-tab")),
-        "link map": R(Key("a-c/50, w-5/1")),#assumes map is output window for
+        "link map": R(Key("a-c/50, w-5/1")),#assumes map is output window 5
+        "link notes ": R(Key("a-c/50, w-6/1")),#assumes onenote  is output window 6
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":
@@ -195,6 +196,7 @@ class EdgeRule(MappingRule):
         Choice("voice_action", {
                 "click on": ":c",
                 "tab [on]": ":t",
+                "(under tab|later)": ":b",
                 "hover": ":h",
                 "(get|copy)": ":s",
             }),

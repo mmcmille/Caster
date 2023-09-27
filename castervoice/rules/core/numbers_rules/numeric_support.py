@@ -11,7 +11,7 @@ def word_number(wn):
         6: "six",
         7: "seven",
         8: "eight",
-        9: "nine"
+        9: "nine",
     }
     Text(numbers_to_words[int(wn)]).execute()
 

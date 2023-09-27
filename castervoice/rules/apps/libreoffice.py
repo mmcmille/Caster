@@ -171,7 +171,7 @@ class LORule(MappingRule):
             "(select|get) row": "s-space",
             "(select|get) column": "c-space",
             "delete column": "c-minus/40, c, a-o",
-        	"delete row": "c-minus/40, r, a-o",
+        	"delete row": "c-minus/40, a-r, a-o",
             "delete this": "c-minus",
             "insert column": "apps/40, i/20, c, a-o",
             "insert comment": "ca-c",

@@ -175,26 +175,26 @@ class Navigation(MergeRule):
             R(Function(navigation.left_up)),
 
         # special keystroke commands
-        "(lease wally | latch) [<nnavi10>]":
-            R(Key("home:%(nnavi10)s")),
-        "(ross wally | ratch) [<nnavi10>]":
-            R(Key("end:%(nnavi10)s")),
-        "sauce wally [<nnavi10>]":
-            R(Key("c-home:%(nnavi10)s")),
-        "dunce wally [<nnavi10>]":
-            R(Key("c-end:%(nnavi10)s")),
-        "bird [<nnavi500>]":
-            R(Key("c-left:%(nnavi500)s")),
-        "firch [<nnavi500>]":
-            R(Key("c-right:%(nnavi500)s")),
-        "brick [<nnavi500>]":
-            R(Key("s-left:%(nnavi500)s")),
-        "frick [<nnavi500>]":
-            R(Key("s-right:%(nnavi500)s")),
-        "blitch [<nnavi500>]":
-            R(Key("cs-left:%(nnavi500)s")),
-        "flitch [<nnavi500>]":
-            R(Key("cs-right:%(nnavi500)s")),
+        #"(lease wally | latch) [<nnavi10>]":
+        #    R(Key("home:%(nnavi10)s")),
+        #"(ross wally | ratch) [<nnavi10>]":
+        #    R(Key("end:%(nnavi10)s")),
+        #"sauce wally [<nnavi10>]":
+        #    R(Key("c-home:%(nnavi10)s")),
+        #"dunce wally [<nnavi10>]":
+        #    R(Key("c-end:%(nnavi10)s")),
+        #"bird [<nnavi500>]":
+        #    R(Key("c-left:%(nnavi500)s")),
+        #"firch [<nnavi500>]":
+        #    R(Key("c-right:%(nnavi500)s")),
+        #"brick [<nnavi500>]":
+        #    R(Key("s-left:%(nnavi500)s")),
+        #"frick [<nnavi500>]":
+        #    R(Key("s-right:%(nnavi500)s")),
+        #"blitch [<nnavi500>]":
+        #    R(Key("cs-left:%(nnavi500)s")),
+        #"flitch [<nnavi500>]":
+        #    R(Key("cs-right:%(nnavi500)s")),
         "<button_dictionary_500_no_prefix_no_modifier> [<nnavi500>]":
             R(Key("%(button_dictionary_500_no_prefix_no_modifier)s/1")*Repeat(extra='nnavi500'),
               rdescript="press buttons: %(button_dictionary_500_no_prefix_no_modifier)s %(nnavi500)s"),
