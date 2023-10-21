@@ -1,3 +1,8 @@
+'''
+Michael McMillen
+'''
+
+from dragonfly import Function, Choice, Dictation
 from castervoice.lib.actions import Text, Key
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -9,14 +14,12 @@ class SQL(MergeRule):
     pronunciation = "sequel"
 
     mapping = {
-        "select":
-            R(Text(" SELECT ")),
-        "select (all | every)":
-            R(Text(" SELECT * ")),
-        "from":
-            R(Text(" FROM ")),
-        "where":
-            R(Text(" WHERE ")),
+
+        "string <dict>": R(Text("\'") + Text("%(dict)s") + Text("\' ")),
+        "<dict> {weight=1000}": R(Text("%(dict)s ")),
+        "<sql_strings>": R(Text("%(sql_strings)s")),
+
+
         "between":
             R(Text(" BETWEEN ")),
         "lodge and ":
@@ -67,6 +70,7 @@ class SQL(MergeRule):
             R(Text(" IS NULL ")),
         "is not null":
             R(Text(" IS NOT NULL ")),
+
         "fun max":
             R(Text(" MAX() ") + Key("left/5:2")),
         "fun min":
@@ -79,8 +83,18 @@ class SQL(MergeRule):
             R(Text(" OVER (PARTITION BY ) ") + Key("left/5:2")),
     }
 
-    extras = []
-    defaults = {}
+    extras = [
+        Dictation("dict"),
+        Choice("sql_strings", {
+            "select":" SELECT ",
+            "select (all | every)":" SELECT * ",
+            "from":" FROM ",
+            "where":" WHERE ",
+        }),
+    ]
+    defaults = {
+        "dict": ""
+    }
 
 
 def get_rule():

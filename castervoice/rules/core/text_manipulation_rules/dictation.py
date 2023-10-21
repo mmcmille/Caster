@@ -13,7 +13,6 @@ from castervoice.lib.merge.state.short import R
 class DictationRule(MappingRule):
 
     mapping = {
-
         "[dictate] <dict> {weight=1000}": R(Text("%(dict)s ")),
     }
     extras = [

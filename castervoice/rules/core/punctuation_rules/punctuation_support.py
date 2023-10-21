@@ -4,9 +4,9 @@ import dragonfly
 def double_text_punc_dict():
     return {
         "quotes":                            "\"\"",
-        "thin quotes":                         "''",
+        "(thin|single) quotes":                "''",
         "tickris":                             "``",
-        "pair":                             "()",
+        "parens":                             "()",
         "brax":                                "[]",
         "curly":                               "{}",
         "angle":                               "<>",

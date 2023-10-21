@@ -110,8 +110,10 @@ class EdgeRule(MappingRule):
 
 
         # requires an extension in some browsers such as chrome
-        "(show|hide) cursor":
+        "[toggle] caret browsing":
             R(Key("f7")),
+        "(show|hide) cursor":
+            R(Key("")),
         "[go] home [page]":
             R(Key("a-home")),
         "[show] history":
@@ -221,6 +223,9 @@ class EdgeRule(MappingRule):
     	   #"drop text": "cs-v",
            "out": "a-left",
            "edit": "f2",# spreadsheet
+           #google slides
+           "canvas view": "csa-c",#Move to canvas	Ctrl + Alt + Shift + c
+
         }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}

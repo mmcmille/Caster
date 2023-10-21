@@ -30,7 +30,7 @@ class WindowManagementRule(MappingRule):
         #"search apps":R(Key("w-s/20")+ Text("apps: ")),
         #"search web":R(Key("w-s/20")+ Text("web: ")),
         "system tray": R(Key("w-t/20,tab/5,space")),
-
+        "show desktop": R(Key("w-d")),
         "window isolate":
             R(Key("w-d/150, a-tab")),
 

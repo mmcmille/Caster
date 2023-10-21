@@ -59,7 +59,7 @@ class HomeWindowManagementRule(MappingRule):
             "(1|web)": 1,
             "(2|email|outlook)": 2,
             "(3|commands)": 3,
-            "(4)": 4,
+            "(4|files)": 4,
             "(5|map)": 5,
             "(6|notes|one note)": 6,
             "7": 7,
