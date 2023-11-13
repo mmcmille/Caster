@@ -198,7 +198,7 @@ class EdgeRule(MappingRule):
         Choice("voice_action", {
                 "click on": ":c",
                 "tab [on]": ":t",
-                "(under tab|later)": ":b",
+                "(page|later)": ":b",
                 "hover": ":h",
                 "(get|copy)": ":s",
             }),
