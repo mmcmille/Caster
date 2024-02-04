@@ -33,7 +33,7 @@ class OneNoteRule(MappingRule):
 		#generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40")),
 
-	    "(find | search) [<dict>]": R(Key("c-e") + Pause("50") + Text("%(dict)s")),
+	    "search [<dict>]": R(Key("c-e") + Pause("50") + Text("%(dict)s")),
 		"(find | search) [on] page [<dict>]": R(Key("c-f") + Pause("50") + Text("%(dict)s")),
 		    #text formatting
 		"heading <heading_n> {weight=1000}":

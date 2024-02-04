@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 import dragonfly
 
 
@@ -6,7 +10,7 @@ def double_text_punc_dict():
         "quotes":                            "\"\"",
         "(thin|single) quotes":                "''",
         "tickris":                             "``",
-        "parens":                             "()",
+        "pairs":                                "()",
         "brax":                                "[]",
         "curly":                               "{}",
         "angle":                               "<>",
@@ -15,7 +19,6 @@ def double_text_punc_dict():
 
 def _inv_dtpb():
     return {v: k for k, v in double_text_punc_dict().items()}
-
 
 def text_punc_dict():
     # Insurers comma is recognized consistently with DNS/Natlink and
@@ -30,31 +33,31 @@ def text_punc_dict():
 
     _id = _inv_dtpb()
     return {
+        comma:                                                ",",
         "spacebar":                                         " ",
-        "clamor | bang":                                    "!",
-        "(chocky| open quote| close quote)":                 "\"",
-        "hash tag":                                           "#",
+        "(clamor | bang)":                                    "!",
+        "hash tag":                                           "\#",                                   "!",
+        "(chocky | open quote | close quote)":               "\"",
         "dollar":                                              "$",
-        "(modulo|percent)":                                   "%",
+        "(modulo | percent)":                                   "%",
         "ampersand":                                          "&",
-        "apostrophe | single quote | chicky":                 "'",
-        "open " + _id["()"]:                                  "(",
-        "close " + _id["()"]:                                 ")",
+        "(apostrophe | single quote | chicky)":                 "'",
+        "start " + _id["()"]:                                  "(",
+        "end " + _id["()"]:                                 ")",
         "starling":                                           "*",
         "plus":                                               "+",
-        comma:                                                ",",
         "minus":                                              "-",
-        "(dot|point)":                                         ".",
+        "period":                                             ".",
         "slash":                                              "/",
         "colon":                                             ":",
-        "semicolon":                                             ";",
+        "semicolon":                                          ";",
         "[is] less than | left " + _id["<>"]:                 "<",
         "[is] less [than] [or] equal [to]":                  "<=",
         "equals":                                             "=",
         "[is] equal to":                                     "==",
         "[is] greater than | right " + _id["<>"]:             ">",
         "[is] greater [than] [or] equal [to]":               ">=",
-        "(questo|question mark)":                             "?",
+        "questo":                                             "?",
         "(atty | at symbol)":                                 "@",
         "open " + _id["[]"]:                                  "[",
         "backslash":                                         "\\",
@@ -66,4 +69,22 @@ def text_punc_dict():
         "pipe symbol":                                         "|",
         "close " + _id["{}"]:                                 "}",
         "tilde":                                              "~",
+    }
+
+def sentence_punc_dict():
+    # Insurers comma is recognized consistently with DNS/Natlink and
+    # if/else statement workaround engines that do not expect punctuation symbol as a command
+    if hasattr(dragonfly.get_current_engine(), "name"):
+        if (dragonfly.get_current_engine().name == 'natlink'):
+            comma = "(comma | ,)"
+        else:
+            comma = "comma"
+    else:
+        comma = "comma"
+
+    return {
+        comma:                                                ",",
+        "period":                                             ".",
+        "exclamation point":                                  "!",
+        "question mark":                                      "?",
     }

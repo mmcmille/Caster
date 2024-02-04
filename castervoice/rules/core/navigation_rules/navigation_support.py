@@ -36,14 +36,14 @@ B) the user of a programming language will know what they're supposed to get fil
 
 TARGET_CHOICE = Choice(
     "target", {
-        comma: ",",
-        "period": ".",
+        #comma: ",",
+        #"period": ".",
         "(pair | parentheses)": "(~)",
         "[square] (bracket | brackets)": "[~]",
         "curly [brace]": "{~}",
         "loop": "for~while",
-        "L paren": "(",
-        "are paren": ")",
+        "open paren": "(",
+        "close paren": ")",
         "openers": "(~[~{",
         "closers": "}~]~)",
         "token": "TOKEN",

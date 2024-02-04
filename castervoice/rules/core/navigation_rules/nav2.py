@@ -30,7 +30,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "(find|search)":
+        "find":
             R(Key("c-f")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
@@ -59,7 +59,7 @@ class NavigationNon(MappingRule):
         "track": R(Key("f10")),
         "wheel <direction> [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
-        "scree <direction> <time_in_seconds>":
+        "scroll <direction> [<time_in_seconds>] ":
             R(AsynchronousAction(
                 [L(S(["cancel"], Function(navigation.wheel_scroll, nnavi500=1)))],
                 repetitions=1000,
@@ -158,6 +158,7 @@ class NavigationNon(MappingRule):
         "mim": "",
         "nnavi500": 1,
         "direction2": "",
+        "time_in_seconds": 0.6,
         "dokick": 0,
         "text": "",
         "wm": 2

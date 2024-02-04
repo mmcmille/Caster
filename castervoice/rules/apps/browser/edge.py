@@ -20,14 +20,17 @@ class EdgeRule(MappingRule):
         #"transfer": R(Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
         #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
 
+
         "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
+
+        #formative rules
+        "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
 
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
         #gmail,   ...outlook online rules
         #moved to folder
-
         "move [(it|to)] [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
         "flag it": R(Mouse("(246, 146), left")),
         "trash it": R(Key("s-3")), #R(Mouse("(443, 148), left")),#510, 158
@@ -36,7 +39,8 @@ class EdgeRule(MappingRule):
 
         "link":
             R(Key("a-c/50, a-tab")),
-        "link map": R(Key("a-c/50, w-5/1")),#assumes map is output window 5
+        "link <m>": R(Key("a-c/50, w-%(m)s")),
+        "link map": R(Key("a-c/50, w-9/1")),#assumes map is output window 9
         "link notes ": R(Key("a-c/50, w-6/1")),#assumes onenote  is output window 6
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
@@ -105,8 +109,7 @@ class EdgeRule(MappingRule):
             R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "skip":
     		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
-    	"stop [it]":
-    		R(Key("escape")),
+    	"stop [it]":R(Key("escape")),
 
 
         # requires an extension in some browsers such as chrome
@@ -198,7 +201,7 @@ class EdgeRule(MappingRule):
         Choice("voice_action", {
                 "click on": ":c",
                 "tab [on]": ":t",
-                "(under tab|later)": ":b",
+                "(next | page)": ":b",#tab behind
                 "hover": ":h",
                 "(get|copy)": ":s",
             }),
@@ -212,7 +215,7 @@ class EdgeRule(MappingRule):
     		}),
 	    ShortIntegerRef("k", 0, 10000),
         ShortIntegerRef("n", 1, 100),
-        ShortIntegerRef("m", 1, 10),
+        ShortIntegerRef("m", 0, 10),
         Choice("click_item", {
     		"true":"288, 881",
     		"false":"257, 927",
@@ -220,11 +223,15 @@ class EdgeRule(MappingRule):
             "continue":"747, 944",
     		}),
         Choice("key_rule", {
-    	   #"drop text": "cs-v",
+            "caret browsing": "f7",
+            "next": "tab:2",
+           #"drop text": "cs-v",
+
            "out": "a-left",
            "edit": "f2",# spreadsheet
            #google slides
-           "canvas view": "csa-c",#Move to canvas	Ctrl + Alt + Shift + c
+           "grid view": "ca-1",
+           #"canvas view": "csa-c",#Move to canvas	Ctrl + Alt + Shift + c
 
         }),
     ]

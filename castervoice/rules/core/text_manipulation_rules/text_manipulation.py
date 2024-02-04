@@ -95,9 +95,9 @@ class TextManipulation(MergeRule):
 
 
         # remove text or character
-        "clear <line_dir>": R(Key("s-%(line_dir)s/20, backspace")),
+        "clear <line_dir>": R(Key("s-%(line_dir)s, backspace")),
         "strike [<direction>] [<n>]": #defaults to left, say right to strike right
-            R(Key("cs-%(direction)s/10")*Repeat(extra="n") + Key("backspace")),
+            R(Key("cs-%(direction)s/1")*Repeat(extra="n") + Key("backspace")),
 
         "remove <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.copypaste_remove_phrase_from_text,
@@ -235,6 +235,7 @@ class TextManipulation(MergeRule):
             "underline text": "c-u",
             "italic text": "c-i",
             #line commands
+            "get line":"home, s-end",
             "back line":"home",
         	"jump line": "end",
             "new line": "end,enter",
@@ -248,7 +249,7 @@ class TextManipulation(MergeRule):
             "get word": "c-left, cs-right, c-c",
             "copy over": "c-c/20, a-tab",
             "cut [it|this]": "c-x, shift:up, ctrl:up",
-            "drop [it]": "c-v",
+            "drop it": "c-v",
 
 
 
@@ -262,7 +263,7 @@ class TextManipulation(MergeRule):
             "school email":"mmcmillen@sbhsd.k12.ca.us",
             "Monterey email":"mmcmillen@csumb.edu",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "syngenta password":"Q1w1e1rr",
+            "syngenta password":"Q1w1e1rt",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
             "my email":"mcmillen.michael.s@gmail.com",
             "password":"Lucydog1",
@@ -271,8 +272,9 @@ class TextManipulation(MergeRule):
             "last name": "McMillen",
             "birthdate": "07/30/1983",
             "address": "1561 Albright Dr.",
-            "(telephone|phone) [number]": "8312062683",
+            "(telephone|phone) [number]": "8315248552",
             "Monica's (telephone|phone) [number]": "2096027457",
+            "Monica's birthdate": "12/29/1987",
             "zipcode": "95023",
             "student id": "841703494",
 

@@ -16,18 +16,20 @@ class SQL(MergeRule):
     mapping = {
 
         "string <dict>": R(Text("\'") + Text("%(dict)s") + Text("\' ")),
-        "<dict> {weight=1000}": R(Text("%(dict)s ")),
+        #"<dict> {weight=1000}": R(Text("%(dict)s ")),
         "<sql_strings>": R(Text("%(sql_strings)s")),
 
 
         "between":
-            R(Text(" BETWEEN ")),
+            R(Text("BETWEEN ")),
         "lodge and ":
             R(Text(" AND ")),
         "lodge or":
             R(Text(" OR ")),
-        "it are in":
-            R(Text(" IN ")),
+        "case":
+            R(Text("CASE ") + Key("enter/5:2") + Text("END,") + Key("up/5")),
+        "in":
+            R(Text(" IN ('')") + Key("left/5:2")),
         "equals | equal to":
             R(Text(" = ")),
         "not equals | not equal to":
@@ -35,11 +37,11 @@ class SQL(MergeRule):
         "group by":
             R(Text(" GROUP BY ")),
         "order by":
-            R(Text(" ORDER BY ")),
+            R(Text("ORDER BY ")),
         "ascending":
-            R(Text(" ASC ")),
+            R(Text("ASC ")),
         "descending":
-            R(Text(" DESC ")),
+            R(Text("DESC ")),
         "left join":
             R(Text(" LEFT JOIN ")),
         "inner join":
@@ -61,9 +63,9 @@ class SQL(MergeRule):
         "delete":
             R(Text(" DELETE ")),
         "like":
-            R(Text(" LIKE '%%'") + Key("left/5:2")),
+            R(Text("LIKE '%%'") + Key("left/5:2")),
         "union":
-            R(Text(" UNION ")),
+            R(Text("UNION ")),
         "alias as":
             R(Text(" AS ")),
         "is null":
@@ -87,9 +89,17 @@ class SQL(MergeRule):
         Dictation("dict"),
         Choice("sql_strings", {
             "select":" SELECT ",
-            "select (all | every)":" SELECT * ",
+            "distinct":"DISTINCT ",
+            "(all | every)":"* ",
             "from":" FROM ",
             "where":" WHERE ",
+            "use":"USE ",
+            "not":"NOT ",
+            "and":"AND ",
+            "when":"WHEN ",
+            "then":"THEN ",
+            "else":"ELSE ",
+            "null":"NULL ",
         }),
     ]
     defaults = {

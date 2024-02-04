@@ -55,12 +55,9 @@ class FreeplaneRule(MappingRule):#free plane
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
-			"search map": "cs-j",
-			"filter": "c-f",
-			"(clear filter)": "ca-x",
-			"jump in":"s-escape",
-			"jump out":"escape",
-			"go back":"escape",
+			"(jump in|isolate)":"s-escape",
+			"(jump out|go back)":"escape",
+
 			"next":"enter,enter",
 
 			"fold [it]": "space",
@@ -68,6 +65,11 @@ class FreeplaneRule(MappingRule):#free plane
 			"unfold all": "a-end",
 			"outline view": "cs-o",
 			"edit styles": "c-f11",
+			# filter
+			"find | search": "cs-j",
+			"filter": "c-f",
+			"clear filter": "ca-f",
+
 			#split
 			"split dot": "ca-dot",
 			"split here": "a-s",
@@ -79,7 +81,6 @@ class FreeplaneRule(MappingRule):#free plane
 
 			#nodes
 			"(insert|big bro)": "s-enter",
-			"(sibling|bro)": "enter",
 			"(child|kid)": "tab",
 			"(paste|drop) clone": "c-d",
 			#links
@@ -92,6 +93,7 @@ class FreeplaneRule(MappingRule):#free plane
 			#icons
 			"info icon ": "ca-i",
 			"school":"",
+			"remove icons": "cs-d",
 
 		}),
 	]

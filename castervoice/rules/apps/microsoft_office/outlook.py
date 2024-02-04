@@ -17,6 +17,7 @@ def capitalize(text):
 class OutlookRule(MappingRule):
     mapping = {
         # create new thing
+        "new email": R(Key("c-n")),
         "new (appointment | event)": R(Key("sc-a")),
         "new contact": R(Key("cs-c")),
         "new folder": R(Key("cs-e")),
