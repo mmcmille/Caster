@@ -9,9 +9,9 @@ from dragonfly import Choice, Repeat, ShortIntegerRef, Dictation
 from castervoice.lib.actions import Key, Text
 
 try:  # Try  first loading  from caster user directory! !
-    from punctuation_support import double_text_punc_dict, text_punc_dict
+    from punctuation_support import double_text_punc_dict, text_punc_dict, sentence_punc_dict
 except ImportError:
-    from castervoice.rules.core.punctuation_rules.punctuation_support import double_text_punc_dict, sentence_punc_dict, text_punc_dict
+    from castervoice.rules.core.punctuation_rules.punctuation_support import double_text_punc_dict, text_punc_dict, sentence_punc_dict
 
 from castervoice.lib.const import CCRType
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -28,14 +28,16 @@ class Punctuation(MergeRule):
 
         "ace [<npunc100>]":
             R(Text(" "))*Repeat(extra="npunc100"),
-        "<text_punc>": R(Text("%(text_punc)s")),
+
 
         #alternative punctuation rule, relies on a space after words (moves to the left one space)
         "<sentence_punc>": R(Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
+        #used to place sentence punctuation at cursor
+        "drop <sentence_punc>": R(Text("%(sentence_punc)s")),
         "<dict> <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
         "underscore": R(Key("left/1") + Text("_")),
-        #used to place sentence punctuation at cursor
-        "drop <text_punc>": R(Text("%(sentence_punc)s")),
+
+        "<text_punc>": R(Text("%(text_punc)s")),
 
         "[<long>] <text_punc> [<npunc>]":
             R(Text("%(long)s" + "%(text_punc)s" + "%(long)s"))*Repeat(extra="npunc"),
@@ -52,7 +54,7 @@ class Punctuation(MergeRule):
             R(Text(", "))*Repeat(extra="npunc"),
         "(dot|point) [<npunc>]":
             R(Text("."))*Repeat(extra="npunc"),
-        #no space symbols
+
 
 
     }

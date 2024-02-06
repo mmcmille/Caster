@@ -156,7 +156,7 @@ class Navigation(MergeRule):
             R(Function(textformat.prior_text_format)),
         "<word_limit> [<big>] format <textnv>":
             R(Function(textformat.partial_format_text)),
-        "hug <enclosure>":
+        "hug it <enclosure>":
             R(Function(text_utils.enclose_selected)),
         "dredge [<nnavi10>]":
             R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
