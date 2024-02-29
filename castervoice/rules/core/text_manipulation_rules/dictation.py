@@ -16,7 +16,7 @@ class DictationRule(MappingRule):
         #"<sentence_punc> {weight=1000}": R(Key("backspace/1") + Text("%(sentence_punc)s")),
         "snake": R(Key("left/1") + Text("_")),
 
-        "<sentence_punc>": R(Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
+        "<sentence_punc>": R(Key("backspace/1") + Text("%(sentence_punc)s") + Key("space/1")),
 
         #ambiguous :"<dict>] <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
         "sheet function": R(Key("home, equals, end")+ Text("()") + Key("left")),
