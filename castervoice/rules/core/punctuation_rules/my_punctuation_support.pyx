@@ -1,16 +1,12 @@
-'''
-Michael McMillen
-'''
-
 import dragonfly
 
 
 def double_text_punc_dict():
     return {
         "quotes":                            "\"\"",
-        "(thin|single) quotes":                "''",
+        "single quotes":                       "''",
         "tickris":                             "``",
-        "pairs":                                "()",
+        "hug":                                 "()",
         "brax":                                "[]",
         "curly":                               "{}",
         "angle":                               "<>",
@@ -19,6 +15,7 @@ def double_text_punc_dict():
 
 def _inv_dtpb():
     return {v: k for k, v in double_text_punc_dict().items()}
+
 
 def text_punc_dict():
     # Insurers comma is recognized consistently with DNS/Natlink and
@@ -32,22 +29,23 @@ def text_punc_dict():
         comma = "comma"
 
     _id = _inv_dtpb()
+    #do not comment out any of the following (keyboard relies on them)
     return {
-        comma:                                                ",",
-        "spacebar":                                         " ",
-        "(clamor | bang)":                                    "!",
-        "hash tag":                                           "\#",                                   "!",
-        "(chocky | open quote | close quote)":               "\"",
-        "dollar":                                              "$",
-        "(modulo | percent)":                                   "%",
+        "ace":                                                " ",
+        "bang":                                             "!",
+        "(open quote | close quote)":                           "\"",
+        "hash tag":                                           "#",
+        "dollar sign":                                        "$",
+        "modulo | percent":                                   "%",
         "ampersand":                                          "&",
-        "(apostrophe | single quote | chicky)":                 "'",
-        "start " + _id["()"]:                                  "(",
-        "end " + _id["()"]:                                 ")",
+        "apostrophe | single quote | chicky":                 "'",
+        "open " + _id["()"]:                                  "(",
+        "close " + _id["()"]:                                 ")",
         "starling":                                           "*",
         "plus":                                               "+",
+        comma:                                                ",",
         "minus":                                              "-",
-        "period":                                             ".",
+        "point":                                              ".",
         "slash":                                              "/",
         "colon":                                             ":",
         "semicolon":                                          ";",
@@ -64,10 +62,10 @@ def text_punc_dict():
         "close " + _id["[]"]:                                 "]",
         "carrot":                                             "^",
         "underscore":                                         "_",
-        "ticky | ((left | right) " + _id["``"] + " )":        "`",
+        "ticky | ((open | close ) " + _id["``"] + " )":        "`",
         "open " + _id["{}"]:                                  "{",
-        "pipe symbol":                                         "|",
         "close " + _id["{}"]:                                 "}",
+        "pipe (sim | symbol)":                                "|",
         "tilde":                                              "~",
     }
 
@@ -85,6 +83,7 @@ def sentence_punc_dict():
     return {
         comma:                                                ",",
         "period":                                             ".",
-        "exclamation point":                                  "!",
-        "question mark":                                      "?",
+        "(exclamation point | !)":                            "!",
+        "(question mark | ?)":                                "?",
+        "colon":                                              ":",
     }

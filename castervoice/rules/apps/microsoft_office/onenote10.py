@@ -7,7 +7,7 @@ Michael McMillen
 from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition, Pause, Function, ShortIntegerRef
 
 from castervoice.rules.core.alphabet_rules import alphabet_support  # Manually change in port in if in user directory
-from castervoice.lib.actions import Text, Key
+from castervoice.lib.actions import Text, Key, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
@@ -32,7 +32,7 @@ class OneNote10Rule(MappingRule):
 
 		#generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40")),
-
+		"rename": R(Mouse("right") + Pause("20") + Key("r")),
 	    "(find | search) [<dict>]": R(Key("c-e") + Pause("50") + Text("%(dict)s")),
 		"(find | search) [on] page [<dict>]": R(Key("c-f") + Pause("50") + Text("%(dict)s")),
 		    #text formatting
@@ -67,6 +67,7 @@ class OneNote10Rule(MappingRule):
 			"checkbox": "c-1",
 			"number list": "c-slash",
 			"select branch": "cs-minus",
+			"clear formatting": "cs-n",
 		}),
 
 		ShortIntegerRef("n", 1, 50),

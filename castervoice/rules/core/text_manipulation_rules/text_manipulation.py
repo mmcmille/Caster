@@ -63,7 +63,6 @@ class TextManipulation(MergeRule):
         #if len(_history) !=0:
         print(_history[len(_history)-1])
 
-
     mapping = {
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40, shift:up, ctrl:up")),
@@ -71,16 +70,30 @@ class TextManipulation(MergeRule):
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
+
         #select text
-        "get [<direction>] [<n>]": #defaults to left
+        "get <direction> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
         "get <direction> <direction2> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
+        "get line [<number_of_lines_to_get>]":#selects line and additional number of lines to get
+            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5")),
+        "get line <line_dir>":#selects everything to the left or right of the cursor on the current line 
+            R(Key("s-%(line_dir)s/5")),
 
+
+
+        "copy line [<number_of_lines_to_get>]":
+            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-c")),
+        "cut line [<number_of_lines_to_get>]":
+            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-x")),
         "snag [<n>]": #char
             R(Key("s-left:%(n)s")),
         "snag right [<n>]":
             R(Key("s-right:%(n)s")),
+
+        "drop text":R(Key("wca-v/20")),#uses microsoft powertoys
+
 
     # replace text or character
         "replace <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation> with <dictation2>":
@@ -181,12 +194,21 @@ class TextManipulation(MergeRule):
         ShortIntegerRef("m", 1, 100),
         ShortIntegerRef("wait_time", 1, 1000),
         ShortIntegerRef("number_of_lines_to_search", 1, 50),
+        ShortIntegerRef("number_of_more_lines_to_get", 0, 50),
 
 
         Choice("character", character_dict),
         Choice("character2", character_dict),
         Choice("single_character", character_dict),
 
+        Choice("number_of_lines_to_get", {
+        "": 0,
+        "one": 0,
+        "two": 1,
+        "three": 2,
+        "four": 3,
+        "five": 4,
+        }),
         Choice("direction", {
             "left": "left",
             "right": "right",
@@ -231,13 +253,14 @@ class TextManipulation(MergeRule):
         }),
         Choice("key_rule", {
             "(select all|get everything)": "c-a",
+            "select through end": "cs-end",
             "bold text": "c-b",
             "underline text": "c-u",
             "italic text": "c-i",
             #line commands
-            "get line":"home, s-end",
-            "back line":"home",
-        	"jump line": "end",
+            #see nav.py
+            #"back line":"home",
+        	#"jump line": "end",
             "new line": "end,enter",
             #clears text
             "clear line": "end, s-home, backspace",
@@ -250,13 +273,10 @@ class TextManipulation(MergeRule):
             "copy over": "c-c/20, a-tab",
             "cut [it|this]": "c-x, shift:up, ctrl:up",
             "drop it": "c-v",
-
-
-
-            "copy line": "end/20, s-home/20, c-c",
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
-            "cut line": "end/20, s-home/20, c-x",
             "transfer page": "c-a, c-c/20, a-tab",
+            #Dragon
+            "dictation box": "cs-d",
         }),
         Choice("drop_strings", {
             "email":"mandmmcmillen@gmail.com",
@@ -285,8 +305,8 @@ class TextManipulation(MergeRule):
         "before_after": None,
         "letter_size": "upper",
         "number_of_lines_to_search": 0, # before changing this default, please read the function deal_with_up_down_directions
-        "occurrence_number": 1,} # if direction is up or down, the default number_of_lines_to_search
-
+        "occurrence_number": 1, # if direction is up or down, the default number_of_lines_to_search
+        }
         # will be 3 instead of zero.
         # This can be changed in the function deal_with_up_down_directions
         # 'number_of_lines_to_search = zero' means you are searching only on the current line

@@ -14,14 +14,27 @@ class DictationRule(MappingRule):
 
     mapping = {
         #"<sentence_punc> {weight=1000}": R(Key("backspace/1") + Text("%(sentence_punc)s")),
+        "snake": R(Key("left/1") + Text("_")),
+
+        "<sentence_punc>": R(Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
+
+        #ambiguous :"<dict>] <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
+        "sheet function": R(Key("home, equals, end")+ Text("()") + Key("left")),
+        #goes last in mapping order
         "[dictate] <dict>": R(Text("%(dict)s ")),
+
+
+
+
     }
     extras = [
-        #Choice(
-        #    "sentence_punc", {
-                #"comma": ", ",
-        #        "period": ". ",
-        #    }),
+        Choice("sentence_punc", {
+                "break": ",",
+                "period": ".",
+                "(exclamation point | !)": "!",
+                "(question mark | ?)": "?",
+                "deaf": ":",
+        }),
         Dictation("dict"),
     ]
     defaults = {"dict": ""}

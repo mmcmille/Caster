@@ -23,7 +23,8 @@ class NavigationNon(MappingRule):
     pronunciation = "navigation companion"
 
     mapping = {
-        "<direction> <time_in_seconds>":
+
+        "go <direction> <time_in_seconds>":
             AsynchronousAction(
                 [L(S(["cancel"], Key("%(direction)s"), consume=False))],
                 repetitions=1000,
@@ -56,14 +57,19 @@ class NavigationNon(MappingRule):
         # "pointer <mouse_grid> [<track_choice>]":
         "<mouse_grid> [<track_choice>]":
             R(Mouse("(%(mouse_grid)s)")+ Key("%(track_choice)s")),
-        "track": R(Key("f10")),
-        "wheel <direction> [<nnavi500>]":
+        "hold <mouse_grid>":
+            R(Mouse("(%(mouse_grid)s)") + Function(navigation.left_down)),
+        "scroll [<direction>] [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
-        "scroll <direction> [<time_in_seconds>] ":
+        "scroll [<direction>] page [<time_in_seconds>] ":
             R(AsynchronousAction(
                 [L(S(["cancel"], Function(navigation.wheel_scroll, nnavi500=1)))],
                 repetitions=1000,
                 blocking=False)),
+        "(zoom in|increase font) [<n>]":
+            R(Key("control:down") + Mouse("wheelup") + Key("control:up"))*Repeat(extra="n"),
+        "(zoom out|decrease font) [<n>]":
+            R(Key("control:down") + Mouse("wheeldown") + Key("control:up"))*Repeat(extra="n"),
 
         "colic":
             R(Key("control:down") + Mouse("left") + Key("control:up")),
@@ -75,11 +81,8 @@ class NavigationNon(MappingRule):
                 navigation.drop_keep_clipboard,
                 capitalization=0,
                 spacing=0)),
-        "drop text":R(Key("wca-v/20")),#uses microsoft powertoys
         "refresh":
             R(Key("c-r")),
-        "maxiwin":
-            R(Key("w-up")),
         "move window":
             R(Key("a-space, r, a-space, m")),
         "window (left | lease) [<n>]":
@@ -133,18 +136,23 @@ class NavigationNon(MappingRule):
             "tie": 2
         }),
         Choice("mouse_grid", {#3x3 grid for mouse
+            "top left edge": "0, 0",
             "(top left | northwest)": "0.17, 0.17",
             "(top | north)": "0.5, 0.17",
-            "far (top | north)": "0.5, 0.02",
+            "(top | north) edge": "0.5, 0.001",
             "(top right | northeast)": "0.83, 0.17",
+            "top right edge": "0.999, 0",
             "(mid left | west)": "0.17, 0.5",
+            "left edge": "0, 0.5",
             "(center|middle)": "0.5, 0.5",
             "(mid right | east)": "0.83, 0.5",
+            "right edge": "0.999, 0.5",
             "(bottom left | southwest)": "0.17, 0.83",
+            "bottom left edge": "0, 0.99",
             "(bottom | south)": "0.5, 0.83",
-            "far (bottom | south)": "0.5, 0.98",
+            "(bottom | south) edge ": "0.5, 0.999",
             "(bottom right | southeast)": "0.83, 0.83",
-            "far (bottom right | southeast)": "0.95, 0.95",
+            "(bottom right | southeast) edge": "0.99, 0.999",
         }),
 
         Choice("track_choice",{
@@ -157,6 +165,7 @@ class NavigationNon(MappingRule):
         "n": 1,
         "mim": "",
         "nnavi500": 1,
+        "direction": "down",
         "direction2": "",
         "time_in_seconds": 0.6,
         "dokick": 0,

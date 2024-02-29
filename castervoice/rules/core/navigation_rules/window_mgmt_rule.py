@@ -26,6 +26,7 @@ class WindowManagementRule(MappingRule):
         "search <search_tag>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s")),
         "search <search_tag> [for] <dict>":R(Key("alt:down,ctrl:down,ctrl:up,alt:up") + Pause("50") + Text("%(search_tag)s") + Key("tab")+ Text("%(dict)s")),
         #uses windows start menu
+        "start menu": R(Key("win")) ,
 
         #"search apps":R(Key("w-s/20")+ Text("apps: ")),
         #"search web":R(Key("w-s/20")+ Text("web: ")),
@@ -64,7 +65,13 @@ class WindowManagementRule(MappingRule):
             R(Key("ws-%(direction)s"))*Repeat(extra="n"),
         "(next | prior) window":
             R(Key("ca-tab, enter")),
-        "show": R(Key("a-tab")),
+        "show":
+            R(
+                Key("a-tab") +
+                Pause("50") +
+                Mouse("(0.5, 0.5)") +
+                Key("%(close_choice)s")
+            ),
         "show (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
         #change screen

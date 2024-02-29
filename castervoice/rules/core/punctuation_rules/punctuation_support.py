@@ -3,13 +3,14 @@ import dragonfly
 
 def double_text_punc_dict():
     return {
-        "quotes":                            "\"\"",
-        "single quotes":                       "''",
-        "tickris":                             "``",
-        "hug":                                 "()",
-        "brax":                                "[]",
-        "curly":                               "{}",
-        "angle":                               "<>",
+        #https://www.grammar-monster.com/glossary/brackets.htm
+        "quote":                            "\"\"",
+        "(single | thin) quote":               "''",
+        "tick":                             "``",
+        "round [brack]":                             "()",
+        "square [brack]":                                "[]",
+        "curly [brack]":                               "{}",
+        "angle [brack]":                               "<>",
     }
 
 
@@ -32,10 +33,10 @@ def text_punc_dict():
     return {
         "ace":                                                " ",
         "bang":                                             "!",
-        "(open quote | close quote)":                           "\"",
+        "chocky":                                            "\"",
         "hash tag":                                           "#",
-        "dollar sign":                                        "$",
-        "modulo | percent":                                   "%",
+        "dollar sign":                                          "$",
+        "(modulo | percent sign)":                              "%",
         "ampersand":                                          "&",
         "apostrophe | single quote | chicky":                 "'",
         "open " + _id["()"]:                                  "(",
@@ -44,10 +45,10 @@ def text_punc_dict():
         "plus":                                               "+",
         comma:                                                ",",
         "minus":                                              "-",
-        "point | dot":                                       ".",
+        "dot":                                       ".",
         "slash":                                              "/",
         "colon":                                             ":",
-        "semicolon":                                          ";",
+        "semicolon":                                             ";",
         "[is] less than | left " + _id["<>"]:                 "<",
         "[is] less [than] [or] equal [to]":                  "<=",
         "equals":                                             "=",
@@ -56,32 +57,17 @@ def text_punc_dict():
         "[is] greater [than] [or] equal [to]":               ">=",
         "questo":                                             "?",
         "(atty | at symbol)":                                 "@",
-        "open " + _id["[]"]:                                  "[",
+        "open" + _id["[]"]:                                  "[",
         "backslash":                                         "\\",
-        "close " + _id["[]"]:                                 "]",
+        "close" + _id["[]"]:                                 "]",
         "carrot":                                             "^",
         "underscore":                                         "_",
-        "ticky | ((open | close ) " + _id["``"] + " )":        "`",
+        "ticky | ((left | right | open | close) " + _id["``"] + " )":   "`",
         "open " + _id["{}"]:                                  "{",
-        "close " + _id["{}"]:                                 "}",
         "pipe (sim | symbol)":                                "|",
+        "close " + _id["{}"]:                                 "}",
         "tilde":                                              "~",
-    }
-
-def sentence_punc_dict():
-    # Insurers comma is recognized consistently with DNS/Natlink and
-    # if/else statement workaround engines that do not expect punctuation symbol as a command
-    if hasattr(dragonfly.get_current_engine(), "name"):
-        if (dragonfly.get_current_engine().name == 'natlink'):
-            comma = "(comma | ,)"
-        else:
-            comma = "comma"
-    else:
-        comma = "comma"
-
-    return {
-        comma:                                                ",",
-        "period":                                             ".",
-        "(exclamation point | !)":                                  "!",
-        "(question mark | ?)":                                     "?",
+        "pipe (sim | symbol)":                                "|",
+        "open " + _id["<>"]:                                  "<",
+        "close " + _id["<>"]:                                 ">",
     }

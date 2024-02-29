@@ -1,7 +1,3 @@
-'''
-Michael McMillen
-'''
-
 import itertools
 
 from castervoice.rules.ccr.standard import SymbolSpecs

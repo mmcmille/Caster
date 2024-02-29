@@ -21,7 +21,15 @@ class EdgeRule(MappingRule):
         #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
 
 
-        "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
+        #Google Sheets
+        #menu control
+        "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
+
+        "(next | right) sheet [<n>]":
+            R(Key("a-down/20"))*Repeat(extra="n"),
+        "(prior | left) sheet [<n>]":
+            R(Key("a-up/20"))*Repeat(extra="n"),
+
 
         #formative rules
         "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
@@ -29,9 +37,11 @@ class EdgeRule(MappingRule):
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
+        "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
+        
         #gmail,   ...outlook online rules
         #moved to folder
-        "move [(it|to)] [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
+        #"move (it|to) [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
         "flag it": R(Mouse("(246, 146), left")),
         "trash it": R(Key("s-3")), #R(Mouse("(443, 148), left")),#510, 158
         "send (it|email)": R(Key("tab:3/20,enter")),
@@ -101,7 +111,7 @@ class EdgeRule(MappingRule):
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll [<read_dir>] [<read_speed>]": #current mouse location
+        "scroll smooth [<read_dir>] [<read_speed>]": #current mouse location
             R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #right side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
@@ -222,8 +232,20 @@ class EdgeRule(MappingRule):
             "submit":"835, 1002",
             "continue":"747, 944",
     		}),
+        Choice("menu_title", {
+			"file": "f",
+			"edit": "e",
+			"view": "v",
+			"insert": "i",
+            "format": "o",
+            "sheet": "s",
+            "data": "d",
+            "tools": "t",
+            "window": "w",
+			"help": "h",
+		}),
         Choice("key_rule", {
-            "caret browsing": "f7",
+            "switch mode": "f7",
             "next": "tab:2",
            #"drop text": "cs-v",
 
@@ -232,7 +254,13 @@ class EdgeRule(MappingRule):
            #google slides
            "grid view": "ca-1",
            #"canvas view": "csa-c",#Move to canvas	Ctrl + Alt + Shift + c
-
+           #Google Sheets Shortcuts
+           #https://support.google.com/docs/answer/181110?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cpc-shortcuts
+           "get column":"c-space",
+           "get row":"s-space",
+           #"right sheet":"a-down",
+           #"left sheet":"a-up",
+           "delete row":"sa-e/20,d/20,d",
         }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}

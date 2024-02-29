@@ -70,23 +70,23 @@ class Navigation(MergeRule):
 #        "fill <target>":
 #            R(Key("escape, escape, end"), show=False) +
 #            AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line)))],
-#        "jump in":
-#            AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
-#                               time_in_seconds=0.1,
-#                               repetitions=50),
-#        "jump out":
-#            AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
-#                               time_in_seconds=0.1,
-#                               repetitions=50),
-#        "jump back":
-#            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-#                               time_in_seconds=0.1,
-#                               repetitions=50),
-#        "jump back in":
-#            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-#                               finisher=Key("right"),
-#                               time_in_seconds=0.1,
-#                               repetitions=50),
+        "jump in":
+            AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
+                               time_in_seconds=0.01,
+                               repetitions=50),
+        "jump out":
+            AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
+                               time_in_seconds=0.1,
+                               repetitions=50),
+        "jump back":
+            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+                               time_in_seconds=0.1,
+                               repetitions=50),
+        "jump back in":
+            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+                               finisher=Key("right"),
+                               time_in_seconds=0.1,
+                               repetitions=50),
 
         # keyboard shortcuts
         "ignore body":
@@ -150,6 +150,7 @@ class Navigation(MergeRule):
             R(Function(textformat.clear_text_format)),
         "peek [<big>] format":
             R(Function(textformat.peek_text_format)),
+
         "(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)] <textnv> [brunt]":
             R(Function(textformat.master_format_text)+Text(" ")),
         "[<big>] format <textnv>":
@@ -163,11 +164,11 @@ class Navigation(MergeRule):
               rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
-     "(kick| ah ) [<nnavi3>]":
+        "(doot | kick ) [<nnavi3>]":
             R(Function(navigation.left_click))*Repeat(extra="nnavi3"),
-        "psychic":
+        "(show menu | psychic)":
             R(Function(navigation.right_click)),
-        "(kick double|double tap)":
+        "(double tap)":
             R(Function(navigation.left_click)*Repeat(2)),
         "(squat| grab it| hold it )":
             R(Function(navigation.left_down)),
@@ -175,10 +176,11 @@ class Navigation(MergeRule):
             R(Function(navigation.left_up)),
 
         # special keystroke commands
-        #"(lease wally | latch) [<nnavi10>]":
-        #    R(Key("home:%(nnavi10)s")),
-        #"(ross wally | ratch) [<nnavi10>]":
-        #    R(Key("end:%(nnavi10)s")),
+        "shave right [<nnavi50>]": R(Key("s-right:%(nnavi50)s, backspace")),
+        "(lease wally | latch | back line) [<nnavi10>]":
+            R(Key("home:%(nnavi10)s")),
+        "(ross wally | ratch | jump line) [<nnavi10>]":
+            R(Key("end:%(nnavi10)s")),
         #"sauce wally [<nnavi10>]":
         #    R(Key("c-home:%(nnavi10)s")),
         #"dunce wally [<nnavi10>]":

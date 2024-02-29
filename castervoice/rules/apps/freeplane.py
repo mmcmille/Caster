@@ -77,7 +77,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"edit": "end",
 			"edit dialogue": "a-enter",
 			"title it":"ca-c",
-			"(capitalize| cap) it":"as-up",
+			"(capitalize| cap) it":"ca-up",
 
 			#nodes
 			"(insert|big bro)": "s-enter",
