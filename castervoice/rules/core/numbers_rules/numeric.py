@@ -18,15 +18,14 @@ class Numbers(MergeRule):
     pronunciation = "numbers"
     mapping = {
 
-        "word number <wn>":
-            R(Function(word_number, extra="wn")),
+        #"word <wn>":
+        #    R(Function(word_number, extra="wn")),
         #"[<long>] numb <wnKK>": R(Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
         #simplified numbers
-        "numb <wnKK>": R(Function(numbers2, extra="wnKK")),
-        "numb zero <wnKK>": R(Text("0") + Function(numbers2, extra="wnKK")),
-        "numb zero zero <wnKK>": R(Text("00") + Function(numbers2, extra="wnKK")),
-        #"zero <wnKK>": R(Text("0") + Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
-        #"oh": R(Text("0")),
+        "number <wnKK>": R(Function(numbers2, extra="wnKK")),
+        "zero <wnKK>": R(Text("0") + Function(numbers2, extra="wnKK")),
+        "zero zero <wnKK>": R(Text("00") + Function(numbers2, extra="wnKK")),
+
     }
 
     extras = [

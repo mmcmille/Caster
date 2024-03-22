@@ -66,8 +66,6 @@ class SQL(MergeRule):
             R(Text("LIKE '%%'") + Key("left/5:2")),
         "union":
             R(Text("UNION ")),
-        "as":
-            R(Text(" AS ")),
         "is null":
             R(Text(" IS NULL ")),
         "is not null":
@@ -81,6 +79,8 @@ class SQL(MergeRule):
             R(Text(" COUNT() ") + Key("left/5:2")),
         "fun average":
             R(Text(" AVG() ") + Key("left/5:2")),
+        "fun some":
+            R(Text(" SUM() ") + Key("left/5:2")),
         "over partition by":
             R(Text(" OVER (PARTITION BY ) ") + Key("left/5:2")),
     }
@@ -88,6 +88,7 @@ class SQL(MergeRule):
     extras = [
         Dictation("dict"),
         Choice("sql_strings", {
+            "as": "AS ",
             "select":" SELECT ",
             "distinct":"DISTINCT ",
             "(all | every)":"* ",
@@ -95,7 +96,9 @@ class SQL(MergeRule):
             "where":" WHERE ",
             "use":"USE ",
             "not":"NOT ",
+            "limit":"LIMIT  ",
             "and":"AND ",
+            "with":"WITH ",
             "when":"WHEN ",
             "then":"THEN ",
             "else":"ELSE ",

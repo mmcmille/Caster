@@ -71,14 +71,19 @@ class TextManipulation(MergeRule):
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
         # PROBLEM: sometimes Dragon thinks the variables are part of dictation.
 
+        # move cursor
+        "back [<n>]": R(Key("c-left:%(n)s/10", use_hardware=True)),
+        "jump [<n>]": R(Key("c-right:%(n)s/10")),
+
         #select text
-        "get <direction> [<n>]": #defaults to left
+
+        "(hold | get) <direction> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
-        "get <direction> <direction2> [<n>]": #defaults to left
+        "(hold | get) <direction> <direction2> [<n>]": #defaults to left
             R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
-        "get line [<number_of_lines_to_get>]":#selects line and additional number of lines to get
+        "(hold | get) line [<number_of_lines_to_get>]":#selects line and additional number of lines to get
             R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5")),
-        "get line <line_dir>":#selects everything to the left or right of the cursor on the current line 
+        "(hold | get) <line_dir> line":#selects everything to the left or right of the cursor on the current line
             R(Key("s-%(line_dir)s/5")),
 
 
@@ -132,11 +137,7 @@ class TextManipulation(MergeRule):
                        dict(character="phrase"), dictation_versus_character="character"),
               rdescript="Text Manipulation: delete until chosen character"),
 
-        # move cursor
-        "back [<n>]": R(Key("c-left:%(n)s/10", use_hardware=True)),
-        "jump [<n>]": R(Key("c-right:%(n)s/10")),
 
-        #to do get line n
 
         #"move <direction> [<number_of_lines_to_search>] [<before_after>] [<occurrence_number>] <dictation>":
         #    R(Function(text_manipulation_support.move_until_phrase,
@@ -226,8 +227,8 @@ class TextManipulation(MergeRule):
             "down": "down",
         }),
         Choice("line_dir", {
-                "left": "home",
-                "right": "end",
+                "(left|back)": "home",
+                "(right|jump)": "end",
         }),
         Choice("before_after", {
             "before": "before",
@@ -252,8 +253,6 @@ class TextManipulation(MergeRule):
             "tenth": 10,
         }),
         Choice("key_rule", {
-            "(select all|get everything)": "c-a",
-            "select through end": "cs-end",
             "bold text": "c-b",
             "underline text": "c-u",
             "italic text": "c-i",
@@ -264,14 +263,17 @@ class TextManipulation(MergeRule):
             "new line": "end,enter",
             #clears text
             "clear line": "end, s-home, backspace",
-            "strike line": "end, s-up, s-end, backspace",
+            "strike line": "home:2/10, s-end/10, backspace:2",
             "clear page": "c-a, backspace",
             #copying
             #added release modifiers to work with "select"
-            "copy [it|this]": "c-c, shift:up, ctrl:up",
-            "get word": "c-left, cs-right, c-c",
+            "copy ": "c-c",
+            "copy (word|it|this)": "c-left, cs-right, c-c",
+            "copy (word|it|this) over": "c-left, cs-right, c-c/20, a-tab",
             "copy over": "c-c/20, a-tab",
-            "cut [it|this]": "c-x, shift:up, ctrl:up",
+            "copy (page|everything)": "c-a/10, c-c",
+            "copy (through|to) end": "cs-end/10, c-c",
+            "cut [it|this]": "c-x",
             "drop it": "c-v",
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
             "transfer page": "c-a, c-c/20, a-tab",

@@ -56,7 +56,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"last": "a-left",
 			"next": "a-right",
 			"(jump in|isolate)":"s-escape",
-			"(jump out|go back)":"escape",
+			"jump out":"c-home",
 
 			"next":"enter,enter",
 
@@ -66,7 +66,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"outline view": "cs-o",
 			"edit styles": "c-f11",
 			# filter
-			"find | search": "cs-j",
+			"search": "cs-j",
 			"filter": "c-f",
 			"clear filter": "ca-f",
 

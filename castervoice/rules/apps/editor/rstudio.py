@@ -9,10 +9,18 @@ from castervoice.lib.merge.state.short import R
 from castervoice.lib.temporary import Store, Retrieve
 
 
-class RStudioRule(MappingRule):
+class RStudioRule(MappingRule): #R Studio
     mapping = {
+    #menu control
+    "<menu_title> menu": R(Key("alt/10, right:%(menu_title)s/20, down")),
+
+
+    #generic key rule
+    "<key_rule>": R(Key("%(key_rule)s")),
+
+
     "new file":
-        R(Key("cs-n")),
+        R(Key("cs-n")), # keyboard shortcut isn't working for some reason within editor
     "open file":
         R(Key("c-o")),
     "open recent project":
@@ -76,6 +84,23 @@ class RStudioRule(MappingRule):
         ShortIntegerRef("ln1", 1, 10000),
         ShortIntegerRef("ln2", 1, 10000),
         Choice("action", navigation.actions),
+        Choice("menu_title", {
+			"file": 0,
+			"edit": 1,
+            "code": 2,
+            "view": 3,
+			"plots": 4,
+            "session": 5,
+            "build": 6,
+            "debug": 7,
+            "profile": 8,
+            "tools": 9,
+			"help": 10,
+		}),
+        Choice("key_rule", {
+            "move down": "a-down",
+            "move up": "a-up",
+        }),
     ]
     defaults = {"ln2": ""}
 

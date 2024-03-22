@@ -61,7 +61,7 @@ class NavigationNon(MappingRule):
             R(Mouse("(%(mouse_grid)s)") + Function(navigation.left_down)),
         "scroll [<direction>] [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),
-        "scroll [<direction>] page [<time_in_seconds>] ":
+        "scroll page [<direction>] [<time_in_seconds>] ":
             R(AsynchronousAction(
                 [L(S(["cancel"], Function(navigation.wheel_scroll, nnavi500=1)))],
                 repetitions=1000,

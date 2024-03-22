@@ -41,14 +41,11 @@ class HomeWindowManagementRule(MappingRule):
         #"taskbar <n>": R(Key("w-%(n)s")),
 
         #transfers clipboard to Windows number , 1-10
-        "transfer <app_n_key>":
+        "copy <app_n_key>":
             R(
-                Key("cw-%(app_n_key)s") +
-                Pause("50") +
-                Key("c-v") +
-                Pause("50") +
-                #Mouse("(0.5, 0.5)") +
-                Key("a-tab")
+                Key("c-c") +
+                Key("cw-%(app_n_key)s")
+                #Mouse("(0.5, 0.5)")
             ),
 
     }
@@ -67,7 +64,7 @@ class HomeWindowManagementRule(MappingRule):
             "(4|files)": 4,
             "(5|spreadsheet|Calc)": 5,
             "(6|notes|one note)": 6,
-            "7": 7,
+            "(7|timer)": 7,
             "(8)": 8,
             "(9|map)": 9,
             "10": 0,

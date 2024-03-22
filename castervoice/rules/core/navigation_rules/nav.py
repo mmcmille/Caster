@@ -70,19 +70,19 @@ class Navigation(MergeRule):
 #        "fill <target>":
 #            R(Key("escape, escape, end"), show=False) +
 #            AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line)))],
-        "jump in":
+        "go in":
             AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
                                time_in_seconds=0.01,
                                repetitions=50),
-        "jump out":
+        "go out":
             AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
                                time_in_seconds=0.1,
                                repetitions=50),
-        "jump back":
+        "go back":
             AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
                                time_in_seconds=0.1,
                                repetitions=50),
-        "jump back in":
+        "go back in":
             AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
                                finisher=Key("right"),
                                time_in_seconds=0.1,
@@ -164,18 +164,20 @@ class Navigation(MergeRule):
               rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
-        "(doot | kick ) [<nnavi3>]":
+        "(here | kick ) [<nnavi3>]":
             R(Function(navigation.left_click))*Repeat(extra="nnavi3"),
-        "(show menu | psychic)":
+        "(menu here |here menu| psychic)":
             R(Function(navigation.right_click)),
         "(double tap)":
             R(Function(navigation.left_click)*Repeat(2)),
-        "(squat| grab it| hold it )":
+        "hold (it|this|here)":
             R(Function(navigation.left_down)),
-        "(bench|release [it])":
+        "(release [(it|this)])":
             R(Function(navigation.left_up)),
 
         # special keystroke commands
+        #"next line": R(Key("backspace, enter")),
+        #"go": R(Key("backspace, c-right")),
         "shave right [<nnavi50>]": R(Key("s-right:%(nnavi50)s, backspace")),
         "(lease wally | latch | back line) [<nnavi10>]":
             R(Key("home:%(nnavi10)s")),

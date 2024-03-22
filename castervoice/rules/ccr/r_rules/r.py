@@ -85,12 +85,16 @@ class Rlang(MergeRule):
             R(Text(".R")),
         "see as vee":
             R(Text("csv")),
+        "pipe":
+            R(Key("s-5") + Text(">") + Key("s-5") + Key("enter")),
 
 
         "tidy verse":
             R(Text("tidyverse")),
         "<function>":
             R(Text("%(function)s()") + Key("left")),
+        "function":
+            R(Key("backspace") + Text("()") + Key("left")),
         "graph <ggfun>":
             R(Text("%(ggfun)s()") + Key("left")),
         "pack <pacfun>":
@@ -120,7 +124,7 @@ class Rlang(MergeRule):
                 "install packages":"install.packages",
                 "is NA":"is.na",
                 "left join": "left_join",
-                "length": "length",
+                #"length": "length",
                 "library": "library",
                 "list": "list",
                 "(LM | linear model)": "lm",
@@ -142,6 +146,7 @@ class Rlang(MergeRule):
                 "trim white space": "trimws",
                 "ungroup": "ungroup",
                 "vector": "c",
+                "view": "view",
             }),
         Choice(
             "ggfun", {
