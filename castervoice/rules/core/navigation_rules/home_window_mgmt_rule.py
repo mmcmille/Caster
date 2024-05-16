@@ -11,7 +11,7 @@ from castervoice.lib.merge.state.short import R
 class HomeWindowManagementRule(MappingRule):
     mapping = {
         #command for Enable Viacam head tracking
-        "track": R(Key("scrolllock")),
+        "track": R(Key("f10")),
 
         #app switching via Windows number , 1-10
         "[<close_choice>] (show|open|window) <app_n_key>":
@@ -64,7 +64,7 @@ class HomeWindowManagementRule(MappingRule):
             "(4|files)": 4,
             "(5|spreadsheet|Calc)": 5,
             "(6|notes|one note)": 6,
-            "(7|timer)": 7,
+            "(7|timer|tracker)": 7,
             "(8)": 8,
             "(9|map)": 9,
             "10": 0,

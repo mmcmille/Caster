@@ -11,7 +11,7 @@ try:  # Try first loading from caster user directory
 except ImportError:
     from castervoice.rules.core.punctuation_rules import punctuation_support
 
-from castervoice.lib.actions import Key
+from castervoice.lib.actions import Key, Mouse
 
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.mergerule import MergeRule
@@ -32,7 +32,7 @@ class Keyboard(MappingRule):
             R(Key("%(modifier)s-%(button_dictionary_1)s"), rdescript="Keyboard: %(modifier)s %(button_dictionary_1)s"),
         "hold <modifier_key_name>":
             R(Function(lambda modifier_key_name: hold_keys(modifier_key_name),rdescript="Keyboard: Hold %(modifier_key_name)s")),
-        "release modifier keys": R(Key("shift:up, ctrl:up, alt:up, win:up"))
+        "release [modifier keys]": R(Key("shift:up, ctrl:up, alt:up, win:up")+ Mouse("left:up")),
         }
 
     extras = [
@@ -44,6 +44,7 @@ class Keyboard(MappingRule):
     defaults = {
         "modifier": "",
         "modifier_name": "",
+        "modifier_key_name": "shift",
         "button_dictionary_1": "",
     }
 

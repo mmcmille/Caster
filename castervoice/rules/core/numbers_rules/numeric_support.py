@@ -18,3 +18,6 @@ def word_number(wn):
 
 def numbers2(wnKK):
     Text(str(wnKK)).execute()
+
+def numbers3(wnKK2):
+    Text(str(wnKK2)).execute()

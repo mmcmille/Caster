@@ -38,7 +38,8 @@ class EdgeRule(MappingRule):
         "<key_rule>": R(Key("%(key_rule)s")),
 
         "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
-        
+        "tab here": R(Key("ctrl:down, shift:down") + Mouse("left") + Key("ctrl:up, shift:up")),
+
         #gmail,   ...outlook online rules
         #moved to folder
         #"move (it|to) [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
@@ -111,7 +112,7 @@ class EdgeRule(MappingRule):
             #Page scrolling
     	#"scroll [<read_dir>] [<read_speed>]":
     	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll smooth [<read_dir>] [<read_speed>]": #current mouse location
+        "scroll (here|this) [<read_dir>] [<read_speed>]": #current mouse location
             R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
         "scroll right [<read_dir>] [<read_speed>]": #right side
         R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
@@ -127,8 +128,6 @@ class EdgeRule(MappingRule):
             R(Key("f7")),
         "(show|hide) cursor":
             R(Key("")),
-        "[go] home [page]":
-            R(Key("a-home")),
         "[show] history":
             R(Key("c-h")),
         "address bar":
@@ -209,6 +208,7 @@ class EdgeRule(MappingRule):
                 "(ninth|last)":"9",
             }),
         Choice("voice_action", {
+                "go": "",
                 "click on": ":c",
                 "tab [on]": ":t",
                 "(next | page)": ":b",#tab behind
@@ -246,11 +246,14 @@ class EdgeRule(MappingRule):
 		}),
         Choice("key_rule", {
             "switch mode": "f7",
-            "next": "tab:2",
+            "next": "tab:1",
            #"drop text": "cs-v",
 
            "out": "a-left",
-           "edit": "f2",# spreadsheet
+
+           # spreadsheet
+           "edit": "f2",
+           "drop date": "c-semicolon",
            #google slides
            "grid view": "ca-1",
            #"canvas view": "csa-c",#Move to canvas	Ctrl + Alt + Shift + c

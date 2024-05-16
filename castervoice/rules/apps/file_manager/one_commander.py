@@ -3,7 +3,7 @@ Michael McMillen
 '''
 
 
-from dragonfly import Repeat, MappingRule, Choice, Pause, ShortIntegerRef
+from dragonfly import Repeat, MappingRule, Choice, Pause, ShortIntegerRef, Dictation
 from castervoice.lib.actions import Key, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
@@ -12,16 +12,19 @@ from castervoice.lib.merge.state.short import R
 class OneCommanderRule(MappingRule):
     mapping = {
         #generic key rule
+
         "<key_rule>": R(Key("%(key_rule)s/10")),
 
         "rename <new_name>": R(Key('f2/20, %(new_name)s, enter')),
         "out [<n>]": R(Key('a-up/20') * Repeat(extra='n')),
         "search text": R(Key("a-f7") + Pause("100") + Key("tab/10") * Repeat(extra=5)  + Key("space")),
         #"open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
+        "<dict>": R(Text("%(dict)s")),
     }
     extras = [
         ShortIntegerRef("n", 1, 100),
         ShortIntegerRef("m", 1, 10),
+        Dictation("dict"),
         Choice("new_name", {
 			"Q": "q.csv",
 		}),
@@ -35,9 +38,9 @@ class OneCommanderRule(MappingRule):
             "extract [all]": "escape, apps,t,enter",
             "Favorites": "c-d",
             "last": "a-left",
-            "link": "cs-c",
+            "link": "cs-c, a-tab",
             "get filename": 'cs-n/20, a-tab',
-            "get path": "cs-c",
+            "get path": "cs-c, a-tab",
             "find [in] files": 'a-f7',
             "search": "a-f7",
             "properties": "apps,up,enter",
@@ -56,6 +59,7 @@ class OneCommanderRule(MappingRule):
             "sort by size": 'c-f6',
             "file filter": 'c-f12',
             "new tab": 'c-t',
+            "new folder": "cs-n",
             "rename": 'f2',
             "multi rename": 'c-m',
             "display thumbnails": 'cs-f1',
@@ -65,7 +69,10 @@ class OneCommanderRule(MappingRule):
 		}),
 
     ]
-    defaults = {"n": 1, "m":"", "nth": ""}
+    defaults = {"n": 1, "m":"",
+        "nth": "",
+        "dict": "",
+    }
 
 
 def get_rule():

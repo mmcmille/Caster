@@ -17,8 +17,9 @@ class Punctuation(MergeRule):
     pronunciation = "punctuation"
 
     mapping = {
-        "[<long>] <text_punc> [<npunc>]":
-            R(Text("%(long)s" + "%(text_punc)s" + "%(long)s"))*Repeat(extra="npunc"),
+        #removed repetition to deal with punctuation working with numbers
+        "[<long>] <text_punc>": # [<npunc>]":
+            R(Text("%(long)s" + "%(text_punc)s" + "%(long)s")), #*Repeat(extra="npunc"),
         # For some reason, this one doesn't work through the other function
         "[<long>] backslash [<npunc>]":
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),

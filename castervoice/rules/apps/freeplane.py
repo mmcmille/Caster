@@ -50,8 +50,9 @@ class FreeplaneRule(MappingRule):#free plane
 		}),
 		Choice("key_rule", {
 			"save all": "a-s",
-			"copy (node|single)": "cs-c",
-			"copy [node] ID": "cs-i",
+			"(copy|get) (node|single)": "cs-c",
+			"(copy|get) [node] ID": "cs-i",
+			"(copy|get) [node] (URL|address)": "cs-u",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -60,7 +61,7 @@ class FreeplaneRule(MappingRule):#free plane
 
 			"next":"enter,enter",
 
-			"fold [it]": "space",
+			"fold [it]": "right",
 			"(fold|collapse) all": "a-home",
 			"unfold all": "a-end",
 			"outline view": "cs-o",
@@ -77,8 +78,8 @@ class FreeplaneRule(MappingRule):#free plane
 			"edit": "end",
 			"edit dialogue": "a-enter",
 			"title it":"ca-c",
-			"(capitalize| cap) it":"ca-up",
-
+			"(capitalize| cap) this":"ca-up",
+			"(all caps|title) this":"ca-c",
 			#nodes
 			"(insert|big bro)": "s-enter",
 			"(child|kid)": "tab",
@@ -94,6 +95,8 @@ class FreeplaneRule(MappingRule):#free plane
 			"info icon ": "ca-i",
 			"school":"",
 			"remove icons": "cs-d",
+			"unchecked": "c-1",
+			"checked": "c-2",
 
 		}),
 	]

@@ -9,11 +9,14 @@ from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib.merge.state.short import R
 
-
+#SQL and MySQL Workbench
 class SQL(MergeRule):
     pronunciation = "sequel"
 
     mapping = {
+
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s")),
 
         "string <dict>": R(Text("\'") + Text("%(dict)s") + Text("\' ")),
         "<dict>": R(Text("%(dict)s")),
@@ -103,6 +106,10 @@ class SQL(MergeRule):
             "then":"THEN ",
             "else":"ELSE ",
             "null":"NULL ",
+            "comment":"-- ",
+        }),
+        Choice("key_rule", {
+            "run line": "c-enter",
         }),
     ]
     defaults = {

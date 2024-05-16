@@ -182,6 +182,8 @@ class SpreadsheetsRule(MappingRule):
         	"sort up": "a-down/40, up/20,up/20,enter",
             "fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
+            #formatting
+            "format cells": "c-1",
 
         }),
     ]

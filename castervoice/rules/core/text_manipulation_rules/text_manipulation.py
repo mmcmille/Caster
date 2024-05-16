@@ -76,22 +76,32 @@ class TextManipulation(MergeRule):
         "jump [<n>]": R(Key("c-right:%(n)s/10")),
 
         #select text
+        "get (page|everything)": R(Key("c-a/5")),
 
-        "(hold | get) <direction> [<n>]": #defaults to left
-            R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
-        "(hold | get) <direction> <direction2> [<n>]": #defaults to left
-            R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
-        "(hold | get) line [<number_of_lines_to_get>]":#selects line and additional number of lines to get
-            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5")),
-        "(hold | get) <line_dir> line":#selects everything to the left or right of the cursor on the current line
+        #"these <number_of_lines_to_get> lines up":#selects line and additional number of lines above
+        #    R(Key("end, s-home, s-up:%(number_of_lines_to_get)s/5, s-home")),
+
+
+        "get line":#selects line
+            R(Key("home, shift:down/5, end/5, shift:up")),
+        "get <n> lines":#selects number of lines below
+            #R(Key("home/5, s-down:%(number_of_lines_to_get)s/5, s-end/5")),
+            R(Key("home/5") +  Key("s-down/5")*Repeat(extra="n")),
+        "get <line_dir>":#selects everything to the left or right of the cursor on the current line
             R(Key("s-%(line_dir)s/5")),
 
+        #selects words
+        "get word": R(Key("c-left/5, cs-right/5")),
+        "get <direction> <n>": #selects n words to the left or right, defaults to left
+            R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
+        "get <direction> <direction2> [<n>]": #selects n words to the two directions, defaults to left
+            R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
 
 
-        "copy line [<number_of_lines_to_get>]":
-            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-c")),
-        "cut line [<number_of_lines_to_get>]":
-            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-x")),
+        #"copy line [<number_of_lines_to_get>]":
+        #    R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-c")),
+        #"cut line [<number_of_lines_to_get>]":
+        #    R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-x")),
         "snag [<n>]": #char
             R(Key("s-left:%(n)s")),
         "snag right [<n>]":
@@ -113,7 +123,7 @@ class TextManipulation(MergeRule):
 
 
         # remove text or character
-        "clear <line_dir>": R(Key("s-%(line_dir)s, backspace")),
+        "clear <line_dir>": R(Key("s-%(line_dir)s/5, backspace")),
         "strike [<direction>] [<n>]": #defaults to left, say right to strike right
             R(Key("cs-%(direction)s/1")*Repeat(extra="n") + Key("backspace")),
 
@@ -253,28 +263,27 @@ class TextManipulation(MergeRule):
             "tenth": 10,
         }),
         Choice("key_rule", {
-            "bold text": "c-b",
-            "underline text": "c-u",
-            "italic text": "c-i",
+            # this refers to what is selected
+            # this (verb), select then act, verb this: act on current selection
+            "bold this": "c-b",
+            "underline this": "c-u",
+            "italic this": "c-i",
+
             #line commands
-            #see nav.py
-            #"back line":"home",
-        	#"jump line": "end",
             "new line": "end,enter",
             #clears text
-            "clear line": "end, s-home, backspace",
-            "strike line": "home:2/10, s-end/10, backspace:2",
-            "clear page": "c-a, backspace",
+            "clear line": "end/5, s-home/5, backspace",
+            "strike line": "home:2/5, s-end/5, backspace:2",
             #copying
             #added release modifiers to work with "select"
-            "copy ": "c-c",
-            "copy (word|it|this)": "c-left, cs-right, c-c",
-            "copy (word|it|this) over": "c-left, cs-right, c-c/20, a-tab",
-            "copy over": "c-c/20, a-tab",
+            "copy [this] ": "c-c",
+            "copy [this] over": "c-c/20, a-tab",
             "copy (page|everything)": "c-a/10, c-c",
             "copy (through|to) end": "cs-end/10, c-c",
-            "cut [it|this]": "c-x",
+            "cut [this]": "c-x",
+            "cut line":"end/20, s-home/20, c-x",
             "drop it": "c-v",
+            "copy line":"end/20, s-home/20, c-c",
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
             "transfer page": "c-a, c-c/20, a-tab",
             #Dragon

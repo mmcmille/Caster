@@ -157,22 +157,24 @@ class Navigation(MergeRule):
             R(Function(textformat.prior_text_format)),
         "<word_limit> [<big>] format <textnv>":
             R(Function(textformat.partial_format_text)),
-        "hug it <enclosure>":
+        "hug this <enclosure>":
             R(Function(text_utils.enclose_selected)),
-        "dredge [<nnavi10>]":
-            R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
-              rdescript="Core: switch to most recent Windows"),
+        #"dredge [<nnavi10>]": #replaced by "show"
+        #    R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
+        #      rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
-        "(here | kick ) [<nnavi3>]":
-            R(Function(navigation.left_click))*Repeat(extra="nnavi3"),
-        "(menu here |here menu| psychic)":
+        # two main points of control, cursor and pointer
+        "here [<nnavi3>]": #here refers to the location of the pointer
+            R(Function(navigation.left_click)+Pause("5"))*Repeat(extra="nnavi3"),
+        "menu here | here menu":
             R(Function(navigation.right_click)),
-        "(double tap)":
+        "double tap | here two":
             R(Function(navigation.left_click)*Repeat(2)),
-        "hold (it|this|here)":
+        "hold here | here hold":
             R(Function(navigation.left_down)),
-        "(release [(it|this)])":
+        #release implemented in keyboard rule, releases modifiers as well
+        "(release (it|this|here))":
             R(Function(navigation.left_up)),
 
         # special keystroke commands
@@ -245,7 +247,7 @@ class Navigation(MergeRule):
         Choice("capitalization", {
             "yell": 1,
             "title": 2,
-            "gerrish": 3,
+            "camel": 3,
             "sing": 4,
             "laws": 5,
             "say": 6,
