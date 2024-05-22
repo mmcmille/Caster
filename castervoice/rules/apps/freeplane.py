@@ -70,7 +70,8 @@ class FreeplaneRule(MappingRule):#free plane
 			"search": "cs-j",
 			"filter": "c-f",
 			"clear filter": "ca-f",
-
+			# tools menu
+			"preferences": "c-comma",
 			#split
 			"split dot": "ca-dot",
 			"split here": "a-s",
