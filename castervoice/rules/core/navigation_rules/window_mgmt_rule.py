@@ -13,7 +13,7 @@ from castervoice.lib.merge.state.short import R
 class WindowManagementRule(MappingRule):
     mapping = {
 
-        "draw": R(Key("csa-m")),#uses Fluent Search
+        "letters": R(Key("csa-m")),#uses Fluent Search
         "snippet": R(Key("ws-s")),#uses snipping tool
 
         #Window Manipulation
