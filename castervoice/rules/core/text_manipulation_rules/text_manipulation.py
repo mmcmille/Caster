@@ -267,7 +267,7 @@ class TextManipulation(MergeRule):
             # this (verb), select then act, verb this: act on current selection
             "bold this": "c-b",
             "underline this": "c-u",
-            "italic this": "c-i",
+            "(italic|italicize) this": "c-i",
 
             #line commands
             "new line": "end,enter",
@@ -293,21 +293,30 @@ class TextManipulation(MergeRule):
             "email":"mandmmcmillen@gmail.com",
             "school email":"mmcmillen@sbhsd.k12.ca.us",
             "Monterey email":"mmcmillen@csumb.edu",
-            "syngenta email":"michael.mcmillen@syngenta.com",
-            "syngenta password":"Q1w1e1rt",
             "Outlook email":"Michael.S.McMillen@Outlook.com",
             "my email":"mcmillen.michael.s@gmail.com",
-            "password":"Lucydog1",
+            "my password":"Lucydog1",
             "[full] name" : "Michael McMillen",
             "first name": "Michael",
             "last name": "McMillen",
             "birthdate": "07/30/1983",
             "address": "1561 Albright Dr.",
-            "(telephone|phone) [number]": "8315248552",
+            "my phone number": "8315248552",
+
             "Monica's (telephone|phone) [number]": "2096027457",
             "Monica's birthdate": "12/29/1987",
             "zipcode": "95023",
             "student id": "841703494",
+
+            # Syngenta
+            "syngenta email":"michael.mcmillen@syngenta.com",
+            "[syngenta] password":"Q1w1e1r2",#
+            "old password":"Syn.2024.Syn.b",
+            "employee ID": "8610841",
+            "username": "u581917",
+            "citrix username": "NAFTA\u581917",
+            "phone number": "8312062683",
+
 
         }),
     ]

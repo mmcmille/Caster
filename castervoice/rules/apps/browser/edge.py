@@ -57,7 +57,37 @@ class EdgeRule(MappingRule):
         "previous": R(Key("a-left")),
 	    "duplicate tab":
             R(Key("cs-k")),
-	    "(new window|win new)":
+
+       #Plug-ins
+       #Midnight
+       "midnight":
+            R(Key("as-m")),
+       #click by voice
+       "refresh (buttons | numbers)":
+            R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
+            R(Key("cs-space/80") + Text(":+") + Key("enter")),
+       "show (buttons | numbers)":
+            R(Key("cs-space/80") + Text(":+") + Key("enter")),
+       "hide (buttons | numbers)":
+            R(Key("cs-space/100") + Text(":-") + Key("enter")),
+        "<k>": R(Key("cs-space/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
+        "<voice_action> <k>":
+            R(Key("cs-space/20") + Text("".join(["%(k)s", "%(voice_action)s"])) + Pause("20") + Key("enter")),
+
+            #Page scrolling
+    	#"scroll [<read_dir>] [<read_speed>]":
+    	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        "scroll (here|this) [<read_dir>] [<read_speed>]": #current mouse location
+            R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        "scroll right [<read_dir>] [<read_speed>]": #right side
+        R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        "scroll left [<read_dir>] [<read_speed>]": #left side
+            R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
+        "skip":
+    		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
+    	"stop [it]":R(Key("escape")),
+
+        "(new window|win new)":
             R(Key("c-n")),
         "(new incognito window | incognito)":
             R(Key("cs-n")),
@@ -91,38 +121,6 @@ class EdgeRule(MappingRule):
             R(Key("c-g/20")) * Repeat(extra="n"),
         "find (back|prev|prior|previous) [match] [<n>]":
             R(Key("cs-g/20")) * Repeat(extra="n"),
-
-
-       #Plug-ins
-       #Midnight
-       "midnight":
-            R(Key("as-m")),
-       #click by voice
-       "refresh (buttons | numbers)":
-            R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
-            R(Key("cs-space/80") + Text(":+") + Key("enter")),
-       "show (buttons | numbers)":
-            R(Key("cs-space/80") + Text(":+") + Key("enter")),
-       "hide (buttons | numbers)":
-            R(Key("cs-space/100") + Text(":-") + Key("enter")),
-        "<k>": R(Key("cs-space/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
-        "<voice_action> <k>":
-            R(Key("cs-space/20") + Text("".join(["%(k)s", "%(voice_action)s"])) + Pause("20") + Key("enter")),
-
-            #Page scrolling
-    	#"scroll [<read_dir>] [<read_speed>]":
-    	#	R(Key("escape") + Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll (here|this) [<read_dir>] [<read_speed>]": #current mouse location
-            R(Mouse("".join(["middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll right [<read_dir>] [<read_speed>]": #right side
-        R(Mouse("".join(["(0.97, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "scroll left [<read_dir>] [<read_speed>]": #left side
-            R(Mouse("".join(["(12, 0.5), middle, <0, ","%(read_dir)s", "%(read_speed)s", ">"]))),
-        "skip":
-    		R(Mouse("<0,60>") + Pause("20") + Mouse("<0,-60>") ),
-    	"stop [it]":R(Key("escape")),
-
-
         # requires an extension in some browsers such as chrome
         "[toggle] caret browsing":
             R(Key("f7")),
@@ -176,8 +174,14 @@ class EdgeRule(MappingRule):
             R(Key("c-%(m)s%(nth)s")),
         "second last tab":
             R(Key("c-9, cs-tab")),
+
+
+
+
         "[toggle] bookmark bar":
             R(Key("cs-b")),
+
+
         "focus notification":
             R(Key("a-n")),
         "allow notification":

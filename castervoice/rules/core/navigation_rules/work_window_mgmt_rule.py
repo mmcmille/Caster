@@ -32,12 +32,7 @@ class WorkWindowManagementRule(MappingRule):
 	   # "open citrix":
         #    R(BringApp(r"C:\Program Files (x86)\Citrix\ICA Client\SelfServicePlugin\SelfService.exe")),
         #"open spirit": R(BringApp(r"C:\Program Files (
-        "drop username": R(Text("u581917")+ Key("tab")),
-        "drop citrix username": R(Text("NAFTA\u581917")+ Key("tab")),
 
-        #hotstrings
-        "password":R(Text("Q1w1e1r;")+ Pause("20") + Key("enter")),
-        "drop Syngenta email": R(Text("michael.mcmillen@syngenta.com")),
 
         #app switching via Windows number , 1-10
         "[<close_choice>] (show|open|window) <app_n_key>":

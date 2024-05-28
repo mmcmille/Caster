@@ -12,6 +12,9 @@ class HomeWindowManagementRule(MappingRule):
     mapping = {
         #command for Enable Viacam head tracking
         "track": R(Key("f10")),
+        "letters": R(Key("csa-m")),#puts letters on the screen for navigation using Fluent Search
+        "snippet": R(Key("ws-s")),#uses snipping tool
+
 
         #app switching via Windows number , 1-10
         "[<close_choice>] (show|open|window) <app_n_key>":
@@ -48,6 +51,12 @@ class HomeWindowManagementRule(MappingRule):
                 #Mouse("(0.5, 0.5)")
             ),
 
+        # "Open VPN":
+        #    R(BringApp("C:\Program Files\Palo Alto Networks\GlobalProtect\PanGPA.exe")),
+
+        "open process [explorer]":
+            R(BringApp(r"C:\Users\u581917\Apps Local\Utility\ProcessExplorer\procexp.exe")),
+
     }
 
     extras = [
@@ -65,9 +74,9 @@ class HomeWindowManagementRule(MappingRule):
             "(5|spreadsheet|Calc)": 5,
             "(6|notes|one note)": 6,
             "(7|timer|tracker)": 7,
-            "(8)": 8,
+            "(8|teams)": 8,
             "(9|map)": 9,
-            "10": 0,
+            "(10|log)": 0,
         }),
         Choice("app_n_11", {
             "11": 1,

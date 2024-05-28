@@ -136,6 +136,7 @@ class NavigationNon(MappingRule):
             "tie": 2
         }),
         Choice("mouse_grid", {#3x3 grid for mouse
+            "window": "60, 20",
             "top left edge": "0, 0",
             "top left": "0.17, 0.17",
             "top": "0.5, 0.17",

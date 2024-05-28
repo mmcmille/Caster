@@ -17,9 +17,9 @@ from castervoice.lib.merge.state.short import R
 
 class ExcelRule(MappingRule):
     mapping = {
-        "next sheet [<n>]":
+        "right sheet [<n>]":
             R(Key("c-pgdown"))*Repeat(extra='n'),
-        "(prior | previous) sheet [<n>]":
+        "left sheet [<n>]":
             R(Key("c-pgup"))*Repeat(extra='n'),
         "[select] cell <column_1> <row_1>":
             R(Key("c-g") + Text("%(column_1)s%(row_1)s") + Key("enter")),
@@ -99,4 +99,4 @@ class ExcelRule(MappingRule):
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return ExcelRule, RuleDetails(name="excel", executable="excel")
+    return ExcelRule, RuleDetails(name="excel original", executable="excel")

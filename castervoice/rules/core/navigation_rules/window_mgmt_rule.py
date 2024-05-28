@@ -13,9 +13,6 @@ from castervoice.lib.merge.state.short import R
 class WindowManagementRule(MappingRule):
     mapping = {
 
-        "letters": R(Key("csa-m")),#uses Fluent Search
-        "snippet": R(Key("ws-s")),#uses snipping tool
-
         #Window Manipulation
 
         #screen zooming by Windows magnifier, note zoom in is w-equals, not w-plus!

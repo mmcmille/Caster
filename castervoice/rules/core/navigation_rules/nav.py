@@ -55,7 +55,7 @@ class Navigation(MergeRule):
     mapping = {
         # "periodic" repeats whatever comes next at 1-second intervals until "terminate"
         # or "escape" (or your SymbolSpecs.CANCEL) is spoken or 100 tries occur
-        "(repeat | periodic)":
+        "(repeat | periodic) command ":
             ContextSeeker(forward=[
                 L(
                     S(["cancel"], lambda: None),

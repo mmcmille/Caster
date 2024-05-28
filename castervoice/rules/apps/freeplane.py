@@ -49,10 +49,15 @@ class FreeplaneRule(MappingRule):#free plane
 			"right": "right",
 		}),
 		Choice("key_rule", {
-			"save all": "a-s",
-			"(copy|get) (node|single)": "cs-c",
-			"(copy|get) [node] ID": "cs-i",
-			"(copy|get) [node] (URL|address)": "cs-u",
+
+			"okay":"a-o",
+			# "cancel":"a-c", # esc will also cancel
+			# menu items
+			"preferences": "c-comma",
+			"save all": "a-f, a",#"a-s",
+			"(copy|get) branch": "cs-c",
+			"(copy|get) [node] ID": "a-e,c,c",# "cs-i",
+			"get (link|address)": "a-e,c,o",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -64,39 +69,51 @@ class FreeplaneRule(MappingRule):#free plane
 			"fold [it]": "right",
 			"(fold|collapse) all": "a-home",
 			"unfold all": "a-end",
-			"outline view": "cs-o",
+			"outline view": "a-v,v,o", #"cs-o",
 			"edit styles": "c-f11",
+
 			# filter
 			"search": "cs-j",
 			"filter": "c-f",
-			"clear filter": "ca-f",
+			"clear filter": "a-i,n",#"ca-f",
 
 			#split
-			"split dot": "ca-dot",
 			"split here": "a-s",
+
+			"split dot": "ca-dot",
+			"split comma": "ca-comma",
+
 			#edit
 			"edit": "end",
 			"edit dialogue": "a-enter",
+			"edit note":"a-e,n,e",
 			"title it":"ca-c",
 			"(capitalize| cap) this":"ca-up",
 			"(all caps|title) this":"ca-c",
+
 			#nodes
 			"(insert|big bro)": "s-enter",
 			"(child|kid)": "tab",
 			"(paste|drop) clone": "c-d",
+			"summary node": "a-r,n,w",
+
 			#links
 			"open link": "c-enter",
 			"edit link": "c-k",
 			"get link": "a-e/20, c, c",
+
 			#view
 			"center ( view | node )": "ca-c",
-			"new (window|view)": "ca-v",
+			"new (window|view)": "a-v,e",#"ca-v",
+
 			#icons
 			"info icon ": "ca-i",
 			"school":"",
-			"remove icons": "cs-d",
-			"unchecked": "c-1",
-			"checked": "c-2",
+			"remove (icon | icons )": "a-r,o,r,e", #"cs-d",
+			"project icon": "a-r,o,i,o,l",
+			"task icon": "a-r,o,i,s,m",
+			"unchecked": "a-r,o,i,s,u",# "c-1",
+			"checked": "a-r,o,i,s,c",#"c-2",
 
 		}),
 	]

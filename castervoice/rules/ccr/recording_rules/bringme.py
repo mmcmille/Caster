@@ -132,7 +132,7 @@ class BringRule(BaseSelfModifyingRule):
             files = utilities.get_selected_files(folders=True)
             path = files[0] if files else None # or allow adding multiple folders
         else:
-            Key("a-d/5").execute()
+            Key("a-d/10").execute()
             fail, path = context.read_selected_without_altering_clipboard()
             if fail == 2:
                 # FIXME: A better solution would be to specify a number of retries and the time interval.
@@ -190,7 +190,7 @@ class BringRule(BaseSelfModifyingRule):
         Text(folder).execute()
     def _bring_folder(self, folder, app):
         if not app:
-            Popen([BringRule._explorer_path ,str(folder)])# uses one commander 
+            Popen([BringRule._explorer_path ,str(folder)])# uses one commander
             #Popen([BringRule._explorer_path ,str( '\''+folder+'\'')])# uses double commander instead
             """
             ContextAction(Function(lambda: Popen([BringRule._explorer_path, folder])), [

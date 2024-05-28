@@ -123,4 +123,4 @@ class SpiritRule(MappingRule):
 
 def get_rule():
 
-	return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell")
+	return SpiritRule, RuleDetails(name="spirit citrix", executable="wfica32")#"SPIRITShell")
