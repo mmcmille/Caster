@@ -62,7 +62,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"last": "a-left",
 			"next": "a-right",
 			"(jump in|isolate)":"s-escape",
-			"jump out":"c-home",
+			"jump out":"a-n,m",
 
 			"next":"enter,enter",
 
@@ -105,6 +105,7 @@ class FreeplaneRule(MappingRule):#free plane
 			#view
 			"center ( view | node )": "ca-c",
 			"new (window|view)": "a-v,e",#"ca-v",
+			"tool panel":"a-v,c,o",
 
 			#icons
 			"info icon ": "ca-i",
