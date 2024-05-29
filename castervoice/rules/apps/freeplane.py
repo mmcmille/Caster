@@ -49,7 +49,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"right": "right",
 		}),
 		Choice("key_rule", {
-
+			"over ": "a-tab",
 			"okay":"a-o",
 			# "cancel":"a-c", # esc will also cancel
 			# menu items
