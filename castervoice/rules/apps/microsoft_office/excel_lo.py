@@ -39,7 +39,7 @@ class ExcelRule(MappingRule):
         #temporary rule for transferring
         "transfer": R(Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter")),
         #menu control
-        "<menu_title> [menu]": R(Key("alt/20, %(menu_title)s/20")),
+        "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
 
 
     # whole number input, move to next cell automatically
@@ -50,9 +50,9 @@ class ExcelRule(MappingRule):
         # collect number direction, number= number of cells
         "collect <output_number_options>": R(Function(change_number_output_direction)),
 
-        "next sheet [<n>]":
+        "right sheet [<n>]":
                 R(Key("c-pgdown"))*Repeat(extra='n'),
-        "(prior | previous) sheet [<n>]":
+        "left sheet [<n>]":
                 R(Key("c-pgup"))*Repeat(extra='n'),
         "select <column_1> <row_1> through <column_2> <row_2>":
                 R(Key("c-g") + Text("%(column_1)s%(row_1)s:%(column_2)s%(row_2)s") + Key("enter")),
@@ -87,10 +87,9 @@ class ExcelRule(MappingRule):
             R(Key("c-up")),
         "beginning of row":
             R(Key("c-left")),
-        "insert stuff":
+        "insert":
             R(Key("cs-plus")),
-        "insert row":
-            R(Key("cs-plus/80,down")),
+            #LibreOffice R(Key("cs-plus/80,down:2/10,enter")),
         "insert cell [to the] left":
             R(Key("cs-plus, a-i, enter")),
         "insert cell above":
@@ -147,26 +146,29 @@ class ExcelRule(MappingRule):
 		}),
 
         Choice("key_rule", {
+
+            "(drop|insert) date":"c-semicolon",
             "edit": "f2",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "sa-right",
             "( search | find)": "c-f",
             "freeze top row": "a-v/40,c,r",
+            "merge":"a-h,m,m",
+            "unmerge":"a-h,m,u",
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
-            "add filter": "cs-l",
+            "(add|remove) filter": "cs-l",
         	"filter": "a-down/20",
-            "(clear filter| filter off)": "a-down/40, s-tab/20, c/20, enter",
+            "(clear filter| filter off)": "a-down/40, c/20, enter",
             #sorting
-            "sort down": "a-down/40, s-tab, space, enter",
-        	"sort up": "a-down/40, s-tab, space, down, enter",
+            "sort [down]": "a-down/40, s",#-tab, space, enter",
+        	"sort up": "a-down/40, o", #s-tab, space, down, enter",
             "fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
         	"save [file] as": "a-f/40, a/20",
 
             #pasting
-            "drop text": "csa-v",
             "drop special": "cs-v",
             "okay":"a-o, enter",
             #selecting
@@ -175,12 +177,17 @@ class ExcelRule(MappingRule):
             "delete column": "c-minus/40, a-c, a-o",
         	"delete row": "c-minus/40, a-r, a-o",
             "delete this": "c-minus",
-            "insert column": "apps/40, i/20, c, a-o",
+            "insert column": "c-space, apps, i/20", #c, a-o,
+            "insert row": "apps,i,enter/40,r,enter",
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 
             #Writer
             "check spelling": "f7",
+
+            #Menus
+            #Home
+            "clear (format|formats)":"a-h,e,f",
 
 
         }),

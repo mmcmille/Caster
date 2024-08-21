@@ -81,9 +81,9 @@ class BringRule(BaseSelfModifyingRule):
             Choice(
                 "launch_type", {
                     "[current] program": "program",
-                    "(website|page)": "website",
+                    "(website|page|site|webpage)": "website",
                     "folder": "folder",
-                    "( this |file )": "file",
+                    "(this|file)": "file",
                 }),
             Choice("app", {
                 "terminal": "terminal",

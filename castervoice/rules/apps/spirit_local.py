@@ -10,7 +10,7 @@ from castervoice.lib.merge.state.short import R
 from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
-class SpiritRule(MappingRule):
+class SpiritLocalRule(MappingRule):
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
@@ -27,6 +27,7 @@ class SpiritRule(MappingRule):
 		#row and column right-click menu commands
 		#uses menu, assthe es mouse is resting on row
 		"<rc_item>": R(Mouse("left/40,right/40") +Key("%(rc_item)s,enter")),
+
 
 
 
@@ -68,6 +69,7 @@ class SpiritRule(MappingRule):
 			"(material ID|mad ID)":"MAT:MATID",
 			"trial ID":"EXT:TRLID",
 			"line code":"MAT:LINE:LINCD",
+			"person code":"PERSN:CODE",
 
 
 		}),
@@ -76,7 +78,7 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "28,136",
+			"query": "28,86",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
@@ -162,5 +164,5 @@ class SpiritRule(MappingRule):
 
 def get_rule():
 
-	#return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
-	return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream
+	return SpiritLocalRule, RuleDetails(name="spirit local", executable="SPIRITShell") #Local version
+	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream

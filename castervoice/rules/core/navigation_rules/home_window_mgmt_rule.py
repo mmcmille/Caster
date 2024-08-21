@@ -10,10 +10,10 @@ from castervoice.lib.merge.state.short import R
 
 class HomeWindowManagementRule(MappingRule):
     mapping = {
-        #command for Enable Viacam head tracking
-        "track": R(Key("f10")),
-        "letters": R(Key("csa-m")),#puts letters on the screen for navigation using Fluent Search
-        "snippet": R(Key("ws-s")),#uses snipping tool
+        #temp rule for spirit upstream
+        "this": R(Mouse("left") + Pause("10") + Key("tab/10, space")),
+        #generic key rule
+		"<key_rule>": R(Key("%(key_rule)s/5")),
 
 
         #app switching via Windows number , 1-10
@@ -50,13 +50,6 @@ class HomeWindowManagementRule(MappingRule):
                 Key("cw-%(app_n_key)s")
                 #Mouse("(0.5, 0.5)")
             ),
-
-        # "Open VPN":
-        #    R(BringApp("C:\Program Files\Palo Alto Networks\GlobalProtect\PanGPA.exe")),
-
-        "open process [explorer]":
-            R(BringApp(r"C:\Users\u581917\Apps Local\Utility\ProcessExplorer\procexp.exe")),
-
     }
 
     extras = [
@@ -71,12 +64,12 @@ class HomeWindowManagementRule(MappingRule):
             "(2|email|outlook)": 2,
             "(3|commands)": 3,
             "(4|files)": 4,
-            "(5|spreadsheet|Calc)": 5,
-            "(6|notes|one note)": 6,
-            "(7|timer|tracker)": 7,
-            "(8|teams)": 8,
+            "(5|notes|one note)": 5,
+            "(6|Excel)": 6,
+            "(7|teams)": 7,
+            "(8|spirit)": 8,
             "(9|map)": 9,
-            "(10|log)": 0,
+            "(10)": 0,
         }),
         Choice("app_n_11", {
             "11": 1,
@@ -112,6 +105,17 @@ class HomeWindowManagementRule(MappingRule):
             "19": 910,
             "20": 957,
         }),
+        Choice("key_rule", {
+
+            "track": "f10", #command for Enable Viacam head tracking
+            "letters": "csa-m",#puts letters on the screen for navigation using Fluent Search
+            "snippet": "ws-s",#uses snipping tool
+            "show clipboard": "w-v",
+            #uses power toys
+            "get text": "ws-t",
+            "screen ruler":"ws-m",
+        }),
+
     ]
 
 

@@ -92,7 +92,7 @@ class TextManipulation(MergeRule):
 
         #selects words
         "get word": R(Key("c-left/5, cs-right/5")),
-        "get <direction> <n>": #selects n words to the left or right, defaults to left
+        "get <direction> [n]": #selects n words to the left or right, defaults to left
             R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
         "get <direction> <direction2> [<n>]": #selects n words to the two directions, defaults to left
             R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
@@ -300,22 +300,27 @@ class TextManipulation(MergeRule):
             "first name": "Michael",
             "last name": "McMillen",
             "birthdate": "07/30/1983",
-            "address": "1561 Albright Dr.",
+            "address": "1426 Chinqua Pine Dr.",
+            "Hollister address": "1561 Albright Dr.",
             "my phone number": "8315248552",
 
             "Monica's (telephone|phone) [number]": "2096027457",
             "Monica's birthdate": "12/29/1987",
-            "zipcode": "95023",
+            "zipcode": "27519",
+            "Hollister zipcode": "95023",
             "student id": "841703494",
 
             # Syngenta
+            "Michele's email":"michele.gardiner@syngenta.com",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "[syngenta] password":"Q1w1e1r2",#
+            "[syngenta] password":"Q1w1e1r3",#
             "old password":"Syn.2024.Syn.b",
             "employee ID": "8610841",
             "username": "u581917",
             "citrix username": "NAFTA\u581917",
             "phone number": "8312062683",
+            "production server": "USAEDWSPRRGP2",
+            "stage server":"USAEDWSPRRGS2",
 
 
         }),

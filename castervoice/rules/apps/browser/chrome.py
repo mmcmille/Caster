@@ -124,8 +124,6 @@ class ChromeRule(MappingRule):
         # requires an extension in some browsers such as chrome
         "[toggle] caret browsing":
             R(Key("f7")),
-        "[go] home [page]":
-            R(Key("a-home")),
         "[show] history":
             R(Key("c-h")),
         "address bar":
@@ -250,6 +248,7 @@ class ChromeRule(MappingRule):
         Choice("key_rule", {
             "switch mode": "f7",
             "next": "tab:1",
+            "restore tab": "cs-t",
            #"drop text": "cs-v",
 
            "out": "a-left",

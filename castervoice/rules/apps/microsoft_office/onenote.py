@@ -58,6 +58,7 @@ class OneNoteRule(MappingRule):
     extras = [
 		Choice("key_rule", {
 			"full (page|screen)": "f11",
+			"sidebar": "cs-g, space",
 			"new window": "c-m",
 			"new page": "c-n",
 			"drop text": "apps,t",
@@ -66,7 +67,9 @@ class OneNoteRule(MappingRule):
 			"checkbox": "c-1",
 			"number list": "c-slash",
 			"select branch": "cs-minus",
-			"clear formatting": "cs-n",
+			#Formatting
+			"(normal text|clear formatting)": "cs-n",
+
 		}),
 
 		ShortIntegerRef("n", 1, 50),

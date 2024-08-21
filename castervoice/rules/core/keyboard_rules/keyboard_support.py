@@ -76,7 +76,7 @@ class ButtonDict():
         self.button_dictionary.update({"(F{}".format(i) + " | function {})".format(i): "f{}".format(i)
                                        for i in range(1, 13)})
         self.button_dictionary.update({
-            "(tab | tabby)": "tab",
+            "(tab | tabby )": "tab",
             "(backspace | clear)": "backspace",
             "(delete | deli)": "del",
             "(enter | shock)": "enter",

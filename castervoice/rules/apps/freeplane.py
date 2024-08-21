@@ -17,7 +17,7 @@ from castervoice.lib.temporary import Store, Retrieve
 class FreeplaneRule(MappingRule):#free plane
 	mapping = {
 		#generic key rule
-		"<key_rule>": R(Key("%(key_rule)s/40")),
+		"<key_rule>": R(Key("%(key_rule)s/10")),
 		#menu control
 		"<menu_title> menu": R(Key("a-%(menu_title)s")),
 		#zoom
@@ -54,10 +54,10 @@ class FreeplaneRule(MappingRule):#free plane
 			# "cancel":"a-c", # esc will also cancel
 			# menu items
 			"preferences": "c-comma",
-			"save all": "a-f, a",#"a-s",
+			"save all": "a-f/10, a",#"a-s",
 			"(copy|get) branch": "cs-c",
-			"(copy|get) [node] ID": "a-e,c,c",# "cs-i",
-			"get (link|address)": "a-e,c,o",
+			"(copy|get) [node] ID": "a-e/10,c,c",# "cs-i",
+			"[get] (link|address)": "a-e/10,c,o",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -66,10 +66,10 @@ class FreeplaneRule(MappingRule):#free plane
 
 			"next":"enter,enter",
 
-			"fold [it]": "right",
+			"fold [it]": "space",
 			"(fold|collapse) all": "a-home",
 			"unfold all": "a-end",
-			"outline view": "a-v,v,o", #"cs-o",
+			"outline view": "a-v/10,v,o", #"cs-o",
 			"edit styles": "c-f11",
 
 			# filter
@@ -86,7 +86,7 @@ class FreeplaneRule(MappingRule):#free plane
 			#edit
 			"edit": "end",
 			"edit dialogue": "a-enter",
-			"edit note":"a-e,n,e",
+			"edit note":"a-e/10,n,e",
 			"title it":"ca-c",
 			"(capitalize| cap) this":"ca-up",
 			"(all caps|title) this":"ca-c",
@@ -95,26 +95,26 @@ class FreeplaneRule(MappingRule):#free plane
 			"(insert|big bro)": "s-enter",
 			"(child|kid)": "tab",
 			"(paste|drop) clone": "c-d",
-			"summary node": "a-r,n,w",
+			"summary node": "a-r/10,n,w",
 
 			#links
 			"open link": "c-enter",
 			"edit link": "c-k",
-			"get link": "a-e/20, c, c",
+			"get link": "a-e/10, c, c",
 
 			#view
 			"center ( view | node )": "ca-c",
-			"new (window|view)": "a-v,e",#"ca-v",
-			"tool panel":"a-v,c,o",
+			"new (window|view)": "a-v/10,e",#"ca-v",
+			"tool (panel|bar)":"a-v/10,c,o",
 
 			#icons
 			"info icon ": "ca-i",
 			"school":"",
-			"remove (icon | icons )": "a-r,o,r,e", #"cs-d",
-			"project icon": "a-r,o,i,o,l",
-			"task icon": "a-r,o,i,s,m",
-			"unchecked": "a-r,o,i,s,u",# "c-1",
+			"(clear|remove) (icon | icons )": "a-r/10,o,r,e", #"cs-d",
+			"project icon": "a-r/10,o,i,o,l",
+			"task icon": "a-r/10,o,i,s,m",
 			"checked": "a-r,o,i,s,c",#"c-2",
+			"unchecked": "a-r/10,o,i,s,u",# "c-1",
 
 		}),
 	]

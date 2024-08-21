@@ -2,9 +2,9 @@
 Michael McMillen
 '''
 
-from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
+from dragonfly import Function, Pause, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
 
-from castervoice.lib.actions import Key, Text
+from castervoice.lib.actions import Key, Text, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
@@ -36,8 +36,8 @@ class OutlookRule(MappingRule):
         # new message window
         "to field": R(Key("a-dot")),
         "c c field": R(Key("a-c")),
-        "subject [field]": R(Key("a-u")),
-        "subject <text>": R(Key("a-u") + Function(capitalize) + Key("tab")),
+        #"subject [field]": R(Key("a-u")),
+        #"subject <text>": R(Key("a-u") + Function(capitalize) + Key("tab")),
         "attach file": R(Key("n, a, f")),
         "add to dictionary": R(Key("s-f10/2, a")),
         "send email": R(Key("a-s")),  # be careful
@@ -96,18 +96,22 @@ class OutlookRule(MappingRule):
         "month view": R(Key("ca-4")),
 
         #message shortcuts
+        "(new window|read this)":R(Key("s-enter")),
         "flag (it|email)": R(Key("insert")),
-        "reply [<dict>]": R(Key("c-r") + Text("%(dict)s")),
-        "reply all [<dict>]": R(Key("cs-r") + Text("%(dict)s")),
+        "reply ": R(Key("c-r")),
+        "reply all ": R(Key("cs-r")),
         "forward": R(Key("c-f")),
         "Mark as read": R(Key("c-q")),
         "Mark as unread": R(Key("c-u")),
         "(folder | go to folder)": R(Key("c-y")),
         "move it": R(Key("cs-v")),
+        "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
+        "categorize [it]":R(Key("apps/50,down:8/5,right/5")),
+        #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),
         # navigation
-	    "open folder": R(Key("c-y")),
+        "open folder": R(Key("c-y")),
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
         "email [page]": R(Key("c-1")),
@@ -124,7 +128,7 @@ class OutlookRule(MappingRule):
         "next view": R(Key("a-right")),
 
         # misc
-        "[go] back": R(Key("a-left")),
+        "go back": R(Key("a-left")),
     }
     extras = [
         Dictation("dict"),

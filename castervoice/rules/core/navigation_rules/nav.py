@@ -215,7 +215,7 @@ class Navigation(MergeRule):
     tell_commands_dict = {"dock": ";", "doc": ";", "sink": "", "com": ",", "deck": ":"}
     tell_commands_dict.update(_tpd)
     button_dictionary_500_no_prefix_no_modifier = {
-        "tabby": "tab",
+        "(tabby|next)": "tab",
         "shave": "backspace",# shift:up, ctrl:up", #select mod
         "(delete | deli)": "del,  shift:up, ctrl:up",#select mod
         "done": "enter",
