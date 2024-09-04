@@ -22,13 +22,13 @@ class Numbers(MergeRule):
         #    R(Function(word_number, extra="wn")),
         #"[<long>] numb <wnKK>": R(Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
         #simplified numbers
-        "(numb|number) <wnKK>": R(Function(numbers2, extra="wnKK")),
+        "numb <wnKK>": R(Function(numbers2, extra="wnKK")),
         "point <wnKK2>":
             R(Text(".") + Function(numbers3, extra="wnKK2")),
         "[(numb|number)] <wnKK> point <wnKK2>":
             R(Function(numbers2, extra="wnKK") + Text(".") + Function(numbers3, extra="wnKK2")),
-        "zero <wnKK>": R(Text("0") + Function(numbers2, extra="wnKK")),
-        "zero zero <wnKK>": R(Text("00") + Function(numbers2, extra="wnKK")),
+        "[numb] zero <wnKK>": R(Text("0") + Function(numbers2, extra="wnKK")),
+        "[numb] zero zero <wnKK>": R(Text("00") + Function(numbers2, extra="wnKK")),
 
     }
 

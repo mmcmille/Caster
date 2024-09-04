@@ -23,11 +23,11 @@ class ExcelRule(MappingRule):
 
     def _number_output_direction():
         #print(LORule.number_output_mode)
-        return Key(LORule.number_output_mode).execute() #+Key("%(_input_mode)s"),
+        return Key(ExcelRule.number_output_mode).execute() #+Key("%(_input_mode)s"),
     # change the direction of number output, based on the Choice
     def change_number_output_direction(output_number_options):
-        LORule.number_output_mode = output_number_options #"down"
-        print(LORule.number_output_mode)
+        ExcelRule.number_output_mode = output_number_options #"down"
+        print(ExcelRule.number_output_mode)
 
 
     mapping = {
@@ -113,6 +113,8 @@ class ExcelRule(MappingRule):
         #dictation mode
         #"<dict> {weight=100}": R(Text("%(dict)s ")),
         "hi <name>": R(Text("Hi %(name)s,") + Key("enter")),
+        "<function> function": R(Text("%(function)s")),
+
     }
     extras = [
         alphabet_support.get_alphabet_choice("letter"),
@@ -149,6 +151,8 @@ class ExcelRule(MappingRule):
 
             "(drop|insert) date":"c-semicolon",
             "edit": "f2",
+            # View
+            "hide ribbon": "c-f1",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "sa-right",
@@ -198,6 +202,9 @@ class ExcelRule(MappingRule):
             "drew": "Drew",
             "yvette": "Yvette",
             "leo": "Leo",
+        }),
+        Choice("function", {
+            "join": "=TEXT_JOIN(\";\",TRUE,",
         }),
     ]
     defaults = {"n": 1, "dict": ""}

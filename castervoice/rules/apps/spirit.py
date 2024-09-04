@@ -14,6 +14,8 @@ class SpiritRule(MappingRule):
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
+		#show/hide columns: move item under mouse to display
+        "this": R(Mouse("left") + Pause("10") + Key("tab/10, space")),
 
 		# table and button navigation
 		"[open] <item>": R(Mouse("(%(item)s)/50, left")),
@@ -42,7 +44,7 @@ class SpiritRule(MappingRule):
 	extras = [
 		Choice("menu_title", { #press alt...
 			"file": "f",
-			"close frame": "f, enter",
+			"close (frame|grid)": "f, enter",
 			"logout": "f, up:2,enter",
 			"import": "f,down:2,right,enter",
 			"export": "f,down:3/40,right/40,enter",
@@ -68,6 +70,8 @@ class SpiritRule(MappingRule):
 			"(material ID|mad ID)":"MAT:MATID",
 			"trial ID":"EXT:TRLID",
 			"line code":"MAT:LINE:LINCD",
+
+			"login person code":"LOGIN:PERSN:CODE",
 
 
 		}),

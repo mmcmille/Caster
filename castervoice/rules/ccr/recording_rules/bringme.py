@@ -69,7 +69,7 @@ class BringRule(BaseSelfModifyingRule):
             "(open|show) <program>": R(Function(self._bring_program)),
             "(open|show) <website>": R(Function(self._bring_website)),
             "(open|show) <folder> [in <app>]": R(Function(self._bring_folder)),
-            "<folder> [folder]": R(Function(self._bring_folder_path)),
+            "(open|show) <folder> [folder]": R(Function(self._bring_folder_path)),
             "(open|show) <file>": R(Function(self._bring_file)),
             "(refresh|reload) opener": R(Function(self._load_and_refresh)),
             "(open|show) <launch_type> as <key>": R(Function(self._bring_add)),

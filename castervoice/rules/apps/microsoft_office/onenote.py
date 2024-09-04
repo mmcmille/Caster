@@ -69,6 +69,8 @@ class OneNoteRule(MappingRule):
 			"select branch": "cs-minus",
 			#Formatting
 			"(normal text|clear formatting)": "cs-n",
+			#OneMore
+			"navigator":"as-n",'s '
 
 		}),
 

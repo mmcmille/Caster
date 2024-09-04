@@ -62,7 +62,7 @@ class WindowManagementRule(MappingRule):
             R(Key("ws-%(direction)s"))*Repeat(extra="n"),
         "(next | prior) window":
             R(Key("ca-tab, enter")),
-        "show":
+        "switch":
             R(
                 Key("a-tab") +
                 Pause("50") +

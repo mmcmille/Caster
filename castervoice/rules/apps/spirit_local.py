@@ -14,8 +14,10 @@ class SpiritLocalRule(MappingRule):
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
+		#show/hide columns: move item under mouse to display
+        "this": R(Mouse("left") + Pause("10") + Key("tab/10, space")),
 
-		# table and button navigation
+		# table and button navigation, by mouse clicking
 		"[open] <item>": R(Mouse("(%(item)s)/50, left")),
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
@@ -43,7 +45,7 @@ class SpiritLocalRule(MappingRule):
 	extras = [
 		Choice("menu_title", { #press alt...
 			"file": "f",
-			"close frame": "f, enter",
+			"close (frame|grid)": "f, enter",
 			"logout": "f, up:2,enter",
 			"import": "f,down:2,right,enter",
 			"export": "f,down:3/40,right/40,enter",
@@ -66,10 +68,15 @@ class SpiritLocalRule(MappingRule):
 		Choice("spirit_trait", {
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
+			#Material
 			"(material ID|mad ID)":"MAT:MATID",
-			"trial ID":"EXT:TRLID",
-			"line code":"MAT:LINE:LINCD",
+			"Matt BE":"MAT:MMT:BEBID",
+			"Matt line code":"MAT:LINE:LINCD",
+			#Line
+			"line line code":"LINE:LINCD",
+
 			"person code":"PERSN:CODE",
+			"trial ID":"EXT:TRLID",
 
 
 		}),
@@ -145,7 +152,7 @@ class SpiritLocalRule(MappingRule):
 			#other commands
 			"(okay|OK)":"a-o",
 			"edit": "f2",
-			"refresh": "f5/20",
+			"refresh (grid|frame)": "f5",
 
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
