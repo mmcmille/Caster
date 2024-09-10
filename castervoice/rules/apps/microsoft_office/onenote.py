@@ -46,14 +46,6 @@ class OneNoteRule(MappingRule):
 	        R(Key("c-pgup/20"))*Repeat(extra="n"),
 
 
-
-	#swallow dictation to prevent unintentional edits
-	#"<dict>":
-	#	R(Function(editText)),
-	 #"edits on ":
-	#	R(Function(editOn)),
-	#"edits off":
-	#	R(Function(editOn)),
     }
     extras = [
 		Choice("key_rule", {
@@ -62,6 +54,7 @@ class OneNoteRule(MappingRule):
 			"new window": "c-m",
 			"new page": "c-n",
 			"drop text": "apps,t",
+			"drop date":"as-d",
 			"open link": "c-enter",
 			"edit link": "c-k",
 			"checkbox": "c-1",
@@ -70,7 +63,7 @@ class OneNoteRule(MappingRule):
 			#Formatting
 			"(normal text|clear formatting)": "cs-n",
 			#OneMore
-			"navigator":"as-n",'s '
+			"navigator":"as-n",
 
 		}),
 

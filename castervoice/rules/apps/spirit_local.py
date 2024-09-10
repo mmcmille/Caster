@@ -85,7 +85,7 @@ class SpiritLocalRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "28,86",
+			"query": "775,66",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
