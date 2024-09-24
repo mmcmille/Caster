@@ -157,7 +157,7 @@ class ExcelRule(MappingRule):
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "sa-right",
             "( search | find)": "c-f",
-            "freeze top row": "a-v/40,c,r",
+            "freeze top row": "a-w/20,f,r", #lo "a-v/40,c,r",
             "merge":"a-h,m,m",
             "unmerge":"a-h,m,u",
             # filtering
@@ -191,7 +191,7 @@ class ExcelRule(MappingRule):
 
             #Menus
             #Home
-            "clear (format|formats)":"a-h,e,f",
+            "clear (format|formats|formatting)":"a-h,e,f",
 
 
         }),

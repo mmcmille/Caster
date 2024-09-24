@@ -82,6 +82,8 @@ class HomeWindowManagementRule(MappingRule):
         "show (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
 
+        "show app (window | windows)":
+            R(Key("ca-tilde"))*Repeat(extra="n"),
         #"taskbar <n>": R(Key("w-%(n)s")),
         #switches to last displayed app
         "show":

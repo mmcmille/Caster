@@ -73,6 +73,10 @@ class SpiritRule(MappingRule):
 
 			"login person code":"LOGIN:PERSN:CODE",
 
+			#Traits
+			"trait code":"UDTRT:UDTCD",
+
+
 
 		}),
 		Choice("item", {
@@ -80,7 +84,7 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "28,136",
+			"query": "741,140",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",

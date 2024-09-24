@@ -65,7 +65,7 @@ class TextManipulation(MergeRule):
 
     mapping = {
         #generic key rule
-        "<key_rule>": R(Key("%(key_rule)s/40, shift:up, ctrl:up")),
+        "<key_rule>": R(Key("%(key_rule)s/10")),
         "drop <drop_strings>": R(Text("%(drop_strings)s")),
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
@@ -107,7 +107,7 @@ class TextManipulation(MergeRule):
         "snag right [<n>]":
             R(Key("s-right:%(n)s")),
 
-        "drop text":R(Key("wca-v/20")),#uses microsoft powertoys
+        "drop text":R(Key("wca-v/10")),#uses microsoft powertoys
 
 
     # replace text or character
@@ -316,7 +316,7 @@ class TextManipulation(MergeRule):
             "[syngenta] password":"Q1w1e1r3",#
             "old password":"Syn.2024.Syn.b",
             "employee ID": "8610841",
-            "username": "u581917",
+            "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",
             "phone number": "8312062683",
             "production server": "USAEDWSPRRGP2",

@@ -52,6 +52,7 @@ class OneNoteRule(MappingRule):
 			"full (page|screen)": "f11",
 			"sidebar": "cs-g, space",
 			"new window": "c-m",
+			"new docked window":"a-w/20,c",
 			"new page": "c-n",
 			"drop text": "apps,t",
 			"drop date":"as-d",

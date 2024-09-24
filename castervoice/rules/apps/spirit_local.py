@@ -77,6 +77,8 @@ class SpiritLocalRule(MappingRule):
 
 			"person code":"PERSN:CODE",
 			"trial ID":"EXT:TRLID",
+			#VH
+			"stable variety code":"VH:STBVC",
 
 
 		}),
@@ -131,7 +133,7 @@ class SpiritLocalRule(MappingRule):
 				#Favorites
 				"set default profile":"up:2/40,right/40,down/40",
 				"(new|save) profile":"up:2/40,right/40,up:2/40",
-				"create new grouping":"up:2/40,right/40,up/40",
+				"[create] new grouping":"up:2/40,right/40,up/40",
 
 				"(edit|add|remove|change) (columns|profile)":"up:4/40",
 

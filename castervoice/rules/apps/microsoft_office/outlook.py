@@ -16,6 +16,8 @@ def capitalize(text):
 
 class OutlookRule(MappingRule):
     mapping = {
+
+        "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
         # create new thing
         "new email": R(Key("c-n")),
         "new (appointment | event)": R(Key("sc-a")),
@@ -106,7 +108,7 @@ class OutlookRule(MappingRule):
         "(folder | go to folder)": R(Key("c-y")),
         "move it": R(Key("cs-v")),
         "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
-        "categorize [it]":R(Key("s-f10/30,down:5/5,right/5")),
+        "categorize [it]":R(Mouse("left") + Key("s-f10/30,down:5/5,right/5")),
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),
