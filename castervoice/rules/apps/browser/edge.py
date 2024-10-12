@@ -52,7 +52,7 @@ class EdgeRule(MappingRule):
             R(Key("a-c/50, a-tab")),
         "link <m>": R(Key("a-c/50, w-%(m)s")),
         "link map": R(Key("a-c/50, w-9/1")),#assumes map is output window 9
-        "link notes ": R(Key("a-c/50, w-6/1")),#assumes onenote  is output window 6
+        "link notes ": R(Key("a-c/50, w-5/1")),#assumes onenote  is output window 6
         "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":
