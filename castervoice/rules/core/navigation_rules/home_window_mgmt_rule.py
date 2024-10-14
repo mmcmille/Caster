@@ -22,9 +22,12 @@ class HomeWindowManagementRule(MappingRule):
             R(Key("w-d/150, a-tab")),
 
         "(window close|close window )": R(Key("a-f4")),
-
+        #moves window to the direction indicated
         "window <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),
+        #stretches window to the left or right
+        "window (span|stretch)  <direction> [<n>]":
+            R(Key("wca-%(direction)s"))*Repeat(extra="n"),
         #switches the position of the center window with either the left or right window
         "window switch left":
             R(Mouse("[601, 13], left")+
@@ -196,9 +199,9 @@ class HomeWindowManagementRule(MappingRule):
         Choice("key_rule", {
 
             "track": "f10", #command for Enable Viacam head tracking
-            "letters": "csa-m",#puts letters on the screen for navigation using Fluent Search
+            "(letters|click)": "csa-m",#puts letters on the screen for navigation using Fluent Search
             "snippet": "ws-s",#uses snipping tool
-            "show clipboard": "w-v",
+            "(show|open) clipboard": "w-v",
             #uses power toys
             "get text": "ws-t",
             "screen ruler":"ws-m",

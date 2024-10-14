@@ -132,25 +132,27 @@ class ExcelRule(MappingRule):
             "off": ""
         }),
         Choice("menu_title", {
-			"file": "f",
-			"edit": "e",
-			"view": "v",
-			"insert": "i",
-            "format": "o",
-            "styles": "y",
-            "sheet": "s",
-            "data": "d",
-            "table": "a",
-            "form": "r",
-            "tools": "t",
-            "window": "w",
-			"help": "h",
+            "file": "f",
+			"home":"h",
+			"insert": "n",
+            "page layout": "p",
+            "formulas": "m",
+            "data": "a",
+            "review": "r",
+            "view": "w",
+            "automate": "u",
+            "developer": "l",
+			"help": "y",
 		}),
+
 
         Choice("key_rule", {
 
             "(drop|insert) date":"c-semicolon",
             "edit": "f2",
+            #Home
+            "wrap text": "a-h/20, w",
+
             # View
             "hide ribbon": "c-f1",
             "(read|edit) mode": "cs-m",
@@ -163,7 +165,7 @@ class ExcelRule(MappingRule):
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
-        	"filter": "a-down/20",
+        	"filter": "a-down/20, down:8/20",
             "(clear filter| filter off)": "a-down/40, c/20, enter",
             #sorting
             "sort [down]": "a-down/40, s",#-tab, space, enter",
@@ -178,7 +180,7 @@ class ExcelRule(MappingRule):
             #selecting
             "(select|get) row": "s-space",
             "(select|get) column": "c-space",
-            "delete column": "c-minus/40, a-c, a-o",
+            "delete column": "c-minus/40, a-c, a-o, enter",
         	"delete row": "c-minus/40, a-r, a-o",
             "delete this": "c-minus",
             "insert column": "c-space, apps, i/20", #c, a-o,

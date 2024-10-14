@@ -56,8 +56,9 @@ class OneNoteRule(MappingRule):
 			"new page": "c-n",
 			"drop text": "apps,t",
 			"drop date":"as-d",
-			"open link": "c-enter",
-			"edit link": "c-k",
+			"open link": "c-enter", #open selected link
+			"edit link": "c-k", #edit selected link
+			"link":"apps,p", #get link to paragraph
 			"checkbox": "c-1",
 			"number list": "c-slash",
 			"select branch": "cs-minus",

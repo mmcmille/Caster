@@ -17,7 +17,7 @@ class SpiritRule(MappingRule):
 		#show/hide columns: move item under mouse to display
         "this": R(Mouse("left") + Pause("10") + Key("tab/10, space")),
 
-		# table and button navigation
+		# table and button navigation, by mouse clicking
 		"[open] <item>": R(Mouse("(%(item)s)/50, left")),
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
@@ -29,6 +29,7 @@ class SpiritRule(MappingRule):
 		#row and column right-click menu commands
 		#uses menu, assthe es mouse is resting on row
 		"<rc_item>": R(Mouse("left/40,right/40") +Key("%(rc_item)s,enter")),
+		"view associated": R(Mouse("left/40,right/40") +Key("v")),
 
 
 
@@ -67,15 +68,17 @@ class SpiritRule(MappingRule):
 		Choice("spirit_trait", {
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
+			#Material
 			"(material ID|mad ID)":"MAT:MATID",
+			"Matt BE":"MAT:MMT:BEBID",
+			"Matt line code":"MAT:LINE:LINCD",
+			#Line
+			"line line code":"LINE:LINCD",
+
+			"person code":"PERSN:CODE",
 			"trial ID":"EXT:TRLID",
-			"line code":"MAT:LINE:LINCD",
-
-			"login person code":"LOGIN:PERSN:CODE",
-
-			#Traits
-			"trait code":"UDTRT:UDTCD",
-
+			#VH
+			"stable variety code":"VH:STBVC",
 
 
 		}),
@@ -84,13 +87,13 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "741,140",
+			"query": "775,66",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
 
 
-			"material management":"87, 130",
+			#"material management":"87, 130",
 			"materials":"82, 160",
 			"(trial|experiment) management":"87, 654",
 
@@ -114,12 +117,12 @@ class SpiritRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
-				"view associated": "v",
 				"view [associated] materials": "v/40, m/40",
 				"view [associated] (parent materials|parents)": "v/40, p/40",
 				"view [associated] subplots": "v/40, right/40, up:2",
 				"view [associated] plots": "v/40, right/40, p/40",
 				"view [associated] progeny": "v/40, right/40, up:4/40",
+				"view [associated] pollinations": "v/40, right/40, up/40",
 				"view [associated] (trial|trials)": "v/40, t/40",
 				"(add|make) subplots": "a/40:2",
 
@@ -130,7 +133,7 @@ class SpiritRule(MappingRule):
 				#Favorites
 				"set default profile":"up:2/40,right/40,down/40",
 				"(new|save) profile":"up:2/40,right/40,up:2/40",
-				"create new grouping":"up:2/40,right/40,up/40",
+				"[create] new grouping":"up:2/40,right/40,up/40",
 
 				"(edit|add|remove|change) (columns|profile)":"up:4/40",
 
@@ -151,7 +154,7 @@ class SpiritRule(MappingRule):
 			#other commands
 			"(okay|OK)":"a-o",
 			"edit": "f2",
-			"refresh": "f5/20",
+			"refresh (grid|frame)": "f5",
 
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
@@ -169,6 +172,6 @@ class SpiritRule(MappingRule):
 
 
 def get_rule():
-
-	#return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
-	return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream
+	return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Local version
+	#return SpiritLocalRule, RuleDetails(name="spirit local", executable="SPIRITShell") #Local version
+	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream

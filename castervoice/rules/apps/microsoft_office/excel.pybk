@@ -95,6 +95,24 @@ class ExcelRule(MappingRule):
         # change max to 3 if you want sequences of lentgh three and so on
         Repetition(Choice("alphabet1", alphabet_support.caster_alphabet()), min=1, max=2, name="column_1"),
         Repetition(Choice("alphabet2", alphabet_support.caster_alphabet()), min=1, max=2, name="column_2")
+
+#Menu
+'''
+            "file": "f",
+      "edit": "e",
+      "view": "v",
+      "insert": "i",
+            "format": "o",
+            "styles": "y",
+            "sheet": "s",
+            "data": "d",
+            "table": "a",
+            "form": "r",
+            "tools": "t",
+            "window": "w",
+      "help": "h",
+'''
+
     ]
     defaults = {"n": 1, "dict": ""}
 
