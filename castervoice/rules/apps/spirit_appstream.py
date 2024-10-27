@@ -10,14 +10,14 @@ from castervoice.lib.merge.state.short import R
 from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
-class SpiritLocalRule(MappingRule):
+class SpiritAppstreamRule(MappingRule):
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
 		#show/hide columns: move item under mouse to display
         "this": R(Mouse("left") + Pause("10") + Key("tab/10, space")),
 
-		# table and button navigation, by mouse clicking
+		# table and button navigation
 		"[open] <item>": R(Mouse("(%(item)s)/50, left")),
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
@@ -29,7 +29,6 @@ class SpiritLocalRule(MappingRule):
 		#row and column right-click menu commands
 		#uses menu, assthe es mouse is resting on row
 		"<rc_item>": R(Mouse("left/40,right/40") +Key("%(rc_item)s,enter")),
-
 
 
 
@@ -68,17 +67,15 @@ class SpiritLocalRule(MappingRule):
 		Choice("spirit_trait", {
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
-			#Material
 			"(material ID|mad ID)":"MAT:MATID",
-			"Matt BE":"MAT:MMT:BEBID",
-			"Matt line code":"MAT:LINE:LINCD",
-			#Line
-			"line line code":"LINE:LINCD",
-
-			"person code":"PERSN:CODE",
 			"trial ID":"EXT:TRLID",
-			#VH
-			"stable variety code":"VH:STBVC",
+			"line code":"MAT:LINE:LINCD",
+
+			"login person code":"LOGIN:PERSN:CODE",
+
+			#Traits
+			"trait code":"UDTRT:UDTCD",
+
 
 
 		}),
@@ -87,7 +84,7 @@ class SpiritLocalRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "775,66",
+			"query": "741,140",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
@@ -124,6 +121,7 @@ class SpiritLocalRule(MappingRule):
 				"view [associated] plots": "v/40, right/40, p/40",
 				"view [associated] progeny": "v/40, right/40, up:4/40",
 				"view [associated] (trial|trials)": "v/40, t/40",
+				"view [associated] pollinations": "v/40, right/40, up/40",
 				"(add|make) subplots": "a/40:2",
 
 				"plant (trial|trials)":"p/40:3",
@@ -154,7 +152,7 @@ class SpiritLocalRule(MappingRule):
 			#other commands
 			"(okay|OK)":"a-o",
 			"edit": "f2",
-			"refresh (grid|frame)": "f5",
+			"refresh grid": "f5",
 
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
@@ -173,5 +171,5 @@ class SpiritLocalRule(MappingRule):
 
 def get_rule():
 
-	return SpiritLocalRule, RuleDetails(name="spirit local", executable="SPIRITShell") #Local version
-	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream
+	#return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
+	return SpiritAppstreamRule, RuleDetails(name="spirit appstream", executable="appstreamclient") #Appstream

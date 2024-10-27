@@ -19,8 +19,8 @@ class OutlookRule(MappingRule):
 
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
         # create new thing
-        "new email": R(Key("c-n")),
-        "new (appointment | event)": R(Key("sc-a")),
+        "new (email|event)": R(Key("c-n")),
+        #"new (appointment | event)": R(Key("sc-a")),
         "new contact": R(Key("cs-c")),
         "new folder": R(Key("cs-e")),
         "advanced (search| find)": R(Key("cs-f")),
@@ -108,7 +108,7 @@ class OutlookRule(MappingRule):
         "(folder | go to folder)": R(Key("c-y")),
         "move it": R(Key("cs-v")),
         "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
-        "categorize [it]":R(Mouse("left") + Key("s-f10/30,down:5/5,right/5")),
+        "categorize [it]":Key("s-f10/30,down:5/5,right/5"), #prefix with if needed R(Mouse("left") + 
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),

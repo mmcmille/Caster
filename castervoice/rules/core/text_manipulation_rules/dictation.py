@@ -31,8 +31,8 @@ class DictationRule(MappingRule):
         Choice("sentence_punc", {
                 "break": ",",
                 "period": ".",
-                "(exclamation point | !)": "!",
-                "(question mark | ?)": "?",
+                "exclamation point": "!", #dragon "(exclamation point | !)": "!",
+                "question mark": "?", #dragon "(question mark | ?)": "?",
                 "deaf": ":",
         }),
         Dictation("dict"),
