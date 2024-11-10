@@ -4,6 +4,7 @@ Michael McMillen
 
 
 from dragonfly import Repeat, Pause, Function, Choice, MappingRule, ShortIntegerRef
+#from dragonfly.windows.clipboard import Clipboard
 from castervoice.lib.actions import Key, Mouse, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
@@ -11,6 +12,9 @@ from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
 class SpiritRule(MappingRule):
+	temporary = Clipboard({Clipboard.format_unicode: u"\\Client\C$\"temp\SpiritTemp\Spirit_temp_export.xlsx"})
+	temporary.copy_to_system()
+
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
@@ -22,13 +26,21 @@ class SpiritRule(MappingRule):
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
 		#query menu
-		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("tab/40,equals")),
-		#"<key_rule>": R(Key("%(key_rule)s/40")),
+		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("right")),#"tab/40,equals")),
+
+		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
+
+		"export": R(Key("alt/40,f,down:3/40,right/40,enter")
+			+ Pause("200") ),
+			#+ Key("tab:2/20, c-v")),
+
+			#Text("\\Client\C$\temp\SpiritTemp\Spirit_temp_export.xlsx", pause = 0.3)+Key("s-tab")),
+
 
 		#"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
 		#row and column right-click menu commands
 		#uses menu, assthe es mouse is resting on row
-		"<rc_item>": R(Mouse("left/40,right/40") +Key("%(rc_item)s,enter")),
+		"<rc_item>": R(Key("apps/40, %(rc_item)s,enter")), #Mouse("left/40,right/40") +
 		"view associated": R(Mouse("left/40,right/40") +Key("v")),
 
 
@@ -42,15 +54,15 @@ class SpiritRule(MappingRule):
 		"<menu_title> [menu]": R(Key("alt/40, %(menu_title)s/40")),
 		"frame [<m>]": R(Key("alt/40, w/40, %(m)s/40")),
 	}
+
 	extras = [
 		Choice("menu_title", { #press alt...
 			"file": "f",
 			"close (frame|grid)": "f, enter",
 			"logout": "f, up:2,enter",
 			"import": "f,down:2,right,enter",
-			"export": "f,down:3/40,right/40,enter",
-			"export containers": "f,down:3/40,right/40,down/40,enter",
 
+			"export containers": "f,down:3/40,right/40,down/40,enter",
 
 			"edit menu": "e",
 			"view": "v",
@@ -59,10 +71,6 @@ class SpiritRule(MappingRule):
 			"window|switch": "w",
 
 			"help": "h",
-
-
-
-
 		}),
 
 		Choice("spirit_trait", {
@@ -70,18 +78,27 @@ class SpiritRule(MappingRule):
 			"plot status":"",
 			#Material
 			"(material ID|mad ID)":"MAT:MATID",
-			"Matt BE":"MAT:MMT:BEBID",
+			"Matt BE [bid]":"MAT:MMT:BEBID",
 			"Matt line code":"MAT:LINE:LINCD",
+
 			#Line
 			"line line code":"LINE:LINCD",
+			"line incident number":"LINE:INCNO",
 
 			"person code":"PERSN:CODE",
 			"trial ID":"EXT:TRLID",
 			#VH
 			"stable variety code":"VH:STBVC",
+			#People
+
+		}),
+		Choice("spirit_part_trait", {
+			#partial traits
+			"line":"LINE:",
 
 
 		}),
+
 		Choice("item", {
 			#assumes menu layout is:
 			#Standard
@@ -138,7 +155,6 @@ class SpiritRule(MappingRule):
 				"(edit|add|remove|change) (columns|profile)":"up:4/40",
 
 				"remove":"r/10",
-				"paste down":"p/10:2",
 				"properties":"up/40",
 
 		}),
@@ -147,18 +163,23 @@ class SpiritRule(MappingRule):
 			"next": "tab",
 			"run query": "a-q",
 			"append":"a-a",
+			"replace":"a-r",
 			"close query": "a-s",
 			"remove": "apps,r",
 			"like": "l",
+			"in":"i",
 
 			#other commands
 			"(okay|OK)":"a-o",
 			"edit": "f2",
 			"refresh (grid|frame)": "f5",
+			"paste down":"apps/20, down:4/10, enter",
 
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
 			"move":"s-tab:3",
+
+
 
 		}),
 
@@ -172,6 +193,7 @@ class SpiritRule(MappingRule):
 
 
 def get_rule():
-	return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Local version
-	#return SpiritLocalRule, RuleDetails(name="spirit local", executable="SPIRITShell") #Local version
+	#return SpiritRule, RuleDetails(name="spirit", title="Spirit")#title=window title
+	return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Citrix version
+	#return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
 	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream

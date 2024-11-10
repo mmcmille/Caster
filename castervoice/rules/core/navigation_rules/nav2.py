@@ -31,7 +31,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "find":
+        "find [text]":
             R(Key("c-f")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
@@ -39,7 +39,7 @@ class NavigationNon(MappingRule):
             R(Key("s-f3"))*Repeat(extra="n"),
         "find everywhere":
             R(Key("cs-f")),
-        "replace":
+        "replace text":
             R(Key("c-h")),
         "[show] context menu":
             R(Key("s-f10")),
@@ -141,6 +141,7 @@ class NavigationNon(MappingRule):
             "top left": "0.17, 0.17",
             "top": "0.5, 0.17",
             "top edge": "0.5, 0.001",
+            "window title": "0.5, 0.01",
             "top right": "0.83, 0.17",
             "top right edge": "0.9999, 0",
             "(mid|center) left": "0.17, 0.5",

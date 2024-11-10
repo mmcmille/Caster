@@ -32,6 +32,11 @@ class OneNoteRule(MappingRule):
 
 		#generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40")),
+
+        #menu control
+        "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
+
+
 		"rename": R(Mouse("right") + Pause("20") + Key("r")),
 	    "search [<dict>]": R(Key("c-e") + Pause("50") + Text("%(dict)s")),
 		"(find | search) [on] page [<dict>]": R(Key("c-f") + Pause("50") + Text("%(dict)s")),
@@ -58,7 +63,7 @@ class OneNoteRule(MappingRule):
 			"drop date":"as-d",
 			"open link": "c-enter", #open selected link
 			"edit link": "c-k", #edit selected link
-			"link":"apps,p", #get link to paragraph
+			"get link":"apps,p", #get link to paragraph
 			"checkbox": "c-1",
 			"number list": "c-slash",
 			"select branch": "cs-minus",
@@ -68,7 +73,19 @@ class OneNoteRule(MappingRule):
 			"navigator":"as-n",
 
 		}),
-
+        Choice("menu_title", {
+            "file": "f",
+			"home":"h",
+			"insert": "n",
+            "page layout": "p",
+            "formulas": "m",
+            "data": "a",
+            "review": "r",
+            "view": "w",
+            "automate": "u",
+            "developer": "l",
+			"help": "y",
+		}),
 		ShortIntegerRef("n", 1, 50),
 		Dictation("dict"),
 		Choice("direction",{"up":"pgup","down":"pgdown"}),

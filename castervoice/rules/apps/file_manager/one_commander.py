@@ -39,6 +39,7 @@ class OneCommanderRule(MappingRule):
             "Favorites": "c-d",
             "last": "a-left",
             "link": "cs-c, a-tab",
+            "(get|copy|web) link": "apps/20,down:13/10,enter",
             "get filename": 'cs-n/20, a-tab',
             "get path": "cs-c, a-tab",
             "find [in] files": 'a-f7',

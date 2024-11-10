@@ -265,9 +265,9 @@ class TextManipulation(MergeRule):
         Choice("key_rule", {
             # this refers to what is selected
             # this (verb), select then act, verb this: act on current selection
-            "bold this": "c-b",
-            "underline this": "c-u",
-            "(italic|italicize) this": "c-i",
+            "bold (this|text)": "c-b",
+            "underline (this|text)": "c-u",
+            "(italic|italicize) (this|text)": "c-i",
 
             #line commands
             "new line": "end,enter",
@@ -313,8 +313,7 @@ class TextManipulation(MergeRule):
             # Syngenta
             "Michele's email":"michele.gardiner@syngenta.com",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "[syngenta] password":"Q1w1e1r3",#
-            "old password":"Syn.2024.Syn.b",
+            "[syngenta] password":"Q1w1e1r4",#
             "employee ID": "8610841",
             "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",

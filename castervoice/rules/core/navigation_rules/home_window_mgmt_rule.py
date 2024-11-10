@@ -56,7 +56,7 @@ class HomeWindowManagementRule(MappingRule):
             R(Key("ca-tab, enter")),
 
         #app switching via Windows number , 1-10
-        "[<close_choice>] (open|switch|show|window) <app_n_key>":
+        "[<close_choice>] (open|show|window) <app_n_key>":
             R(
                 Key("cw-%(app_n_key)s") +
                 Pause("50") +
@@ -65,7 +65,7 @@ class HomeWindowManagementRule(MappingRule):
             ),
 
         #app switching for windows 11+
-        "[<close_choice>] (open|switch|show|window) <app_n_11>": #<app_n>":
+        "[<close_choice>] (open|show|window) <app_n_11>": #<app_n>":
             R(
                 Key("w-t/5, right:9") + #down if vertical taskbar, right if horizontal
                 Key("right:%(app_n_11)s, enter") +
@@ -199,7 +199,7 @@ class HomeWindowManagementRule(MappingRule):
         Choice("key_rule", {
 
             "track": "f10", #command for Enable Viacam head tracking
-            "(letters|click)": "csa-m",#puts letters on the screen for navigation using Fluent Search
+            "click": "csa-m",#puts letters on the screen for navigation using Fluent Search
             "snippet": "ws-s",#uses snipping tool
             "(show|open) clipboard": "w-v",
             #uses power toys

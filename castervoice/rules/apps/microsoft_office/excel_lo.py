@@ -41,6 +41,8 @@ class ExcelRule(MappingRule):
         #menu control
         "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
 
+        #Locates email with subject of selected cell in outlook, assumes outlook is Win #2
+        "(search|find e-mail)": R(Key("c-c/20, cw-2") + Pause("100") + Key("c-e/20, s-home, delete, \", c-v, \", enter")),
 
     # whole number input, move to next cell automatically
     #number input right/down/off
@@ -154,6 +156,8 @@ class ExcelRule(MappingRule):
             "wrap text": "a-h/20, w",
 
             # View
+            "new window":"a-w/40,n",
+            "hide columns":"c-space/10,apps/20,h",
             "hide ribbon": "c-f1",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
@@ -166,7 +170,7 @@ class ExcelRule(MappingRule):
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
         	"filter": "a-down/20, down:8/20",
-            "(clear filter| filter off)": "a-down/40, c/20, enter",
+            "(clear filter| filter off)": "a-down/40, c/20",
             #sorting
             "sort [down]": "a-down/40, s",#-tab, space, enter",
         	"sort up": "a-down/40, o", #s-tab, space, down, enter",
@@ -181,10 +185,10 @@ class ExcelRule(MappingRule):
             "(select|get) row": "s-space",
             "(select|get) column": "c-space",
             "delete column": "c-minus/40, a-c, a-o, enter",
-        	"delete row": "c-minus/40, a-r, a-o",
+        	"delete row": "c-minus/40, a-r, enter",
             "delete this": "c-minus",
-            "insert column": "c-space, apps, i/20", #c, a-o,
-            "insert row": "apps,i,enter/40,r,enter",
+            "(add|insert) (column|columns)": "c-space, apps, i/20", #c, a-o,
+            "(add|insert) (row|rows)": "apps,i,enter",
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 
@@ -194,6 +198,9 @@ class ExcelRule(MappingRule):
             #Menus
             #Home
             "clear (format|formats|formatting)":"a-h,e,f",
+
+            #Macros
+            "generate":"c-g",#for hierarchy viewer macro
 
 
         }),
@@ -206,7 +213,10 @@ class ExcelRule(MappingRule):
             "leo": "Leo",
         }),
         Choice("function", {
-            "join": "=TEXT_JOIN(\";\",TRUE,",
+            "join": "=TEXTJOIN(\";\",TRUE,",
+            "look up ": "=VLOOKUP(",
+            as
+
         }),
     ]
     defaults = {"n": 1, "dict": ""}

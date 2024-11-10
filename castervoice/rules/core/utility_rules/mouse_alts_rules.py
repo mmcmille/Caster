@@ -12,7 +12,7 @@ class MouseAlternativesRule(MappingRule):
             R(Function(Grid.mouse_alternates, mode="rainbow")),
         "douglas [<monitor>]":
             R(Function(Grid.mouse_alternates, mode="douglas")),
-        "sudoku [<monitor>]":
+        "(grid|sudoku) [<monitor>]":
             R(Function(Grid.mouse_alternates, mode="sudoku")),
     }
     extras = [

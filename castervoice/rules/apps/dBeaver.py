@@ -1,8 +1,5 @@
 '''
 Michael McMillen
-search
-to do
-filter dictation, press escape
 '''
 
 
@@ -13,7 +10,8 @@ from castervoice.lib.merge.state.short import R
 
 from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
-class FreeplaneRule(MappingRule):#free plane
+
+class DBeaverRule(MappingRule):
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/10")),
@@ -122,4 +120,4 @@ class FreeplaneRule(MappingRule):#free plane
 	}
 
 def get_rule():
-	return FreeplaneRule, RuleDetails(name="freeplane", executable="javaw")
+	return DBeaverRule, RuleDetails(name="D beaver", executable="dbeaver")
