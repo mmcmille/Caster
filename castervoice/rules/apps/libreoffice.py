@@ -179,6 +179,8 @@ class LORule(MappingRule):
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 
+            #View
+            "freeze top row": "a-v,c,r",
             #Writer
             "check spelling": "f7",
 

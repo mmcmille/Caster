@@ -215,7 +215,6 @@ class ExcelRule(MappingRule):
         Choice("function", {
             "join": "=TEXTJOIN(\";\",TRUE,",
             "look up ": "=VLOOKUP(",
-            as
 
         }),
     ]

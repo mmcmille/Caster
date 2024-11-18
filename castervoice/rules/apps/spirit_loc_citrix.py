@@ -12,8 +12,8 @@ from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
 class SpiritRule(MappingRule):
-	temporary = Clipboard({Clipboard.format_unicode: u"\\Client\C$\"temp\SpiritTemp\Spirit_temp_export.xlsx"})
-	temporary.copy_to_system()
+	#temporary = Clipboard({Clipboard.format_unicode: u"\\Client\C$\"temp\SpiritTemp\Spirit_temp_export.xlsx"})
+	#temporary.copy_to_system()
 
 	mapping = {
 		#generic key rule
