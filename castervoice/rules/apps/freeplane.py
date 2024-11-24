@@ -51,12 +51,17 @@ class FreeplaneRule(MappingRule):#free plane
 			"over ": "a-tab",
 			"okay":"a-o",
 			# "cancel":"a-c", # esc will also cancel
+
 			# menu items
 			"preferences": "c-comma",
 			"save all": "a-f/10, a",#"a-s",
 			"(copy|get) branch": "cs-c",
 			"(copy|get) [node] ID": "a-e/10,c,c",# "cs-i",
 			"[get] (link|address)": "a-e/10,c,o",
+
+			#format
+			"edit styles": "c-f11",
+			
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
