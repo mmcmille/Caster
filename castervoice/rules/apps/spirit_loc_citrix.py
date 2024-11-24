@@ -12,8 +12,8 @@ from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
 class SpiritRule(MappingRule):
-	temporary = Clipboard({Clipboard.format_unicode: u"\\Client\C$\"temp\SpiritTemp\Spirit_temp_export.xlsx"})
-	temporary.copy_to_system()
+	#temporary = Clipboard({Clipboard.format_unicode: u"\\Client\C$\"temp\SpiritTemp\Spirit_temp_export.xlsx"})
+	#temporary.copy_to_system()
 
 	mapping = {
 		#generic key rule
@@ -31,16 +31,19 @@ class SpiritRule(MappingRule):
 		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
 
 		"export": R(Key("alt/40,f,down:3/40,right/40,enter")
-			+ Pause("200") ),
-			#+ Key("tab:2/20, c-v")),
+			+ Pause("200")
+			+ Key("tab:2/20")
+		#"client": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
+		+ Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 
-			#Text("\\Client\C$\temp\SpiritTemp\Spirit_temp_export.xlsx", pause = 0.3)+Key("s-tab")),
+		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 
 
 		#"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
+
 		#row and column right-click menu commands
-		#uses menu, assthe es mouse is resting on row
-		"<rc_item>": R(Key("apps/40, %(rc_item)s,enter")), #Mouse("left/40,right/40") +
+		#uses menu key, where the mouse is resting on row
+		"<rc_item>": R(Key("apps/80, %(rc_item)s/40,enter")), #Mouse("left/40,right/40") +
 		"view associated": R(Mouse("left/40,right/40") +Key("v")),
 
 
@@ -134,28 +137,28 @@ class SpiritRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
-				"view [associated] materials": "v/40, m/40",
-				"view [associated] (parent materials|parents)": "v/40, p/40",
+				"view [associated] materials": "v/40, m",
+				"view [associated] (parent materials|parents)": "v/40, p",
 				"view [associated] subplots": "v/40, right/40, up:2",
-				"view [associated] plots": "v/40, right/40, p/40",
-				"view [associated] progeny": "v/40, right/40, up:4/40",
-				"view [associated] pollinations": "v/40, right/40, up/40",
-				"view [associated] (trial|trials)": "v/40, t/40",
-				"(add|make) subplots": "a/40:2",
+				"view [associated] plots": "v/40, right/40, p",
+				"view [associated] progeny": "v/40, right/40, up:4",
+				"view [associated] pollinations": "v/40, right/40, up",
+				"view [associated] (trial|trials)": "v/40, t",
+				"(add|make) subplots": "a:2",
 
 				"plant (trial|trials)":"p/40:3",
-				"sort [down]":"up:8/10,right/10,down/10",
-				"sort up":"up:8/10,right/10,down:2/10",
+				"sort [down]":"up:8/10,right/10,down",
+				"sort up":"up:8/10,right/10,down:2",
 
 				#Favorites
-				"set default profile":"up:2/40,right/40,down/40",
-				"(new|save) profile":"up:2/40,right/40,up:2/40",
-				"[create] new grouping":"up:2/40,right/40,up/40",
+				"set default profile":"up:2/40,right/40,down",
+				"(new|save) profile":"up:2/40,right/40,up:2",
+				"[create] new grouping":"up:2/40,right/40,up",
 
-				"(edit|add|remove|change) (columns|profile)":"up:4/40",
+				"(edit|add|remove|change) (columns|profile)":"up:4",
 
-				"remove":"r/10",
-				"properties":"up/40",
+				"remove":"r",
+				"properties":"up",
 
 		}),
 		Choice("key_rule", {
@@ -178,6 +181,8 @@ class SpiritRule(MappingRule):
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
 			"move":"s-tab:3",
+
+
 
 
 

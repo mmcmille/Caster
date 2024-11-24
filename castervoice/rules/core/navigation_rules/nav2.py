@@ -2,7 +2,7 @@
 Michael McMillen
 '''
 
-from dragonfly import Function, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
+from dragonfly import Function, Pause, Text, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
 
 from castervoice.lib.actions import Key, Mouse
 from castervoice.lib import navigation, utilities
@@ -31,8 +31,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "find [text]":
-            R(Key("c-f")),
+        "find [<text>]": R(Key("c-f")+ Pause("50")+ Text("%(text)s")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
         "find prior [<n>]":

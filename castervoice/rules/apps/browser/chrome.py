@@ -4,7 +4,7 @@ Michael McMillen
 independent Windows for tabs
 dictation folder
 '''
-from dragonfly import Repeat, Pause, Function, Choice, MappingRule, ShortIntegerRef
+from dragonfly import Repeat, Pause, Function, Choice, MappingRule, ShortIntegerRef, Dictation
 
 from castervoice.lib.actions import Key, Mouse, Text
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -14,6 +14,7 @@ from castervoice.lib import github_automation
 from castervoice.lib.temporary import Store, Retrieve
 
 class ChromeRule(MappingRule):
+
     mapping = {
         #temporary rule for virtual mint fulfillment ,
         # uses an excel file with source container ids in one column, and envelope container ids in the column to the right
@@ -37,7 +38,6 @@ class ChromeRule(MappingRule):
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
-        "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
         "tab here": R(Key("ctrl:down, shift:down") + Mouse("left") + Key("ctrl:up, shift:up")),
 
         #gmail,   ...outlook online rules
@@ -53,7 +53,7 @@ class ChromeRule(MappingRule):
         "link <m>": R(Key("a-c/50, w-%(m)s")),
         "link map": R(Key("a-c/50, w-9/1")),#assumes map is output window 9
         "link notes ": R(Key("a-c/50, w-6/1")),#assumes onenote  is output window 6
-        "find": R(Key("c-f")),
+        #implemented in nav2 "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":
             R(Key("cs-k")),
@@ -121,7 +121,10 @@ class ChromeRule(MappingRule):
             R(Key("c-g/20")) * Repeat(extra="n"),
         "find (back|prev|prior|previous) [match] [<n>]":
             R(Key("cs-g/20")) * Repeat(extra="n"),
-        # requires an extension in some browsers such as chrome
+        # requires an extension in some browsers such as
+
+
+
         "[toggle] caret browsing":
             R(Key("f7")),
         "[show] history":
@@ -197,6 +200,7 @@ class ChromeRule(MappingRule):
             R(Key("a-f/5, l")),
     }
     extras = [
+        Dictation("dict"),
         Choice("nth", {
                 "first": "1",
                 "second": "2",
@@ -227,12 +231,6 @@ class ChromeRule(MappingRule):
 	    ShortIntegerRef("k", 0, 10000),
         ShortIntegerRef("n", 1, 100),
         ShortIntegerRef("m", 0, 10),
-        Choice("click_item", {
-    		"true":"288, 881",
-    		"false":"257, 927",
-            "submit":"835, 1002",
-            "continue":"747, 944",
-    		}),
         Choice("menu_title", {
 			"file": "f",
 			"edit": "e",

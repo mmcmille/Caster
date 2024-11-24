@@ -14,12 +14,9 @@ class DictationRule(MappingRule):
 
     mapping = {
         #"<sentence_punc> {weight=1000}": R(Key("backspace/1") + Text("%(sentence_punc)s")),
-        "snake": R(Key("left/1") + Text("_")),
-
-        "<sentence_punc>": R(Key("backspace/1") + Text("%(sentence_punc)s") + Key("space/1")),
 
         #ambiguous :"<dict>] <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
-        "sheet function": R(Key("home, equals, end")+ Text("()") + Key("left")),
+
         #goes last in mapping order
         "<dict>": R(Text("%(dict)s ")),
 
@@ -28,16 +25,10 @@ class DictationRule(MappingRule):
 
     }
     extras = [
-        Choice("sentence_punc", {
-                "break": ",",
-                "period": ".",
-                "exclamation point": "!", #dragon "(exclamation point | !)": "!",
-                "question mark": "?", #dragon "(question mark | ?)": "?",
-                "deaf": ":",
-        }),
         Dictation("dict"),
     ]
     defaults = {"dict": ""}
 
 def get_rule():
-    return DictationRule, RuleDetails(name="dictation")
+    return DictationRule, RuleDetails(name="edit")
+    #return DictationRule, RuleDetails(name="dictation")

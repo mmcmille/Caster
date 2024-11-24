@@ -17,6 +17,9 @@ class Punctuation(MergeRule):
     pronunciation = "punctuation"
 
     mapping = {
+        #my punction for sentences
+        "<sentence_punc>": R(Key("backspace/1") + Text("%(sentence_punc)s") + Key("space/1")),
+
         #removed repetition to deal with punctuation working with numbers
         "[<long>] <text_punc>": # [<npunc>]":
             R(Text("%(long)s" + "%(text_punc)s" + "%(long)s")), #*Repeat(extra="npunc"),
@@ -40,6 +43,13 @@ class Punctuation(MergeRule):
     extras = [
         ShortIntegerRef("npunc", 0, 10),
         ShortIntegerRef("npunc100", 0, 100),
+        Choice("sentence_punc", {
+                "break": ",",
+                "period": ".",
+                "exclamation point": "!", #dragon "(exclamation point | !)": "!",
+                "question mark": "?", #dragon "(question mark | ?)": "?",
+                "deaf": ":",
+        }),
         Choice(
             "long", {
                 "long": " ",

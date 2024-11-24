@@ -14,19 +14,13 @@ class HomeWindowManagementRule(MappingRule):
         #generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/5")),
 
-
-        "start menu": R(Key("win")) ,
-        "system tray": R(Key("w-t/20,tab/5,space")),
-        "show desktop": R(Key("w-d")),
-        "window isolate":
-            R(Key("w-d/150, a-tab")),
-
-        "(window close|close window )": R(Key("a-f4")),
         #moves window to the direction indicated
         "window <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),
         #stretches window to the left or right
-        "window (span|stretch)  <direction> [<n>]":
+        "window (span|stretch) <direction> [<n>]":
+            R(Key("wca-%(direction)s"))*Repeat(extra="n"),
+        "(span|stretch) window <direction> [<n>]":
             R(Key("wca-%(direction)s"))*Repeat(extra="n"),
         #switches the position of the center window with either the left or right window
         "window switch left":
@@ -197,7 +191,12 @@ class HomeWindowManagementRule(MappingRule):
             "20": 957,
         }),
         Choice("key_rule", {
-
+            "start menu": "win",
+            "system tray": "w-t/20,tab/5,space",
+            "show desktop": "w-d",
+            "window isolate":"w-d/150, a-tab",
+            "(pin|unpin) window":"wc-t", #uses power toys
+            "(window close|close window )": "a-f4",
             "track": "f10", #command for Enable Viacam head tracking
             "click": "csa-m",#puts letters on the screen for navigation using Fluent Search
             "snippet": "ws-s",#uses snipping tool

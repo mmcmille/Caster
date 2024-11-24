@@ -22,6 +22,8 @@ class Numbers(MergeRule):
         #    R(Function(word_number, extra="wn")),
         #"[<long>] numb <wnKK>": R(Text("%(long)s") + Function(numbers2, extra="wnKK") + Text("%(long)s"), rspec="Number"),
         #simplified numbers
+
+        "<wnKK> slash <wnKK2>": R(Function(numbers2, extra="wnKK") + Text("/")+ Function(numbers3, extra="wnKK2")),
         "numb <wnKK>": R(Function(numbers2, extra="wnKK")),
         "point <wnKK2>":
             R(Text(".") + Function(numbers3, extra="wnKK2")),
@@ -33,7 +35,7 @@ class Numbers(MergeRule):
     }
 
     extras = [
-        ShortIntegerRef("wn", 0, 10),
+        ShortIntegerRef("wn", 0, 12),
         ShortIntegerRef("wnKK", 0, 1000000),
         ShortIntegerRef("wnKK2", 0, 1000000),
         Choice(

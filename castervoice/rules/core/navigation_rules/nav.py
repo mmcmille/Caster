@@ -163,14 +163,21 @@ class Navigation(MergeRule):
         #    R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
         #      rdescript="Core: switch to most recent Windows"),
 
-        # Ccr Mouse Commands
+        # Ccr Mouse (Commands)
         # two main points of control, cursor and pointer
-        "here [<nnavi3>]": #here refers to the location of the pointer
+        #"here" refers to the location of the cursor
+        "here [<nnavi3>]":
             R(Function(navigation.left_click)+Pause("5"))*Repeat(extra="nnavi3"),
         "menu here | here menu":
             R(Function(navigation.right_click)),
-        "double tap | here two":
+        #"scroll here | here scroll":
+            #R(Function(navigation.middle_click)),
+
+        #"this" refers to what is beneath the cursor
+        "double tap | this [word] ":
             R(Function(navigation.left_click)*Repeat(2)),
+        "(here|this) line":
+            R(Function(navigation.left_click)+Pause("20"))*Repeat(3),
         "hold here | here hold":
             R(Function(navigation.left_down)),
         #release implemented in keyboard rule, releases modifiers as well

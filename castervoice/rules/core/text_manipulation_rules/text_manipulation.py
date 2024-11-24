@@ -65,7 +65,7 @@ class TextManipulation(MergeRule):
 
     mapping = {
         #generic key rule
-        "<key_rule>": R(Key("%(key_rule)s/10")),
+        "<key_rule>": R(Key("%(key_rule)s/20")),
         "drop <drop_strings>": R(Text("%(drop_strings)s")),
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
@@ -107,7 +107,7 @@ class TextManipulation(MergeRule):
         "snag right [<n>]":
             R(Key("s-right:%(n)s")),
 
-        "drop text":R(Key("wca-v/10")),#uses microsoft powertoys
+        "drop text":R(Key("wca-v/40")),#uses microsoft powertoys
 
 
     # replace text or character
@@ -279,6 +279,7 @@ class TextManipulation(MergeRule):
             "copy [this] ": "c-c",
             "copy [this] over": "c-c/20, a-tab",
             "copy (page|everything)": "c-a/10, c-c",
+            "copy (page|everything) over": "c-a/10, c-c, a-tab",
             "copy (through|to) end": "cs-end/10, c-c",
             "cut [this]": "c-x",
             "cut line":"end/20, s-home/20, c-x",

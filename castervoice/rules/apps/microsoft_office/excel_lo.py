@@ -41,8 +41,12 @@ class ExcelRule(MappingRule):
         #menu control
         "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
 
+        #Right-Click menu
+        "<rc_item>": R(Mouse("left/40,right/40") + Key("%(rc_item)s")), # +
+
         #Locates email with subject of selected cell in outlook, assumes outlook is Win #2
         "(search|find e-mail)": R(Key("c-c/20, cw-2") + Pause("100") + Key("c-e/20, s-home, delete, \", c-v, \", enter")),
+
 
     # whole number input, move to next cell automatically
     #number input right/down/off
@@ -146,15 +150,22 @@ class ExcelRule(MappingRule):
             "developer": "l",
 			"help": "y",
 		}),
+        Choice("rc_item", {
+            "delete this": "d",
+            "move this":"m",
 
-
+        }),
         Choice("key_rule", {
 
             "(drop|insert) date":"c-semicolon",
             "edit": "f2",
             #Home
             "wrap text": "a-h/20, w",
+            #Formulas
+            "calculate sheet": "s-f9",
 
+            #Data
+            "refresh all":"ca-f5",
             # View
             "new window":"a-w/40,n",
             "hide columns":"c-space/10,apps/20,h",
@@ -185,10 +196,10 @@ class ExcelRule(MappingRule):
             "(select|get) row": "s-space",
             "(select|get) column": "c-space",
             "delete column": "c-minus/40, a-c, a-o, enter",
-        	"delete row": "c-minus/40, a-r, enter",
-            "delete this": "c-minus",
+        	"delete row": "c-minus/40, r, enter",
+            "delete (cell|cells)": "apps,d",
             "(add|insert) (column|columns)": "c-space, apps, i/20", #c, a-o,
-            "(add|insert) (row|rows)": "apps,i,enter",
+            "(add|insert) (row|rows)": "apps/10,i/10,enter",
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 
@@ -201,6 +212,9 @@ class ExcelRule(MappingRule):
 
             #Macros
             "generate":"c-g",#for hierarchy viewer macro
+            #saving
+            "don't save":"a-n",
+
 
 
         }),
@@ -215,8 +229,6 @@ class ExcelRule(MappingRule):
         Choice("function", {
             "join": "=TEXTJOIN(\";\",TRUE,",
             "look up ": "=VLOOKUP(",
-            as
-
         }),
     ]
     defaults = {"n": 1, "dict": ""}

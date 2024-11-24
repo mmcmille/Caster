@@ -47,7 +47,7 @@ class OneCommanderRule(MappingRule):
             "properties": "apps,up,enter",
             "find [in] files": 'a-f7',
             "view": 'f3',
-            "edit": 'f4',
+            "address [bar]": 'f4',
             "move": 'f6',
             "new (directory | folder)": "cs-n",
             "wipe": 's-delete',

@@ -16,6 +16,8 @@ def capitalize(text):
 
 class OutlookRule(MappingRule):
     mapping = {
+
+
         "find task": R(Mouse("left:3") + Key("c-c/20, cw-6") + Pause("100") + Key("c-f/50, backspace, c-v/40, enter/20, escape")),
 
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
@@ -75,7 +77,7 @@ class OutlookRule(MappingRule):
         "block sender": R(Key("a-h/3, j/3, b")),
         "search": R(Key("c-e")),
         "search [for] [<dict>]": R(Key("c-e") + Text("%(dict)s")),
-        "(categorize|label) [it] [<dict>] ": R(Mouse("left/10") + Key("s-f10/40,down:5/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
+        "(categorize|label) [it] [<dict>] ": R(Key("s-f10/40,down:5/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
 
         "(message list | messages)": R(Key("tab:3")),
         "(empty | clear) search [bar]": R(Key("c-e, c-a, del/3, escape")),
@@ -113,7 +115,7 @@ class OutlookRule(MappingRule):
         "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
-        "trash it": R(Key("delete")),
+        "trash it": R(Key("delete/40,s-tab")),
         # navigation
         "open folder": R(Key("c-y")),
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
@@ -133,6 +135,9 @@ class OutlookRule(MappingRule):
 
         # misc
         "go back": R(Key("a-left")),
+
+        #goes last in mapping order
+        "<dict>": R(Text("%(dict)s ")),
     }
     extras = [
         Dictation("dict"),
