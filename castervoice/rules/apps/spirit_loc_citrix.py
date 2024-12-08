@@ -84,6 +84,7 @@ class SpiritRule(MappingRule):
 			"Matt BE [bid]":"MAT:MMT:BEBID",
 			"Matt line code":"MAT:LINE:LINCD",
 
+
 			#Line
 			"line line code":"LINE:LINCD",
 			"line incident number":"LINE:INCNO",
@@ -98,6 +99,12 @@ class SpiritRule(MappingRule):
 		Choice("spirit_part_trait", {
 			#partial traits
 			"line":"LINE:",
+
+			#material
+			"material":"MAT:",
+			"female parent":"FPARM:",
+			"male parent":"MPARM:",
+			"batch":"MMT:BID",
 
 
 		}),

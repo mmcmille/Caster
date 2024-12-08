@@ -319,7 +319,7 @@ class TextManipulation(MergeRule):
             "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",
             "phone number": "8312062683",
-            "production server": "USAEDWSPRRGP2",
+            "spirit [production] server": "SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG",
             "stage server":"USAEDWSPRRGS2",
 
 

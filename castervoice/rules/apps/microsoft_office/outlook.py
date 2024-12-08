@@ -115,7 +115,7 @@ class OutlookRule(MappingRule):
         "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
-        "trash it": R(Key("delete/40,s-tab")),
+        "trash it": R(Key("delete")),
         # navigation
         "open folder": R(Key("c-y")),
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),

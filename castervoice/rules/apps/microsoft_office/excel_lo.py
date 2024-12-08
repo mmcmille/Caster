@@ -159,6 +159,7 @@ class ExcelRule(MappingRule):
 
             "(drop|insert) date":"c-semicolon",
             "edit": "f2",
+            "edit link": "c-k",
             #Home
             "wrap text": "a-h/20, w",
             #Formulas
@@ -209,7 +210,7 @@ class ExcelRule(MappingRule):
             #Menus
             #Home
             "clear (format|formats|formatting)":"a-h,e,f",
-
+            "normal text":"a-h,e,f",
             #Macros
             "generate":"c-g",#for hierarchy viewer macro
             #saving

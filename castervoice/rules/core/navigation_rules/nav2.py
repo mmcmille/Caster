@@ -46,7 +46,7 @@ class NavigationNon(MappingRule):
             R(Function(navigation.right_down)),
         "hoist":
             R(Function(navigation.right_up)),
-        "kick mid":
+        "scroll it":
             R(Function(navigation.middle_click)),
         "shift right click":
             R(Key("shift:down") + Mouse("right") + Key("shift:up")),
