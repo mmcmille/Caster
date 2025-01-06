@@ -21,8 +21,6 @@ class DictationRule(MappingRule):
         "<dict>": R(Text("%(dict)s ")),
 
 
-
-
     }
     extras = [
         Dictation("dict"),
@@ -30,5 +28,5 @@ class DictationRule(MappingRule):
     defaults = {"dict": ""}
 
 def get_rule():
-    return DictationRule, RuleDetails(name="edit")
-    #return DictationRule, RuleDetails(name="dictation")
+    #return DictationRule, RuleDetails(name="edit")
+    return DictationRule, RuleDetails(name="dictation")

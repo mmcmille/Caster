@@ -166,7 +166,7 @@ class ExcelRule(MappingRule):
             "calculate sheet": "s-f9",
 
             #Data
-            "refresh all":"ca-f5",
+            "refresh all":"a-a/10,r,a",
             # View
             "new window":"a-w/40,n",
             "hide columns":"c-space/10,apps/20,h",
@@ -199,8 +199,8 @@ class ExcelRule(MappingRule):
             "delete column": "c-minus/40, a-c, a-o, enter",
         	"delete row": "c-minus/40, r, enter",
             "delete (cell|cells)": "apps,d",
-            "(add|insert) (column|columns)": "c-space, apps, i/20", #c, a-o,
-            "(add|insert) (row|rows)": "apps/10,i/10,enter",
+            "(add|insert) (column|columns)": "escape/10, c-space, apps, i/20", #c, a-o,
+            "(add|insert) (row|rows)": "s-space/20,apps/10,i/10,enter",
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 

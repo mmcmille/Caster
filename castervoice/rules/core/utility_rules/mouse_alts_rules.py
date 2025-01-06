@@ -6,8 +6,8 @@ from castervoice.lib.merge.state.short import R
 
 class MouseAlternativesRule(MappingRule):
     mapping = {
-        "legion [<monitor>] [<rough>]":
-            R(Function(Grid.mouse_alternates, mode="legion")),
+        #"legion [<monitor>] [<rough>]":
+        #    R(Function(Grid.mouse_alternates, mode="legion")),
         "rainbow [<monitor>]":
             R(Function(Grid.mouse_alternates, mode="rainbow")),
         "douglas [<monitor>]":

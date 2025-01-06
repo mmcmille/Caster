@@ -26,15 +26,18 @@ class SpiritRule(MappingRule):
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
 		#query menu
-		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("right")),#"tab/40,equals")),
+		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("right/40, i/40, tab/40")),#"tab/40,equals")),
 
 		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
 
 		"export": R(Key("alt/40,f,down:3/40,right/40,enter")
 			+ Pause("200")
 			+ Key("tab:2/20")
-		#"client": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
-		+ Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
+		#Citrix Path
+		#+ Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
+		#Local Path
+		+ Text("C:", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
+
 
 		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 
@@ -206,6 +209,6 @@ class SpiritRule(MappingRule):
 
 def get_rule():
 	#return SpiritRule, RuleDetails(name="spirit", title="Spirit")#title=window title
-	return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Citrix version
-	#return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
+	#return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Citrix version
+	return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
 	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream
