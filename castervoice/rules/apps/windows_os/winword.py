@@ -1,4 +1,4 @@
-from dragonfly import Dictation, MappingRule, ShortIntegerRef, Choice 
+from dragonfly import Dictation, MappingRule, ShortIntegerRef, Choice
 from castervoice.lib.actions import Key
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
@@ -9,7 +9,7 @@ class MSWordRule(MappingRule):
         "insert image": R(Key("alt, n, p")),
         #menu control
         "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
-
+        "<menu_command>": R(Key("alt/20, %(menu_command)s/20")),
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
@@ -30,8 +30,9 @@ class MSWordRule(MappingRule):
             "developer": "l",
 			"help": "y",
 		}),
-
-
+        Choice("menu_command", {
+            "save as":"f,a",
+        }),
         Choice("key_rule", {
         "normal text":"a-h/10,l,enter",
 

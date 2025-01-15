@@ -93,6 +93,8 @@ class SpiritRule(MappingRule):
 			"line incident number":"LINE:INCNO",
 
 			"person code":"PERSN:CODE",
+			"experiment number":"EXP:EXTNO",
+			"research station code":"LOC:RST:RSTCD",
 			"trial ID":"EXT:TRLID",
 			#VH
 			"stable variety code":"VH:STBVC",
@@ -154,6 +156,7 @@ class SpiritRule(MappingRule):
 				"view [associated] progeny": "v/40, right/40, up:4",
 				"view [associated] pollinations": "v/40, right/40, up",
 				"view [associated] (trial|trials)": "v/40, t",
+				"view [associated] locations": "v/40, l",
 				"(add|make) subplots": "a:2",
 
 				"plant (trial|trials)":"p/40:3",
@@ -163,7 +166,7 @@ class SpiritRule(MappingRule):
 				#Favorites
 				"set default profile":"up:2/40,right/40,down",
 				"(new|save) profile":"up:2/40,right/40,up:2",
-				"[create] new grouping":"up:2/40,right/40,up",
+				"[create] (new|save) grouping":"up:2/40,right/40,up",
 
 				"(edit|add|remove|change) (columns|profile)":"up:4",
 
@@ -191,9 +194,6 @@ class SpiritRule(MappingRule):
 			#Show Hide Columns
 			"transfer":"tab,space,s-tab",
 			"move":"s-tab:3",
-
-
-
 
 
 		}),

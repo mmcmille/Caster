@@ -81,7 +81,8 @@ class OneNoteRule(MappingRule):
 			"open link": "c-enter", #open selected link
 			"edit link": "c-k", #edit selected link
 			"get link":"apps,p", #get link to paragraph
-			"checkbox": "c-1",
+            "remove (tag|tags)": "c-0",
+            "checkbox": "c-1",
 			"number list": "c-slash",
 			"(select|get) branch": "cs-minus",
             #branch is line plus indented lines below it
@@ -94,8 +95,8 @@ class OneNoteRule(MappingRule):
 
             #Formatting
 			"(normal text|clear formatting)": "cs-n",
-            "bullet text":"c-dot",
-            "number text":"c-slash",
+            "bullet (this|text)":"c-dot",
+            "number (this|text)":"c-slash",
             #OneMore
 			"navigator":"as-n",
 

@@ -21,7 +21,9 @@ class ChromeRule(MappingRule):
         #"transfer": R(Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
         #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
 
-
+        "drop user info": R(Text("u581917") + Key("tab")
+                + Text("Michael McMillen") + Key("tab")
+                + Text("michael.mcmillen@syngenta.com") + Key("tab")),
         #Google Sheets
         #menu control
         "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
@@ -264,6 +266,10 @@ class ChromeRule(MappingRule):
            #"right sheet":"a-down",
            #"left sheet":"a-up",
            "delete row":"sa-e/20,d/20,d",
+           #silverbullet
+           "page":"c-k",
+           "command":"c-slash",
+           "search":"cs-f",
         }),
     ]
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
