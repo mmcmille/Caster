@@ -61,7 +61,7 @@ class FreeplaneRule(MappingRule):#free plane
 
 			#format
 			"edit styles": "c-f11",
-			
+
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -127,4 +127,4 @@ class FreeplaneRule(MappingRule):#free plane
 	}
 
 def get_rule():
-	return FreeplaneRule, RuleDetails(name="freeplane", executable="javaw")
+	return FreeplaneRule, RuleDetails(name="freeplane", title="Freeplane")
