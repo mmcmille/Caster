@@ -18,7 +18,7 @@ class DictationRule(MappingRule):
         #ambiguous :"<dict>] <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
 
         #goes last in mapping order
-        "<dict>": R(Text("%(dict)s ")),
+        "<dict>": R(Text("%(dict)s ",pause=0.01,use_hardware=True)),
 
 
     }

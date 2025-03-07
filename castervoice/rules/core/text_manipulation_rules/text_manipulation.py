@@ -274,6 +274,7 @@ class TextManipulation(MergeRule):
             #clears text
             "clear line": "end/5, s-home/5, backspace",
             "strike line": "home:2/5, s-end/5, backspace:2",
+            "clear page": "c-a/10, backspace",
             #copying
             #added release modifiers to work with "select"
             "copy [this] ": "c-c",
@@ -283,6 +284,7 @@ class TextManipulation(MergeRule):
             "copy (through|to) end": "cs-end/10, c-c",
             "cut [this]": "c-x",
             "cut line":"end/20, s-home/20, c-x",
+            "replace line":"end/20, s-home/20, backspace, c-v",
             "drop it": "c-v",
             "copy line":"end/20, s-home/20, c-c",
             "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",

@@ -45,8 +45,8 @@ class ExcelRule(MappingRule):
         "<rc_item>": R(Mouse("left/40,right/40") + Key("%(rc_item)s")), # +
 
         #Locates email with subject of selected cell in outlook, assumes outlook is Win #2
-        "(search|find e-mail)": R(Key("c-c/20, cw-2") + Pause("100") + Key("c-e/20, s-home, delete, \", c-v, \", enter")),
-
+        "(search|find e-mail)": R(Key("c-c/20, cw-2") + Pause("100") + Key("a-q/20, s-home, delete, \", c-v, \", enter")),
+        "(search|find notes)": R(Key("c-c/20, cw-5") + Pause("100") + Key("c-e/20, delete, \", c-v, \"/40, enter")),
 
     # whole number input, move to next cell automatically
     #number input right/down/off
@@ -164,7 +164,7 @@ class ExcelRule(MappingRule):
             "wrap text": "a-h/20, w",
             #Formulas
             "calculate sheet": "s-f9",
-
+            "calculate workbook": "f9",
             #Data
             "refresh all":"a-a/10,r,a",
             # View
@@ -186,6 +186,7 @@ class ExcelRule(MappingRule):
             #sorting
             "sort [down]": "a-down/40, s",#-tab, space, enter",
         	"sort up": "a-down/40, o", #s-tab, space, down, enter",
+            "(custom|advanced) sort": "a-h/10,s,u",
             "fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
         	"save [file] as": "a-f/40, a/20",
@@ -200,7 +201,7 @@ class ExcelRule(MappingRule):
         	"delete row": "c-minus/40, r, enter",
             "delete (cell|cells)": "apps,d",
             "(add|insert) (column|columns)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "(add|insert) (row|rows)": "s-space/20,apps/10,i/10,enter",
+            "(add|insert) (row|rows)": "s-space/20,apps/20,i/10,enter",
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
 

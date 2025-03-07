@@ -1,3 +1,21 @@
+'''
+
+
+#app switching for windows 11+
+"[<close_choice>] (open|show|window) <app_n_11>": #<app_n>":
+    R(
+        Key("w-t/5, right:9") + #down if vertical taskbar, right if horizontal
+        Key("right:%(app_n_11)s, enter") +
+        Pause("50") +
+        Mouse("(0.5, 0.5)") +
+
+        #Key("control:down") +
+      #Mouse("".join(["[30,","%(app_n)s", "], left"])) +
+      #Key("control:up/20") +
+        Pause("100")+
+        Key("%(close_choice)s")),
+'''
+
 
 from dragonfly import Dictation, MappingRule, Function, Repeat, Pause, Choice, BringApp, ShortIntegerRef, RunCommand
 from castervoice.lib import utilities
@@ -49,28 +67,24 @@ class HomeWindowManagementRule(MappingRule):
         "(next | prior) window":
             R(Key("ca-tab, enter")),
 
-        #app switching via Windows number , 1-10
-        "[<close_choice>] (open|show|window) <app_n_key>":
+
+        #app switching by listed number
+        "[<close_choice>] (open|show|window) <n>":
             R(
-                Key("cw-%(app_n_key)s") +
+                Key("w-t:%(n)s") +
+                Key("enter") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
-
-        #app switching for windows 11+
-        "[<close_choice>] (open|show|window) <app_n_11>": #<app_n>":
+        #app switching via Windows number , 1-10
+        "[<close_choice>] (open|show|window) <app_n_key>":
             R(
-                Key("w-t/5, right:9") + #down if vertical taskbar, right if horizontal
-                Key("right:%(app_n_11)s, enter") +
+                Key("cw-%(app_n_key)s/10") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)") +
-
-                #Key("control:down") +
-              #Mouse("".join(["[30,","%(app_n)s", "], left"])) +
-              #Key("control:up/20") +
-                Pause("100")+
-                Key("%(close_choice)s")),
+                Key("%(close_choice)s")
+            ),
 
         #app switching via fluent search
         "show apps": R(Key("ca-p/10,down")),# + Pause( "100") + Text("%(text)s ")),
@@ -139,22 +153,22 @@ class HomeWindowManagementRule(MappingRule):
         ShortIntegerRef("n_1_9", 1, 9),
         Dictation("text"),
 
-        ShortIntegerRef("n", 1, 20, default=1),
+        ShortIntegerRef("n", 1, 30, default=1),
         Choice("close_choice",{
             "close":"a-f4",
             "":"",
         }),
         Choice("app_n_key", {#can open individual programs through BringMe (opener), but it doesn't work for every program, save first if needed (do this for freeplane )
-            "(1|web)": 1,
-            "(2|email|outlook)": 2,
-            "(3|commands)": 3,
-            "(4|files)": 4,
-            "(5|notes|one note)": 5,
-            "(6|Excel)": 6,
-            "(7|teams)": 7,
-            "(8|spirit)": 8,
-            "(9|map)": 9,
-            "(10)": 0,
+            "(web)": 1,
+            "(calendar|email|outlook)": 2,
+            "(commands)": 3,
+            "(files)": 4,
+            "(notes|one note)": 5,
+            "(Excel)": 6,
+            "(teams)": 7,
+            "(spirit)": 8,
+            "(map)": 9,
+            #"(10)": 0,
         }),
         Choice("app_n_11", {
             "11": 1,

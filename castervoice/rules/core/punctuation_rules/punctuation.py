@@ -46,8 +46,8 @@ class Punctuation(MergeRule):
         Choice("sentence_punc", {
                 "break": ",",
                 "period": ".",
-                "exclamation point": "!", #dragon "(exclamation point | !)": "!",
-                "question mark": "?", #dragon "(question mark | ?)": "?",
+                "X point": "!", #dragon "(exclamation point | !)": "!",
+                "Q mark": "?", #dragon "(question mark | ?)": "?",
                 "deaf": ":",
         }),
         Choice(

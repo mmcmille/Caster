@@ -53,12 +53,15 @@ class SpiritRule(MappingRule):
 
 		#mouse commands
 		"(drag over|pull over| bring over| apply profile | apply this)": R(Mouse("left:down/60, <-800, 0>, left:down/80, left:up")),
-		"pull up": R(Mouse("left:down/60, <0, -30>, left:up")),
-		"pull down": R(Mouse("left:down/60, <0, 60>, left:up")),
+		"pull up": R(Mouse("left:down/10, <0, -30>") + Pause("50") + Mouse("left:up")),
+		"pull down": R(Mouse("left:down/10, <0, 60>") + Pause("50") + Mouse("left:up")),
 
 		#menu control
 		"<menu_title> [menu]": R(Key("alt/40, %(menu_title)s/40")),
 		"frame [<m>]": R(Key("alt/40, w/40, %(m)s/40")),
+		#grid (window) switching
+		"window" : R(Key("alt, w/40")),
+		"grid [<m>]": R(Key("alt, w/40") + Key("%(m)s/40")),
 	}
 
 	extras = [
@@ -74,8 +77,6 @@ class SpiritRule(MappingRule):
 			"view": "v",
 			"reports": "r",
 
-			"window|switch": "w",
-
 			"help": "h",
 		}),
 
@@ -84,8 +85,9 @@ class SpiritRule(MappingRule):
 			"plot status":"",
 			#Material
 			"(material ID|mad ID)":"MAT:MATID",
-			"Matt BE [bid]":"MAT:MMT:BEBID",
+			"Matt BE":"MAT:MMT:BEBID",
 			"Matt line code":"MAT:LINE:LINCD",
+			"batch bid":"MAT:MMT:BID",
 
 
 			#Line
@@ -98,8 +100,10 @@ class SpiritRule(MappingRule):
 			"trial ID":"EXT:TRLID",
 			#VH
 			"stable variety code":"VH:STBVC",
+			"variety name":"VH:VHNM",
 			#People
-
+			#location
+			"location code":"LOC:LOCCD",
 		}),
 		Choice("spirit_part_trait", {
 			#partial traits
@@ -149,6 +153,7 @@ class SpiritRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
+				"view [associated] (locations|lines)": "v/40, l",
 				"view [associated] materials": "v/40, m",
 				"view [associated] (parent materials|parents)": "v/40, p",
 				"view [associated] subplots": "v/40, right/40, up:2",
@@ -156,7 +161,7 @@ class SpiritRule(MappingRule):
 				"view [associated] progeny": "v/40, right/40, up:4",
 				"view [associated] pollinations": "v/40, right/40, up",
 				"view [associated] (trial|trials)": "v/40, t",
-				"view [associated] locations": "v/40, l",
+
 				"(add|make) subplots": "a:2",
 
 				"plant (trial|trials)":"p/40:3",
@@ -168,7 +173,7 @@ class SpiritRule(MappingRule):
 				"(new|save) profile":"up:2/40,right/40,up:2",
 				"[create] (new|save) grouping":"up:2/40,right/40,up",
 
-				"(edit|add|remove|change) (columns|profile)":"up:4",
+				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
 				"remove":"r",
 				"properties":"up",
@@ -204,11 +209,11 @@ class SpiritRule(MappingRule):
 		ShortIntegerRef("m", 1, 10)
 
 	]
-	defaults = {"n": 1, "k": 1, "m":1, "nth": ""}
+	defaults = {"n": 1, "k": 1, "nth": ""}
 
 
 def get_rule():
-	#return SpiritRule, RuleDetails(name="spirit", title="Spirit")#title=window title
+	#return SpiritRule, RuleDetails(name="spirit", title="Spirit Application")#title=window title
 	#return SpiritRule, RuleDetails(name="spirit", executable="wfica32") #Citrix version
 	return SpiritRule, RuleDetails(name="spirit", executable="SPIRITShell") #Local version
 	#return SpiritRule, RuleDetails(name="spirit", executable="appstreamclient") #Appstream

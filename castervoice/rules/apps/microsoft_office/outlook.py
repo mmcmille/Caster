@@ -1,5 +1,6 @@
 '''
 Michael McMillen
+Using Outlook for Web Shortcuts
 '''
 
 from dragonfly import Function, Pause, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
@@ -17,7 +18,7 @@ def capitalize(text):
 class OutlookRule(MappingRule):
     mapping = {
 
-
+        "scroll here": R(Mouse("middle")),
         "find task": R(Mouse("left:3") + Key("c-c/20, cw-6") + Pause("100") + Key("c-f/50, backspace, c-v/40, enter/20, escape")),
 
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
@@ -75,10 +76,10 @@ class OutlookRule(MappingRule):
         "sort by [<sort_by>]": R(Key("a-v/5, a, b/5, %(sort_by)s")),
         "reverse sort": R(Key("a-v, r, s")),
         "block sender": R(Key("a-h/3, j/3, b")),
-        "search": R(Key("c-e")),
-        "search [for] [<dict>]": R(Key("c-e") + Text("%(dict)s")),
-        "(categorize|label) [it] [<dict>] ": R(Key("s-f10/40,down:5/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
-
+        "search": R(Key("a-q")),#c-e
+        "new search": R(Key("a-q/10,s-home,backspace")),#c-e
+        "search [for] [<dict>]": R(Key("a-q") + Text("%(dict)s")),
+        "(categorize|label) [it] [<dict>]": R(Key("c/10")+Text("%(dict)s")), #"s-f10/40,down:8/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
         "(message list | messages)": R(Key("tab:3")),
         "(empty | clear) search [bar]": R(Key("c-e, c-a, del/3, escape")),
         # from the search bar to get the focus into the messages is three tabs
@@ -92,7 +93,6 @@ class OutlookRule(MappingRule):
         "(prior | previous) message [<n>]": R(Key("s-f6/20, up"))*Repeat(extra='n'),
         "[select] next link": R(Key("tab")),
         "[select] (previous | prior) link": R(Key("s-tab")),
-        "move email": R(Key("popup/20, m")),
         "tag email": R(Key("popup/20, t/10, a")),
     #    "archive": R(Key("backspace")),
         "done tagging": R(Key("space/10, enter")),
@@ -110,9 +110,9 @@ class OutlookRule(MappingRule):
         "forward": R(Key("c-f")),
         "Mark as read": R(Key("c-q")),
         "Mark as unread": R(Key("c-u")),
+        #folders
         "(folder | go to folder)": R(Key("c-y")),
-        "move it": R(Key("cs-v")),
-        "move to [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),
+        "move (it|to) [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),
@@ -120,12 +120,12 @@ class OutlookRule(MappingRule):
         "open folder": R(Key("c-y")),
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
-        "email [page]": R(Key("c-1")),
-        "calendar [page]": R(Key("c-2")),
-        "contacts": R(Key("c-3")),
-        "tasks": R(Key("c-4")),
-        "go to notes": R(Key("c-5")),
-        "folder list": R(Key("c-6")),
+        "email [page]": R(Key("cs-1")),
+        "calendar [page]": R(Key("cs-2")),
+        "contacts": R(Key("cs-3")),
+        "tasks": R(Key("cs-4")),
+        "go to notes": R(Key("cs-5")),
+        "folder list": R(Key("cs-6")),
         "find contact": R(Key("f11")),
         "address book": R(Key("cs-a")),
         "next open message": R(Key("c-dot")),
@@ -160,3 +160,4 @@ class OutlookRule(MappingRule):
 
 def get_rule():
     return OutlookRule, RuleDetails(name="outlook", executable="outlook")
+    #return OutlookRule, RuleDetails(name="utlook", title="Outlook")#title=window title

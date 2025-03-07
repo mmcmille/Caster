@@ -73,7 +73,7 @@ class OneNoteRule(MappingRule):
         Choice("key_rule", {
 			"full (page|screen)": "f11",
 			"sidebar": "cs-g, space",
-			"new window": "c-m",
+			"new (tab|window)": "c-m",
 			"new docked window":"a-w/20,c",
 			"new page": "c-n",
 			"drop text": "apps,t",
@@ -94,7 +94,7 @@ class OneNoteRule(MappingRule):
             "replace":"c-h",
 
             #Formatting
-			"(normal text|clear formatting)": "cs-n",
+			"(normal text|clear formatting)": "a-h,l,up:2,enter",
             "bullet (this|text)":"c-dot",
             "number (this|text)":"c-slash",
             #OneMore

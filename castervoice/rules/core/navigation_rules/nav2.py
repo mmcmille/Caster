@@ -137,7 +137,7 @@ class NavigationNon(MappingRule):
         Choice("mouse_grid", {#3x3 grid for mouse
             "title bar": "60, 20",
             "top left edge": "0, 0",
-            "top left": "0.17, 0.17",
+            "top left": "0.05, 0.05",
             "top": "0.5, 0.17",
             "top edge": "0.5, 0.001",
             "window title": "0.5, 0.01",

@@ -251,9 +251,24 @@ class Navigation(MergeRule):
         Dictation("textnv"),
         Choice("enclosure", _dtpd),
 
+#    Commands for capitalization:
+#    1 yell - ALLCAPS
+#    2 tie - TitleCase
+#    3 Gerrish - camelCase
+#    4 sing - Sentencecase
+#    5 laws (default) - alllower
+
+#   Commands for word spacing:
+#    0 (default except Gerrish) - words with spaces
+#    1 gum (default for Gerrish)  - wordstogether
+#    2 spine - words-with-hyphens
+#    3 snake - words_with_underscores
+#    4 pebble - words.with.fullstops
+#    5 incline - words/with/slashes
+
         Choice("capitalization", {
             "yell": 1,
-            "title": 2,
+            "tie": 2,
             "camel": 3,
             "sing": 4,
             "laws": 5,
