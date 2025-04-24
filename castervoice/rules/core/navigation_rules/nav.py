@@ -170,6 +170,8 @@ class Navigation(MergeRule):
             R(Function(navigation.left_click)+Pause("5"))*Repeat(extra="nnavi3"),
         "menu here | here menu":
             R(Function(navigation.right_click)),
+        "drop here":
+            R(Function(navigation.right_click)+Pause("5")+ Key("c-v")),
         #"scroll here | here scroll":
             #R(Function(navigation.middle_click)),
 
@@ -222,7 +224,7 @@ class Navigation(MergeRule):
     tell_commands_dict = {"dock": ";", "doc": ";", "sink": "", "com": ",", "deck": ":"}
     tell_commands_dict.update(_tpd)
     button_dictionary_500_no_prefix_no_modifier = {
-        "(tabby|next)": "tab",
+        "tabby": "tab",
         "shave": "backspace",# shift:up, ctrl:up", #select mod
         "(delete | deli)": "del,  shift:up, ctrl:up",#select mod
         "done": "enter",

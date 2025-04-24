@@ -132,6 +132,12 @@ class ExcelRule(MappingRule):
         # change max to 3 if you want sequences of lentgh three and so on
         Repetition(Choice("alphabet1", alphabet_support.caster_alphabet()), min=1, max=2, name="column_1"),
         Repetition(Choice("alphabet2", alphabet_support.caster_alphabet()), min=1, max=2, name="column_2"),
+        Choice("direction", {
+			"up": "up",
+			"down": "down",
+			"left": "left",
+			"right": "right",
+		}),
         Choice("output_number_options", {
             "down": "down",
             "right": "tab",
@@ -153,56 +159,93 @@ class ExcelRule(MappingRule):
         Choice("rc_item", {
             "delete this": "d",
             "move this":"m",
+            "get link":"l",
 
         }),
         Choice("key_rule", {
 
-            "(drop|insert) date":"c-semicolon",
             "edit": "f2",
+            #links
             "edit link": "c-k",
+            "open link": "apps/20,o,o,enter",
+
             #Home
             "wrap text": "a-h/20, w",
+
             #Formulas
             "calculate sheet": "s-f9",
             "calculate workbook": "f9",
+
             #Data
             "refresh all":"a-a/10,r,a",
+            "remove duplicates":"a-a/10,m/80,s-tab:2",
+
             # View
             "new window":"a-w/40,n",
+            "hide": "apps/20,h",
+            "unhide": "apps/20,u",
             "hide columns":"c-space/10,apps/20,h",
             "hide ribbon": "c-f1",
+
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
             "fit column [width]": "sa-right",
             "( search | find)": "c-f",
+            "replace": "c-h",
+            "replace all": "a-a",
             "freeze top row": "a-w/20,f,r", #lo "a-v/40,c,r",
             "merge":"a-h,m,m",
             "unmerge":"a-h,m,u",
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
-        	"filter": "a-down/20, down:8/20",
-            "(clear filter| filter off)": "a-down/40, c/20",
+        	"filter": "c-up:2/20, a-down/20, down:8/20",
+            "(update|apply|re-) filter": "c-up:2/20, a-down/20, down:8/20, enter",
+            "filter this": "apps/10,e,v", #using header: "c-c/20, c-up:2/20, a-down/20, down:8/40, c-v/20, enter",
+            "(clear filter| filter off)": "apps/10,e,e", #using header:"c-up/2, a-down/40, c/20",
+
             #sorting
-            "sort [down]": "a-down/40, s",#-tab, space, enter",
-        	"sort up": "a-down/40, o", #s-tab, space, down, enter",
+            "sort [down]": "c-up:3/20,a-down/40, s",#-tab, space, enter",
+        	"sort up": "c-up:3/20, a-down/40, o", #s-tab, space, down, enter",
             "(custom|advanced) sort": "a-h/10,s,u",
-            "fill down": "c-d",
+            #"fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
         	"save [file] as": "a-f/40, a/20",
 
             #pasting
+            "fill right": "c-c, right, c-down, left, cs-up, c-v", #fills down based on adjacent right column
+            "fill left": "c-c, left, c-down, right, cs-up, c-v",
+            "fill down": "c-c, down, cs-down, c-v",
+            "(drop|insert) date":"c-semicolon",
             "drop special": "cs-v",
             "okay":"a-o, enter",
+
+            #worksheet
+            "new sheet":"f6/20,tab/20,enter",
+            "rename sheet":"f6/20,apps/20,r",
+            "move sheet":"f6/20,apps/20,m",
+            "link sheet":"f6/20,apps/20,l",
+            "delete sheet":"f6/20,apps/20,d",
+
             #selecting
+            "(open|activate) sheet":"f6/20,s-tab/20,apps",
+            "delete [cell|cells]": "apps,d",
+
+            #row
             "(select|get) row": "s-space",
+            "copy row": "s-space/40,c-c",
+            "delete row": "s-space/40, apps,d",
+            "(add|insert) (row|rows)": "s-space/40,apps/20,i/10,enter",
+
+            #column
             "(select|get) column": "c-space",
-            "delete column": "c-minus/40, a-c, a-o, enter",
-        	"delete row": "c-minus/40, r, enter",
-            "delete (cell|cells)": "apps,d",
+            "copy column": "c-space/40, c-c",
+            "delete column": "c-space/40, apps,d",
             "(add|insert) (column|columns)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "(add|insert) (row|rows)": "s-space/20,apps/20,i/10,enter",
-            "insert comment": "ca-c",
+
+
+            "[new|insert] comment": "a-r/20,c",
+            "[new|insert] note": "s-f2",
             "fly under": "up, c-down, down",
 
             #Writer
@@ -213,7 +256,7 @@ class ExcelRule(MappingRule):
             "clear (format|formats|formatting)":"a-h,e,f",
             "normal text":"a-h,e,f",
             #Macros
-            "generate":"c-g",#for hierarchy viewer macro
+            "generate|update [sort]":"c-g",#for hierarchy viewer macro, #for Task Manager
             #saving
             "don't save":"a-n",
 
@@ -228,9 +271,11 @@ class ExcelRule(MappingRule):
             "yvette": "Yvette",
             "leo": "Leo",
         }),
-        Choice("function", {
+        Choice("function", { #Excel functions
             "join": "=TEXTJOIN(\";\",TRUE,",
-            "look up ": "=VLOOKUP(",
+            "[V] look up": "=VLOOKUP(",
+            "count": "=COUNTIF(",
+
         }),
     ]
     defaults = {"n": 1, "dict": ""}

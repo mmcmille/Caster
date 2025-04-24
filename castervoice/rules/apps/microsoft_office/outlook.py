@@ -1,6 +1,6 @@
 '''
 Michael McMillen
-Using Outlook for Web Shortcuts
+Using "Outlook for Web" Shortcuts
 '''
 
 from dragonfly import Function, Pause, Repeat, Dictation, Choice, MappingRule, ShortIntegerRef
@@ -17,19 +17,21 @@ def capitalize(text):
 
 class OutlookRule(MappingRule):
     mapping = {
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s/20")),
 
         "scroll here": R(Mouse("middle")),
         "find task": R(Mouse("left:3") + Key("c-c/20, cw-6") + Pause("100") + Key("c-f/50, backspace, c-v/40, enter/20, escape")),
 
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
         # create new thing
-        "new (email|event)": R(Key("c-n")),
+        "new (email|event)": R(Key("n")),
         #"new (appointment | event)": R(Key("sc-a")),
         "new contact": R(Key("cs-c")),
         "new folder": R(Key("cs-e")),
         "advanced (search| find)": R(Key("cs-f")),
         "new office document": R(Key("cs-h")),
-        "(inbox | go to inbox)": R(Key("cs-i")),
+        "(inbox | go to inbox)": R(Key("g,i")),#cs-i
         "new journal entry": R(Key("cs-j")),
         "new task": R(Key("cs-k")),
         "new contact group": R(Key("cs-l")),
@@ -63,8 +65,8 @@ class OutlookRule(MappingRule):
         # some of these may be user dependent, depends on the order of your folders
         # which you can inspect by pressing control y
         # also I think some of these are built into Dragon
-        "[go to] sent mail": R(Key("c-y/10, s, enter")),
-        "go to drafts": R(Key("c-y/10, d, enter")),
+        "[go to] sent mail": R(Key("g,s")),#c-y/10, s, enter")),
+        "go to drafts": R(Key("g,d")),#c-y/10, d, enter")),
         "go to trash": R(Key("c-y/10, t, enter")),
         "go to spam": R(Key("c-y/10, s:2, enter")),
         "go to starred": R(Key("c-y/10, s:3, enter")),
@@ -111,13 +113,12 @@ class OutlookRule(MappingRule):
         "Mark as read": R(Key("c-q")),
         "Mark as unread": R(Key("c-u")),
         #folders
-        "(folder | go to folder)": R(Key("c-y")),
+        "[(go to|open)] folder": R(Key("c-y")),
         "move (it|to) [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),
         # navigation
-        "open folder": R(Key("c-y")),
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
         "email [page]": R(Key("cs-1")),
@@ -137,7 +138,7 @@ class OutlookRule(MappingRule):
         "go back": R(Key("a-left")),
 
         #goes last in mapping order
-        "<dict>": R(Text("%(dict)s ")),
+        #"<dict>": R(Text("%(dict)s ")),
     }
     extras = [
         Dictation("dict"),
@@ -153,7 +154,12 @@ class OutlookRule(MappingRule):
                 "type": "t",
                 "attachments": "c",
                 "account": "o",
-            }),
+        }),
+        Choice("key_rule", {
+            "(clear formatting|normal text)":"c-space",
+            "remove label":"c/20,down/10,space",
+
+        }),
     ]
     defaults = {"n": 1, "dict": "", "text": "", "sort_by": ""}
 

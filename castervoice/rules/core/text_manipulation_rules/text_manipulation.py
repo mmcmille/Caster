@@ -121,11 +121,10 @@ class TextManipulation(MergeRule):
               rdescript="Text Manipulation: replace character to the left of the cursor"),
 
 
-
         # remove text or character
         "clear <line_dir>": R(Key("s-%(line_dir)s/5, backspace")),
         "strike [<direction>] [<n>]": #defaults to left, say right to strike right
-            R(Key("cs-%(direction)s/1")*Repeat(extra="n") + Key("backspace")),
+            R(Key("cs-%(direction)s:%(n)s/5") + Key("backspace")),
 
         "remove <direction> [<number_of_lines_to_search>] [<occurrence_number>] <dictation>":
             R(Function(text_manipulation_support.copypaste_remove_phrase_from_text,
@@ -269,6 +268,9 @@ class TextManipulation(MergeRule):
             "underline (this|text)": "c-u",
             "(italic|italicize) (this|text)": "c-i",
 
+            #switch field
+            "next field": "tab",
+            "last field": "s-tab",
             #line commands
             "new line": "end,enter",
             #clears text
@@ -314,15 +316,17 @@ class TextManipulation(MergeRule):
             "Hollister zipcode": "95023",
             "student id": "841703494",
 
+
+
             # Syngenta
-            "Michele's email":"michele.gardiner@syngenta.com",
+            "Aparna":"Aparnadevi.Vadlani@syngenta.com",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "[syngenta] password":"Q11111w1e1r5",#
+            "[syngenta] password":"Q11111w1e1r6",#
             "employee ID": "8610841",
             "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",
             "phone number": "8312062683",
-            "spirit [production] server": "SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG",
+            "(spirit|US) [production] server": "SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG",
             "stage server":"USAEDWSPRRGS2",
 
 

@@ -2,7 +2,6 @@
 Michael McMillen
 '''
 
-
 from dragonfly import Repeat, Pause, Function, Choice, MappingRule, ShortIntegerRef
 #from dragonfly.windows.clipboard import Clipboard
 from castervoice.lib.actions import Key, Mouse, Text
@@ -31,16 +30,19 @@ class SpiritRule(MappingRule):
 		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
 
 		"export": R(Key("alt/40,f,down:3/40,right/40,enter")
-			+ Pause("200")
+			+ Pause("100")
 			+ Key("tab:2/20")
 		#Citrix Path
 		#+ Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 		#Local Path
-		+ Text("C:", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
-
+		+ Text("C:", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01) + Pause("50") + Key("s-tab")),
 
 		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 
+		#servers
+		"global server": R(Text("SPR-GDB-P-1.NAFTA.SYNGENTA.ORG")),
+		"US server": R(Text("SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG")),
+		"EU server": R(Text("SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG")),
 
 		#"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
 
@@ -63,11 +65,10 @@ class SpiritRule(MappingRule):
 		"window" : R(Key("alt, w/40")),
 		"grid [<m>]": R(Key("alt, w/40") + Key("%(m)s/40")),
 	}
-
 	extras = [
 		Choice("menu_title", { #press alt...
 			"file": "f",
-			"close (frame|grid)": "f, enter",
+			"close (frame|grid|it)": "f, enter",
 			"logout": "f, up:2,enter",
 			"import": "f,down:2,right,enter",
 
@@ -123,7 +124,7 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "775,66",
+			"query": "785,66",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
@@ -153,8 +154,8 @@ class SpiritRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
-				"view [associated] (locations|lines)": "v/40, l",
-				"view [associated] materials": "v/40, m",
+				"view [associated] (locations|line|lines)": "v/40, l",
+				"view [associated] materials [created]": "v/40, m",
 				"view [associated] (parent materials|parents)": "v/40, p",
 				"view [associated] subplots": "v/40, right/40, up:2",
 				"view [associated] plots": "v/40, right/40, p",
@@ -178,8 +179,18 @@ class SpiritRule(MappingRule):
 				"remove":"r",
 				"properties":"up",
 
+
 		}),
 		Choice("key_rule", {
+			#crops
+			"broccoli":"b",
+			"cucumber":"c:7",
+			"lettuce":"l",
+			"peppers":"p:2",
+			"sweetcorn":"s:6",
+			"tomato":"t",
+			"watermelon":"w",
+
 			#query
 			"next": "tab",
 			"run query": "a-q",
@@ -206,7 +217,7 @@ class SpiritRule(MappingRule):
 
 		ShortIntegerRef("k", 1, 1000),
 		ShortIntegerRef("n", 1, 100),
-		ShortIntegerRef("m", 1, 10)
+		ShortIntegerRef("m", 1, 10),
 
 	]
 	defaults = {"n": 1, "k": 1, "nth": ""}
