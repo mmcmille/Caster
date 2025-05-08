@@ -40,9 +40,7 @@ class SpiritRule(MappingRule):
 		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 
 		#servers
-		"global server": R(Text("SPR-GDB-P-1.NAFTA.SYNGENTA.ORG")),
-		"US server": R(Text("SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG")),
-		"EU server": R(Text("SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG")),
+		"<server_name> server": R(Key("end/20,s-home")+Text("%(server_name)s")+Key("tab")),
 
 		#"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
 
@@ -66,6 +64,11 @@ class SpiritRule(MappingRule):
 		"grid [<m>]": R(Key("alt, w/40") + Key("%(m)s/40")),
 	}
 	extras = [
+		Choice("server_name",{
+			"global": "SPR-GDB-P-1.NAFTA.SYNGENTA.ORG",
+			#"US": "SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG",
+			"european": "SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG",
+		}),
 		Choice("menu_title", { #press alt...
 			"file": "f",
 			"close (frame|grid|it)": "f, enter",
@@ -105,6 +108,8 @@ class SpiritRule(MappingRule):
 			#People
 			#location
 			"location code":"LOC:LOCCD",
+			#Trait Definitions
+			"trait code":"UDTRT:UDTCD",
 		}),
 		Choice("spirit_part_trait", {
 			#partial traits
@@ -177,13 +182,18 @@ class SpiritRule(MappingRule):
 				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
 				"remove":"r",
+				"delete record":"d",
 				"properties":"up",
 
 
 		}),
 		Choice("key_rule", {
+			#close window
+			"close window":"",
+
 			#crops
 			"broccoli":"b",
+			"cauliflower":"c:3",
 			"cucumber":"c:7",
 			"lettuce":"l",
 			"peppers":"p:2",

@@ -53,9 +53,10 @@ class NavigationNon(MappingRule):
         "mouse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
             R(Function(navigation.curse)),
         #places mouse cursor in position of 3x3 grid, and presses f11 to start tracking if needed
-        # "pointer <mouse_grid> [<track_choice>]":
         "<mouse_grid> [<track_choice>]":
             R(Mouse("(%(mouse_grid)s)")+ Key("%(track_choice)s")),
+        "<mouse_grid> [<track_choice>] screen":
+            R(Mouse("%(mouse_grid)s")+ Key("%(track_choice)s")),
         "hold <mouse_grid>":
             R(Mouse("(%(mouse_grid)s)") + Function(navigation.left_down)),
         "scroll [<direction>] [<nnavi500>]":
@@ -96,11 +97,11 @@ class NavigationNon(MappingRule):
             R(Key("ca-tab, enter")),
         "switch (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
-        "(next | right | down) tab [<n>]":
-            R(Key("c-tab/20"))*Repeat(extra="n"),
+        #"(next | right | down) tab [<n>]":
+        #    R(Key("c-tab/20"))*Repeat(extra="n"),
             #R(Key("c-pgdown/20"))*Repeat(extra="n"),
-        "(prior | left | up ) tab [<n>]":
-            R(Key("cs-tab/20"))*Repeat(extra="n"),
+        #"(prior | left | up ) tab [<n>]":
+        #    R(Key("cs-tab/20"))*Repeat(extra="n"),
             #R(Key("c-pgup/20"))*Repeat(extra="n"),
         "close (tab|it) [<n>]":
             R(Key("c-w/40"))*Repeat(extra="n"),

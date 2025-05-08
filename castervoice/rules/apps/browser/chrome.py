@@ -24,6 +24,12 @@ class ChromeRule(MappingRule):
         "drop user info": R(Text("u581917") + Key("tab")
                 + Text("Michael McMillen") + Key("tab")
                 + Text("michael.mcmillen@syngenta.com") + Key("tab")),
+
+        #tab navigation
+        "(next | right | down) tab [<n>]":
+            R(Key("c-tab/20"))*Repeat(extra="n"),
+        "(prior | left | up ) tab [<n>]":
+            R(Key("cs-tab/20"))*Repeat(extra="n"),
         #Google Sheets
         #menu control
         "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
@@ -69,7 +75,7 @@ class ChromeRule(MappingRule):
             R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
             R(Key("cs-space/80") + Text(":+") + Key("enter")),
        "show (buttons | numbers)":
-            R(Key("cs-space/80") + Text(":+") + Key("enter")),
+            R(Key("cs-space/90") + Text(":+") + Key("enter")),
        "hide (buttons | numbers)":
             R(Key("cs-space/100") + Text(":-") + Key("enter")),
         "<k>": R(Key("cs-space/40") + Text("".join(["%(k)s"])) + Pause("20") + Key("enter")),
@@ -261,14 +267,17 @@ class ChromeRule(MappingRule):
             "material":"Material ID",
             "line":"Stable Line Code",
             "variety":"Stable Variety Code",
+            "BE|be E":"Biological Entity",
         }),
         Choice("im_crop", {
+            "broccoli":"br",
             "cauliflower": "cau",
             "lettuce": "l",
             "pepper|peppers":"pep",
             "spinach": "sp",
             "squash": "sq",
             "sweetcorn": "sw",
+            "tomato":"t",
 
             "watermelon": "wa",
         }),
@@ -299,7 +308,7 @@ class ChromeRule(MappingRule):
 
            #IM
            "batch":"f5/80,tab:14",
-           "BE|be E|entity":"f5/80,tab:13/10,down/10,tab",
+           "entity":"f5/80,tab:13/10,down/10,tab",
            "search":"tab:4/20,space",
 
 

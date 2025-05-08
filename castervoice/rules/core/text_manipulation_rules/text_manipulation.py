@@ -272,7 +272,7 @@ class TextManipulation(MergeRule):
             "next field": "tab",
             "last field": "s-tab",
             #line commands
-            "new line": "end,enter",
+            
             #clears text
             "clear line": "end/5, s-home/5, backspace",
             "strike line": "home:2/5, s-end/5, backspace:2",

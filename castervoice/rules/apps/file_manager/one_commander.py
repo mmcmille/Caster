@@ -12,8 +12,12 @@ from castervoice.lib.merge.state.short import R
 class OneCommanderRule(MappingRule):
     mapping = {
         #generic key rule
-
         "<key_rule>": R(Key("%(key_rule)s/10")),
+        #tab navigation
+        "(next | right | down) tab [<n>]":
+            R(Key("c-tab/20"))*Repeat(extra="n"),
+        "(prior | left | up ) tab [<n>]":
+            R(Key("cs-tab/20"))*Repeat(extra="n"),
 
         "rename <new_name>": R(Key('f2/20, %(new_name)s, enter')),
         "out [<n>]": R(Key('a-up/20') * Repeat(extra='n')),
@@ -36,7 +40,7 @@ class OneCommanderRule(MappingRule):
             "open": "c-p",
             "open with": "apps,h",
             "extract [all]": "escape, apps,t,enter",
-            "extract here": "escape, apps,down:4/20,enter",
+            "extract here": "escape, apps/40,down:5/20,enter",
             "Favorites": "c-d",
             "last": "a-left",
             "link": "cs-c, a-tab",

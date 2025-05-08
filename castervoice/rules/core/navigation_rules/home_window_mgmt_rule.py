@@ -33,12 +33,12 @@ class HomeWindowManagementRule(MappingRule):
 		"<key_rule>": R(Key("%(key_rule)s/5")),
 
         #moves window to the direction indicated
-        "window <direction> [<n>]":
+        "(window|win) <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),
         #stretches window to the left or right
-        "window (span|stretch) <direction> [<n>]":
+        "(window|win) (span|stretch) <direction> [<n>]":
             R(Key("wca-%(direction)s"))*Repeat(extra="n"),
-        "(span|stretch) window <direction> [<n>]":
+        "(span|stretch) (window|win) <direction> [<n>]":
             R(Key("wca-%(direction)s"))*Repeat(extra="n"),
         #switches the position of the center window with either the left or right window
         "window switch left":

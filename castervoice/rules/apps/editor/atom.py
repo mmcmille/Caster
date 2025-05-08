@@ -40,8 +40,9 @@ class AtomRule(MappingRule):
 
     mapping = {
         "search project [for] [<text>]": R(Key("cs-f")+ Pause("50")+ Text("%(text)s")+ Key("enter")),
-
-        # Menu UI------------------------------------------------------------------------
+        "(last|left) tab [<n>]": R(Key("c-pgup"))*Repeat(extra="n"),
+        "(next|right) tab [<n>]": R(Key("c-pgdown"))*Repeat(extra="n"),
+        # Menu UI-------------------------------------------------------
         #File Menu
         "[open] new window":
             R(Key("cs-n")),

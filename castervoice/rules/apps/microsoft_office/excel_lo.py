@@ -33,7 +33,8 @@ class ExcelRule(MappingRule):
     mapping = {
 
 
-
+        #scrolling
+        "scroll (here|this)" : R(Mouse("middle")),
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
         #temporary rule for transferring
@@ -161,6 +162,8 @@ class ExcelRule(MappingRule):
             "move this":"m",
             "get link":"l",
 
+
+
         }),
         Choice("key_rule", {
 
@@ -171,7 +174,8 @@ class ExcelRule(MappingRule):
 
             #Home
             "wrap text": "a-h/20, w",
-
+            "style": "a-h/20, j",
+            "style input": "a-h/20, j/40, down, right:5/10,enter",
             #Formulas
             "calculate sheet": "s-f9",
             "calculate workbook": "f9",
@@ -219,6 +223,7 @@ class ExcelRule(MappingRule):
             "(drop|insert) date":"c-semicolon",
             "drop special": "cs-v",
             "okay":"a-o, enter",
+            "transpose":"apps/20,t,enter",
 
             #worksheet
             "new sheet":"f6/20,tab/20,enter",
@@ -235,7 +240,7 @@ class ExcelRule(MappingRule):
             "(select|get) row": "s-space",
             "copy row": "s-space/40,c-c",
             "delete row": "s-space/40, apps,d",
-            "(add|insert) (row|rows)": "s-space/40,apps/20,i/10,enter",
+            "(add|insert) (row|rows)": "s-space/40,apps/20,i",
 
             #column
             "(select|get) column": "c-space",
