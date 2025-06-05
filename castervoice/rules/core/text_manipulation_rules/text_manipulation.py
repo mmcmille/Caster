@@ -306,7 +306,7 @@ class TextManipulation(MergeRule):
             "last name": "McMillen",
             "birthdate": "07/30/1983",
             "apartment address": "1426 Chinqua Pine Dr.",
-            "home address": "3012 Bear Oak Ln.",
+            "[home] address": "3012 Bear Oak Ln.",
             "Hollister address": "1561 Albright Dr.",
             "my phone number": "8315248552",
 
