@@ -11,6 +11,7 @@ from castervoice.lib.merge.state.short import R
 #double commander
 class OneCommanderRule(MappingRule):
     mapping = {
+
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s/10")),
         #tab navigation
@@ -24,6 +25,7 @@ class OneCommanderRule(MappingRule):
         "search text": R(Key("a-f7") + Pause("100") + Key("tab/10") * Repeat(extra=5)  + Key("space")),
         #"open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
         "<dict>": R(Text("%(dict)s")),
+
     }
     extras = [
         ShortIntegerRef("n", 1, 100),
@@ -34,7 +36,7 @@ class OneCommanderRule(MappingRule):
 		}),
 		Choice("key_rule", {
             "restore tab": "cs-t",
-            "switch [frame]": "a-f",
+            "(focus|switch) [frame]": "a-f",
             "transfer": "a-m",
             "duplicate": "a-c",
             "open": "c-p",
@@ -52,7 +54,7 @@ class OneCommanderRule(MappingRule):
             "properties": "apps,up,enter",
             "find [in] files": 'a-f7',
             "view": 'f3',
-            "address [bar]": 'f4',
+            "address [bar]": 'a-d',
             "move": 'f6',
             "new (directory | folder)": "cs-n",
             "wipe": 's-delete',

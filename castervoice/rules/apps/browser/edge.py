@@ -59,9 +59,9 @@ class EdgeRule(MappingRule):
             R(Key("cs-k")),
 
        #Plug-ins
-       #Midnight
+       #Midnight (Dark Reader Extension)
        "midnight":
-            R(Key("as-m")),
+            R(Key("as-d")),
        #click by voice
        "refresh (buttons | numbers)":
             R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
@@ -99,9 +99,9 @@ class EdgeRule(MappingRule):
         #    R(Key("c-w")) * Repeat(extra='n'),
         "win close|close all tabs":
             R(Key("cs-w")),
-        "(next|forward) tab [<n>]|tab (right|sauce) [<n>]":
+        "right tab [<n>]|tab right [<n>]":
             R(Key("c-tab/40")) * Repeat(extra="n"),
-        "(back|previous) tab [<n>]|tab (left|lease) [<n>]":
+        "left tab [<n>]|tab left [<n>]":
             R(Key("cs-tab/40")) * Repeat(extra="n"),
         "new tab that":
             R(Mouse("middle") + Pause("20") + Key("c-tab")),

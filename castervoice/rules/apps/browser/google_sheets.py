@@ -169,7 +169,7 @@ class GoogleSheetsRule(MappingRule):
             "okay":"a-o, enter",
             #selecting
             "(select|get) row": "s-space",
-            "(select|get) column": "c-space",
+            "(select|get) column": "c-space:2/40",
             "delete column": "c-minus/40, a-c, a-o, enter",
             "delete row": "c-minus/40, r, enter",
             "delete (cell|cells)": "apps,d",
@@ -178,14 +178,18 @@ class GoogleSheetsRule(MappingRule):
             "insert comment": "ca-c",
             "fly under": "up, c-down, down",
             #Sheet Navigation
+            "new sheet": "s-f11",
             "open sheet":"as-k",
+            "sheet menu":"as-s",
+            "rename sheet":"a-1",
             #Writer
             "check spelling": "f7",
 
             #Menus
             #Home
             "clear (format|formats|formatting)":"a-h,e,f",
-            "normal text":"a-h,e,f",
+            "normal text":"c-backslash",
+            "[keyboard] shortcuts":"c-slash",
             #Macros
             "generate":"c-g",#for hierarchy viewer macro
             #saving

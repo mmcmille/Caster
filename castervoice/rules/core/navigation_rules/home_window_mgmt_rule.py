@@ -64,19 +64,17 @@ class HomeWindowManagementRule(MappingRule):
 
         "window ( far |fly ) <direction> [<n>]":
             R(Key("ws-%(direction)s"))*Repeat(extra="n"),
-        "(next | prior) window":
-            R(Key("ca-tab, enter")),
 
 
         #app switching by listed number
-        "[<close_choice>] (open|show|window) <n>":
-            R(
-                Key("w-t:%(n)s") +
-                Key("enter") +
-                Pause("50") +
-                Mouse("(0.5, 0.5)") +
-                Key("%(close_choice)s")
-            ),
+        #"[<close_choice>] (open|show|window) <n>":
+        #    R(
+        #        Key("w-t/10,end/10,w-t:%(n)s/20") +
+        #        Key("enter") +
+        #        Pause("50") +
+        #        Mouse("(0.5, 0.5)") +
+        #        Key("%(close_choice)s")
+        #    ),
         #app switching via Windows number , 1-10
         "[<close_choice>] (open|show|window) <app_n_key>":
             R(
@@ -85,17 +83,15 @@ class HomeWindowManagementRule(MappingRule):
                 Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
-
-        #app switching via fluent search
-        "show apps": R(Key("ca-p/10,down")),# + Pause( "100") + Text("%(text)s ")),
+        #app switching via switcheroo
+        "switch": R(Key("w-`/20")),
+        "switch <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
+        "switch <text>": R(Key("w-`/20")+Text("%(text)s")),
 
         #displays Windows to switch to
         "show (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
 
-        "show app (window | windows)":
-            R(Key("ca-tilde"))*Repeat(extra="n"),
-        #"taskbar <n>": R(Key("w-%(n)s")),
         #switches to last displayed app
         "show":
             R(
@@ -169,6 +165,11 @@ class HomeWindowManagementRule(MappingRule):
             "(spirit)": 8,
             "(map)": 9,
             #"(10)": 0,
+        }),
+        Choice("app_name", {
+        "email":"Outlook",
+        "files":"OneCommander",
+        "notes": "onenote",
         }),
         Choice("app_n_11", {
             "11": 1,
