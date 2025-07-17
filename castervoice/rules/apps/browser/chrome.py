@@ -30,6 +30,8 @@ class ChromeRule(MappingRule):
             R(Key("c-tab/20"))*Repeat(extra="n"),
         "(prior | left | up ) tab [<n>]":
             R(Key("cs-tab/20"))*Repeat(extra="n"),
+        "tab (here|this)": R(Mouse("right") + Key("down,enter")),
+
         #Google Sheets
         #menu control
         "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
@@ -59,8 +61,8 @@ class ChromeRule(MappingRule):
         "link":
             R(Key("a-c/50, a-tab")),
         "link <m>": R(Key("a-c/50, w-%(m)s")),
-        "link map": R(Key("a-c/50, w-9/1")),#assumes map is output window 9
-        "link notes ": R(Key("a-c/50, w-6/1")),#assumes onenote  is output window 6
+        #"link map": R(Key("a-c/50, w-9/1")),#assumes map is output window 9
+        "link notes ": R(Key("a-c/50, w-5/1")),#assumes onenote  is output window 5
         #implemented in nav2 "find": R(Key("c-f")),
         "previous": R(Key("a-left")),
 	    "duplicate tab":
@@ -206,19 +208,7 @@ class ChromeRule(MappingRule):
             R(Key("a-f/20, l, e/15, enter")),
         "more tools":
             R(Key("a-f/5, l")),
-
-#IM
-        "<im_crop>": R(Key("tab,space/20,s-tab/40,enter/40")
-        + Text("%(im_crop)s")
-        + Pause("20")
-        + Key("space/40,tab:2/40,space,s-tab:3")
-
-        ),
-
-        "<im_attribute>": R(Key("c-a/20")
-            + Text("%(im_attribute)s")
-            + Key("enter/10,tab/20,down:7,tab")),
-    }
+        }
     extras = [
         Dictation("dict"),
         Choice("nth", {
@@ -263,24 +253,7 @@ class ChromeRule(MappingRule):
             "window": "w",
 			"help": "h",
 		}),
-        Choice("im_attribute", {
-            "material":"Material ID",
-            "line":"Stable Line Code",
-            "variety":"Stable Variety Code",
-            "BE|be E":"Biological Entity",
-        }),
-        Choice("im_crop", {
-            "broccoli":"br",
-            "cauliflower": "cau",
-            "lettuce": "l",
-            "pepper|peppers":"pep",
-            "spinach": "sp",
-            "squash": "sq",
-            "sweetcorn": "sw",
-            "tomato":"t",
 
-            "watermelon": "wa",
-        }),
         Choice("key_rule", {
             "switch mode": "f7",
             "restore tab": "cs-t",
@@ -305,13 +278,6 @@ class ChromeRule(MappingRule):
            "page":"c-k",
            "command":"c-slash",
            "search":"cs-f",
-
-           #IM
-           "batch":"f5/80,tab:14",
-           "entity":"f5/80,tab:13/10,down/10,tab",
-           "search":"tab:4/20,space",
-
-
 
         }),
     ]

@@ -83,7 +83,7 @@ class TextManipulation(MergeRule):
 
 
         "get line":#selects line
-            R(Key("home, shift:down/5, end/5, shift:up")),
+            R(Key("end/5, s-home")),
         "get <n> lines":#selects number of lines below
             #R(Key("home/5, s-down:%(number_of_lines_to_get)s/5, s-end/5")),
             R(Key("home/5") +  Key("s-down/5")*Repeat(extra="n")),
@@ -92,16 +92,16 @@ class TextManipulation(MergeRule):
 
         #selects words
         "get word": R(Key("c-left/5, cs-right/5")),
-        "get <direction> [n]": #selects n words to the left or right, defaults to left
+        "get <direction> [<n>]": #selects n words to the left or right, defaults to left
             R(Key("cs-%(direction)s/1")*Repeat(extra="n")),
         "get <direction> <direction2> [<n>]": #selects n words to the two directions, defaults to left
             R(Key("cs-%(direction)s/1") + Key("s-%(direction2)s/1")*Repeat(extra="n")),
 
 
-        #"copy line [<number_of_lines_to_get>]":
-        #    R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-c")),
-        #"cut line [<number_of_lines_to_get>]":
-        #    R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-x")),
+        "copy line [<number_of_lines_to_get>]":
+            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-c")),
+        "cut line [<number_of_lines_to_get>]":
+            R(Key("home, s-end, s-down:%(number_of_lines_to_get)s/5, s-end:%(number_of_lines_to_get)s/5, c-x")),
         "snag [<n>]": #char
             R(Key("s-left:%(n)s")),
         "snag right [<n>]":
@@ -264,20 +264,20 @@ class TextManipulation(MergeRule):
         Choice("key_rule", {
             # this refers to what is selected
             # this (verb), select then act, verb this: act on current selection
-            "bold (this|text)": "c-b",
-            "underline (this|text)": "c-u",
-            "(italic|italicize) (this|text)": "c-i",
+            "bold (it|this|text)": "c-b",
+            "underline (it|this|text)": "c-u",
+            "(italic|italicize|tilt) (it|this|text)": "c-i",
 
             #switch field
             "next field": "tab",
             "last field": "s-tab",
             #line commands
-            
             #clears text
             "clear line": "end/5, s-home/5, backspace",
-            "strike line": "home:2/5, s-end/5, backspace:2",
+            "(delete|remove|strike) line": "home:2/5, s-end/5, backspace, s-end/5, backspace",
             "clear page": "c-a/10, backspace",
-            #copying
+            "replace page": "c-a/10, backspace/20, c-v",
+            #copyingsee
             #added release modifiers to work with "select"
             "copy [this] ": "c-c",
             "copy [this] over": "c-c/20, a-tab",

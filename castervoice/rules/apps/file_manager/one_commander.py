@@ -24,6 +24,7 @@ class OneCommanderRule(MappingRule):
         "out [<n>]": R(Key('a-up/20') * Repeat(extra='n')),
         "search text": R(Key("a-f7") + Pause("100") + Key("tab/10") * Repeat(extra=5)  + Key("space")),
         #"open T Drive": R(Key("c-p") + Text("t:/") + Key("enter")),
+        #must be last rule or will consume above rules
         "<dict>": R(Text("%(dict)s")),
 
     }
@@ -36,7 +37,11 @@ class OneCommanderRule(MappingRule):
 		}),
 		Choice("key_rule", {
             "restore tab": "cs-t",
+<<<<<<< Updated upstream
             "(focus|switch) [frame]": "a-f",
+=======
+            "[switch|top|bottom] frame": "a-f",
+>>>>>>> Stashed changes
             "transfer": "a-m",
             "duplicate": "a-c",
             "open": "c-p",

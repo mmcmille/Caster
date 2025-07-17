@@ -70,7 +70,6 @@ class NavigationNon(MappingRule):
             R(Key("control:down") + Mouse("wheelup") + Key("control:up"))*Repeat(extra="n"),
         "(zoom out|decrease font) [<n>]":
             R(Key("control:down") + Mouse("wheeldown") + Key("control:up"))*Repeat(extra="n"),
-
         "colic":
             R(Key("control:down") + Mouse("left") + Key("control:up")),
         "garb [<nnavi500>]":
@@ -84,7 +83,7 @@ class NavigationNon(MappingRule):
         "refresh":
             R(Key("c-r")),
         "move window":
-            R(Key("a-space, r, a-space, m")),
+            R(Key("a-space/10, r, a-space/10, m/30,left")),
         "window (left | lease) [<n>]":
             R(Key("w-left"))*Repeat(extra="n"),
         "window (right | ross) [<n>]":
@@ -137,24 +136,24 @@ class NavigationNon(MappingRule):
         }),
         Choice("mouse_grid", {#3x3 grid for mouse
             "title bar": "60, 20",
-            "top left edge": "0, 0",
+            "top left (edge|corner)": "0, 0",
             "top left": "0.05, 0.05",
             "top": "0.5, 0.17",
             "top edge": "0.5, 0.001",
             "window title": "0.5, 0.01",
             "top right": "0.83, 0.17",
-            "top right edge": "0.9999, 0",
+            "top right (edge|corner)": "0.99, 0.005",
             "(mid|center) left": "0.17, 0.5",
             "left edge": "0, 0.5",
             "(center|middle)": "0.5, 0.5",
             "(mid|center) right": "0.83, 0.5",
             "right edge": "-1, 0.5",
             "bottom left": "0.17, 0.83",
-            "bottom left edge": "0, 0.999",
+            "bottom left (edge|corner)": "0, 0.999",
             "bottom": "0.5, 0.83",
             "bottom edge ": "0.5, 0.994",
             "bottom right": "0.83, 0.83",
-            "bottom right edge": "0.99, 0.999",
+            "bottom right (edge|corner)": "0.99, 0.999",
         }),
 
         Choice("track_choice",{

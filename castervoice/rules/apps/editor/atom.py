@@ -212,7 +212,7 @@ class AtomRule(MappingRule):
         "[select] inside brackets":
             R(Key("ac-comma")),
         #Find Menu
-        "find [<text>]": R(Key("c-f")+ Pause("50")+ Text("%(text)s")),
+        "(find|search) [<text>]": R(Key("c-f")+ Pause("50")+ Text("%(text)s")),
         "find (selection | selected)":
             R(Key("c-e")),
         "find [and] select all":

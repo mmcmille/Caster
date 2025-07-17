@@ -16,6 +16,7 @@ class OneNoteRule(MappingRule):
 
 		#generic key rule
         "<key_rule>": R(Key("%(key_rule)s/40")),
+        "<rc_rule>": R(Key("%(key_rule)s/40")),
 
         #menu control
         "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
@@ -68,7 +69,9 @@ class OneNoteRule(MappingRule):
         # change max to 3 if you want sequences of lentgh three and so on
         Repetition(Choice("alphabet1", alphabet_support.caster_alphabet()), min=1, max=2, name="column_1"),
         Repetition(Choice("alphabet2", alphabet_support.caster_alphabet()), min=1, max=2, name="column_2"),
-
+        Choice("rc_rule", {
+            "link page":"l",
+        }),
         #Key Rules
         Choice("key_rule", {
 			"full (page|screen)": "f11",
@@ -80,7 +83,11 @@ class OneNoteRule(MappingRule):
 			"drop date":"as-d",
 			"open link": "c-enter", #open selected link
 			"edit link": "c-k", #edit selected link
+<<<<<<< Updated upstream
 			"(get link|link paragraph)":"apps,p", #get link to paragraph
+=======
+			"[get] link":"apps,p", #get link to paragraph
+>>>>>>> Stashed changes
             "remove (tag|tags)": "c-0",
             "checkbox": "c-1",
 			"number list": "c-slash",

@@ -35,22 +35,16 @@ class SpiritRule(MappingRule):
 		#Citrix Path
 		#+ Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
 		#Local Path
-		+ Text("C:", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01) + Pause("50") + Key("s-tab")),
+		+ Text("C:", pause = 0.01) + Text("\\temp\DefaultExport.xlsx", pause = 0.01) + Pause("50") + Key("s-tab")),
 
-		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\Spirit_temp_export.xlsx", pause = 0.01)), #+Key("s-tab")),
+		"temp": R(Text("\\") + Text("\Client\C$", pause = 0.01) + Text("\\temp\DefaultExport.xlsx", pause = 0.01)), #+Key("s-tab")),
 
 		#servers
 		"<server_name> server": R(Key("end/20,s-home")+Text("%(server_name)s")+Key("tab")),
-
-		#"close frame": R(Mouse("(0.998, 38), left")),#R(Key("a-f/40,enter")),
-
 		#row and column right-click menu commands
 		#uses menu key, where the mouse is resting on row
 		"<rc_item>": R(Key("apps/80, %(rc_item)s/40,enter")), #Mouse("left/40,right/40") +
-		"view associated": R(Mouse("left/40,right/40") +Key("v")),
-
-
-
+		"view associated":R(Key("apps/80, v")), #Mouse("left/40,right/40") +"v",
 		#mouse commands
 		"(drag over|pull over| bring over| apply profile | apply this)": R(Mouse("left:down/60, <-800, 0>, left:down/80, left:up")),
 		"pull up": R(Mouse("left:down/10, <0, -30>") + Pause("50") + Mouse("left:up")),
@@ -66,8 +60,8 @@ class SpiritRule(MappingRule):
 	extras = [
 		Choice("server_name",{
 			"global": "SPR-GDB-P-1.NAFTA.SYNGENTA.ORG",
-			#"US": "SPR-USRDB-P-1.NAFTA.SYNGENTA.ORG",
-			"european": "SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG",
+			"stage": "SPR-USRDB-S-1.NAFTA.SYNGENTA.ORG",
+			"EU|european|production|main": "SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG",
 		}),
 		Choice("menu_title", { #press alt...
 			"file": "f",
@@ -85,13 +79,18 @@ class SpiritRule(MappingRule):
 		}),
 
 		Choice("spirit_trait", {
+			#full Spirit trait chains
+
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
 			#Material
-			"(material ID|mad ID)":"MAT:MATID",
-			"Matt BE":"MAT:MMT:BEBID",
-			"Matt line code":"MAT:LINE:LINCD",
-			"batch bid":"MAT:MMT:BID",
+			"(Matt|material) ID":"MAT:MATID",
+			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
+			"[Matt|material] generation code":"MAT:GENCD",
+			"[Matt|material] identity generation code ": "MAT:MMT:IGENCD",
+			"(Matt|material) line code":"MAT:LINE:LINCD",
+			"(Matt|material) batch bid":"MAT:MMT:BID",
+			"(Matt|material) LBG": "MAT:MMT:",
 
 
 			#Line
@@ -105,6 +104,7 @@ class SpiritRule(MappingRule):
 			#VH
 			"stable variety code":"VH:STBVC",
 			"variety name":"VH:VHNM",
+			"variety number":"VH:VHNO",
 			#People
 			#location
 			"location code":"LOC:LOCCD",
@@ -112,15 +112,20 @@ class SpiritRule(MappingRule):
 			"trait code":"UDTRT:UDTCD",
 		}),
 		Choice("spirit_part_trait", {
-			#partial traits
-			"line":"LINE:",
+			#partial trait chains
 
+			#line
+			"line":"LINE:",
+			"default material": "DMAT:",
 			#material
+			"[biological] entity":"MMT:BEBID",
 			"material":"MAT:",
-			"female parent":"FPARM:",
+			"female parent":"F",
 			"male parent":"MPARM:",
 			"batch":"MMT:BID",
-
+			"identity generation code": "MMT:IGENCD",
+			"pedigree":"PDGRE",
+			"identity pedigree":"MMT:BPDGRE",
 
 		}),
 
@@ -146,7 +151,7 @@ class SpiritRule(MappingRule):
 
 
 
-			"advanced sort":"396, 70",
+			"advanced sort":"386, 70",
 
 			"cell 1":"190, 135",
 			"get table":"180, 128",
@@ -159,6 +164,7 @@ class SpiritRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
+				"view [associated] (affiliations|GNA)": "v/40, g",
 				"view [associated] (locations|line|lines)": "v/40, l",
 				"view [associated] materials [created]": "v/40, m",
 				"view [associated] (parent materials|parents)": "v/40, p",
@@ -167,9 +173,11 @@ class SpiritRule(MappingRule):
 				"view [associated] progeny": "v/40, right/40, up:4",
 				"view [associated] pollinations": "v/40, right/40, up",
 				"view [associated] (trial|trials)": "v/40, t",
-
+				"view [associated] variety": "v/40, v",
+				"append [existing] [flex] traits": "a:3",
 				"(add|make) subplots": "a:2",
 
+				"check quantity": "c:3",
 				"plant (trial|trials)":"p/40:3",
 				"sort [down]":"up:8/10,right/10,down",
 				"sort up":"up:8/10,right/10,down:2",
@@ -181,8 +189,8 @@ class SpiritRule(MappingRule):
 
 				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
-				"remove":"r",
-				"delete record":"d",
+				"remove [record|records]":"r",
+				"delete (record|records)":"d",
 				"properties":"up",
 
 
@@ -193,6 +201,8 @@ class SpiritRule(MappingRule):
 
 			#crops
 			"broccoli":"b",
+			"Brussels sprouts":"b:2",
+			"cabbage":"c",
 			"cauliflower":"c:3",
 			"cucumber":"c:7",
 			"lettuce":"l",
@@ -201,15 +211,21 @@ class SpiritRule(MappingRule):
 			"tomato":"t",
 			"watermelon":"w",
 
+
 			#query
-			"next": "tab",
+			"next [field]": "tab",
 			"run query": "a-q",
+			"clear query": "a-c",
 			"append":"a-a",
 			"replace":"a-r",
 			"close query": "a-s",
-			"remove": "apps,r",
+			#"remove": "apps,r",
 			"like": "l",
 			"in":"i",
+
+			#Show Hide Columns
+			"transfer":"tab,space,s-tab",
+			"move":"s-tab:3",
 
 			#other commands
 			"(okay|OK)":"a-o",
@@ -217,9 +233,9 @@ class SpiritRule(MappingRule):
 			"refresh (grid|frame)": "f5",
 			"paste down":"apps/20, down:4/10, enter",
 
-			#Show Hide Columns
-			"transfer":"tab,space,s-tab",
-			"move":"s-tab:3",
+			#Cell text
+			"submit":"s,u,tab",
+			"complete":"c,tab",
 
 
 		}),
