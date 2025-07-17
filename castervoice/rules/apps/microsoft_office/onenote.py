@@ -83,11 +83,7 @@ class OneNoteRule(MappingRule):
 			"drop date":"as-d",
 			"open link": "c-enter", #open selected link
 			"edit link": "c-k", #edit selected link
-<<<<<<< Updated upstream
 			"(get link|link paragraph)":"apps,p", #get link to paragraph
-=======
-			"[get] link":"apps,p", #get link to paragraph
->>>>>>> Stashed changes
             "remove (tag|tags)": "c-0",
             "checkbox": "c-1",
 			"number list": "c-slash",

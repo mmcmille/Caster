@@ -37,11 +37,7 @@ class OneCommanderRule(MappingRule):
 		}),
 		Choice("key_rule", {
             "restore tab": "cs-t",
-<<<<<<< Updated upstream
-            "(focus|switch) [frame]": "a-f",
-=======
             "[switch|top|bottom] frame": "a-f",
->>>>>>> Stashed changes
             "transfer": "a-m",
             "duplicate": "a-c",
             "open": "c-p",
