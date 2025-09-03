@@ -114,7 +114,7 @@ class OutlookRule(MappingRule):
         "Mark as unread": R(Key("c-u")),
         #folders
         "[(go to|open)] folder": R(Key("c-y")),
-        "move (it|to) [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
+        "move [it|to] [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),

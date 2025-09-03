@@ -57,7 +57,7 @@ class NavigationNon(MappingRule):
             R(Mouse("(%(mouse_grid)s)")+ Key("%(track_choice)s")),
         "<mouse_grid> [<track_choice>] screen":
             R(Mouse("%(mouse_grid)s")+ Key("%(track_choice)s")),
-        "hold <mouse_grid>":
+        "(get|hold) <mouse_grid>":
             R(Mouse("(%(mouse_grid)s)") + Function(navigation.left_down)),
         "scroll [<direction>] [<nnavi500>]":
             R(Function(navigation.wheel_scroll)),

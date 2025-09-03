@@ -51,6 +51,7 @@ class DBeaverRule(MappingRule):
 			# "cancel":"a-c", # esc will also cancel
 			# menu items
 			"preferences": "c-comma",
+			"save as": "a-f/10, down:4/10, enter",
 			"save all": "a-f/10, a",#"a-s",
 			"(copy|get) branch": "cs-c",
 			"(copy|get) [node] ID": "a-e/10,c,c",# "cs-i",

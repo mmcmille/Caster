@@ -164,7 +164,6 @@ class ExcelRule(MappingRule):
         Choice("rc_item", {
             "delete this": "d",
             "move this":"m",
-            "get link":"l",
             "insert here":"e",
 
 
@@ -181,7 +180,9 @@ class ExcelRule(MappingRule):
         Choice("key_rule", {
             "function":"equals",
             "edit": "f2",
+            "locket":"f4",
             #links
+            "get link":"alt/20,z,s,l",
             "edit link": "c-k",
             "open link": "apps/20,o,o,enter",
             "remove link": "apps/20,r",
@@ -195,7 +196,7 @@ class ExcelRule(MappingRule):
             "style note": "a-h/20, j/40, down:2/10, right/10,enter",
             #Formulas
             "calculate sheet": "s-f9",
-            "calculate workbook": "f9",
+            "calculate (workbook|now|file)": "f9",
             "manual calculation":"a-m,x,m",
             "automatic calculation":"a-m,x,a",
 
@@ -204,7 +205,7 @@ class ExcelRule(MappingRule):
             "remove duplicates":"a-a/10,m/80,s-tab:2",
 
             # View
-            "(switch modes|midnight)":"a-w/40,m,1", 
+            "(switch modes|midnight)":"a-w/40,m,1",
             "new window":"a-w/40,n",
             "hide": "apps/20,h",
             "unhide": "apps/20,u",
@@ -235,7 +236,7 @@ class ExcelRule(MappingRule):
             "(custom|advanced) sort": "a-h/10,s,u",
             #"fill down": "c-d",
             "get unique values": "alt/20, a, 2, u/40, enter",
-        	"save [file] as": "a-f/40, a/20",
+        	"save [file] as": "a-f/40, a/60,o",
 
             #pasting
             "fill right": "c-c, right, c-down, left, cs-up, c-v", #fills down based on adjacent right column
@@ -251,6 +252,8 @@ class ExcelRule(MappingRule):
             "insert cut cells" : "apps/20, e",
 
             #selecting
+            "next field":"tab",
+            "last field": "s-tab",
             "(open|activate) sheet":"f6/20,s-tab/20,apps",
             "delete [cell|cells]": "apps,d",
 
@@ -267,7 +270,8 @@ class ExcelRule(MappingRule):
             "(add|insert) (column|columns)": "escape/10, c-space, apps, i/20", #c, a-o,
             "fit (column|columns) [width]": "a-h,o,i",
 
-
+            #comments
+            "show comments": "a-r/20,h,1",
             "[new|insert] comment": "a-r/20,c",
             "[new|insert] note": "s-f2",
             "fly under": "up, c-down, down",
@@ -298,9 +302,12 @@ class ExcelRule(MappingRule):
         Choice("function", { #Excel functions
             "join": "TEXTJOIN(\";\",TRUE,",
             "[V] look up": "VLOOKUP(",
+            "char":"CHAR(",
+            "length":"LEN(",
             "count": "COUNTIF(",
             "index": "INDEX(",
             "match":"MATCH(",
+
 
         }),
     ]

@@ -56,7 +56,7 @@ def text_punc_dict():
         "[is] greater than | right " + _id["<>"]:             ">",
         "[is] greater [than] [or] equal [to]":               ">=",
         "questo":                                             "?",
-        "(atty | at symbol)":                                 "@",
+        "(atty | at symbol | at sign)":                       "@",
         "open " + _id["[]"]:                                  "[",
         "backslash":                                         "\\",
         "close " + _id["[]"]:                                 "]",

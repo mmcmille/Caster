@@ -67,14 +67,15 @@ class HomeWindowManagementRule(MappingRule):
 
 
         #app switching by listed number
-        #"[<close_choice>] (open|show|window) <n>":
-        #    R(
-        #        Key("w-t/10,end/10,w-t:%(n)s/20") +
-        #        Key("enter") +
-        #        Pause("50") +
-        #        Mouse("(0.5, 0.5)") +
-        #        Key("%(close_choice)s")
-        #    ),
+        "[<close_choice>] (open|show|window) <n>":
+            R(
+                Key("w-t:%(n)s/20") +
+                Key("enter") +
+                Pause("50") +
+                Mouse("(0.5, 0.5)") +
+                Key("%(close_choice)s")
+            ),
+
         #app switching via Windows number , 1-10
         "[<close_choice>] (open|show|window) <app_n_key>":
             R(
@@ -170,6 +171,7 @@ class HomeWindowManagementRule(MappingRule):
         "email":"Outlook",
         "files":"OneCommander",
         "notes": "onenote",
+        "spirit":"spirit",
         }),
         Choice("app_n_11", {
             "11": 1,
@@ -216,6 +218,7 @@ class HomeWindowManagementRule(MappingRule):
             "click": "csa-m",#puts letters on the screen for navigation using Fluent Search
             "snippet": "ws-s",#uses snipping tool
             "(show|open) clipboard": "w-v",
+            "drop clipboard": "w-v/80,enter",
             #uses power toys
             "get text": "ws-t",
             "screen ruler":"ws-m",
@@ -227,3 +230,4 @@ class HomeWindowManagementRule(MappingRule):
 def get_rule():
     details = RuleDetails(name="home computer rule")
     return HomeWindowManagementRule, details
+#

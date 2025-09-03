@@ -47,7 +47,7 @@ class Punctuation(MergeRule):
                 "break": ",",
                 "period": ".",
                 "X point": "!", #dragon "(exclamation point | !)": "!",
-                "Q mark": "?", #dragon "(question mark | ?)": "?",
+                "(question mark | ?)": "?",#kaldi "question mark": "?", #dragon 
                 "deaf": ":",
         }),
         Choice(

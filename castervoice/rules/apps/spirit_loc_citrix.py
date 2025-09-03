@@ -41,6 +41,8 @@ class SpiritRule(MappingRule):
 
 		#servers
 		"<server_name> server": R(Key("end/20,s-home")+Text("%(server_name)s")+Key("tab")),
+		"<crop>": R(Key("b,%(crop)s/60")),
+
 		#row and column right-click menu commands
 		#uses menu key, where the mouse is resting on row
 		"<rc_item>": R(Key("apps/80, %(rc_item)s/40,enter")), #Mouse("left/40,right/40") +
@@ -59,9 +61,9 @@ class SpiritRule(MappingRule):
 	}
 	extras = [
 		Choice("server_name",{
-			"global": "SPR-GDB-P-1.NAFTA.SYNGENTA.ORG",
-			"stage": "SPR-USRDB-S-1.NAFTA.SYNGENTA.ORG",
-			"EU|european|production|main": "SPR-EURDB-P-1.NAFTA.SYNGENTA.ORG",
+			"global": "SPR-GDB-P-2.NAFTA.SYNGENTA.ORG",
+			"stage": "spr-eurdb-s-3.nafta.syngenta.org",
+			"EU|european|production|main|local": "SPR-EURDB-P-2.NAFTA.SYNGENTA.ORG",
 		}),
 		Choice("menu_title", { #press alt...
 			"file": "f",
@@ -86,7 +88,8 @@ class SpiritRule(MappingRule):
 			#Material
 			"(Matt|material) ID":"MAT:MATID",
 			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
-			"[Matt|material] generation code":"MAT:GENCD",
+			"(Matt|material) creation date":"MAT:CRTDT",
+			"[Matt|material] (generation|Jen) code":"MAT:GENCD",
 			"[Matt|material] identity generation code ": "MAT:MMT:IGENCD",
 			"(Matt|material) line code":"MAT:LINE:LINCD",
 			"(Matt|material) batch bid":"MAT:MMT:BID",
@@ -94,7 +97,7 @@ class SpiritRule(MappingRule):
 
 
 			#Line
-			"line line code":"LINE:LINCD",
+			"[line] line code":"LINE:LINCD",
 			"line incident number":"LINE:INCNO",
 
 			"person code":"PERSN:CODE",
@@ -116,16 +119,17 @@ class SpiritRule(MappingRule):
 
 			#line
 			"line":"LINE:",
+
 			"default material": "DMAT:",
 			#material
-			"[biological] entity":"MMT:BEBID",
+			"BE BID":"MMT:BEBID",
 			"material":"MAT:",
-			"female parent":"F",
+			"female parent":"FPARM:",
 			"male parent":"MPARM:",
-			"batch":"MMT:BID",
+			"batch [bid]":"MMT:BID",
 			"identity generation code": "MMT:IGENCD",
 			"pedigree":"PDGRE",
-			"identity pedigree":"MMT:BPDGRE",
+			"(identity|batch) pedigree":"MMT:BPDGRE",
 
 		}),
 
@@ -134,14 +138,13 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "785,66",
+			"query": "780,66",
 
 			"people":"1073,81",
 			"crop logins":"1105,81",
 
 
 			#"material management":"87, 130",
-			"materials":"82, 160",
 			"(trial|experiment) management":"87, 654",
 
 			"lines": "87,66",
@@ -151,7 +154,7 @@ class SpiritRule(MappingRule):
 
 
 
-			"advanced sort":"386, 70",
+			"advanced sort":"396, 60",
 
 			"cell 1":"190, 135",
 			"get table":"180, 128",
@@ -172,6 +175,7 @@ class SpiritRule(MappingRule):
 				"view [associated] plots": "v/40, right/40, p",
 				"view [associated] progeny": "v/40, right/40, up:4",
 				"view [associated] pollinations": "v/40, right/40, up",
+				"view [associated] source pollinations": "v/40, s",
 				"view [associated] (trial|trials)": "v/40, t",
 				"view [associated] variety": "v/40, v",
 				"append [existing] [flex] traits": "a:3",
@@ -195,26 +199,27 @@ class SpiritRule(MappingRule):
 
 
 		}),
-		Choice("key_rule", {
-			#close window
-			"close window":"",
-
+		Choice("crop", {
 			#crops
-			"broccoli":"b",
-			"Brussels sprouts":"b:2",
+			"broccoli":"up",
+			"Brussels sprouts":"b",
 			"cabbage":"c",
 			"cauliflower":"c:3",
 			"cucumber":"c:7",
 			"lettuce":"l",
 			"peppers":"p:2",
+			"Spinach":"s:3",
 			"sweetcorn":"s:6",
 			"tomato":"t",
 			"watermelon":"w",
-
+		}),
+		Choice("key_rule", {
+			#close window
+			"close window":"",
 
 			#query
 			"next [field]": "tab",
-			"run query": "a-q",
+			"(run query|search it)": "a-q",
 			"clear query": "a-c",
 			"append":"a-a",
 			"replace":"a-r",

@@ -71,7 +71,7 @@ class ChromeRule(MappingRule):
        #Plug-ins
        #Midnight
        "midnight":
-            R(Key("as-m")),
+            R(Key("as-d")),
        #click by voice
        "refresh (buttons | numbers)":
             R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +

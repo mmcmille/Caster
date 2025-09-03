@@ -268,9 +268,7 @@ class TextManipulation(MergeRule):
             "underline (it|this|text)": "c-u",
             "(italic|italicize|tilt) (it|this|text)": "c-i",
 
-            #switch field
-            "next field": "tab",
-            "last field": "s-tab",
+
             #line commands
             #clears text
             "clear line": "end/5, s-home/5, backspace",
@@ -321,7 +319,7 @@ class TextManipulation(MergeRule):
             # Syngenta
             "Aparna":"Aparnadevi.Vadlani@syngenta.com",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "[syngenta] password":"Q11111w1e1r6",#
+            "[syngenta] password":"Q1w1e1r1t1",#
             "employee ID": "8610841",
             "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",
