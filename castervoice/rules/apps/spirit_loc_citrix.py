@@ -86,6 +86,7 @@ class SpiritRule(MappingRule):
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
 			#Material
+			"[Matt|material] abbreviated code ": "MAT:ABBRC",
 			"(Matt|material) ID":"MAT:MATID",
 			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
 			"(Matt|material) creation date":"MAT:CRTDT",
@@ -193,8 +194,8 @@ class SpiritRule(MappingRule):
 
 				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
-				"remove [record|records]":"r",
-				"delete (record|records)":"d",
+				"remove (row|rows|record|records)":"r",
+				"delete (row|rows|record|records)":"d",
 				"properties":"up",
 
 
