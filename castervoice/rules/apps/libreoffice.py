@@ -147,6 +147,8 @@ class LORule(MappingRule):
 		}),
 
         Choice("key_rule", {
+
+            "(drop|insert) date":"c-semicolon",
             "edit": "f2",
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",

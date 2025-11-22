@@ -85,10 +85,9 @@ class HomeWindowManagementRule(MappingRule):
                 Key("%(close_choice)s")
             ),
         #app switching via switcheroo
-        "switch": R(Key("w-`/20")),
-        "switch <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
-        "switch <text>": R(Key("w-`/20")+Text("%(text)s")),
-
+        "window": R(Key("w-`/20")),
+        "window <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
+        ##"window <text>": R(Key("w-`/20")+Text("%(text)s")),
         #displays Windows to switch to
         "show (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
@@ -143,6 +142,9 @@ class HomeWindowManagementRule(MappingRule):
             R(Function(virtual_desktops.move_current_window_to_desktop)),
         "move work [space] <n>":
             R(Function(virtual_desktops.move_current_window_to_desktop, follow=True)),
+
+        #
+        "window <text>": R(Key("w-`/20")+Text("%(text)s")),
     }
 
     extras = [
@@ -230,4 +232,3 @@ class HomeWindowManagementRule(MappingRule):
 def get_rule():
     details = RuleDetails(name="home computer rule")
     return HomeWindowManagementRule, details
-#

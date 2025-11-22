@@ -131,6 +131,7 @@ class GoogleSheetsRule(MappingRule):
         Choice("key_rule", {
 
             "(drop|insert) date":"c-semicolon",
+
             "edit": "f2",
             "edit link": "c-k",
             #Home
@@ -139,7 +140,8 @@ class GoogleSheetsRule(MappingRule):
             "calculate sheet": "s-f9",
             "calculate workbook": "f9",
             #Data
-            "refresh all":"a-a/10,r,a",
+            "data validation":"a-a/10,v",
+
             # View
             "new window":"a-w/40,n",
             "hide columns":"c-space/10,apps/20,h",
@@ -154,10 +156,9 @@ class GoogleSheetsRule(MappingRule):
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
-            "filter": "a-down/20, down:8/20",
-            "(clear filter| filter off)": "a-down/40, c/20",
+            "(clear filter| filter off)": "c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
+            "filter": "ca-r/20, tab:6/20",
             #sorting
-            "sort [down]": "a-down/40, s",#-tab, space, enter",
             "sort up": "a-down/40, o", #s-tab, space, down, enter",
             "(custom|advanced) sort": "a-h/10,s,u",
             "fill down": "c-d",
