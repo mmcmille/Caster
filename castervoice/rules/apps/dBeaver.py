@@ -46,74 +46,8 @@ class DBeaverRule(MappingRule):
 			"right": "right",
 		}),
 		Choice("key_rule", {
-			"over ": "a-tab",
-			"okay":"a-o",
-			# "cancel":"a-c", # esc will also cancel
-			# menu items
-			"preferences": "c-comma",
-			"save as": "a-f/10, down:4/10, enter",
-			"save all": "a-f/10, a",#"a-s",
-			"(copy|get) branch": "cs-c",
-			"(copy|get) [node] ID": "a-e/10,c,c",# "cs-i",
-			"[get] (link|address)": "a-e/10,c,o",
-			# navigation
-			"last": "a-left",
-			"next": "a-right",
-			"(jump in|isolate)":"s-escape",
-			"jump out":"a-n,m",
-
-			"next":"enter,enter",
-
-			"fold [it]": "space",
-			"(fold|collapse) all": "a-home",
-			"unfold all": "a-end",
-			"outline view": "a-v/10,v,o", #"cs-o",
-			"edit styles": "c-f11",
-
-			# filter
-			"search": "cs-j",
-			"filter": "c-f",
-			"clear filter": "a-i,n",#"ca-f",
-
-			#split
-			"split here": "a-s",
-
-			"split dot": "ca-dot",
-			"split comma": "ca-comma",
-
-			#edit
-			"edit": "end",
-			"edit dialogue": "a-enter",
-			"edit note":"a-e/10,n,e",
-			"title it":"ca-c",
-			"(capitalize| cap) this":"ca-up",
-			"(all caps|title) this":"ca-c",
-
-			#nodes
-			"(insert|big bro)": "s-enter",
-			"(child|kid)": "tab",
-			"(paste|drop) clone": "c-d",
-			"summary node": "a-r/10,n,w",
-
-			#links
-			"open link": "c-enter",
-			"edit link": "c-k",
-			"get link": "a-e/10, c, c",
-
-			#view
-			"center ( view | node )": "ca-c",
-			"new (window|view)": "a-v/10,e",#"ca-v",
-			"tool (panel|bar)":"a-v/10,c,o",
-
-			#icons
-			"info icon ": "ca-i",
-			"school":"",
-			"(clear|remove) (icon | icons )": "a-r/10,o,r,e", #"cs-d",
-			"project icon": "a-r/10,o,i,o,l",
-			"task icon": "a-r/10,o,i,s,m",
-			"checked": "a-r,o,i,s,c",#"c-2",
-			"unchecked": "a-r/10,o,i,s,u",# "c-1",
-
+			"left tab": "c-pgup",
+			"right tab": "c-pgdown",
 		}),
 	]
 	defaults = {

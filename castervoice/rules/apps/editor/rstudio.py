@@ -58,7 +58,7 @@ class RStudioRule(MappingRule): #R Studio
 
     "run line":
         R(Key("c-enter")),
-    "run document":
+    "run (all|document)":
         R(Key("ac-r")),
     "knit document":
         R(Key("cs-k")),

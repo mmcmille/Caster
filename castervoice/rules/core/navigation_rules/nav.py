@@ -255,7 +255,7 @@ class Navigation(MergeRule):
 
 #    Commands for capitalization:
 #    1 yell - ALLCAPS
-#    2 tie - TitleCase
+#    2 tie - Title Case
 #    3 Gerrish - camelCase
 #    4 sing - Sentencecase
 #    5 laws (default) - alllower
@@ -270,12 +270,12 @@ class Navigation(MergeRule):
 
         Choice("capitalization", {
             "yell": 1,
-            "tie": 2,
+            "(tie|title)": 2,
             "camel": 3,
             "sing": 4,
             "laws": 5,
             "say": 6,
-            "cap": 7,
+            "cap|upper": 7,
             "slip": 8,
         }),
         Choice(

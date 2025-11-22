@@ -37,7 +37,7 @@ class OneCommanderRule(MappingRule):
 		}),
 		Choice("key_rule", {
             "restore tab": "cs-t",
-            "[switch|top|bottom] frame": "a-f",
+            "[switch|top|bottom] (frame|focus)": "a-f",
             "transfer": "a-m",
             "duplicate": "a-c",
             "open": "c-p",

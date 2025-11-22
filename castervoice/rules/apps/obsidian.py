@@ -11,7 +11,7 @@ from castervoice.lib.actions import Text, Key, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
-class OneNoteRule(MappingRule):
+class ObsidianRule(MappingRule):
     mapping = {
 
 		#generic key rule
@@ -25,23 +25,20 @@ class OneNoteRule(MappingRule):
 		"rename": R(Mouse("right") + Pause("20") + Key("r")),
 
 
-        "search [for] [<dict>]": R(Key("c-e") + Pause("10") + Text("%(dict)s")),
+        "search [for] [<dict>]": R(Key("cs-f") + Pause("10") + Text("%(dict)s")),
+        "switch [<dict>]": R(Key("c-o") + Pause("10") + Text("%(dict)s")),
 		"(find | search) [on] page [for] [<dict>]": R(Key("c-f") + Pause("10") + Text("%(dict)s")),
 		    #text formatting
-		"heading <heading_n> {weight=1000}":
-	            R(Key("ca-%(heading_n)s")),
 	    "toggle edit cell":
 	            R(Key("f2")),
-        #navigate section
-        "(next | down ) section [<n>]":
-	        R(Key("c-tab/10"))*Repeat(extra="n"),
-	    "(prior | up ) section [<n>]":
-	        R(Key("cs-tab/10"))*Repeat(extra="n"),
+        #navigate tabs
+        "(next | right) tab [<n>]":
+	        R(Key("c-pgdown/10"))*Repeat(extra="n"),
+	    "(prior | left ) tab [<n>]":
+	        R(Key("c-pgup/10"))*Repeat(extra="n"),
         #navigate page
-        "(next | down ) page [<n>]":
-	        R(Key("c-pgdown/20"))*Repeat(extra="n"),
-	    "(prior | up ) page [<n>]":
-	        R(Key("c-pgup/20"))*Repeat(extra="n"),
+        "(next | down ) page [<n>]": R(Key("cs-pgdown/20"))*Repeat(extra="n"),
+	    "(prior | up ) page [<n>]": R(Key("cs-pgup/20"))*Repeat(extra="n"),
         #moves content in direction
         "move <direction_arrow> [<n>]":
 	        R(Key("as-%(direction_arrow)s/10"))*Repeat(extra="n"),
@@ -65,7 +62,6 @@ class OneNoteRule(MappingRule):
 		Dictation("dict"),
 		Choice("direction",{"up":"pgup","down":"pgdown"}),
         Choice("direction_arrow",{"up":"up","down":"down","left":"left","right":"right"}),
-        ShortIntegerRef("heading_n", 1, 6),
         # change max to 3 if you want sequences of lentgh three and so on
         Repetition(Choice("alphabet1", alphabet_support.caster_alphabet()), min=1, max=2, name="column_1"),
         Repetition(Choice("alphabet2", alphabet_support.caster_alphabet()), min=1, max=2, name="column_2"),
@@ -74,10 +70,15 @@ class OneNoteRule(MappingRule):
         }),
         #Key Rules
         Choice("key_rule", {
-			"full (page|screen)": "f11",
-			"sidebar": "cs-g, space",
-			"new (tab|window)": "c-m",
-			"new docked window":"a-w/20,c",
+            "(read | edit) (mode | page)":"c-e",
+            "source mode":"cs-s",
+            "full (page|screen)": "f11",
+			"sidebar": "cs-g",
+            #tabs
+            "new tab": "c-t",
+            "close tab":"c-w",
+            "new window": "ca-t",
+            #"new docked window":"a-w/20,c",
 			"new page": "c-n",
 			"drop text": "apps,t",
 			"drop date":"as-d",
@@ -90,23 +91,26 @@ class OneNoteRule(MappingRule):
 			"(select|get) branch": "cs-minus",
             #branch is line plus indented lines below it
             "cut branch": "cs-minus/10,c-x",
-            "search this": "c-c/10,c-e/10,c-v/10,enter",
-            "search (it|clipboard)": "c-e/10,c-v/10,enter",
+            "search this": "c-c/10,cs-f/10,c-v/10,enter",
+            "search (it|clipboard)": "cs-f/10,c-v/10,enter",
             #Folding and unfolding
             "(fold|collapse) (it|this|branch)":"as-minus",
             "unfold (it|this)":"as-plus",
             "replace":"c-h",
 
             #Formatting
-			"(normal text|clear formatting)": "a-h,l,up:2,enter",
+            "heading":"home,s-3",
+			"(normal text|clear formatting)": "ca-c",
             "bullet (this|text)":"c-dot",
             "number (this|text)":"c-slash",
-            #OneMore
-			"navigator":"as-n",
+
+            #Notebook Navigator
+            "(show | reveal) folder":"cs-r",
+            "navigator":"as-n",
 
 		}),
     ]
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return OneNoteRule, RuleDetails(name="one note", executable="onenote")
+    return ObsidianRule, RuleDetails(name="obsidian", executable="obsidian")

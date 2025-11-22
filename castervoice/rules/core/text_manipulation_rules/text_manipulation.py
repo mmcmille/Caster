@@ -319,7 +319,7 @@ class TextManipulation(MergeRule):
             # Syngenta
             "Aparna":"Aparnadevi.Vadlani@syngenta.com",
             "syngenta email":"michael.mcmillen@syngenta.com",
-            "[syngenta] password":"Q1w1e1r1t1",#
+            "[syngenta] password":"Q1w1e1r1t",#
             "employee ID": "8610841",
             "(username|user ID)": "u581917",
             "citrix username": "NAFTA\u581917",
