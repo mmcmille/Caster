@@ -32,6 +32,7 @@ class HomeWindowManagementRule(MappingRule):
         #generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/5")),
 
+        ###Window Commands
         #moves window to the direction indicated
         "(window|win) <direction> [<n>]":
             R(Key("w-%(direction)s"))*Repeat(extra="n"),
@@ -67,7 +68,7 @@ class HomeWindowManagementRule(MappingRule):
 
 
         #app switching by listed number
-        "[<close_choice>] (open|show|window) <n>":
+        "[<close_choice>] (show|open|window) <n>":
             R(
                 Key("w-t:%(n)s/20") +
                 Key("enter") +
@@ -77,7 +78,7 @@ class HomeWindowManagementRule(MappingRule):
             ),
 
         #app switching via Windows number , 1-10
-        "[<close_choice>] (open|show|window) <app_n_key>":
+        "[<close_choice>] (show|open|window) <app_n_key>":
             R(
                 Key("cw-%(app_n_key)s/10") +
                 Pause("50") +
@@ -86,19 +87,27 @@ class HomeWindowManagementRule(MappingRule):
             ),
         #app switching via switcheroo
         "window": R(Key("w-`/20")),
-        "window <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
+        #"window <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
         ##"window <text>": R(Key("w-`/20")+Text("%(text)s")),
         #displays Windows to switch to
         "show (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
 
+        #open window panes configuration, need to set in fancy zones
+        "window ( zones | panes)":R(Key("ws-`")),
+
         #switches to last displayed app
-        "show":
+        "show [window]":
             R(
                 Key("a-tab") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)")
             ),
+        #displays Windows to switch to
+        "show windows":
+            R(Key("ca-tab"))*Repeat(extra="n"),
+
+
         #transfers clipboard to Windows number , 1-10
         "copy <app_n_key>":
             R(
@@ -107,8 +116,6 @@ class HomeWindowManagementRule(MappingRule):
                 #Mouse("(0.5, 0.5)")
             ),
 
-        #open window panes configuration, need to set in fancy zones
-        "window ( zones | panes)":R(Key("ws-`")),
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
 
@@ -118,10 +125,18 @@ class HomeWindowManagementRule(MappingRule):
             R(Function(utilities.maximize_window)),
         "window (min|hide)":
             R(Function(utilities.minimize_window)),
-	           "window swap":
+	    "window swap":
             R(Key("ws-right")),
         "window resize":
             R(Mouse("(0.99, 0.99), left")),
+        #app switching via Fluent Search (change shortcut in app)
+        "window": R(Key("w-`")),#Fluent "ca-w/20, space")),
+        #"window <app_name>": R(Key("ca-w/20")+Text("%(app_name)s/80")+Key("enter")),
+        "window <text>": R(Key("w-`/20")+Text("%(text)s")),
+
+
+
+
         # Workspace management
         "show work [spaces]":
             R(Key("w-tab")),
@@ -158,8 +173,8 @@ class HomeWindowManagementRule(MappingRule):
             "":"",
         }),
         Choice("app_n_key", {#can open individual programs through BringMe (opener), but it doesn't work for every program, save first if needed (do this for freeplane )
-            "(web)": 1,
-            "(calendar|email|outlook)": 2,
+            "(web|chrome)": 1,
+            "(email|mail|outlook)": 2,
             "(commands)": 3,
             "(files)": 4,
             "(notes|one note)": 5,

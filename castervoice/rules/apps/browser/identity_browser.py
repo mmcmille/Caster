@@ -46,9 +46,11 @@ class IdentityRule(MappingRule):
             "cauliflower": "cau",
             "cucumber":"cuc",
             "lettuce": "l",
+            "onion": "on",
             "pepper|peppers":"pep",
             "spinach": "sp",
             "squash": "sq",
+            "sunflower": "su",
             "sweetcorn": "sw",
             "tomato":"t",
             "watermelon": "wa",
@@ -58,6 +60,7 @@ class IdentityRule(MappingRule):
            #IM
            "search batch":"f5/80,tab:14",
            "search entity":"f5/80,tab:13/10,down/10,tab",
+           "search clipboard":"c-a/20,c-v/40,tab:4/20,space",
            "search it":"tab:4/20,space",
 
         }),

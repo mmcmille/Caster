@@ -140,7 +140,7 @@ class NavigationNon(MappingRule):
             "top left": "0.05, 0.05",
             "top": "0.5, 0.17",
             "top edge": "0.5, 0.001",
-            "window title": "0.5, 0.01",
+            "(top|window) (title|bar)": "0.5, 0.01",
             "top right": "0.83, 0.17",
             "top right (edge|corner)": "0.99, 0.005",
             "(mid|center) left": "0.17, 0.5",

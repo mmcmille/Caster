@@ -1,4 +1,5 @@
 '''
+isUpdated=0
 Michael McMillen
 '''
 
@@ -64,6 +65,7 @@ class SpiritRule(MappingRule):
 			"global": "SPR-GDB-P-2.NAFTA.SYNGENTA.ORG",
 			"stage": "spr-eurdb-s-3.nafta.syngenta.org",
 			"EU|european|production|main|local": "SPR-EURDB-P-2.NAFTA.SYNGENTA.ORG",
+			"test":"SPR-GDB-T-3.NAFTA.SYNGENTA.ORG",
 		}),
 		Choice("menu_title", { #press alt...
 			"file": "f",
@@ -86,6 +88,7 @@ class SpiritRule(MappingRule):
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
 			#Material
+			"[Matt|material] abbreviated code ": "MAT:ABBRC",
 			"(Matt|material) ID":"MAT:MATID",
 			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
 			"(Matt|material) creation date":"MAT:CRTDT",
@@ -138,23 +141,8 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "780,66",
-
-			"people":"1073,81",
-			"crop logins":"1105,81",
-
-
-			#"material management":"87, 130",
-			"(trial|experiment) management":"87, 654",
-
-			"lines": "87,66",
-			"experiments": "87, 234",
-			"plots":"87, 280",
-			"trials":"87, 285",
-
-
-
-			"advanced sort":"396, 60",
+			"query": "920,80",
+			"advanced sort":"396, 80",
 
 			"cell 1":"190, 135",
 			"get table":"180, 128",
@@ -193,8 +181,8 @@ class SpiritRule(MappingRule):
 
 				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
-				"remove [record|records]":"r",
-				"delete (record|records)":"d",
+				"remove (row|rows|record|records)":"r",
+				"delete (row|rows|record|records)":"d",
 				"properties":"up",
 
 

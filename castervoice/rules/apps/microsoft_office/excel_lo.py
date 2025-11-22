@@ -2,23 +2,17 @@
 Michael McMillen
 TODO:
 add grab direction, holds cs, copies with done
-
 """
 
 # this function takes a dictionary and returns a dictionary whose keys are sequences of keys of the original dictionary
 # and whose values our the corresponding sequences of values of the original dictionary
 from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition, Pause, Function, ShortIntegerRef
-
-
-
 from castervoice.rules.core.alphabet_rules import alphabet_support  # Manually change in port in if in user directory
 from castervoice.lib.actions import Text, Key, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
-
-
-class ExcelRule(MappingRule):
+class ExcelRule(MappingRule): #MappingRule
     number_output_mode = ""#default, options: down,right,off,
 
     def _number_output_direction():
@@ -43,7 +37,7 @@ class ExcelRule(MappingRule):
         "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
 
         #Right-Click menu
-        "<rc_item>": R(Mouse("left/40,right/40") + Key("%(rc_item)s")), # +
+        "<rc_item>": R( Key("apps/10, %(rc_item)s")), #
 
         #Sheet Action
         "<sheet_action> sheet": R(Key("f6/20") + Key("%(sheet_action)s")),
@@ -119,10 +113,6 @@ class ExcelRule(MappingRule):
         "freeze panes":
             R(Key("a-w, f")),
 
-        #Writer
-        #dictation mode
-        #"<dict> {weight=100}": R(Text("%(dict)s ")),
-        "hi <name>": R(Text("Hi %(name)s,") + Key("enter")),
         "function <function>": R(Text("=%(function)s")),
         "<function>": R(Text("%(function)s")),
 
@@ -162,7 +152,7 @@ class ExcelRule(MappingRule):
 			"help": "y",
 		}),
         Choice("rc_item", {
-            "delete this": "d",
+            "trash [this]": "d",
             "move this":"m",
             "insert here":"e",
 
@@ -173,7 +163,7 @@ class ExcelRule(MappingRule):
             "new":"tab/20,enter",
             "rename":"apps/20,r",
             "move":"apps/20,m",
-            "copy":"apps/20,m/20,a-c/20,s-tab:2/20,a-down",
+            #"copy":"apps/20,m/20,a-c/20,s-tab:2/20,a-down",
             "link":"apps/20,l",
             "delete":"apps/20,d",
         }),
@@ -181,6 +171,7 @@ class ExcelRule(MappingRule):
             "function":"equals",
             "edit": "f2",
             "locket":"f4",
+            "fit [width]": "a-h,o,i",
             #links
             "get link":"alt/20,z,s,l",
             "edit link": "c-k",
@@ -188,12 +179,14 @@ class ExcelRule(MappingRule):
             "remove link": "apps/20,r",
             #Home
             "wrap text": "a-h/20, w",
+            "[fill] color": "a-h/20, h",
+            "text color": "a-h/20, fc",
             "style": "a-h/20, j",
-            "style input": "a-h/20, j/40, down, right:5/10,enter",
-            "style good": "a-h/20, j/40, right:2/10,enter",
-            "style bad": "a-h/20, j/40, right:1/10,enter",
-            "style neutral": "a-h/20, j/40, right:3/10,enter",
-            "style note": "a-h/20, j/40, down:2/10, right/10,enter",
+            "style bad": "a-h/20, j/40, right:1,enter",
+            "style good": "a-h/20, j/40, right:2/20,enter",
+            "style input": "a-h/20, j/40, down:1, right:5/20,enter",
+            "style neutral": "a-h/20, j/40, right:3/20,enter",
+            "style note": "a-h/20, j/40, down:3/20, right/20,enter",
             #Formulas
             "calculate sheet": "s-f9",
             "calculate (workbook|now|file)": "f9",
@@ -201,6 +194,7 @@ class ExcelRule(MappingRule):
             "automatic calculation":"a-m,x,a",
 
             #Data
+            "data validation":"a-a/10,v,v",
             "refresh all":"a-a/10,r,a",
             "remove duplicates":"a-a/10,m/80,s-tab:2",
 
@@ -209,7 +203,6 @@ class ExcelRule(MappingRule):
             "new window":"a-w/40,n",
             "hide": "apps/20,h",
             "unhide": "apps/20,u",
-            "hide columns":"c-space/10,apps/20,h",
             "hide ribbon": "c-f1",
 
             "(read|edit) mode": "cs-m",
@@ -223,7 +216,6 @@ class ExcelRule(MappingRule):
             "merge":"a-h,m,m",
             "unmerge":"a-h,m,u",
             # filtering
-            "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "escape, cs-l",
         	"filter": "escape, c-up:2/20, a-down/20, down:8/20",
             "(update|apply|re-) filter": "escape, c-up:2/20, a-down/20, down:8/20, enter",
@@ -255,20 +247,20 @@ class ExcelRule(MappingRule):
             "next field":"tab",
             "last field": "s-tab",
             "(open|activate) sheet":"f6/20,s-tab/20,apps",
-            "delete [cell|cells]": "apps,d",
+            "(trash|delete) [cell|cells]": "apps,d",
 
             #row
-            "(select|get) row": "s-space",
-            "copy row": "s-space/40,c-c",
-            "delete row": "s-space/40, apps,d",
-            "(add|insert) (row|rows)": "escape, s-space/40,apps/20,i",
-
+            "[get] row": "s-space",
+            #"copy row": "s-space/40,c-c",
+            "row (trash|delete)": "s-space, apps,d",
+            "(row|rows) (add|insert)": "escape, s-space,apps,i",
+            "(row|rows) fit": "s-space, a-h,o,i",
             #column
-            "(select|get) column": "c-space",
-            "copy column": "c-space/40, c-c",
-            "delete column": "c-space/40, apps,d",
-            "(add|insert) (column|columns)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "fit (column|columns) [width]": "a-h,o,i",
+            "[get] (call|column)": "c-space",
+            "(call|column) copy": "c-space, c-c",
+            "(call|column) (add|insert)": "escape/10, c-space, apps, i/20", #c, a-o,
+            "(call|column) (trash|delete)": "c-space, apps,d",
+            "(call|column) fit [width]": "c-space,a-h,o,i",
 
             #comments
             "show comments": "a-r/20,h,1",

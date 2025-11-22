@@ -23,6 +23,8 @@ class OutlookRule(MappingRule):
         "scroll here": R(Mouse("middle")),
         "find task": R(Mouse("left:3") + Key("c-c/20, cw-6") + Pause("100") + Key("c-f/50, backspace, c-v/40, enter/20, escape")),
 
+        #compose email
+        "hi <dict>": R(Text("Hi %(dict)s,") + Key("enter")),
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
         # create new thing
         "new (email|event)": R(Key("n")),
