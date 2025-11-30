@@ -277,7 +277,7 @@ class ChromeRule(MappingRule):
            #silverbullet
            "page":"c-k",
            "command":"c-slash",
-           "search":"cs-f",
+           "search clipboard":"f6,c-v,enter",
 
         }),
     ]
