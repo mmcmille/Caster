@@ -70,7 +70,7 @@ class ObsidianRule(MappingRule):
         }),
         #Key Rules
         Choice("key_rule", {
-            "(read | edit) (mode | page)":"c-e",
+            "(read | edit) (this|mode|page|note)":"c-e",
             "source mode":"cs-s",
             "full (page|screen)": "f11",
 			"sidebar": "cs-g",

@@ -237,7 +237,7 @@ class ExcelRule(MappingRule): #MappingRule
             "(drop|insert) date":"c-semicolon,enter",
             "(drop|insert) time":"c-colon,enter",
             "(drop|insert) date time":"c-semicolon/20 ,tab/20, c-colon,enter",
-            "drop special": "ca-v",
+            "(drop|paste) special": "ca-v",
             "drop values": "ca-v/20,v,enter",
             "okay":"a-o, enter",
             "transpose":"apps/20,t,enter",
@@ -275,6 +275,9 @@ class ExcelRule(MappingRule): #MappingRule
             #Home
             "clear (format|formats|formatting)":"a-h,e,f",
             "normal text":"a-h,e,f",
+            "font up":"a-h,f,g",
+            "font down":"a-h,f,k",
+
             #Macros
             "generate|update [sort]":"c-g",#for hierarchy viewer macro, #for Task Manager
             #saving
