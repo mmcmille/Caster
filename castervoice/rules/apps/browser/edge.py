@@ -95,8 +95,13 @@ class EdgeRule(MappingRule):
         "search (it|this)": R(Key("c-c/20, c-t, c-v, enter")),
         "restore tab [<n>]|tab reopen [<n>]":
             R(Key("cs-t")) * Repeat(extra="n"),
-        #"close tab [<n>]|tab close [<n>]":
-        #    R(Key("c-w")) * Repeat(extra='n'),
+        #tabs
+        "((new tab [<n>])|(tab new [<n>]))":
+            R(Key("c-t") * Repeat(extra="n")),
+        "reopen tab [<n>]|tab reopen [<n>]":
+            R(Key("cs-t")) * Repeat(extra="n"),
+        "(close tab [<n>]|tab close [<n>])":
+            R(Key("c-w")) * Repeat(extra='n'),
         "win close|close all tabs":
             R(Key("cs-w")),
         "right tab [<n>]|tab right [<n>]":
