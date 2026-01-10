@@ -32,16 +32,6 @@ class ChromeRule(MappingRule):
             R(Key("cs-tab/20"))*Repeat(extra="n"),
         "tab (here|this)": R(Mouse("right") + Key("down,enter")),
 
-        #Google Sheets
-        #menu control
-        "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
-
-        "(next | right) sheet [<n>]":
-            R(Key("a-down/20"))*Repeat(extra="n"),
-        "(prior | left) sheet [<n>]":
-            R(Key("a-up/20"))*Repeat(extra="n"),
-
-
         #formative rules
         "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
 
