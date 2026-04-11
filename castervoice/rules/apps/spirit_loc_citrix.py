@@ -1,5 +1,5 @@
 '''
-isUpdated=0
+isPrimary=1
 Michael McMillen
 '''
 
@@ -26,6 +26,7 @@ class SpiritRule(MappingRule):
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
 		#query menu
+
 		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("right/40, i/40, tab/40")),#"tab/40,equals")),
 
 		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
@@ -57,7 +58,7 @@ class SpiritRule(MappingRule):
 		"<menu_title> [menu]": R(Key("alt/40, %(menu_title)s/40")),
 		"frame [<m>]": R(Key("alt/40, w/40, %(m)s/40")),
 		#grid (window) switching
-		"window" : R(Key("alt, w/40")),
+		"(grid |window) menu" : R(Key("alt, w/40")),
 		"grid [<m>]": R(Key("alt, w/40") + Key("%(m)s/40")),
 	}
 	extras = [
@@ -100,7 +101,7 @@ class SpiritRule(MappingRule):
 
 
 			#Line
-			"[line] line code":"LINE:LINCD",
+			"[line] Linecode":"LINE:LINCD",
 			"line incident number":"LINE:INCNO",
 
 			"person code":"PERSN:CODE",
@@ -108,7 +109,7 @@ class SpiritRule(MappingRule):
 			"research station code":"LOC:RST:RSTCD",
 			"trial ID":"EXT:TRLID",
 			#VH
-			"stable variety code":"VH:STBVC",
+			"Stable Variety Code":"VH:STBVC",
 			"variety name":"VH:VHNM",
 			"variety number":"VH:VHNO",
 			#People
@@ -116,6 +117,7 @@ class SpiritRule(MappingRule):
 			"location code":"LOC:LOCCD",
 			#Trait Definitions
 			"trait code":"UDTRT:UDTCD",
+			"trait group":"UDTRT:TRTGP",
 		}),
 		Choice("spirit_part_trait", {
 			#partial trait chains
@@ -141,7 +143,7 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "920,80",
+			"query": "730,70", #previous: "730,70",
 			"advanced sort":"396, 80",
 
 			"cell 1":"190, 135",
@@ -169,7 +171,7 @@ class SpiritRule(MappingRule):
 				"append [existing] [flex] traits": "a:3",
 				"(add|make) subplots": "a:2",
 
-				"check quantity": "c:3",
+				"check (PM|quantity)": "c:3",
 				"plant (trial|trials)":"p/40:3",
 				"sort [down]":"up:8/10,right/10,down",
 				"sort up":"up:8/10,right/10,down:2",
@@ -181,7 +183,7 @@ class SpiritRule(MappingRule):
 
 				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
-				"remove (row|rows|record|records)":"r",
+				"remove [row|rows|record|records]":"r",
 				"delete (row|rows|record|records)":"d",
 				"properties":"up",
 
@@ -195,8 +197,10 @@ class SpiritRule(MappingRule):
 			"cauliflower":"c:3",
 			"cucumber":"c:7",
 			"lettuce":"l",
+			"onion":"o:2",
 			"peppers":"p:2",
 			"Spinach":"s:3",
+			"squash":"s:4",
 			"sweetcorn":"s:6",
 			"tomato":"t",
 			"watermelon":"w",
@@ -207,6 +211,7 @@ class SpiritRule(MappingRule):
 
 			#query
 			"next [field]": "tab",
+			"search clipboard": "s-home,delete,c-v/20,a-q",
 			"(run query|search it)": "a-q",
 			"clear query": "a-c",
 			"append":"a-a",
@@ -224,7 +229,7 @@ class SpiritRule(MappingRule):
 			"(okay|OK)":"a-o",
 			"edit": "f2",
 			"refresh (grid|frame)": "f5",
-			"paste down":"apps/20, down:4/10, enter",
+			"paste down":"c-q",#"apps/20, down:4/10, enter",
 
 			#Cell text
 			"submit":"s,u,tab",

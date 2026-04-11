@@ -208,4 +208,4 @@ class GoogleSheetsRule(MappingRule):
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return GoogleSheetsRule, RuleDetails(name="Google sheets", title="Google Sheets")
+    return GoogleSheetsRule, RuleDetails(name="Google sheets", executable="chrome", title="Google Sheets")

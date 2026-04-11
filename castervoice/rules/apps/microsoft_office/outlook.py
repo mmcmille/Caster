@@ -24,7 +24,7 @@ class OutlookRule(MappingRule):
         "find task": R(Mouse("left:3") + Key("c-c/20, cw-6") + Pause("100") + Key("c-f/50, backspace, c-v/40, enter/20, escape")),
 
         #compose email
-        "hi <dict>": R(Text("Hi %(dict)s,") + Key("enter")),
+#        "hi <dict>": R(Text("Hi %(dict)s,") + Key("enter")),
         "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
         # create new thing
         "new (email|event)": R(Key("n")),
@@ -116,7 +116,7 @@ class OutlookRule(MappingRule):
         "Mark as unread": R(Key("c-u")),
         #folders
         "[(go to|open)] folder": R(Key("c-y")),
-        "move [it|to] [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
+        "move (it|to) [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
         "send it": R(Key("c-enter")),
         "trash it": R(Key("delete")),
@@ -160,6 +160,8 @@ class OutlookRule(MappingRule):
         Choice("key_rule", {
             "(clear formatting|normal text)":"c-space",
             "remove label":"c/20,down/10,space",
+            "copilot":"a-i",
+            "[reply] popout":"cs-r",
 
         }),
     ]

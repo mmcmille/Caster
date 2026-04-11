@@ -37,9 +37,9 @@ class MSTeamsRule(MappingRule):
             R(Key("c-4")),
         "calls":
             R(Key("c-5")),
-        "files":
+        "copilot":
             R(Key("c-6")),
-        "shifts":
+        "(AI|GPT)":
             R(Key("c-7")),
         "previous item [<nnavi10>]":
             R(Key("a-up"))*Repeat(extra="nnavi10"),

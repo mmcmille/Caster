@@ -1,19 +1,4 @@
 '''
-
-
-#app switching for windows 11+
-"[<close_choice>] (open|show|window) <app_n_11>": #<app_n>":
-    R(
-        Key("w-t/5, right:9") + #down if vertical taskbar, right if horizontal
-        Key("right:%(app_n_11)s, enter") +
-        Pause("50") +
-        Mouse("(0.5, 0.5)") +
-
-        #Key("control:down") +
-      #Mouse("".join(["[30,","%(app_n)s", "], left"])) +
-      #Key("control:up/20") +
-        Pause("100")+
-        Key("%(close_choice)s")),
 '''
 
 
@@ -32,17 +17,8 @@ class HomeWindowManagementRule(MappingRule):
         #generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/5")),
 
-        ###Window Commands
-        #moves window to the direction indicated
-        "(window|win) <direction> [<n>]":
-            R(Key("w-%(direction)s"))*Repeat(extra="n"),
-        #stretches window to the left or right
-        "(window|win) (span|stretch) <direction> [<n>]":
-            R(Key("wca-%(direction)s"))*Repeat(extra="n"),
-        "(span|stretch) (window|win) <direction> [<n>]":
-            R(Key("wca-%(direction)s"))*Repeat(extra="n"),
         #switches the position of the center window with either the left or right window
-        "window switch left":
+        "switch [window] left":
             R(Mouse("[601, 13], left")+
             Key("a-tab/20")+
             Pause("50")+
@@ -52,7 +28,7 @@ class HomeWindowManagementRule(MappingRule):
             Pause("50")+
             Key("w-right")+
             Mouse("( 0.5, 0.5 )")),
-        "window switch right":
+        "switch [window] right":
             R(Mouse("[3000, 14], left")+
             Key("a-tab/20")+
             Pause("50")+
@@ -63,79 +39,57 @@ class HomeWindowManagementRule(MappingRule):
             Key("w-left")+
             Mouse("( 0.5, 0.5 )")),
 
-        "window ( far |fly ) <direction> [<n>]":
-            R(Key("ws-%(direction)s"))*Repeat(extra="n"),
-
-
         #app switching by listed number
-        "[<close_choice>] (show|open|window) <n>":
+        "(show|window) <n> [<close_choice>]":
             R(
-                Key("w-t:%(n)s/20") +
+                Key("w-t:%(n)s/5") +
                 Key("enter") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
 
-        #app switching via Windows number , 1-10
-        "[<close_choice>] (show|open|window) <app_n_key>":
+        #app switching via application name - Windows number , 1-10
+        "show <app_name> [<close_choice>]":
             R(
-                Key("cw-%(app_n_key)s/10") +
+                Key("cw-%(app_name)s/20") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
-        #app switching via switcheroo
-        "window": R(Key("w-`/20")),
-        #"window <app_name>": R(Key("w-`/20")+Text("%(app_name)s")+Key("enter")),
-        ##"window <text>": R(Key("w-`/20")+Text("%(text)s")),
-        #displays Windows to switch to
-        "show (window | windows)":
-            R(Key("ca-tab"))*Repeat(extra="n"),
-
-        #open window panes configuration, need to set in fancy zones
-        "window ( zones | panes)":R(Key("ws-`")),
-
         #switches to last displayed app
-        "show [window]":
+        "show":
             R(
                 Key("a-tab") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)")
             ),
-        #displays Windows to switch to
-        "show windows":
-            R(Key("ca-tab"))*Repeat(extra="n"),
+        #app switching via Fluent Search (change shortcut in app)
+        "show <text>": R(Key("ca-w/60")+Text("%(text)s")),
+
 
 
         #transfers clipboard to Windows number , 1-10
-        "copy <app_n_key>":
+        "copy <app_name>":
             R(
                 Key("c-c") +
-                Key("cw-%(app_n_key)s")
+                Key("cw-%(app_name)s")
                 #Mouse("(0.5, 0.5)")
             ),
 
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
 
-        "window snip":
+        "snip window ":
             R(Key("ws-s")),
-        "window max":
+        "(max|maximize) (win|window)":
             R(Function(utilities.maximize_window)),
-        "window (min|hide)":
+        "(minimize|hide) (win|window)":
             R(Function(utilities.minimize_window)),
-	    "window swap":
+	    "swap (win|window)":
             R(Key("ws-right")),
-        "window resize":
+        "resize (win|window)":
             R(Mouse("(0.99, 0.99), left")),
-        #app switching via Fluent Search (change shortcut in app)
-        "window": R(Key("w-`")),#Fluent "ca-w/20, space")),
-        #"window <app_name>": R(Key("ca-w/20")+Text("%(app_name)s/80")+Key("enter")),
-        "window <text>": R(Key("w-`/20")+Text("%(text)s")),
-
-
-
 
         # Workspace management
         "show work [spaces]":
@@ -157,9 +111,6 @@ class HomeWindowManagementRule(MappingRule):
             R(Function(virtual_desktops.move_current_window_to_desktop)),
         "move work [space] <n>":
             R(Function(virtual_desktops.move_current_window_to_desktop, follow=True)),
-
-        #
-        "window <text>": R(Key("w-`/20")+Text("%(text)s")),
     }
 
     extras = [
@@ -172,23 +123,17 @@ class HomeWindowManagementRule(MappingRule):
             "close":"a-f4",
             "":"",
         }),
-        Choice("app_n_key", {#can open individual programs through BringMe (opener), but it doesn't work for every program, save first if needed (do this for freeplane )
+        Choice("app_name", {#can open individual programs through BringMe (opener), but it doesn't work for every program, save first if needed (do this for freeplane )
             "(web|chrome)": 1,
             "(email|mail|outlook)": 2,
             "(commands)": 3,
             "(files)": 4,
             "(notes|one note)": 5,
             "(Excel)": 6,
-            "(teams)": 7,
-            "(spirit)": 8,
-            "(map)": 9,
+            "(teams|chat|AI)": 7,
+            "copilot": 8,
+            "(spirit)": 9,
             #"(10)": 0,
-        }),
-        Choice("app_name", {
-        "email":"Outlook",
-        "files":"OneCommander",
-        "notes": "onenote",
-        "spirit":"spirit",
         }),
         Choice("app_n_11", {
             "11": 1,
@@ -202,29 +147,9 @@ class HomeWindowManagementRule(MappingRule):
             "19":  9,
             "20":  10
         }),
-        Choice("app_n", {
-         	"(1|web)": 64,
-            "(2|files)": 111,#+47@100%
-            "(3|commands)": 158,
-            "(4|notes)": 205,
-            "(5|)": 252,
-            "6": 299,
-            "7": 346,
-            "8": 393,
-            "9": 440,
-            "10": 487,
-            "11": 534,
-            "12": 581,
-            "13": 628,
-            "14": 675,
-            "15": 722,
-            "16": 769,
-            "17": 816,
-            "18": 863,
-            "19": 910,
-            "20": 957,
-        }),
         Choice("key_rule", {
+            #Windows voice recognition,
+            "Dictate":"w-h",
             "start menu": "win",
             "system tray": "w-t/20,tab/5,space",
             "show desktop": "w-d",
@@ -234,11 +159,15 @@ class HomeWindowManagementRule(MappingRule):
             "track": "f10", #command for Enable Viacam head tracking
             "click": "csa-m",#puts letters on the screen for navigation using Fluent Search
             "snippet": "ws-s",#uses snipping tool
-            "(show|open) clipboard": "w-v",
+            "[show|open] clipboard": "w-v",
             "drop clipboard": "w-v/80,enter",
             #uses power toys
             "get text": "ws-t",
             "screen ruler":"ws-m",
+            #open window panes configuration, need to set in fancy zones
+            "window ( zones | panes)":"ws-`",
+            "two pains":"wca-2",
+            "three pains":"wca-3",
         }),
 
     ]

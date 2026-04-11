@@ -86,7 +86,6 @@ class ObsidianRule(MappingRule):
 			"edit link": "c-k", #edit selected link
 			"(get link|link paragraph)":"apps,p", #get link to paragraph
             "remove (tag|tags)": "c-0",
-            "checkbox": "c-1",
 			"number list": "c-slash",
 			"(select|get) branch": "cs-minus",
             #branch is line plus indented lines below it
@@ -103,6 +102,7 @@ class ObsidianRule(MappingRule):
 			"(normal text|clear formatting)": "ca-c",
             "bullet (this|text)":"c-dot",
             "number (this|text)":"c-slash",
+            "checkbox [this]":"c-l",
 
             #Notebook Navigator
             "(show | reveal) folder":"cs-r",

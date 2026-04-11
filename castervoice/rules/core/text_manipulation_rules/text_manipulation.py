@@ -65,7 +65,7 @@ class TextManipulation(MergeRule):
 
     mapping = {
         #generic key rule
-        "<key_rule>": R(Key("%(key_rule)s/20")),
+        "<key_rule>": R(Key("%(key_rule)s")),
         "drop <drop_strings>": R(Text("%(drop_strings)s")),
         #prefix with space if the last command was text
         #"<dictation>": R(Text("%(dictation)s")),#+Text("")+Function(_print_history)),
@@ -268,11 +268,10 @@ class TextManipulation(MergeRule):
             "underline (it|this|text)": "c-u",
             "(italic|italicize|tilt) (it|this|text)": "c-i",
 
-
             #line commands
             #clears text
             "clear line": "end/5, s-home/5, backspace",
-            "(delete|remove|strike) line": "home:2/5, s-end/5, backspace, s-end/5, backspace",
+            "(delete|remove|strike) line": "end/5, s-home/5, delete",#"home:2/5, s-end/5, backspace, s-end/5, backspace",
             "clear page": "c-a/10, backspace",
             "replace page": "c-a/10, backspace/20, c-v",
             #copyingsee

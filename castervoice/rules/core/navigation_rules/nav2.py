@@ -70,8 +70,7 @@ class NavigationNon(MappingRule):
             R(Key("control:down") + Mouse("wheelup") + Key("control:up"))*Repeat(extra="n"),
         "(zoom out|decrease font) [<n>]":
             R(Key("control:down") + Mouse("wheeldown") + Key("control:up"))*Repeat(extra="n"),
-        "colic":
-            R(Key("control:down") + Mouse("left") + Key("control:up")),
+        "colic": R(Key("control:down") + Mouse("left") + Key("control:up")),
         "garb [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.stoosh_keep_clipboard)),
@@ -82,19 +81,26 @@ class NavigationNon(MappingRule):
                 spacing=0)),
         "refresh":
             R(Key("c-r")),
-        "move window":
-            R(Key("a-space/10, r, a-space/10, m/30,left")),
-        "window (left | lease) [<n>]":
-            R(Key("w-left"))*Repeat(extra="n"),
-        "window (right | ross) [<n>]":
-            R(Key("w-right"))*Repeat(extra="n"),
+
+        #Window Navigation and Movement
+        #also see home_window_mgmt_rule
+
+        #"move window": R(Key("a-space/10, r, a-space/10, m/30,left")),
+        #moves window to the direction indicated
+        "move [window] <direction2> [<n>]":
+            R(Key("w-%(direction2)s"))*Repeat(extra="n"),
+        # moves window to the other monitor
         "monitor (left | lease) [<n>]":
             R(Key("sw-left"))*Repeat(extra="n"),
         "monitor (right | ross) [<n>]":
             R(Key("sw-right"))*Repeat(extra="n"),
+        #stretches window to the left or right
+        "(span|stretch) [window|win] <direction2> [<n>]":
+            R(Key("wca-%(direction2)s"))*Repeat(extra="n"),
+
         "(next | prior) window":
             R(Key("ca-tab, enter")),
-        "switch (window | windows)":
+        "(show|switch) (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
         #"(next | right | down) tab [<n>]":
         #    R(Key("c-tab/20"))*Repeat(extra="n"),
@@ -109,7 +115,6 @@ class NavigationNon(MappingRule):
         "elite translation <text>":
             R(Function(alphabet_support.elite_text)),
     }
-
     extras = [
         Dictation("text"),
         Dictation("mim"),

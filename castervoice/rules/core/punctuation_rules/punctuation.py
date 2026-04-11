@@ -21,8 +21,8 @@ class Punctuation(MergeRule):
         "<sentence_punc>": R(Key("backspace/1") + Text("%(sentence_punc)s") + Key("space/1")),
 
         #removed repetition to deal with punctuation working with numbers
-        "[<long>] <text_punc>": # [<npunc>]":
-            R(Text("%(long)s" + "%(text_punc)s" + "%(long)s")), #*Repeat(extra="npunc"),
+        #"[<long>] <text_punc>": # [<npunc>]": R(Text("%(long)s" + "%(text_punc)s" + "%(long)s")), #*Repeat(extra="npunc"),
+        "<text_punc>": R(Text("%(text_punc)s")), #*Repeat(extra="npunc"),
         # For some reason, this one doesn't work through the other function
         "[<long>] backslash [<npunc>]":
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),
@@ -47,7 +47,7 @@ class Punctuation(MergeRule):
                 "break": ",",
                 "period": ".",
                 "X point": "!", #dragon "(exclamation point | !)": "!",
-                "(question mark | ?)": "?",#kaldi "question mark": "?", #dragon 
+                "(question mark | ?)": "?",#kaldi "question mark": "?", #dragon
                 "deaf": ":",
         }),
         Choice(

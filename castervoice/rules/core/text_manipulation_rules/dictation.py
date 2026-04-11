@@ -18,14 +18,18 @@ class DictationRule(MappingRule):
         #ambiguous :"<dict>] <sentence_punc>": R(Text("%(dict)s ") + Key("left/1") + Text("%(sentence_punc)s") + Key("right/1")),
 
         #goes last in mapping order
-        "<dict>": R(Text("%(dict)s ",pause=0.01,use_hardware=True)),#<dict> {weight=1000}
+        "\"": R(Text("\"")),
+        "close quote": R(Text("\"")),
+        "<dict>": R(Text("%(dict)s ",pause=0.00,use_hardware=True)),#<dict> {weight=1000}
 
 
     }
     extras = [
-        Dictation("dict"),
+        Dictation("dict")
     ]
-    defaults = {"dict": ""}
+    defaults = {
+    "dict": "",
+    }
 
 def get_rule():
     #return DictationRule, RuleDetails(name="edit")

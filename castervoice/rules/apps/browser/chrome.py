@@ -26,24 +26,11 @@ class ChromeRule(MappingRule):
                 + Text("michael.mcmillen@syngenta.com") + Key("tab")),
 
         #tab navigation
-        "(next | right | down) tab [<n>]":
+        "show (next | right | down) [tab] [<n>]":
             R(Key("c-tab/20"))*Repeat(extra="n"),
-        "(prior | left | up ) tab [<n>]":
+        "show (prior | left | up ) [tab] [<n>]":
             R(Key("cs-tab/20"))*Repeat(extra="n"),
-        "tab (here|this)": R(Mouse("right") + Key("down,enter")),
-
-        #Google Sheets
-        #menu control
-        "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
-
-        "(next | right) sheet [<n>]":
-            R(Key("a-down/20"))*Repeat(extra="n"),
-        "(prior | left) sheet [<n>]":
-            R(Key("a-up/20"))*Repeat(extra="n"),
-
-
-        #formative rules
-        "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
+        "tab (here|this)": R(Mouse("right/60") + Key("down,enter")),
 
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s/20")),
@@ -72,6 +59,7 @@ class ChromeRule(MappingRule):
        #Midnight
        "midnight":
             R(Key("as-d")),
+
        #click by voice
        "refresh (buttons | numbers)":
             R(Key("cs-space/100") + Text(":-") + Key("enter")) + Pause("80") +
@@ -277,7 +265,7 @@ class ChromeRule(MappingRule):
            #silverbullet
            "page":"c-k",
            "command":"c-slash",
-           "search clipboard":"f6,c-v,enter",
+           "find clipboard":"c-f,c-v,enter",
 
         }),
     ]

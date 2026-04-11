@@ -107,9 +107,9 @@ class Navigation(MergeRule):
             R(Key("c-f") + Pause("200") + Text("%(textnv)s")),
         "last page": R(Key("a-left")),
 	    "header":
-            R(Key("c-home/50")),
+            R(Key("c-home")),
         "footer":
-            R(Key("c-end/50")),
+            R(Key("c-end")),
         #orig
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),

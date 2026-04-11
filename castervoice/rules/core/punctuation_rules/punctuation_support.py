@@ -1,3 +1,7 @@
+'''
+Michael McMillen
+'''
+
 import dragonfly
 
 
@@ -32,7 +36,7 @@ def text_punc_dict():
     _id = _inv_dtpb()
     return {
         "ace":                                                " ",
-        "bang":                                             "!",
+        "X point":                                             "!",
         "chocky":                                            "\"",
         "hash tag":                                           "#",
         "dollar sign":                                          "$",

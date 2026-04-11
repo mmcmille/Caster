@@ -6,7 +6,7 @@ add grab direction, holds cs, copies with done
 
 # this function takes a dictionary and returns a dictionary whose keys are sequences of keys of the original dictionary
 # and whose values our the corresponding sequences of values of the original dictionary
-from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition, Pause, Function, ShortIntegerRef
+from dragonfly import Repeat, Dictation, Choice, MappingRule, Repetition, Pause, Function, ShortIntegerRef, StartApp
 from castervoice.rules.core.alphabet_rules import alphabet_support  # Manually change in port in if in user directory
 from castervoice.lib.actions import Text, Key, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
@@ -25,8 +25,8 @@ class ExcelRule(MappingRule): #MappingRule
 
 
     mapping = {
-
-
+        ##inserts UUID
+        "(ID|UID) [<n>]":R(StartApp(r"C:\Users\u581917\OneDrive - Syngenta\Apps\Utility\UUID Generator\uuid.exe") + Pause("40") + Key("c-v/20, down"))*Repeat(extra='n'),
         #scrolling
         "scroll (here|this)" : R(Mouse("middle")),
         #generic key rule
@@ -53,11 +53,9 @@ class ExcelRule(MappingRule): #MappingRule
 
         # collect number direction, number= number of cells
         "collect <output_number_options>": R(Function(change_number_output_direction)),
-
-        "right sheet [<n>]":
-                R(Key("c-pgdown"))*Repeat(extra='n'),
-        "left sheet [<n>]":
-                R(Key("c-pgup"))*Repeat(extra='n'),
+        # show other sheets
+        "show right [<n>]":R(Key("c-pgdown"))*Repeat(extra='n'),
+        "show left [<n>]":R(Key("c-pgup"))*Repeat(extra='n'),
         "select <column_1> <row_1> through <column_2> <row_2>":
                 R(Key("c-g") + Text("%(column_1)s%(row_1)s:%(column_2)s%(row_2)s") + Key("enter")),
 
@@ -71,10 +69,6 @@ class ExcelRule(MappingRule): #MappingRule
             R(Key("cs-tab/20"))*Repeat(extra='n'),
         "right file <n>":
             R(Key("c-tab/20"))*Repeat(extra='n'),
-
-
-        # menu items
-        "manage rules": R(Key("alt, h,4,r")),
 
 
 
@@ -116,12 +110,15 @@ class ExcelRule(MappingRule): #MappingRule
         "function <function>": R(Text("=%(function)s")),
         "<function>": R(Text("%(function)s")),
 
+        #Disable Dictation
+        #"<dict>": R(Text("")),
+
     }
     extras = [
         alphabet_support.get_alphabet_choice("letter"),
 	    alphabet_support.get_alphabet_choice("letter_2"),
 	    Dictation("dict"),
-        ShortIntegerRef("n", 1, 10),
+        ShortIntegerRef("n", 1, 100),
         ShortIntegerRef("row_1", 1, 9999),
         ShortIntegerRef("row_2", 1, 100),
         # change max to 3 if you want sequences of lentgh three and so on
@@ -150,11 +147,13 @@ class ExcelRule(MappingRule): #MappingRule
             "automate": "u",
             "developer": "l",
 			"help": "y",
+            "table":"j,t",
 		}),
         Choice("rc_item", {
             "trash [this]": "d",
             "move this":"m",
             "insert here":"e",
+            "format cells":"f",
 
 
 
@@ -163,14 +162,14 @@ class ExcelRule(MappingRule): #MappingRule
             "new":"tab/20,enter",
             "rename":"apps/20,r",
             "move":"apps/20,m",
-            #"copy":"apps/20,m/20,a-c/20,s-tab:2/20,a-down",
+            "copy":"apps/20,m/20,a-c/20,s-tab:2/20,a-down",
             "link":"apps/20,l",
             "delete":"apps/20,d",
         }),
         Choice("key_rule", {
             "function":"equals",
             "edit": "f2",
-            "locket":"f4",
+            "lock":"f4",
             "fit [width]": "a-h,o,i",
             #links
             "get link":"alt/20,z,s,l",
@@ -181,16 +180,26 @@ class ExcelRule(MappingRule): #MappingRule
             "wrap text": "a-h/20, w",
             "[fill] color": "a-h/20, h",
             "text color": "a-h/20, fc",
+            "format [as] table":"a-h/20,t",
+            "conditional formatting" :"a-h/20,l",
+            "manage rules": "a-h/20,l,r",
+
             "style": "a-h/20, j",
-            "style bad": "a-h/20, j/40, right:1,enter",
+            "style bad": "a-h, j/40, right:1,enter",
             "style good": "a-h/20, j/40, right:2/20,enter",
             "style input": "a-h/20, j/40, down:1, right:5/20,enter",
             "style neutral": "a-h/20, j/40, right:3/20,enter",
+            "style (calculate|calculation)": "a-h/20, j/40, down:1/20,enter",
             "style note": "a-h/20, j/40, down:3/20, right/20,enter",
+
+            #Insert
+            "insert link":"a-n/20,i,2/20,i",
+
             #Formulas
             "calculate sheet": "s-f9",
             "calculate (workbook|now|file)": "f9",
             "manual calculation":"a-m,x,m",
+            "partial calculation":"a-m,x,p",
             "automatic calculation":"a-m,x,a",
 
             #Data
@@ -207,11 +216,17 @@ class ExcelRule(MappingRule): #MappingRule
 
             "(read|edit) mode": "cs-m",
             "get block": "cs-down/20,cs-right/20",
+
+            # Find
             "( search | find)": "c-f",
+            "( search | find) clipboard": "c-f,delete/20,c-v,enter",
             "find all": "a-i",
             "find next": "a-f",
             "replace": "c-h",
             "replace all": "a-a",
+
+
+
             "freeze top row": "a-w/20,f,r", #lo "a-v/40,c,r",
             "merge":"a-h,m,m",
             "unmerge":"a-h,m,u",
@@ -220,6 +235,7 @@ class ExcelRule(MappingRule): #MappingRule
         	"filter": "escape, c-up:2/20, a-down/20, down:8/20",
             "(update|apply|re-) filter": "escape, c-up:2/20, a-down/20, down:8/20, enter",
             "filter this": "escape, apps/10,e,v", #using header: "c-c/20, c-up:2/20, a-down/20, down:8/40, c-v/20, enter",
+            "filter clipboard ": "escape, c-up:2/20, a-down/20, down:8/20, c-v/20, enter",
             "(clear filter| filter off)": "escape, apps/10,e,right,enter ", #using header:"c-up/2, a-down/40, c/20",
 
             #sorting
@@ -236,7 +252,7 @@ class ExcelRule(MappingRule): #MappingRule
             "fill down": "c-c, down, cs-down, c-v",
             "(drop|insert) date":"c-semicolon,enter",
             "(drop|insert) time":"c-colon,enter",
-            "(drop|insert) date time":"c-semicolon/20 ,tab/20, c-colon,enter",
+            "(drop|insert|add) (DT |date time)":"cs-t",#relies on macro, original  #"c-semicolon/20 ,space/20 , cs-semicolon,enter", #include seconds
             "(drop|paste) special": "ca-v",
             "drop values": "ca-v/20,v,enter",
             "okay":"a-o, enter",
@@ -251,21 +267,23 @@ class ExcelRule(MappingRule): #MappingRule
 
             #row
             "[get] row": "s-space",
-            #"copy row": "s-space/40,c-c",
-            "row (trash|delete)": "s-space, apps,d",
-            "(row|rows) (add|insert)": "escape, s-space,apps,i",
-            "(row|rows) fit": "s-space, a-h,o,i",
+            "copy row": "s-space/40,c-c",
+            "duplicate row": "s-space/40,c-c/20,cs-plus",
+            "(trash|delete) row ": "s-space, apps,d,down,enter",
+            "(add|insert) (row|rows) ": "escape, s-space/20,apps,i,right,down,enter",
+            "fit (row|rows) ": "s-space, a-h,o,i",
+
             #column
             "[get] (call|column)": "c-space",
             "(call|column) copy": "c-space, c-c",
-            "(call|column) (add|insert)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "(call|column) (trash|delete)": "c-space, apps,d",
-            "(call|column) fit [width]": "c-space,a-h,o,i",
-
+            "(add|insert) (call|column) ": "escape/10, c-space, apps, i/20", #c, a-o,
+            "(trash|delete)(call|column) ": "c-space, apps,d",
+            "fit(call|column) [width]": "c-space,a-h,o,i",
+            "hide (call|column)": "c-space/20,apps/10,h",
             #comments
             "show comments": "a-r/20,h,1",
             "[new|insert] comment": "a-r/20,c",
-            "[new|insert] note": "s-f2",
+            "[new|insert|edit] note": "s-f2",
             "fly under": "up, c-down, down",
 
             #Writer
@@ -273,13 +291,18 @@ class ExcelRule(MappingRule): #MappingRule
 
             #Menus
             #Home
+            "format painter":"a-h,f,p",
             "clear (format|formats|formatting)":"a-h,e,f",
             "normal text":"a-h,e,f",
             "font up":"a-h,f,g",
             "font down":"a-h,f,k",
 
+            #Review
+            "(lock|unlock|protect|unprotect) sheet":"a-r/20,p,s",
+
             #Macros
-            "generate|update [sort]":"c-g",#for hierarchy viewer macro, #for Task Manager
+            "generate|update sort":"c-g",#for hierarchy viewer macro, #for Task Manager
+            "log it":"cs-z",
             #saving
             "don't save":"a-n",
 
@@ -296,12 +319,20 @@ class ExcelRule(MappingRule): #MappingRule
         }),
         Choice("function", { #Excel functions
             "join": "TEXTJOIN(\";\",TRUE,",
-            "[V] look up": "VLOOKUP(",
+            "join ,": "TEXTJOIN(\"','\",TRUE,",
+            "V look up": "VLOOKUP(",
+            "X look up": "XLOOKUP(",
+            "if statement":"IF(",
             "char":"CHAR(",
             "length":"LEN(",
-            "count": "COUNTIF(",
+            "count if": "COUNTIF(",
+            "count many if": "COUNTIF(",
             "index": "INDEX(",
             "match":"MATCH(",
+            "Dell":"(DEL)",
+            "some":"SUM(",
+            "indirect":"INDIRECT(",
+
 
 
         }),

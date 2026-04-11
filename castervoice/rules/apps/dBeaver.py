@@ -46,6 +46,8 @@ class DBeaverRule(MappingRule):
 			"right": "right",
 		}),
 		Choice("key_rule", {
+			"run query":"c-enter",
+			"export query":"cs-enter",#assigned in app
 			"left tab": "c-pgup",
 			"right tab": "c-pgdown",
 		}),

@@ -1,10 +1,12 @@
 '''
-isUpdated=1
+isPrimary=0
 Michael McMillen
 To Update:
 Copy from spirit_loc_citrix.py
 replace all within class with what is in spirit_loc_citrix
-Replace original query mouse coordinates with "query": "745,150",
+Replace original query mouse coordinates with
+
+"query": "745,150", #125% scale 144p
 '''
 
 '''
@@ -31,8 +33,6 @@ from castervoice.lib.temporary import Store, Retrieve
 class SpiritAppstreamRule(MappingRule):
 
 	mapping = {
-
-
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/60")),
 		#show/hide columns: move item under mouse to display
@@ -43,7 +43,8 @@ class SpiritAppstreamRule(MappingRule):
 		#table filtering
 		"filter": R(Mouse("left:down, [0, 20], left:up")),
 		#query menu
-		"<spirit_trait>":R( Text("%(spirit_trait)s")+ Pause("100") +Key("right/40, i/40, tab/40")),#"tab/40,equals")),
+
+		"<spirit_trait>":R( Text("%(spirit_trait)s", pause = 0.1)+Key("right/40, i/40, tab/40")),#"tab/40,equals")),
 
 		"<spirit_part_trait>":R( Text("%(spirit_part_trait)s")),#"tab/40,equals")),
 
@@ -74,7 +75,7 @@ class SpiritAppstreamRule(MappingRule):
 		"<menu_title> [menu]": R(Key("alt/40, %(menu_title)s/40")),
 		"frame [<m>]": R(Key("alt/40, w/40, %(m)s/40")),
 		#grid (window) switching
-		"window" : R(Key("alt, w/40")),
+		"(grid |window) menu" : R(Key("alt, w/40")),
 		"grid [<m>]": R(Key("alt, w/40") + Key("%(m)s/40")),
 	}
 	extras = [
@@ -101,22 +102,19 @@ class SpiritAppstreamRule(MappingRule):
 
 		Choice("spirit_trait", {
 			#full Spirit trait chains
-			"breeding group [code]" :"BGRP:BGPCD",
 
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
 			#Material
 			"[Matt|material] abbreviated code ": "MAT:ABBRC",
 			"(Matt|material) ID":"MAT:MATID",
-			"(Matt|material) batch bid":"MAT:MMT:BID",
 			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
 			"(Matt|material) creation date":"MAT:CRTDT",
-			"[Matt|material] early stage name":"MAT:MMT:ESTGN",
 			"[Matt|material] (generation|Jen) code":"MAT:GENCD",
 			"[Matt|material] identity generation code ": "MAT:MMT:IGENCD",
-			"(Matt|material) LBG": "MAT:MMT:",
 			"(Matt|material) line code":"MAT:LINE:LINCD",
-			"[Matt|material] stable line indicator": "MAT:MMT:SLBID",
+			"(Matt|material) batch bid":"MAT:MMT:BID",
+			"(Matt|material) LBG": "MAT:MMT:",
 
 
 			#Line
@@ -161,24 +159,8 @@ class SpiritAppstreamRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "785,195",#Web
-			"okay": "1725,723",
-
-			"people":"1073,81",
-			"crop logins":"1105,81",
-
-
-			#"material management":"87, 130",
-			"(trial|experiment) management":"87, 654",
-
-			"lines": "87,66",
-			"experiments": "87, 234",
-			"plots":"87, 280",
-			"trials":"87, 285",
-
-
-
-			"advanced sort":"396, 60",
+			"query": "975,250", #1440p @ 100% scale
+			"advanced sort":"396, 80",
 
 			"cell 1":"190, 135",
 			"get table":"180, 128",
@@ -191,7 +173,6 @@ class SpiritAppstreamRule(MappingRule):
 
 		}),
 		Choice("rc_item", {
-				"display chain":"d:2/20,right,enter",
 				"view [associated] (affiliations|GNA)": "v/40, g",
 				"view [associated] (locations|line|lines)": "v/40, l",
 				"view [associated] materials [created]": "v/40, m",
@@ -202,7 +183,7 @@ class SpiritAppstreamRule(MappingRule):
 				"view [associated] pollinations": "v/40, right/40, up",
 				"view [associated] source pollinations": "v/40, s",
 				"view [associated] (trial|trials)": "v/40, t",
-				"view [associated] (variety|varieties)": "v/40, v",
+				"view [associated] variety": "v/40, v",
 				"append [existing] [flex] traits": "a:3",
 				"(add|make) subplots": "a:2",
 
@@ -216,9 +197,9 @@ class SpiritAppstreamRule(MappingRule):
 				"(new|save) profile":"up:2/40,right/40,up:2",
 				"[create] (new|save) grouping":"up:2/40,right/40,up",
 
-				"(edit|add|remove|change|show) (column|columns|profile)":"up:4",
+				"(edit|add|remove|change|show) (columns|profile)":"up:4",
 
-				"remove (row|rows|record|records)":"r",
+				"remove [row|rows|record|records]":"r",
 				"delete (row|rows|record|records)":"d",
 				"properties":"up",
 
@@ -232,6 +213,7 @@ class SpiritAppstreamRule(MappingRule):
 			"cauliflower":"c:3",
 			"cucumber":"c:7",
 			"lettuce":"l",
+			"onion":"o:2",
 			"peppers":"p:2",
 			"Spinach":"s:3",
 			"sweetcorn":"s:6",
@@ -244,6 +226,7 @@ class SpiritAppstreamRule(MappingRule):
 
 			#query
 			"next [field]": "tab",
+			"search clipboard": "s-home,delete,c-v/20,a-q",
 			"(run query|search it)": "a-q",
 			"clear query": "a-c",
 			"append":"a-a",
@@ -258,7 +241,7 @@ class SpiritAppstreamRule(MappingRule):
 			"move":"s-tab:3",
 
 			#other commands
-			#"(okay|OK)":"a-o",
+			"(okay|OK)":"a-o",
 			"edit": "f2",
 			"refresh (grid|frame)": "f5",
 			"paste down":"apps/20, down:4/10, enter",
@@ -277,6 +260,9 @@ class SpiritAppstreamRule(MappingRule):
 
 	]
 	defaults = {"n": 1, "k": 1, "nth": ""}
+
+
+
 
 def get_rule():
 
