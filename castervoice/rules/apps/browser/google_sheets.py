@@ -158,6 +158,7 @@ class GoogleSheetsRule(MappingRule):
             "(add|remove) filter": "cs-l",
             "(clear filter| filter off)": "c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
             "filter": "ca-r/20, tab:6/20",
+            "filter this":"apps,down:10,enter",
             #sorting
             "sort [down]": "a-down/40, s",#-tab, space, entyeah I guess er",
             "sort up": "a-down/40, o", #s-tab, space, down, enter",
