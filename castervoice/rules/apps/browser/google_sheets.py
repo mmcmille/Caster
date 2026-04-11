@@ -156,7 +156,7 @@ class GoogleSheetsRule(MappingRule):
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
-            "(clear filter| filter off)": "c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
+            "(clear filter| filter off)": "apps,down:9,enter",#"c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
             "filter": "ca-r/20, tab:6/20",
             "filter this":"apps,down:10,enter",
             #sorting
@@ -197,6 +197,7 @@ class GoogleSheetsRule(MappingRule):
             "generate":"c-g",#for hierarchy viewer macro
             #saving
             "don't save":"a-n",
+            "ID":"csa-1",
 
 
 

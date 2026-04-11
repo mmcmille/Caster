@@ -128,7 +128,7 @@ class HomeWindowManagementRule(MappingRule):
             "(email|mail|outlook)": 2,
             "(commands)": 3,
             "(files)": 4,
-            "(notes|one note)": 5,
+            "(copilot)": 5,
             "(Excel)": 6,
             "(teams|chat|AI)": 7,
             "copilot": 8,
