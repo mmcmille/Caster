@@ -94,6 +94,7 @@ class SpiritRule(MappingRule):
 			"(Matt|material) (BE|entity)":"MAT:MMT:BEBID",
 			"(Matt|material) creation date":"MAT:CRTDT",
 			"[Matt|material] (generation|Jen) code":"MAT:GENCD",
+			"[Matt|material] (cross number|GNA)":"MAT:GNA:CRSNO",
 			"[Matt|material] identity generation code ": "MAT:MMT:IGENCD",
 			"(Matt|material) line code":"MAT:LINE:LINCD",
 			"(Matt|material) batch bid":"MAT:MMT:BID",
