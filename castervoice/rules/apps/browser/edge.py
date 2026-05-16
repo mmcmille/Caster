@@ -21,19 +21,6 @@ class EdgeRule(MappingRule):
         #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
 
 
-        #Google Sheets
-        #menu control
-        "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
-
-        "(next | right) sheet [<n>]":
-            R(Key("a-down/20"))*Repeat(extra="n"),
-        "(prior | left) sheet [<n>]":
-            R(Key("a-up/20"))*Repeat(extra="n"),
-
-
-        #formative rules
-        "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
-
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
@@ -104,9 +91,9 @@ class EdgeRule(MappingRule):
             R(Key("c-w")) * Repeat(extra='n'),
         "win close|close all tabs":
             R(Key("cs-w")),
-        "right tab [<n>]|tab right [<n>]":
+        "show right [tab] [<n>]":
             R(Key("c-tab/40")) * Repeat(extra="n"),
-        "left tab [<n>]|tab left [<n>]":
+        "show left [tab] [<n>]":
             R(Key("cs-tab/40")) * Repeat(extra="n"),
         "new tab that":
             R(Mouse("middle") + Pause("20") + Key("c-tab")),
