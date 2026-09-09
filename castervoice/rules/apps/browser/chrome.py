@@ -3,6 +3,7 @@
 Michael McMillen
 independent Windows for tabs
 dictation folder
+Source for browser commands
 '''
 from dragonfly import Repeat, Pause, Function, Choice, MappingRule, ShortIntegerRef, Dictation
 
@@ -30,7 +31,7 @@ class ChromeRule(MappingRule):
             R(Key("c-tab/20"))*Repeat(extra="n"),
         "show (prior | left | up ) [tab] [<n>]":
             R(Key("cs-tab/20"))*Repeat(extra="n"),
-            
+
         "tab (here|this)": R(Mouse("right/60") + Key("down,enter")),
 
         #generic key rule
@@ -96,7 +97,7 @@ class ChromeRule(MappingRule):
         "reopen tab [<n>]|tab reopen [<n>]":
             R(Key("cs-t")) * Repeat(extra="n"),
         "(close tab [<n>]|tab close [<n>])":
-            R(Key("c-w")) * Repeat(extra='n'),
+            R(Key("c-w/10")) * Repeat(extra='n'),
         "win close|close all tabs":
             R(Key("cs-w")),
         "(next|forward) tab [<n>]|tab (right|sauce) [<n>]":
@@ -247,6 +248,7 @@ class ChromeRule(MappingRule):
         Choice("key_rule", {
             "switch mode": "f7",
             "restore tab": "cs-t",
+            "duplicate tab":"c-m",
            #"drop text": "cs-v",
 
            "out": "a-left",
@@ -274,4 +276,4 @@ class ChromeRule(MappingRule):
     defaults = {"n": 1, "k": 1, "m":"", "nth": "", "read_speed":"40","read_dir" : ""}
 
 def get_rule():
-    return ChromeRule, RuleDetails(name="google chrome", executable="chrome")
+    return ChromeRule, RuleDetails(name="google chrome", executable="slimjet")#"chrome")

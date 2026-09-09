@@ -15,9 +15,9 @@ class OneCommanderRule(MappingRule):
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s/10")),
         #tab navigation
-        "(next | right | down) tab [<n>]":
+        "show (next | right | down) [tab] [<n>]":
             R(Key("c-tab/20"))*Repeat(extra="n"),
-        "(prior | left | up ) tab [<n>]":
+        "show (prior | left | up ) [tab] [<n>]":
             R(Key("cs-tab/20"))*Repeat(extra="n"),
 
         "rename <new_name>": R(Key('f2/20, %(new_name)s, enter')),
@@ -69,7 +69,7 @@ class OneCommanderRule(MappingRule):
             "file filter": 'c-f12',
             "new tab": 'c-t',
             "new folder": "cs-n",
-            "rename": 'f2',
+            "(edit | rename)": 'f2',
             "multi rename": 'c-m',
             "display thumbnails": 'cs-f1',
             "display list": 'c-f1',

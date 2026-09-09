@@ -92,14 +92,14 @@ class Navigation(MergeRule):
         "ignore body":
             R(Key("c-x")),
         "computer <pc_op>":R( Key("w-x/40,up,up,%(pc_op)s")),
-        'save ( file | it )':
+        'file save':
             R(Key("c-s"), rspec="save"),
         # implemented in each program 'save as': R(Key("cs-s")),
-        'new file':
+        'file new':
             R(Key("c-n")),
-        'open file':
+        'file open':
 	    R(Key("c-o")),
-        'print file':
+        'file print':
             R(Key("c-p")),
 
         #page
@@ -190,9 +190,9 @@ class Navigation(MergeRule):
         #"next line": R(Key("backspace, enter")),
         #"go": R(Key("backspace, c-right")),
         "shave right [<nnavi50>]": R(Key("s-right:%(nnavi50)s, backspace")),
-        "(lease wally | latch | back line) [<nnavi10>]":
+        "(lease wally | latch | line home) [<nnavi10>]":
             R(Key("home:%(nnavi10)s")),
-        "(ross wally | ratch | jump line) [<nnavi10>]":
+        "(ross wally | ratch | line end) [<nnavi10>]":
             R(Key("end:%(nnavi10)s")),
         #"sauce wally [<nnavi10>]":
         #    R(Key("c-home:%(nnavi10)s")),

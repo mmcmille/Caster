@@ -17,18 +17,24 @@ class FreeplaneRule(MappingRule):#free plane
 	mapping = {
 		#generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/10")),
+
+        #tab navigation
+        "show (next | right | down) [tab] [<n>]":
+            R(Key("c-tab/20"))*Repeat(extra="n"),
+        "show (prior | left | up ) [tab] [<n>]":
+            R(Key("cs-tab/20"))*Repeat(extra="n"),
 		#menu control
 		"<menu_title> menu": R(Key("a-%(menu_title)s")),
 		#zoom
-		"zoom out [<m>]": R(Key("a-down")) * Repeat(extra='m'),
-		"zoom in [<m>]": R(Key("a-up")) * Repeat(extra='m'),
+		"zoom out [<n>]": R(Key("a-down")) * Repeat(extra='n'),
+		"zoom in [<n>]": R(Key("a-up")) * Repeat(extra='n'),
 		#movement
-		"move <direction> [<m>]": R(Key("c-%(direction)s")) * Repeat(extra='m'),
+		"move <direction> [<n>]": R(Key("c-%(direction)s")) * Repeat(extra='n'),
 
 		#"drop text": R(Key("cs-v/20, a-p, enter")),
 	}
 	extras = [
-		ShortIntegerRef("m", 1, 10),
+		ShortIntegerRef("n", 1, 10),
 		Choice("menu_title", {
 			"file": "f",
 			"edit": "e",
@@ -55,13 +61,14 @@ class FreeplaneRule(MappingRule):#free plane
 			# menu items
 			"preferences": "c-comma",
 			"save all": "a-f/10, a",#"a-s",
-			"(copy|get) branch": "cs-c",
-			"(copy|get) [node] ID": "a-e/10,c,c",# "cs-i",
+			"copy (single|node)": "cs-c",
+			"copy [node] ID": "a-e/10,c,c",# "cs-i",
 			"[get] (link|address)": "a-e/10,c,o",
 
 			#format
-			"edit styles": "c-f11",
-
+			"(change|edit) styles": "c-f11",
+			#edit
+			"attribute manager": "f4",
 			# navigation
 			"last": "a-left",
 			"next": "a-right",
@@ -74,7 +81,7 @@ class FreeplaneRule(MappingRule):#free plane
 			"(fold|collapse) all": "a-home",
 			"unfold all": "a-end",
 			"outline view": "a-v/10,v,o", #"cs-o",
-			"edit styles": "c-f11",
+			"styles [edit]": "c-f11",
 
 			# filter
 			"search": "cs-j",
@@ -123,8 +130,8 @@ class FreeplaneRule(MappingRule):#free plane
 		}),
 	]
 	defaults = {
-		"m":1,
+		"n":1,
 	}
 
 def get_rule():
-	return FreeplaneRule, RuleDetails(name="freeplane", title="Freeplane")
+	return FreeplaneRule, RuleDetails(name="freeplane", executable="freeplane")

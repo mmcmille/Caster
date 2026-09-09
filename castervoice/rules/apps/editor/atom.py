@@ -39,17 +39,16 @@ class AtomRule(MappingRule):
     """
 
     mapping = {
+        #generic key rule
+        "<key_rule>": R(Key("%(key_rule)s")),
+
         "search project [for] [<text>]": R(Key("cs-f")+ Pause("50")+ Text("%(text)s")+ Key("enter")),
-        "(last|left) tab [<n>]": R(Key("c-pgup"))*Repeat(extra="n"),
-        "(next|right) tab [<n>]": R(Key("c-pgdown"))*Repeat(extra="n"),
+        "tab (last|left) [<n>]": R(Key("c-pgup"))*Repeat(extra="n"),
+        "tab (next|right) [<n>]": R(Key("c-pgdown"))*Repeat(extra="n"),
         # Menu UI-------------------------------------------------------
         #File Menu
         "[open] new window":
             R(Key("cs-n")),
-        "left tab":
-            R(Key("c-pgup")),
-        "right tab":
-            R(Key("c-pgdown")),
         "new file":
             R(Key("c-n")),
         "open file":

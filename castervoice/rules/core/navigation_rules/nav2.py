@@ -31,7 +31,7 @@ class NavigationNon(MappingRule):
                 blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard)),
-        "find [<text>]": R(Key("c-f")+ Pause("50")+ Text("%(text)s")),
+        "find [<text>]": R(Key("c-f")+ Pause("50")+Key("s-home")+ Text("%(text)s")),
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
         "find prior [<n>]":
@@ -82,35 +82,15 @@ class NavigationNon(MappingRule):
         "refresh":
             R(Key("c-r")),
 
-        #Window Navigation and Movement
-        #also see home_window_mgmt_rule
-
-        #"move window": R(Key("a-space/10, r, a-space/10, m/30,left")),
-        #moves window to the direction indicated
-        "move [window] <direction2> [<n>]":
-            R(Key("w-%(direction2)s"))*Repeat(extra="n"),
-        # moves window to the other monitor
-        "monitor (left | lease) [<n>]":
-            R(Key("sw-left"))*Repeat(extra="n"),
-        "monitor (right | ross) [<n>]":
-            R(Key("sw-right"))*Repeat(extra="n"),
-        #stretches window to the left or right
-        "(span|stretch) [window|win] <direction2> [<n>]":
-            R(Key("wca-%(direction2)s"))*Repeat(extra="n"),
-
-        "(next | prior) window":
-            R(Key("ca-tab, enter")),
-        "(show|switch) (window | windows)":
-            R(Key("ca-tab"))*Repeat(extra="n"),
         #"(next | right | down) tab [<n>]":
         #    R(Key("c-tab/20"))*Repeat(extra="n"),
             #R(Key("c-pgdown/20"))*Repeat(extra="n"),
         #"(prior | left | up ) tab [<n>]":
         #    R(Key("cs-tab/20"))*Repeat(extra="n"),
             #R(Key("c-pgup/20"))*Repeat(extra="n"),
-        "close (tab|it) [<n>]":
+        "tab close [<n>]":
             R(Key("c-w/40"))*Repeat(extra="n"),
-        "new tab [<n>]":
+        "tab new [<n>]":
             R(Key("c-t/20"))*Repeat(extra="n"),
         "elite translation <text>":
             R(Function(alphabet_support.elite_text)),

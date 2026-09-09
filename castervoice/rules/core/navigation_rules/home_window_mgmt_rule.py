@@ -1,4 +1,5 @@
 '''
+Michael McMillen
 '''
 
 
@@ -16,6 +17,23 @@ class HomeWindowManagementRule(MappingRule):
 
         #generic key rule
 		"<key_rule>": R(Key("%(key_rule)s/5")),
+
+        #Window Navigation and Movement
+        #also see home_window_mgmt_rule
+
+        #"move window": R(Key("a-space/10, r, a-space/10, m/30,left")),
+        #moves window to the direction indicated
+        "move <direction> [<n>]":
+            R(Key("w-%(direction)s"))*Repeat(extra="n"),
+        # moves window to the other monitor
+        #"monitor (left | lease) [<n>]": R(Key("sw-left"))*Repeat(extra="n"),
+        #"monitor (right | ross) [<n>]": R(Key("sw-right"))*Repeat(extra="n"),
+
+        #stretches window to the left or right
+        "(span|stretch) [window|win] <direction> [<n>]":
+            R(Key("wca-%(direction)s"))*Repeat(extra="n"),
+        "(show|switch) windows":
+            R(Key("ca-tab"))*Repeat(extra="n"),
 
         #switches the position of the center window with either the left or right window
         "switch [window] left":
@@ -39,18 +57,19 @@ class HomeWindowManagementRule(MappingRule):
             Key("w-left")+
             Mouse("( 0.5, 0.5 )")),
 
-        #app switching by listed number
-        "(show|window) <n> [<close_choice>]":
+        #app switching by listed number, updated for Windows 11 new taskbar
+        "window <n> [<close_choice>]":
             R(
-                Key("w-t:%(n)s/5") +
-                Key("enter") +
+                Key("w-t/10") + Key("home/10") +
+                Key("right:%(n)s/20") +
+                Key("left/20") + Key("enter") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)") +
                 Key("%(close_choice)s")
             ),
 
         #app switching via application name - Windows number , 1-10
-        "show <app_name> [<close_choice>]":
+        "window <app_name> [<close_choice>]":
             R(
                 Key("cw-%(app_name)s/20") +
                 Pause("50") +
@@ -58,14 +77,19 @@ class HomeWindowManagementRule(MappingRule):
                 Key("%(close_choice)s")
             ),
         #switches to last displayed app
-        "show":
+        "window (last|previous)":
             R(
                 Key("a-tab") +
                 Pause("50") +
                 Mouse("(0.5, 0.5)")
             ),
         #app switching via Fluent Search (change shortcut in app)
-        "show <text>": R(Key("ca-w/60")+Text("%(text)s")),
+        #"[show] window": R(Key("ca-w/60")),#
+        #"(show|window) <text>": R(Key("ca-w/60")+Text("%(text)s")), ##put last after other show commands
+
+        #app switching via Switcheroo (change shortcut in app)
+        "window": R(Key("ca-tab/20")),#
+        "window <text>": R(Key("a-tab/20")+Text("%(text)s")), ##put last after other show commands
 
 
 
@@ -80,15 +104,15 @@ class HomeWindowManagementRule(MappingRule):
         # get mouse coordinates
         "get mouse coordinates":R(Key("cw-m")),
 
-        "snip window ":
+        "snip window":
             R(Key("ws-s")),
-        "(max|maximize) (win|window)":
+        "(max|maximize) (it|win|window)":
             R(Function(utilities.maximize_window)),
-        "(minimize|hide) (win|window)":
+        "(minimize|hide) (it|win|window) ":
             R(Function(utilities.minimize_window)),
 	    "swap (win|window)":
             R(Key("ws-right")),
-        "resize (win|window)":
+        "resize (win|window) ":
             R(Mouse("(0.99, 0.99), left")),
 
         # Workspace management
@@ -111,6 +135,11 @@ class HomeWindowManagementRule(MappingRule):
             R(Function(virtual_desktops.move_current_window_to_desktop)),
         "move work [space] <n>":
             R(Function(virtual_desktops.move_current_window_to_desktop, follow=True)),
+
+        #Identity Search
+        "lookup material":
+        R(RunCommand("chrome https://identity.mint.syngentadigitalapps.com/app/search")),
+
     }
 
     extras = [
@@ -129,11 +158,11 @@ class HomeWindowManagementRule(MappingRule):
             "(commands)": 3,
             "(files)": 4,
             "(notes|one note)": 5,
-            "(Excel)": 6,
+            "map": 6,
             "(teams|chat|AI)": 7,
             "copilot": 8,
-            "(spirit)": 9,
-            #"(10)": 0,
+            "spirit": 9,
+            "(Excel)": 0,
         }),
         Choice("app_n_11", {
             "11": 1,
@@ -150,8 +179,8 @@ class HomeWindowManagementRule(MappingRule):
         Choice("key_rule", {
             #Windows voice recognition,
             "Dictate":"w-h",
-            "start menu": "win",
-            "system tray": "w-t/20,tab/5,space",
+            "show start menu": "win",
+            "show system tray": "w-t/20,tab/5,space",
             "show desktop": "w-d",
             "window isolate":"w-d/150, a-tab",
             "(pin|unpin) window":"wc-t", #uses power toys

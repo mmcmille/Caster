@@ -76,17 +76,19 @@ class TextManipulation(MergeRule):
         "jump [<n>]": R(Key("c-right:%(n)s/10")),
 
         #select text
-        "get (page|everything)": R(Key("c-a/5")),
+        "select": R(Key("shift:down")),
+
+    #"release": R(Key("control:down,alt:down")),
+        "page select": R(Key("c-a/5")),
 
         #"these <number_of_lines_to_get> lines up":#selects line and additional number of lines above
         #    R(Key("end, s-home, s-up:%(number_of_lines_to_get)s/5, s-home")),
 
 
-        "get line":#selects line
-            R(Key("end/5, s-home")),
-        "get <n> lines":#selects number of lines below
+
+        #"get <n> lines":#selects number of lines below
             #R(Key("home/5, s-down:%(number_of_lines_to_get)s/5, s-end/5")),
-            R(Key("home/5") +  Key("s-down/5")*Repeat(extra="n")),
+            #R(Key("home/5") +  Key("s-down/5")*Repeat(extra="n")),
         "get <line_dir>":#selects everything to the left or right of the cursor on the current line
             R(Key("s-%(line_dir)s/5")),
 
@@ -269,25 +271,35 @@ class TextManipulation(MergeRule):
             "(italic|italicize|tilt) (it|this|text)": "c-i",
 
             #line commands
-            #clears text
-            "clear line": "end/5, s-home/5, backspace",
-            "(delete|remove|strike) line": "end/5, s-home/5, delete",#"home:2/5, s-end/5, backspace, s-end/5, backspace",
-            "clear page": "c-a/10, backspace",
-            "replace page": "c-a/10, backspace/20, c-v",
-            #copyingsee
+            "line [select|hold]":"end/20, s-home/20",
+#            "line copy":"end/20, s-home/20, c-c",
+            "(line copy over | line transfer)":"end/20, s-home/20, c-c/20, a-tab",
+            #"line cut":"end/20, s-home/20, c-x",
+            "line clear": "end/5, s-home/5, backspace",
+            "line right":"home/20, tab",
+            "line left":"home/20, s-tab",
+            "line (delete|remove|strike)": "end/5, s-home/5, delete",#"home:2/5, s-end/5, backspace, s-end/5, backspace",
+
+
+            #page commands
+            #"page":"c-a/10",
+            #"page clear": "c-a/10, backspace",
+            #"replace page": "c-a/10, backspace/20, c-v",
+            #"page copy": "c-a/10, c-c",
+            #"page copy over": "c-a/10, c-c, a-tab",
+            #"transfer page": "c-a, c-c/20, a-tab",
+
             #added release modifiers to work with "select"
-            "copy [this] ": "c-c",
+            "copy [this] ": "c-c/20,shift:up",
             "copy [this] over": "c-c/20, a-tab",
-            "copy (page|everything)": "c-a/10, c-c",
-            "copy (page|everything) over": "c-a/10, c-c, a-tab",
             "copy (through|to) end": "cs-end/10, c-c",
-            "cut [this]": "c-x",
-            "cut line":"end/20, s-home/20, c-x",
+            "cut [this]": "c-x,shift:up",
+
             "replace line":"end/20, s-home/20, backspace, c-v",
             "drop it": "c-v",
-            "copy line":"end/20, s-home/20, c-c",
-            "(copy line over | transfer line)":"end/20, s-home/20, c-c/20, a-tab",
-            "transfer page": "c-a, c-c/20, a-tab",
+
+
+
             #Dragon
             "dictation box": "cs-d",
         }),

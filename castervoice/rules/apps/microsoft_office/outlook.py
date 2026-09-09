@@ -33,7 +33,7 @@ class OutlookRule(MappingRule):
         "new folder": R(Key("cs-e")),
         "advanced (search| find)": R(Key("cs-f")),
         "new office document": R(Key("cs-h")),
-        "(inbox | go to inbox)": R(Key("g,i")),#cs-i
+
         "new journal entry": R(Key("cs-j")),
         "new task": R(Key("cs-k")),
         "new contact group": R(Key("cs-l")),
@@ -74,7 +74,7 @@ class OutlookRule(MappingRule):
         "go to starred": R(Key("c-y/10, s:3, enter")),
         "go to important": R(Key("c-y/10, i:2, enter")),
         "go to outbox": R(Key("cs-o")),
-        "inbox": R(Key("cs-i")),
+
 
         # center pane
         "sort by [<sort_by>]": R(Key("a-v/5, a, b/5, %(sort_by)s")),
@@ -83,7 +83,7 @@ class OutlookRule(MappingRule):
         "search": R(Key("a-q")),#c-e
         "new search": R(Key("a-q/10,s-home,backspace")),#c-e
         "search [for] [<dict>]": R(Key("a-q") + Text("%(dict)s")),
-        "(categorize|label) [it] [<dict>]": R(Key("c/10")+Text("%(dict)s")), #"s-f10/40,down:8/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
+        "(categorize|label) [this|it] [<dict>]": R(Key("alt/60,h/20,g/20,down")+Text("%(dict)s")), #"s-f10/40,down:8/10,right/5") + Text("%(dict)s")), #prefix with if needed R(Mouse("left") +
         "(message list | messages)": R(Key("tab:3")),
         "(empty | clear) search [bar]": R(Key("c-e, c-a, del/3, escape")),
         # from the search bar to get the focus into the messages is three tabs
@@ -108,18 +108,18 @@ class OutlookRule(MappingRule):
 
         #message shortcuts
         "(new window|read this)":R(Key("s-enter")),
-        "flag (it|email)": R(Key("insert")),
-        "reply ": R(Key("c-r")),
-        "reply all ": R(Key("cs-r")),
-        "forward": R(Key("c-f")),
+        "flag (this|it|email)": R(Key("insert")),
+
+
+
         "Mark as read": R(Key("c-q")),
         "Mark as unread": R(Key("c-u")),
         #folders
-        "[(go to|open)] folder": R(Key("c-y")),
-        "move (it|to) [<dict>]": R(Key("v") + Pause("50") + Text("%(dict)s")),#cs-v
+
+        "move (this|to) [<dict>]": R(Key("cs-v") + Pause("50") + Text("%(dict)s")),#cs-v
         #R(Mouse("right, <-5,0>")+ Pause("100") + Key("down:8/5,right/5")),
-        "send it": R(Key("c-enter")),
-        "trash it": R(Key("delete")),
+        "send (this|it)": R(Key("c-enter")),
+        "trash (this|it)": R(Key("delete")),
         # navigation
 	    "next pane [<n>]": R(Key("f6"))*Repeat(extra='n'),
         "(un|prior|previous) pane [<n>]": R(Key("s-f6"))*Repeat(extra='n'),
@@ -159,9 +159,41 @@ class OutlookRule(MappingRule):
         }),
         Choice("key_rule", {
             "(clear formatting|normal text)":"c-space",
-            "remove label":"c/20,down/10,space",
+            "remove label":"c/20,down/0,space",
             "copilot":"a-i",
-            "[reply] popout":"cs-r",
+            #folder
+            "[(go to|open)] folder":"c-y",
+            "sent items":"c-y/20,home,s,enter",
+            "move (this|it)":"cs-v",
+            "inbox":"cs-i",
+            "create new message or calendar event":"c-n",
+            "create new message":"c-s-m",
+            "send email":"c-enter",
+            "send message":"alt-s",
+            "reply":"c-r",
+            "reply all":"cs-r",
+            "forward message":"c-f",
+            "mark as read":"c-q",
+            "mark as unread":"c-u",
+            "delete message":"delete",
+            "go to calendar":"c-2",
+            "go to mail":"c-1",
+            "go to people":"c-4",
+            "go to to do":"c-5",
+            "open message in new window":"s-enter",
+            "next open message":"c-.",
+            "previous open message":"c-,",
+            "go to search":"c-e",
+            "show ribbon access keys":"alt",
+            "open home tab":"alt-h",
+            "open file menu":"alt-f",
+            "create appointment":"c-s-a",
+            "create contact":"c-s-c",
+            "create contact group":"c-s-l",
+            "create folder":"c-s-e",
+            "create meeting request":"c-s-q",
+            "create note":"c-s-n",
+            "create task":"c-s-k"
 
         }),
     ]

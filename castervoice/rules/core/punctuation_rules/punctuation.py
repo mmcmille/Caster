@@ -30,7 +30,7 @@ class Punctuation(MergeRule):
             R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
         "tabby [<npunc>]":
             R(Key("tab"))*Repeat(extra="npunc"),
-        "(back | shin) tabby [<npunc>]":
+        "(back | shift) tabby [<npunc>]":
             R(Key("s-tab"))*Repeat(extra="npunc"),
         "boom [<npunc>]":
             R(Text(", "))*Repeat(extra="npunc"),

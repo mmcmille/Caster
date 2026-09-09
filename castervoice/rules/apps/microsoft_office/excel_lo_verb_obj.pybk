@@ -269,20 +269,20 @@ class ExcelRule(MappingRule): #MappingRule
             "(trash|delete) [cell|cells]": "apps,d",
 
             #row
-            "row": "s-space",
-            "row copy": "s-space/40,c-c",
-            "row duplicate": "s-space/40,c-c/20,cs-plus",
-            "row delete": "s-space, apps,d,down,enter",
-            "(row|rows) (add|insert)": "escape, s-space/20,apps,i,right,down,enter",
-            "(row|rows) fit ": "s-space, a-h,o,i",
+            "[get] row": "s-space",
+            "copy row": "s-space/40,c-c",
+            "duplicate row": "s-space/40,c-c/20,cs-plus",
+            "(trash|delete) row ": "s-space, apps,d,down,enter",
+            "(add|insert) (row|rows) ": "escape, s-space/20,apps,i,right,down,enter",
+            "fit (row|rows) ": "s-space, a-h,o,i",
 
             #column
-            "(field|call|column)": "c-space",
-            "(field|call|column) copy": "c-space, c-c",
-            "(field|call|column) (add|insert)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "(field|call|column) (trash|delete)": "c-space, apps,d",
-            "(field|call|column) fit [width]": "c-space,a-h,o,i",
-            "(field|call|column) hide": "c-space/20,apps/10,h",
+            "[get] (call|column)": "c-space",
+            "(call|column) copy": "c-space, c-c",
+            "(add|insert) (call|column) ": "escape/10, c-space, apps, i/20", #c, a-o,
+            "(trash|delete)(call|column) ": "c-space, apps,d",
+            "fit(call|column) [width]": "c-space,a-h,o,i",
+            "hide (call|column)": "c-space/20,apps/10,h",
             #comments
             "show comments": "a-r/20,h,1",
             "[new|insert] comment": "a-r/20,c",

@@ -32,7 +32,7 @@ class Keyboard(MappingRule):
             R(Key("%(modifier)s-%(button_dictionary_1)s"), rdescript="Keyboard: %(modifier)s %(button_dictionary_1)s"),
         "hold <modifier_key_name>":
             R(Function(lambda modifier_key_name: hold_keys(modifier_key_name),rdescript="Keyboard: Hold %(modifier_key_name)s")),
-        "release [modifier keys]": R(Key("shift:up, ctrl:up, alt:up, win:up")+ Mouse("left:up")),
+        "release [modifier keys]": R(Key("shift:up, control:up, alt:up, win:up")+ Mouse("left:up")),
         }
 
     extras = [

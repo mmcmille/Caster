@@ -21,32 +21,18 @@ class EdgeRule(MappingRule):
         #"next": R(Key("cs-n/80") + Text("38") + Key("enter")+ Pause("100") + Key("cs-n/80") + Text("39") + Key("enter, a-tab/20") + Pause("100") + Key("down,left")+ Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter") + Pause("300") + Key("a-tab") + Pause("100") + Key("right, c-c/20, a-tab") + Pause("100")+Key("c-v,enter")),
 
 
-        #Google Sheets
-        #menu control
-        "<menu_title> menu": R(Key("as-%(menu_title)s/20")),
+        #Text Rules
+        "signoff": R(Text("Best Regards,") + Key("enter") + Text("Michael")),
+        "drop user info": R(Text("u581917") + Key("tab")
+                + Text("Michael McMillen") + Key("tab")
+                + Text("michael.mcmillen@syngenta.com") + Key("tab")),
 
-        "(next | right) sheet [<n>]":
-            R(Key("a-down/20"))*Repeat(extra="n"),
-        "(prior | left) sheet [<n>]":
-            R(Key("a-up/20"))*Repeat(extra="n"),
-
-
-        #formative rules
-        "score <m>": R(Key("%(m)s/40") + Key("tab:2/20")),#scores for converting to rubric
 
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
 
         "[click] <click_item>": R(Mouse("(%(click_item)s), left")),
         "tab here": R(Key("ctrl:down, shift:down") + Mouse("left") + Key("ctrl:up, shift:up")),
-
-        #gmail,   ...outlook online rules
-        #moved to folder
-        #"move (it|to) [<dict>]": R(Key("v") + Pause(" 100")+ Text("%(dict)s")),#R(Mouse("(341, 152), left")+ Pause(" 100")+ Text(" %(dict)s")),
-        "flag it": R(Mouse("(246, 146), left")),
-        "trash it": R(Key("s-3")), #R(Mouse("(443, 148), left")),#510, 158
-        "send (it|email)": R(Key("tab:3/20,enter")),
-        "discard it": R(Key("tab:4/40")),
 
         "link":
             R(Key("a-c/50, a-tab")),

@@ -12,7 +12,7 @@ from castervoice.lib.actions import Text, Key, Mouse
 from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
 from castervoice.lib.merge.state.short import R
 
-class ExcelRule(MappingRule): #MappingRule
+class AccessRule(MappingRule): #MappingRule
     number_output_mode = ""#default, options: down,right,off,
 
     def _number_output_direction():
@@ -34,13 +34,13 @@ class ExcelRule(MappingRule): #MappingRule
         #temporary rule for transferring
         "transfer": R(Key("c-c/20, a-tab") + Pause("100") + Key("c-v/20, enter")),
         #menu control
-        "<menu_title> [menu]": R(Key("alt/20, %(menu_title)s/20")),
+        "<menu_title> menu": R(Key("alt/20, %(menu_title)s/20")),
 
         #Right-Click menu
         "<rc_item>": R( Key("apps/10, %(rc_item)s")), #
 
         #Sheet Action
-        "<sheet_action> sheet": R(Key("f6/40") + Key("%(sheet_action)s")),
+        "<sheet_action> sheet": R(Key("f6:2/20") + Key("%(sheet_action)s")),
 
         #Locates email with subject of selected cell in outlook, assumes outlook is Win #2
         "(search|find e-mail)": R(Key("c-c/20, cw-2") + Pause("100") + Key("a-q/20, s-home, delete, \", c-v, \", enter")),
@@ -149,7 +149,7 @@ class ExcelRule(MappingRule): #MappingRule
             "automate": "u",
             "developer": "l",
 			"help": "y",
-            "table [design]":"j,t",
+            "table":"j,t",
 		}),
         Choice("rc_item", {
             "trash [this]": "d",
@@ -161,7 +161,7 @@ class ExcelRule(MappingRule): #MappingRule
 
         }),
         Choice("sheet_action", {
-            "new":"tab/20,space",
+            "new":"tab/20,enter",
             "rename":"apps/20,r",
             "move":"apps/20,m",
             "copy":"apps/20,m/20,a-c/20,s-tab:2/20,a-down",
@@ -169,155 +169,114 @@ class ExcelRule(MappingRule): #MappingRule
             "delete":"apps/20,d",
         }),
         Choice("key_rule", {
-            "function":"equals",
-            "edit": "f2",
-            "lock":"f4",
-            "fit [width]": "a-h,o,i",
-            #links
-            "get link":"alt/20,z,s,l",
-            "edit link": "c-k",
-            "open link": "apps/20,o,o,enter",
-            "remove link": "apps/20,r",
-            #Home
-            "wrap text": "a-h/20, w",
-            "[fill] color": "a-h/20, h",
-            "text color": "a-h/20, fc",
-            "format [as] table":"a-h/20,t",
-            "conditional formatting" :"a-h/20,l",
-            "manage rules": "a-h/20,l,r",
+            #tables
+            "open table ": "c-o",
+            "new table": "c-n",
+            "rename table ": "f2",
+            "delete table ": "delete",
+            "copy table ": "c-c",
+            "paste table ": "c-v",
+            "design table ": "a-enter",
+            "datasheet view": "c-enter",
 
-            "style": "a-h/20, j",
-            "style bad": "a-h, j/40, right:1,enter",
-            "style good": "a-h/20, j/40, right:2/20,enter",
-            "style input": "a-h/20, j/40, down:1, right:5/20,enter",
-            "style neutral": "a-h/20, j/40, right:3/20,enter",
-            "style (calculate|calculation)": "a-h/20, j/40, down:1/20,enter",
-            "style note": "a-h/20, j/40, down:3/20, right/20,enter",
+            #queries
+            "new query": "c-q",
+            "open query ": "c-o",
+            "run query": "a-r",
+            "design query": "a-enter",
+            "save query": "c-s",
+            "delete query ": "delete",
 
-            #Insert
-            "insert link":"a-n/20,i,2/20,i",
+            #forms
+            "new form": "a-c, f",
+            "open form ": "c-o",
+            "design form": "a-enter",
+            "save form": "c-s",
+            "delete form ": "delete",
 
-            #Formulas
-            "calculate sheet": "s-f9",
-            "calculate (workbook|now|file)": "f9",
-            "manual calculation":"a-m,x,m",
-            "partial calculation":"a-m,x,p",
-            "automatic calculation":"a-m,x,a",
+            #reports
+            "new report": "a-c, r",
+            "open report ": "c-o",
+            "design report": "a-enter",
+            "save report": "c-s",
+            "delete report ": "delete",
 
-            #Data
-            "data validation":"a-a/10,v,v",
-            "refresh all":"a-a/10,r,a",
-            "remove duplicates":"a-a/10,m/80,s-tab:2",
+            #navigation
+            "next object": "c-tab",
+            "previous object": "cs-tab",
+            "close object": "c-w",
+            "close all": "c-f4",
 
-            # View
-            "(switch modes|midnight)":"a-w/40,m,1",
-            "new window":"a-w/40,n",
-            "hide": "apps/20,h",
-            "unhide": "apps/20,u",
-            "hide ribbon": "c-f1",
+            #records
+            "new record": "c-plus",
+            "delete record": "c-minus",
+            "save record": "s-enter",
+            "find record": "c-f",
+            "replace record": "c-h",
+            "sort ascending": "a-a",
+            "sort descending": "a-d",
 
-            "(read|edit) mode": "cs-m",
-            "get block": "cs-down/20,cs-right/20",
+            #fields
+            "new field": "a-i",
+            "delete field": "delete",
+            "rename field": "f2",
+            "copy field": "c-c",
+            "paste field": "c-v",
 
-            # Find
-            "( search | find)": "c-f",
-            "( search | find) clipboard": "c-f,delete/20,c-v,enter",
-            "find all": "a-i",
-            "find next": "a-f",
-            "replace": "c-h",
-            "replace all": "a-a",
+            #filters
+            "filter by selection": "s-f8",
+            "filter by form": "s-f11",
+            "toggle filter": "cs-l",
+            "clear filter": "a-c, c",
+
+            #views
+            "switch to design": "v, d",
+            "switch to datasheet": "v, s",
+            "switch to form view": "v, f",
+            "switch to layout view": "v, l",
+
+            #macros
+            "new macro": "a-c, m",
+            "run macro": "a-f8",
+            "save macro": "c-s",
+            "delete macro ": "delete",
+
+            #modules
+            "new module": "a-c, m",
+            "open module ": "c-o",
+            "save module": "c-s",
+            "run procedure": "f5",
+
+            #application
+            "save database": "c-s",
+            "compact and repair": "a-f11",
+            "options": "a-f, t",
+            "print": "c-p",
+            "exit access": "a-f4",
+
+            #object tabs (top of Access window)
+            "next tab": "c-tab",
+            "previous tab": "cs-tab",
+            "close tab": "c-w",
+            "close all tabs": "c-f4",
+
+            #tab control (inside forms)
+            "next page": "c-tab",
+            "previous page": "cs-tab",
+
+            #navigation pane tabs
+            "toggle navigation pane": "f11",
+            "focus navigation pane": "f11, tab",
 
 
-
-            "freeze top row": "a-w/20,f,r", #lo "a-v/40,c,r",
-            "merge":"a-h,m,m",
-            "unmerge":"a-h,m,u",
-            # filtering
-            "(add|remove) filter": "escape, cs-l",
-        	"filter": "escape, c-up:2/20, a-down/20, down:8/20",
-            "(update|apply|re-) filter": "escape, c-up:2/20, a-down/20, down:8/20, enter",
-            "filter this": "escape, apps/10,e,v", #using header: "c-c/20, c-up:2/20, a-down/20, down:8/40, c-v/20, enter",
-            "filter clipboard ": "escape, c-up:2/20, a-down/20, down:8/20, c-v/20, enter",
-            "(clear filter| filter off)": "escape, apps/10,e,right,enter ", #using header:"c-up/2, a-down/40, c/20",
-
-            #sorting
-            "sort [down]": "escape, c-up:3/20,a-down/40, s",#-tab, space, enter",
-        	"sort up": "escape, c-up:3/20, a-down/40, o", #s-tab, space, down, enter",
-            "(custom|advanced) sort": "a-h/10,s,u",
-            #"fill down": "c-d",
-            "get unique values": "alt/20, a, 2, u/40, enter",
-        	"save [file] as": "a-f/40, a/100,o",
-
-            #pasting
-            "fill right": "c-c, right, c-down, left, cs-up, c-v", #fills down based on adjacent right column
-            "fill left": "c-c, left, c-down, right, cs-up, c-v",
-            "fill down": "c-c, down, cs-down, c-v",
-            "(drop|insert) date":"c-semicolon,enter",
-            "(drop|insert) time":"c-colon,enter",
-            "(drop|insert|add) (DT |date time)":"cs-t",#relies on macro, original  #"c-semicolon/20 ,space/20 , cs-semicolon,enter", #include seconds
-            "(drop|paste) special": "ca-v",
-            "drop values": "ca-v/20,v,enter",
-            "okay":"a-o, enter",
-            "transpose":"apps/20,t,enter",
-            "insert cut cells" : "apps/20, e",
-
-            #selecting
-            "next field":"tab",
-            "last field": "s-tab",
-            "show sheet":"f6/40,s-tab/20,apps",
-            "sheet menu":"f6/40,apps",
-            "(trash|delete) [cell|cells]": "apps,d",
-
-            #row
-            "row": "s-space",
-            "row copy": "s-space/40,c-c",
-            "row duplicate": "s-space/40,c-c/20,cs-plus",
-            "row delete": "s-space, apps,d,down,enter",
-            "(row|rows) (add|insert)": "escape, s-space/20,apps,i,right,down,enter",
-            "(row|rows) fit ": "s-space, a-h,o,i",
-
-            #column
-            "(field|call|column)": "c-space",
-            "(field|call|column) copy": "c-space, c-c",
-            "(field|call|column) (add|insert)": "escape/10, c-space, apps, i/20", #c, a-o,
-            "(field|call|column) (trash|delete)": "c-space, apps,d",
-            "(field|call|column) fit [width]": "c-space,a-h,o,i",
-            "(field|call|column) hide": "c-space/20,apps/10,h",
-            #comments
-            "show comments": "a-r/20,h,1",
-            "[new|insert] comment": "a-r/20,c",
-            "[new|insert|edit] note": "s-f2",
-            "fly under": "up, c-down, down",
-
-            #Writer
-            "check spelling": "f7",
-
-            #Menus
-            #Home
-            "format painter":"a-h,f,p",
-            "clear (format|formats|formatting)":"a-h,e,f",
-            "normal text":"a-h,e,f",
-            "font up":"a-h,f,g",
-            "font down":"a-h,f,k",
-
-            #Review
-            "(lock|unlock|protect|unprotect) sheet":"a-r/20,p,s",
-
-            #Macros
-            #"generate|update sort":"c-g",#for hierarchy viewer macro, #for Task Manager
-            "log it":"cs-z",
-            #saving
-            "don't save":"a-n",
-
-            #swallow error utterances
-            "it's":"",
-            "if":"",
-            "he":"",
-            "him":"",
-            "she":"",
-            "I":"",
-            "the":"",
-
+        }),
+        Choice("name", {
+            "darin": "Darryn",
+            "mel": "Mel",
+            "veronica": "Veronica",
+            "drew": "Drew",
+            "yvette": "Yvette",
+            "leo": "Leo",
         }),
         Choice("function", { #Excel functions
             "join": "TEXTJOIN(\";\",TRUE,",
@@ -342,4 +301,4 @@ class ExcelRule(MappingRule): #MappingRule
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return ExcelRule, RuleDetails(name="excel", executable="excel")
+    return AccessRule, RuleDetails(name="access", executable="access")

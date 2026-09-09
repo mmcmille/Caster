@@ -88,6 +88,9 @@ class SpiritRule(MappingRule):
 
 			"plot prefix":"EXT:PLTPR",
 			"plot status":"",
+			"plot ID":"PSS:PLTID",
+			"record type":"PSS:RECTP",
+			"subplot type":"PSS:PSSTP",
 			#Material
 			"[Matt|material] abbreviated code ": "MAT:ABBRC",
 			"(Matt|material) ID":"MAT:MATID",
@@ -110,7 +113,7 @@ class SpiritRule(MappingRule):
 			"research station code":"LOC:RST:RSTCD",
 			"trial ID":"EXT:TRLID",
 			#VH
-			"Stable Variety Code":"VH:STBVC",
+			"[Stable] Variety Code":"VH:STBVC",
 			"variety name":"VH:VHNM",
 			"variety number":"VH:VHNO",
 			#People
@@ -119,6 +122,9 @@ class SpiritRule(MappingRule):
 			#Trait Definitions
 			"trait code":"UDTRT:UDTCD",
 			"trait group":"UDTRT:TRTGP",
+
+			#Plot,subplot
+			"barcode":"PSS:BARCD",
 		}),
 		Choice("spirit_part_trait", {
 			#partial trait chains
@@ -144,7 +150,7 @@ class SpiritRule(MappingRule):
 			#Standard
 			#Tools (Icons)
 			#Query|Save, Print, etc.
-			"query": "730,70", #previous: "730,70",
+			"query": "780,70", #Default Window Arrangement previous: "730,70",
 			"advanced sort":"396, 80",
 
 			"cell 1":"190, 135",

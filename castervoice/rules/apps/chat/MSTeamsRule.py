@@ -29,8 +29,9 @@ class MSTeamsRule(MappingRule):
         # Navigation
         "activity":
             R(Key("c-1")),
-        "chat":
-            R(Key("c-2")),
+        "chat": R(Key("c-2")),
+        "unread": R(Key("ca-u")),
+
         "teams":
             R(Key("c-3")),
         "calendar":

@@ -54,6 +54,8 @@ class DoubleCommanderRule(MappingRule):
             "sort by size": 'c-f6',
             "file filter": 'c-f12',
             "new tab": 'c-t',
+            "show left":"cs-tab",
+            "show right":"c-tab",
             "rename": 'f2',
             "multi rename": 'c-m',
             "display thumbnails": 'cs-f1',

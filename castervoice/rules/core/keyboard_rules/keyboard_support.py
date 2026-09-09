@@ -13,9 +13,9 @@ try:  # Try  first loading from caster user directory
 except ImportError:
     from castervoice.rules.core.punctuation_rules.punctuation_support import text_punc_dict
 
-right_spec = "(right | ross)"
-left_spec = "(left | lease)"
-shift_spec = "(shift | shin)"
+right_spec = "right"# | ross)"
+left_spec = "left"# | lease)"
+shift_spec = "shift"# shin)"
 control_spec = "(control | fly)"
 alt_spec = "alt"
 windows_spec = "windows"

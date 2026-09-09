@@ -32,9 +32,9 @@ class ObsidianRule(MappingRule):
 	    "toggle edit cell":
 	            R(Key("f2")),
         #navigate tabs
-        "(next | right) tab [<n>]":
+        "show (next | right) [<n>]":
 	        R(Key("c-pgdown/10"))*Repeat(extra="n"),
-	    "(prior | left ) tab [<n>]":
+	    "show (prior | left ) [<n>]":
 	        R(Key("c-pgup/10"))*Repeat(extra="n"),
         #navigate page
         "(next | down ) page [<n>]": R(Key("cs-pgdown/20"))*Repeat(extra="n"),
