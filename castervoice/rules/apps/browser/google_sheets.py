@@ -14,8 +14,6 @@ class GoogleSheetsRule(MappingRule):
 
     mapping = {
 
-
-
         #generic key rule
         "<key_rule>": R(Key("%(key_rule)s")),
         #temporary rule for transferring
@@ -156,8 +154,8 @@ class GoogleSheetsRule(MappingRule):
             # filtering
             "freeze (first|top) row": "a-v/40, c, r",
             "(add|remove) filter": "cs-l",
-            "(clear filter| filter off)": "c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
-            "filter": "ca-r/20, tab:6/20",
+            "(clear filter| filter off)": "",#"c-up, ca-r/20, tab:4/10, space, tab:5/10, enter",
+            "filter": "ca-r/20, tab:7/20",
             "filter this":"apps,down:10,enter",
             #sorting
             "sort [down]": "a-down/40, s",#-tab, space, entyeah I guess er",
@@ -197,6 +195,7 @@ class GoogleSheetsRule(MappingRule):
             "generate":"c-g",#for hierarchy viewer macro
             #saving
             "don't save":"a-n",
+            "ID":"csa-1",
 
 
 
@@ -209,4 +208,4 @@ class GoogleSheetsRule(MappingRule):
     defaults = {"n": 1, "dict": ""}
 
 def get_rule():
-    return GoogleSheetsRule, RuleDetails(name="Google sheets", executable="chrome", title="Google Sheets")
+    return GoogleSheetsRule, RuleDetails(name="Google sheets", title="Google Sheets")#executable="chrome"

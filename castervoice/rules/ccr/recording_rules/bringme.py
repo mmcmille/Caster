@@ -247,7 +247,7 @@ class BringRule(BaseSelfModifyingRule):
             # User Settings
             "caster settings file": str(Path(_user_dir).joinpath("settings/settings.toml")),
             "caster rules file": str(Path(_user_dir).joinpath("settings/rules.toml")),
-            "caster bring me file": str(Path(_user_dir).joinpath("settings/sm_bringme.toml")),
+            "bring me file": str(Path(_user_dir).joinpath("settings/sm_bringme.toml")),
             "caster hooks file": str(Path(_user_dir).joinpath("settings/hooks.toml")),
             "caster companion file": str(Path(_user_dir).joinpath("settings/companion_config.toml")),
             "caster transformers file": str(Path(_user_dir).joinpath("settings/transformers.toml")),

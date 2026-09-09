@@ -90,9 +90,7 @@ class EdgeRule(MappingRule):
             R(Key("c-w")) * Repeat(extra='n'),
         "win close|close all tabs":
             R(Key("cs-w")),
-        "right tab [<n>]|tab right [<n>]":
             R(Key("c-tab/40")) * Repeat(extra="n"),
-        "left tab [<n>]|tab left [<n>]":
             R(Key("cs-tab/40")) * Repeat(extra="n"),
         "new tab that":
             R(Mouse("middle") + Pause("20") + Key("c-tab")),

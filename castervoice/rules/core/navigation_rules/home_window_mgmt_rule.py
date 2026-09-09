@@ -159,6 +159,8 @@ class HomeWindowManagementRule(MappingRule):
             "(files)": 4,
             "(notes|one note)": 5,
             "map": 6,
+            "(copilot)": 5,
+            "(Excel|notes)": 6,
             "(teams|chat|AI)": 7,
             "copilot": 8,
             "spirit": 9,
